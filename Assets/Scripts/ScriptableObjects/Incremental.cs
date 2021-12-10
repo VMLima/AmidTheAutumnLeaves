@@ -23,12 +23,14 @@ public abstract class Incremental
     public int amount;
     public int maxStack;
     public int minStack;
-    public ScriptableObject scriptableObject;
-    public Incremental(ScriptableObject _scriptableObject)
+    public SO_Basic scriptableObject;
+    public Incremental(SO_Basic _scriptableObject)
     {
         scriptableObject = _scriptableObject;
         name = _scriptableObject.name;
-        amount = 1;
+        amount = 0;
+        minStack = scriptableObject.minStack;
+        maxStack = scriptableObject.maxStack;
     }
     
     public int getAmount()
@@ -39,14 +41,13 @@ public abstract class Incremental
     //GENERALLY DON'T OVERRIDE THIS..
     public int addAmount(int _amount)
     {
-        amount += _amount;
         if (_amount > 0)
         {
             return addToAmountInterim(_amount);
         }
         else
         {
-            return subToAmount(-1 * _amount);
+            return subToAmount((-1 * _amount));
         }
     }
 
@@ -62,31 +63,31 @@ public abstract class Incremental
 
     public int addToAmount(int _amount)
     {
-        _amount += _amount;
-        if (_amount > maxStack)
+        amount += _amount;
+        if (amount > maxStack)
         {
-            _amount = maxStack;
+            amount = maxStack;
         }
-        return _amount;
+        return amount;
     }
 
     public int subToAmount(int _amount)
     {
-        _amount -= _amount;
-        if (_amount < minStack)
-        {
-            _amount = minStack;
-        }
-        return _amount;
-    }
-    public virtual void setAmount(int _amount)
-    {
-        amount = _amount;
-        if (_amount < minStack)
+        amount -= _amount;
+        if (amount < minStack)
         {
             amount = minStack;
         }
-        else if (_amount > maxStack)
+        return amount;
+    }
+    public void setAmount(int _amount)
+    {
+        amount = _amount;
+        if (amount < minStack)
+        {
+            amount = minStack;
+        }
+        else if (amount > maxStack)
         {
             amount = maxStack;
         }

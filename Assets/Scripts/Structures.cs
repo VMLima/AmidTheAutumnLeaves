@@ -2,13 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Structures : MonoBehaviour
 {
-    public struct incrIncrease
+    /// <summary>
+    /// incrStruct
+    ///     USED FOR ANY LONG TERM INCREMENT ACTION.
+    ///     Buttons will add a created incrStruct to a list on press, remove that same one on toggle stop?
+    ///         GOTTA FIGURE OUT THE DETAILS OF REMOVING THEM.
+    ///     it holds a incrementable (skill/item/resource) and an amount to increment and a timeframe to increment it by.
+    ///     can easily have inspector elements contain a list of these for easy button setup.
+    ///     can easily have a tooltip reader read anything that does a long term effect.
+    /// </summary>
+    public struct incrStruct
     {
-        public incrIncrease(int x)
+        public Incremental inc;
+        public float incTime;
+        public int incAmount;
+        private float time;
+        public string descTooltip;
+        public string descEffect;
+        public incrStruct(Incremental _inc, int _incAmount = 1, float _incTime = 1f, string _descTooltip = "", string _descEffect = "")
         {
+            //something to be incremented
+            inc = _inc;
+            //how often to be incremented
+            incTime = _incTime;
+            time = incTime;
+            //how much to be incremented
+            incAmount = _incAmount;
+            //tooltip description
+            descTooltip = _descTooltip;
+            //extra effect description
+            descEffect = _descEffect;
+        }
 
+        //however often this is called... running through a list of structs doing .tick(deltaTime) will handle all the passive gains.
+        public void tick(float _time)
+        {
+            time -= _time;
+
+            if (time <= 0)
+            {
+                inc.addAmount(incAmount);
+                time = incTime;
+            }
         }
     }
 }

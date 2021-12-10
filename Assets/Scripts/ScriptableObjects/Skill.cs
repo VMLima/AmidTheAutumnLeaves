@@ -15,7 +15,6 @@ using UnityEngine;
 /// </summary>
 public class Skill : Incremental
 {
-    public string name;
     public int[] xpToLevel;
     private int numLevels;
     private int currentLevel;
@@ -23,7 +22,7 @@ public class Skill : Incremental
 
     private SO_Skill scriptableSkill;
 
-    public Skill(ScriptableObject _scriptableObject) : base(_scriptableObject)
+    public Skill(SO_Basic _scriptableObject) : base(_scriptableObject)
     {
         scriptableSkill = (SO_Skill)_scriptableObject;
         setAmount(0);
@@ -31,6 +30,7 @@ public class Skill : Incremental
         numLevels = xpToLevel.Length;
         currentLevel = 0;
         atMaxLevel = false;
+        Debug.Log("Creating Skill named:" + name);
     }
     public int getLevel()
     {
@@ -72,6 +72,7 @@ public class Skill : Incremental
             amount = 0;
         }
         currentLevel++;
+        maxStack = xpToLevel[currentLevel];
         if (currentLevel >= (numLevels))
         {
             //have reached max level

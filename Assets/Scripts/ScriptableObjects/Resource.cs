@@ -10,9 +10,9 @@ public class Resource : Incremental
 {
     //Incremental uses Amount, setAmount, getAmount...
     public SO_Item scriptableItem;
-    public Resource(ScriptableObject _scriptableObject) : base(_scriptableObject)
+    public Resource(SO_Basic _scriptableObject) : base(_scriptableObject)
     {
         scriptableItem = (SO_Item)_scriptableObject;
-        setAmount(1);
+        setAmount(0);
     }
 }

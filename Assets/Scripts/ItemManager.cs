@@ -50,7 +50,6 @@ public class ItemManager : MonoBehaviour
     {
         //given a prefab instanciate and add a new item.
         Item newItem = new Item(soItem);
-        newItem.setAmount(amount);
         itemList.Add(newItem);
 
         //any other stuff important to instantiating, like adding it to its UI, etc.
@@ -94,7 +93,7 @@ public class ItemManager : MonoBehaviour
             else
             {
                 //ITEM IS NOT IN INVENTORY
-                //Debug.Log("itemManager:additem: adding to inventory");
+                Debug.Log("itemManager:additem: adding " + amount + " to inventory");
                 addNewItem(scriptableItem, amount);
             }
         }
@@ -105,16 +104,16 @@ public class ItemManager : MonoBehaviour
         //Debug.Log("itemManager:additem: FINISHED WITH " + itemName);
     }
 
-    public void removeItem(string itemName, int quantity = 1)
+    public void removeItem(string itemName, int amount = 1)
     {
         //Debug.Log("itemManager:removeItem: " + itemName);
         Item item = getItem(itemName);
         if (item != null)
         {
             //Debug.Log("itemManager:removeItem: found item");
-            if(item.addAmount(quantity) <= 0)
+            if((item.addAmount((-1*amount)) <= 0) && (item.DeleteWhenEmpty))
             {
-                //all out of item.
+                //all out of item and delete when empty.
                 removeItemFromList(item);
             }
         }
