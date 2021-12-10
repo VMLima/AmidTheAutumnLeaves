@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd16aa9fa6096a489eb741f44990d1d, type: 3}
   m_Name: Foraging
   m_EditorClassIdentifier: 
-  name: 
-  singleInstance: 1
-  maxStack: 1
-  canStack: 0
+  name: Foraging
+  xpToLevel: 0a000000140000001e0000002800000032000000
+  unlocked: 0
+  prefab: {fileID: 0}
