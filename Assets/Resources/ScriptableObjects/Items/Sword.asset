@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  name: 
-  maxStacks: 1
-  canStack: 0
+  name: Sword
   maxStack: 1
-  UIScreen: 0
-  UIIndex: 0
+  minStack: 0
   prefab: {fileID: 0}
+  DeleteWhenEmpty: 1
+  UIIndex: 0
