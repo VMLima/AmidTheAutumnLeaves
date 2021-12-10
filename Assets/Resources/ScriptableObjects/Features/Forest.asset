@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Forest
   description: You find yourself in a dense forest.
-  buttons: []
+  buttons:
+  - {fileID: 5715040496820633644, guid: a2106aac3cc0763488535f9a1ad70b58, type: 3}

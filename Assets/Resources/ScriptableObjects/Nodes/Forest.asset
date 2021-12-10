@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5b5bf2de53aba4d8b75673baaf83a4, type: 3}
   m_Name: Forest
   m_EditorClassIdentifier: 
-  name: 
-  numRandomFeatures: 0
-  presetFeatures: []
+  name: Forest
+  numRandomFeatures: 1
+  presetFeatures:
+  - {fileID: 11400000, guid: 0759cf6fb5194c24d98611b8a6cff25b, type: 2}

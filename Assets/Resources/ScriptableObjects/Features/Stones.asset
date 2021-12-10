@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Stones
   description: There are a lot of loose stones all around.
-  buttons: []
+  buttons:
+  - {fileID: 4293528735765515577, guid: 564b07ebee3ed08499eb3b32f66ae201, type: 3}
