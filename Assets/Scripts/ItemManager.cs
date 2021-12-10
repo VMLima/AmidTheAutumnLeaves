@@ -46,11 +46,11 @@ public class ItemManager : MonoBehaviour
         return null;
     }
 
-    private void addNewItem(SO_Item soItem, int quantity = 1)
+    private void addNewItem(SO_Item soItem, int amount = 1)
     {
         //given a prefab instanciate and add a new item.
         Item newItem = new Item(soItem);
-        newItem.setQuantity(quantity);
+        newItem.setAmount(amount);
         itemList.Add(newItem);
 
         //any other stuff important to instantiating, like adding it to its UI, etc.
@@ -68,20 +68,19 @@ public class ItemManager : MonoBehaviour
         Debug.Log("==currentInventory===");
         foreach (Item item in itemList)
         {
-            if(item.canStack) Debug.Log("slot:" + i + "=" + item.name + ":" + item.getQuantity());
-            else Debug.Log("slot:" + i + "=" + item.name);
+            Debug.Log("slot:" + i + "=" + item.name + " amount:" + item.getAmount());
             i++;
         }
         Debug.Log("===================");
     }
 
-    public void addItem(string itemName, int quantity = 1)
+    public void addItem(string itemName, int amount = 1)
     {
         //get prefab from list
         //Debug.Log("itemManager:additem: " + itemName);
-        SO_Item prefab = getScriptableObject(itemName);
+        SO_Item scriptableItem = getScriptableObject(itemName);
         
-        if (prefab)
+        if (scriptableItem)
         {
             //Debug.Log("itemManager:additem: getScriptableObject=found");
             // find out if item already exists in inventory
@@ -90,22 +89,13 @@ public class ItemManager : MonoBehaviour
             if (item != null)
             {
                 //ITEM IS IN INVENTORY ALREADY
-                if (item.singleInstance)
-                {
-                    //Debug.Log("itemManager:additem: adding to quantity");
-                    item.addQuantity(quantity);
-                }
-                else
-                {
-                    //Debug.Log("itemManager:additem: adding another to inventory");
-                    addNewItem(prefab, quantity);
-                }
+                item.addAmount(amount);
             }
             else
             {
                 //ITEM IS NOT IN INVENTORY
                 //Debug.Log("itemManager:additem: adding to inventory");
-                addNewItem(prefab, quantity);
+                addNewItem(scriptableItem, amount);
             }
         }
         else
@@ -122,24 +112,10 @@ public class ItemManager : MonoBehaviour
         if (item != null)
         {
             //Debug.Log("itemManager:removeItem: found item");
-            if (!item.canStack)
+            if(item.addAmount(quantity) <= 0)
             {
-                //Debug.Log("itemManager:removeItem: can't stack, removing item");
+                //all out of item.
                 removeItemFromList(item);
-            }
-            else
-            {
-                if (item.addQuantity(-1 * quantity))
-                {
-                    //cam stack and there is quantity left
-                    //Debug.Log("itemManager:removeItem: still quantity left");
-                }
-                else
-                {
-                    //can stack and there is no quantity left
-                    //Debug.Log("itemManager:removeItem: out of quantity, removing");
-                    removeItemFromList(item);
-                }
             }
         }
         else

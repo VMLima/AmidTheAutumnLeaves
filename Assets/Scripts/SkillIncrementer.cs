@@ -19,6 +19,6 @@ public class SkillIncrementer
     public void tick()
     {
         Debug.Log("SkillIncrementer:tick");
-        if (skill != null) skill.addXP(incrAmount);
+        if (skill != null) skill.addAmount(incrAmount);
     }
 }

@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
-public class SO_Item : ScriptableObject
+[CreateAssetMenu(fileName = "NewResource", menuName = "Scriptable Object/Basic/Resource")]
+public class SO_Resource : ScriptableObject
 {
     [Tooltip("MUST USE THIS EXACT NAME TO REFERENCE IT IN CODE")]
     public string name;
 
     [Tooltip("If Gaining more overflows stack size and less than maxStacks, overflow into new inventory stack.")]
     public int maxStacks = 1;
-    
+
     [Tooltip("Gaining more items adds to quantity.  Like Gold.")]
     public bool canStack = false;
 

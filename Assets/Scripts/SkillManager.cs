@@ -91,7 +91,7 @@ public class SkillManager : MonoBehaviour
         Debug.Log("==currentSkills===");
         foreach (Skill skill in skillList)
         {
-            Debug.Log("slot:" + i + "=" + skill.name + " Level:" + skill.getLevel() + " XP:" + skill.getXP());
+            Debug.Log("slot:" + i + "=" + skill.name + " Level:" + skill.getLevel() + " XP:" + skill.getAmount());
             i++;
         }
         Debug.Log("===================");
@@ -116,7 +116,7 @@ public class SkillManager : MonoBehaviour
 
     public int getXP(string skillName)
     {
-        return getSkill(skillName).getXP();
+        return getSkill(skillName).getAmount();
     }
 
     //for button mashing and events.
@@ -125,7 +125,7 @@ public class SkillManager : MonoBehaviour
         Skill skill = getSkill(skillName);
         if (skill != null)
         {
-            skill.addXP(amount);
+            skill.addAmount(amount);
         }
     }
 

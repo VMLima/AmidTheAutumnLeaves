@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestEvents : MonoBehaviour
+public class TestItems : MonoBehaviour
 {
     // adds and removes items based on a string that corresponds
     // to the name of scriptable objects in a specific directory.
