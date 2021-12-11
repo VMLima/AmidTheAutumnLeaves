@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e1d32d570f8e0141b146ec716499a4e, type: 3}
-  m_Name: River
+  m_Name: ForestRiver
   m_EditorClassIdentifier: 
-  name: River
-  description: There is an ambling river nearby
-  buttons:
-  - {fileID: 5895366186889219798, guid: 687202cdc0e0f5341a12fc1f819c1b1d, type: 3}
+  name: 
+  toUnlock: []
+  unlocked: 0
+  description: 
+  buttons: []

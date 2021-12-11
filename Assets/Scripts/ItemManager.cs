@@ -6,13 +6,13 @@ public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
     private List<Item> itemList;
-    private SO_Item[] prefabArray;
+    private SO_Item[] soItemArray;
 
     void Awake()
     {
         instance = this;
         itemList = new List<Item>();
-        prefabArray = Utils.GetSriptableItems<SO_Item>();
+        soItemArray = Utils.GetSriptableItems<SO_Item>();
     }
 
     // Update is called once per frame
@@ -23,9 +23,9 @@ public class ItemManager : MonoBehaviour
 
     private SO_Item getScriptableObject(string prefabName)
     {
-        foreach (SO_Item soItem in prefabArray)
+        foreach (SO_Item soItem in soItemArray)
         {
-            if (soItem.name == prefabName)
+            if (soItem.nameTag == prefabName)
             {
                 //found the prefab.
                 return soItem;
@@ -38,7 +38,7 @@ public class ItemManager : MonoBehaviour
     {
         foreach(Item item in itemList)
         {
-            if(item.name == itemName)
+            if(item.soItem.nameTag == itemName)
             {
                 return item;
             }
@@ -48,7 +48,7 @@ public class ItemManager : MonoBehaviour
 
     public Item getItem(SO_Item item)
     {
-        return getItem(item.name);
+        return getItem(item.nameTag);
     }
 
     private void addNewItem(SO_Item soItem, int amount = 1)
@@ -72,7 +72,7 @@ public class ItemManager : MonoBehaviour
         Debug.Log("==currentInventory===");
         foreach (Item item in itemList)
         {
-            Debug.Log("slot:" + i + "=" + item.name + " amount:" + item.getAmount());
+            Debug.Log("slot:" + i + "=" + item.soItem.nameTag + " amount:" + item.getAmount());
             i++;
         }
         Debug.Log("===================");

@@ -15,5 +15,6 @@ public class ForestButton : MonoBehaviour
     public void onClick()
     {
         Debug.Log("GOT A FOREST BUTTON PRESS");
+        SkillManager.instance.addXP("Foraging", 5);
     }
 }

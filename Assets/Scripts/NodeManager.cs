@@ -8,6 +8,7 @@ public class NodeManager : MonoBehaviour
 {
     public TextMeshProUGUI textGUI;
     public GameObject buttonPanel;
+    public static NodeManager Instance;
 
     [HideInInspector]
     public SO_Feature[] featureArray;
@@ -22,17 +23,27 @@ public class NodeManager : MonoBehaviour
 
     private void Awake()
     {
+
+        Instance = this;
         //populate feature array
         featureArray = Utils.GetSriptableFeatures<SO_Feature>();
-
+        foreach (SO_Feature feature in featureArray)
+        {
+            feature.reset();
+        }
         //populate node array
         nodeArray = Utils.GetSriptableNodes<SO_Node>();
-        output = "Hello!";
-        updateText();
+        foreach (SO_Node node in nodeArray)
+        {
+            node.reset();
+        }
+
     }
 
-    void updateText()
+    void updateText(string text)
     {
+        output += text;
+        output += " \n ";
         textGUI.text = output;
     }
 
@@ -40,7 +51,7 @@ public class NodeManager : MonoBehaviour
     {
         foreach(SO_Node node in nodeArray)
         {
-            if(node.name == name)
+            if(node.nameTag == name)
             {
                 return node;
             }
@@ -48,54 +59,92 @@ public class NodeManager : MonoBehaviour
         return null;
     }
 
+    void TEST()
+    {
+        output = "";
+        updateText("Hello!");
+        currentNode = getNode("Forest");
+        setNode(currentNode);
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        //get forest node.
-        currentNode = getNode("Forest");
-        setNode(currentNode);
-        //set up its features.
-        //populate text from features
-        //populate buttons from features
-            //buttons need to have their methods set in script.
+        
+
+        TEST();
+        
 
     }
 
-    void setNode(SO_Node node)
+    //when an unlock is called from a listener, can easily do...
+    //"NodeManager.instance.unlockFeature(thisFeature)"
+    public void unlockFeature(SO_Feature feature)
     {
-        //set up its features
-        //preset features
-        featureText = "";
-        foreach (SO_Feature feature in currentNode.presetFeatures)
-        {
-            currentFeatures.Add(feature);
-            featureText += feature.description + "\n";
-            for(int i = 0; i < feature.buttons.Length; i++)
-            {
-                GameObject button = (GameObject)Instantiate(feature.buttons[0], transform);
-                button.transform.SetParent(buttonPanel.transform);
-            }
-        }
-        //random addition features
+        initFeature(feature);
+    }
+
+    void setupCurrentFeatures()
+    {
+        currentFeatures.Clear();
+        currentFeatures.AddRange(currentNode.presetFeatures);
         int index = 0;
         for (int i = 0; i < currentNode.numRandomFeatures; i++)
         {
             //REWRITE THIS SO IT REMOVES ONES FROM LIST OF POTENTIALS INSTEAD OF BRUTE FORCE RNG.
             SO_Feature temp = currentFeatures[0];
             int j = 0;
-            while((currentFeatures.Contains(temp)) && (j < 5))
+            while ((currentFeatures.Contains(temp)) && (j < 5))
             {
                 index = Random.Range(0, featureArray.Length);
                 temp = featureArray[index];
                 j++;
             }
             currentFeatures.Add(featureArray[index]);
-            featureText += featureArray[index].description + "\n";
-            GameObject button = (GameObject)Instantiate(featureArray[index].buttons[0], transform);
+        }
+
+    }
+
+    void setupScene()
+    {
+        //settting up buttons and text.
+        if(currentFeatures.Count > 0)
+        {
+            foreach (SO_Feature feature in currentFeatures)
+            {
+                if (!feature.unlocked)
+                {
+                    //if it is locked, check if it shouldn't be.
+                    feature.unlocked = Utils.checkUnlocked(feature.toUnlock);
+                }
+                if (feature.unlocked)
+                {
+                    initFeature(feature);
+                }
+            }
+        }
+        //LAZY.  DO NOT HAVE REAL LASTING GOOD TEXT SETUP YET.
+        
+    }
+
+    void initFeature(SO_Feature feature)
+    {
+        //setting up buttons and text.
+        for (int i = 0; i < feature.buttons.Length; i++)
+        {
+            updateText(feature.description);
+            GameObject button = (GameObject)Instantiate(feature.buttons[0], transform);
             button.transform.SetParent(buttonPanel.transform);
         }
-        output = featureText;
-        updateText();
+    }
+
+    void setNode(SO_Node node)
+    {
+        //creating a list of features for this scene
+        setupCurrentFeatures();
+        //setting up objects for this scene.
+        setupScene();
     }
 
     // Update is called once per frame

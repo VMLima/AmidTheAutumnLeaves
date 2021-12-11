@@ -13,23 +13,19 @@ public class TestSkills : MonoBehaviour
         Debug.Log("===Adding skill Foraging======");
         SkillManager.instance.unlockSkill("Foraging");
         SkillManager.instance.allSkillsDebugLog();
-
+        /*
         Debug.Log("======Adding 10xp to Foraging");
         SkillManager.instance.addXP("Foraging", 10);
         SkillManager.instance.allSkillsDebugLog();
 
-        Debug.Log("=======Adding 10xp to Foraging");
-        SkillManager.instance.addXP("Foraging", 10);
-        SkillManager.instance.allSkillsDebugLog();
-
-        Debug.Log("=======Adding 10xp to Foraging");
+        Debug.Log("======Adding 10xp to Foraging");
         SkillManager.instance.addXP("Foraging", 10);
         SkillManager.instance.allSkillsDebugLog();
 
         Debug.Log("======Adding passive xp gainer of 5/s to foraging");
         SkillManager.instance.passiveXP("berries", "Foraging", 5);
         SkillManager.instance.allSkillsDebugLog();
-
+        */
     }
 
     // Update is called once per frame
@@ -40,6 +36,8 @@ public class TestSkills : MonoBehaviour
 
         if (timer >= 1f)
         {
+            //Debug.Log("======Adding 10xp to Foraging");
+            //SkillManager.instance.addXP("Foraging", 1);
             SkillManager.instance.allSkillsDebugLog();
             timer -= 1f;
         }

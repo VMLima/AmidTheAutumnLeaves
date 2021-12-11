@@ -38,15 +38,26 @@ public class SkillManager : MonoBehaviour
         instance = this;
         skillList = new List<Skill>();
         SOSkillArray = Utils.GetScriptableSkills<SO_Skill>();
+        setupSkills();
         activeIncrementers = new List<SkillIncrementer>();
         timer = 0f;
+    }
+
+    void setupSkills()
+    {
+        skillList.Clear();
+        foreach(SO_Skill skill in SOSkillArray)
+        {
+            skillList.Add(new Skill(skill));
+            skill.reset();
+        }
     }
 
     public bool hasSkill(string skillName)
     {
         foreach (Skill skill in skillList)
         {
-            if (skill.name == skillName)
+            if (skill.soSkill.nameTag == skillName)
             {
                 //already have skill
                 return true;
@@ -59,7 +70,7 @@ public class SkillManager : MonoBehaviour
     {
         foreach (Skill skill in skillList)
         {
-            if (skill.name == skillName)
+            if (skill.soSkill.nameTag == skillName)
             {
                 //already have skill
                 return skill;
@@ -70,14 +81,14 @@ public class SkillManager : MonoBehaviour
 
     public Skill getSkill(SO_Skill soSkill)
     {
-        return getSkill(soSkill.name);
+        return getSkill(soSkill.nameTag);
     }
 
     private SO_Skill getScriptableObject(string prefabName)
     {
         foreach (SO_Skill soSkill in SOSkillArray)
         {
-            if (soSkill.name == prefabName)
+            if (soSkill.nameTag == prefabName)
             {
                 //found the prefab.
                 return soSkill;
@@ -86,11 +97,15 @@ public class SkillManager : MonoBehaviour
         return null;
     }
 
-    private void addNewSkill(SO_Skill soSkill)
+    public void unlockSkill(SO_Skill skill)
     {
-        //given a prefab instanciate and add a new item.
-        Skill newSkill = new Skill(soSkill);
-        skillList.Add(newSkill);
+        //start up GUI
+        if(skill != null)
+        {
+            skill.unlocked = true;
+            skill.whenUnlocked();
+        }    
+        
     }
 
     public void allSkillsDebugLog()
@@ -99,7 +114,7 @@ public class SkillManager : MonoBehaviour
         Debug.Log("==currentSkills===");
         foreach (Skill skill in skillList)
         {
-            Debug.Log("slot:" + i + "=" + skill.name + " Level:" + skill.getLevel() + " XP:" + skill.getAmount());
+            Debug.Log("slot:" + i + "=" + skill.soSkill.nameTag + " Level:" + skill.getLevel() + " XP:" + skill.getAmount());
             i++;
         }
         Debug.Log("===================");
@@ -107,34 +122,25 @@ public class SkillManager : MonoBehaviour
 
     public void unlockSkill(string skillName)
     {
-        Debug.Log("SkillManager:unlockSkill:" + skillName);
-        if (!hasSkill(skillName))
+        Skill skill = getSkill(skillName);
+        if (skill != null)
         {
-            Debug.Log("SkillManager:unlockSkill:not unlocked yet");
-            //SKILL HAS NOT BEEN ADDED YET
-            SO_Skill soSkill = getScriptableObject(skillName);
-            if(soSkill != null)
-            {
-                Debug.Log("SkillManager:unlockSkill:found scriptable object " + soSkill.name + ". ADDING SKILL");
-                //FOUND THE PREFAB
-                addNewSkill(soSkill);
-            }
+            unlockSkill(skill.soSkill);
         }
     }
 
     public int getXP(string skillName)
     {
-        return getSkill(skillName).getAmount();
+        Skill skill = getSkill(skillName);
+        if(skill != null) return skill.getAmount();
+        return 0;
     }
 
     //for button mashing and events.
     public void addXP(string skillName, int amount)
     {
         Skill skill = getSkill(skillName);
-        if (skill != null)
-        {
-            skill.addAmount(amount);
-        }
+        if (skill != null) skill.addAmount(amount);
     }
 
     //tag is the unique call by which the passiveGain can be stopped

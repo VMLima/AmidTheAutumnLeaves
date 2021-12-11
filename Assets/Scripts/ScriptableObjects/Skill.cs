@@ -17,8 +17,6 @@ public class Skill : Incremental
 {
     public int[] xpToLevel;
     private int numLevels;
-    private int currentLevel;
-    private bool atMaxLevel;
 
     public SO_Skill soSkill;
 
@@ -28,13 +26,11 @@ public class Skill : Incremental
         setAmount(0);
         xpToLevel = soSkill.xpToLevel;
         numLevels = xpToLevel.Length;
-        currentLevel = 0;
-        atMaxLevel = false;
-        Debug.Log("Creating Skill named:" + name);
+        Debug.Log("Creating Skill named:" + soSkill.nameTag);
     }
     public int getLevel()
     {
-        return currentLevel;
+        return soSkill.currentLevel;
     }
 
     //check if you are at max level.
@@ -42,20 +38,21 @@ public class Skill : Incremental
     //BEWARE, currently overflow xp will be discarded (it will hit the cap, be thrown away, then checked for level up)
     public override int addToAmountInterim(int _amount)
     {
-        if(!atMaxLevel)
+        Debug.Log("addToAmountInterim: start");
+        if (!soSkill.maxLevel)
         {
             addToAmount(_amount);
-            if (amount >= maxStack)
+            if (soSkill.amount >= soSkill.maxStack)
             {
                 levelUp();
             }
-            return amount;
+            return soSkill.amount;
         }
         return 0;
     }
     public override int subToAmountInterim(int _amount)
     {
-        if(!atMaxLevel)
+        if(!soSkill.maxLevel)
         {
             return subToAmount(_amount);
         }
@@ -66,18 +63,19 @@ public class Skill : Incremental
     //Overflow xp is added to the next level.
     public void levelUp()
     {
-        amount -= xpToLevel[currentLevel];
-        if(amount < 0)
+        soSkill.amount -= xpToLevel[soSkill.currentLevel];
+        if(soSkill.amount < 0)
         {
-            amount = 0;
+            soSkill.amount = 0;
         }
-        currentLevel++;
-        maxStack = xpToLevel[currentLevel];
-        if (currentLevel >= (numLevels))
+        soSkill.currentLevel++;
+        soSkill.maxStack = xpToLevel[soSkill.currentLevel];
+        if (soSkill.currentLevel >= (numLevels))
         {
             //have reached max level
-            atMaxLevel = true;
+            soSkill.maxLevel = true;
         }
+        Debug.Log("Skill:levelUp:" + soSkill.nameTag);
         SkillManager.instance.skillLevelEvent.Invoke();
     }
 }
