@@ -2,9 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct incrStruct
+{
+    public Incremental inc;
+    public float incTime;
+    public int incAmount;
+    private float time;
+    public string descTooltip;
+    public string descEffect;
+    public incrStruct(Incremental _inc, int _incAmount = 1, float _incTime = 1f, string _descTooltip = "", string _descEffect = "")
+    {
+        //something to be incremented
+        inc = _inc;
+        //how often to be incremented
+        incTime = _incTime;
+        time = incTime;
+        //how much to be incremented
+        incAmount = _incAmount;
+        //tooltip description
+        descTooltip = _descTooltip;
+        //extra effect description
+        descEffect = _descEffect;
+    }
+
+    //however often this is called... running through a list of structs doing .tick(deltaTime) will handle all the passive gains.
+    public void tick(float _time)
+    {
+        time -= _time;
+
+        if (time <= 0)
+        {
+            inc.addAmount(incAmount);
+            time = incTime;
+        }
+    }
+}
 
 
-public class Structures : MonoBehaviour
+//SO_Basic holds a list of these as the requirements to unlock the element.
+//when item/skill/etc is about to be created, first checks the SO_Basic if it is unlocked.
+//  check if already unlocked
+//      if it is a skill, then the amount is level amount
+//      if it is an item/resource, then the amount is amount
+//  potential future check for situations that will unlock.
+//      something to do with listeners
+
+[System.Serializable]
+public struct LockInfo
+{
+    public SO_Basic soBasic;
+    public int amount;
+}
+
+public class Structures
 {
     /// <summary>
     /// incrStruct
@@ -15,39 +66,4 @@ public class Structures : MonoBehaviour
     ///     can easily have inspector elements contain a list of these for easy button setup.
     ///     can easily have a tooltip reader read anything that does a long term effect.
     /// </summary>
-    public struct incrStruct
-    {
-        public Incremental inc;
-        public float incTime;
-        public int incAmount;
-        private float time;
-        public string descTooltip;
-        public string descEffect;
-        public incrStruct(Incremental _inc, int _incAmount = 1, float _incTime = 1f, string _descTooltip = "", string _descEffect = "")
-        {
-            //something to be incremented
-            inc = _inc;
-            //how often to be incremented
-            incTime = _incTime;
-            time = incTime;
-            //how much to be incremented
-            incAmount = _incAmount;
-            //tooltip description
-            descTooltip = _descTooltip;
-            //extra effect description
-            descEffect = _descEffect;
-        }
-
-        //however often this is called... running through a list of structs doing .tick(deltaTime) will handle all the passive gains.
-        public void tick(float _time)
-        {
-            time -= _time;
-
-            if (time <= 0)
-            {
-                inc.addAmount(incAmount);
-                time = incTime;
-            }
-        }
-    }
 }

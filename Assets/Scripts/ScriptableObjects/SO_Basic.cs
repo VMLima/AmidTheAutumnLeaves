@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+
+
 //[CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
 public class SO_Basic : ScriptableObject
 {
@@ -15,6 +18,9 @@ public class SO_Basic : ScriptableObject
 
     [Tooltip("Starting min quantity of item.")]
     public int minStack = 0;
+
+    [Tooltip("Requirements to unlock.  When unlocked stays unlocked")]
+    public LockInfo[] toUnlock;
 
     [Tooltip("The UI prefab to represent this item.")]
     public GameObject prefab;

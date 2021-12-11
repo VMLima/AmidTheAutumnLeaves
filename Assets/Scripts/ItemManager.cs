@@ -34,7 +34,7 @@ public class ItemManager : MonoBehaviour
         return null;
     }
 
-    private Item getItem(string itemName)
+    public Item getItem(string itemName)
     {
         foreach(Item item in itemList)
         {
@@ -44,6 +44,11 @@ public class ItemManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public Item getItem(SO_Item item)
+    {
+        return getItem(item.name);
     }
 
     private void addNewItem(SO_Item soItem, int amount = 1)

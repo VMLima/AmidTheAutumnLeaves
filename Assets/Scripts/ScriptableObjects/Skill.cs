@@ -20,13 +20,13 @@ public class Skill : Incremental
     private int currentLevel;
     private bool atMaxLevel;
 
-    private SO_Skill scriptableSkill;
+    public SO_Skill soSkill;
 
     public Skill(SO_Basic _scriptableObject) : base(_scriptableObject)
     {
-        scriptableSkill = (SO_Skill)_scriptableObject;
+        soSkill = (SO_Skill)_scriptableObject;
         setAmount(0);
-        xpToLevel = scriptableSkill.xpToLevel;
+        xpToLevel = soSkill.xpToLevel;
         numLevels = xpToLevel.Length;
         currentLevel = 0;
         atMaxLevel = false;
@@ -64,7 +64,7 @@ public class Skill : Incremental
 
     //advance to the next level.
     //Overflow xp is added to the next level.
-    private void levelUp()
+    public void levelUp()
     {
         amount -= xpToLevel[currentLevel];
         if(amount < 0)
@@ -78,5 +78,6 @@ public class Skill : Incremental
             //have reached max level
             atMaxLevel = true;
         }
+        SkillManager.instance.skillLevelEvent.Invoke();
     }
 }

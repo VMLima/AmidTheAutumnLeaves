@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Sword
   maxStack: 1
   minStack: 0
+  toUnlock: []
   prefab: {fileID: 0}
   DeleteWhenEmpty: 1
   UIIndex: 0

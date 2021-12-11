@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SkillManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class SkillManager : MonoBehaviour
 
     public static SkillManager instance;
     private float timer;
+
+    public UnityEvent skillLevelEvent = new UnityEvent();
 
     //IN THE FUTURE...
     //each skill script is in a prefab attached to the top game object.
@@ -63,6 +66,11 @@ public class SkillManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public Skill getSkill(SO_Skill soSkill)
+    {
+        return getSkill(soSkill.name);
     }
 
     private SO_Skill getScriptableObject(string prefabName)
