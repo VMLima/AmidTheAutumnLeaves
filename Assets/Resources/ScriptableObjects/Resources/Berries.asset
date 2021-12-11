@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f226f364df0929409af443f7a7d2de6, type: 3}
   m_Name: Berries
   m_EditorClassIdentifier: 
-  name: Berries
+  nameTag: Berries
+  toUnlock: []
+  unlocked: 0
+  amount: 0
+  maxAmount: 10
   maxStack: 10
+  minAmount: 0
   minStack: 0
   prefab: {fileID: 0}

@@ -26,7 +26,6 @@ public class Skill : Incremental
         setAmount(0);
         xpToLevel = soSkill.xpToLevel;
         numLevels = xpToLevel.Length;
-        Debug.Log("Creating Skill named:" + soSkill.nameTag);
     }
     public int getLevel()
     {
@@ -38,7 +37,6 @@ public class Skill : Incremental
     //BEWARE, currently overflow xp will be discarded (it will hit the cap, be thrown away, then checked for level up)
     public override int addToAmountInterim(int _amount)
     {
-        Debug.Log("addToAmountInterim: start");
         if (!soSkill.maxLevel)
         {
             addToAmount(_amount);

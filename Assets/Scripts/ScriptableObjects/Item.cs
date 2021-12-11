@@ -18,6 +18,5 @@ public class Item : Incremental
         DeleteWhenEmpty = soItem.DeleteWhenEmpty;
         //maxStacks = scriptableItem.maxStacks;
         setAmount(1);
-        Debug.Log("Item creation and set: " + soBasic.amount);
     }
 }

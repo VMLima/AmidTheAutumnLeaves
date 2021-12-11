@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1d32d570f8e0141b146ec716499a4e, type: 3}
   m_Name: ForestStone
   m_EditorClassIdentifier: 
-  name: 
-  toUnlock: []
-  unlocked: 0
-  description: 
-  buttons: []
+  nameTag: ForestStone
+  toUnlock:
+  - soBasic: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+    amount: 2
+  unlocked: 1
+  description: You see loose stones
+  buttons:
+  - {fileID: 4293528735765515577, guid: 564b07ebee3ed08499eb3b32f66ae201, type: 3}

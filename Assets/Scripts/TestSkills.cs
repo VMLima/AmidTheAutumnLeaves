@@ -38,7 +38,7 @@ public class TestSkills : MonoBehaviour
         {
             //Debug.Log("======Adding 10xp to Foraging");
             //SkillManager.instance.addXP("Foraging", 1);
-            SkillManager.instance.allSkillsDebugLog();
+            //SkillManager.instance.allSkillsDebugLog();
             timer -= 1f;
         }
     }
