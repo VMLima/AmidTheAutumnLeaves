@@ -5,11 +5,11 @@ public class SkillIncrementer
 {
     //this is gonna get instantiated with a skill and amount per second.
     //held in a list of active passive incrementers in SkillManager.
-    private Skill skill;
+    private SO_Skill skill;
     private int incrAmount = 0;
     private float timer;
     public string tag;
-    public SkillIncrementer(string _tag, Skill _skill, int _incrAmount)
+    public SkillIncrementer(string _tag, SO_Skill _skill, int _incrAmount)
     {
         tag = _tag;
         skill = _skill;

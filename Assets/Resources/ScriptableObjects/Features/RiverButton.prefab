@@ -268,3 +268,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeac184f5dcdd2c4495a524133f6dc2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toIncrementList:
+  - soBasic: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+    incTime: 0
+    incAmount: 10
+    descTooltip: 
+    descEffect: 

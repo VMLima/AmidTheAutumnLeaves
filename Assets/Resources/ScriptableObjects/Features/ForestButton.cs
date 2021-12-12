@@ -3,18 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ForestButton : MonoBehaviour
+public class ForestButton : ButtonEffect
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        //get this's button component and add listener to onClick()
-        this.GetComponent<Button>().onClick.AddListener(onClick);
-    }
-
-    public void onClick()
+    public override void onClickExtra()
     {
         Debug.Log("GOT A FOREST BUTTON PRESS");
-        SkillManager.instance.addXP("Foraging", 5);
     }
 }

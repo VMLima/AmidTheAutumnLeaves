@@ -5,16 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public struct incrStruct
 {
-    public Incremental inc;
+    public SO_Basic soBasic;
     public float incTime;
     public int incAmount;
     private float time;
     public string descTooltip;
     public string descEffect;
-    public incrStruct(Incremental _inc, int _incAmount = 1, float _incTime = 1f, string _descTooltip = "", string _descEffect = "")
+    public incrStruct(SO_Basic _soBasic, int _incAmount = 1, float _incTime = 1f, string _descTooltip = "", string _descEffect = "")
     {
         //something to be incremented
-        inc = _inc;
+        soBasic = _soBasic;
         //how often to be incremented
         incTime = _incTime;
         time = incTime;
@@ -29,13 +29,7 @@ public struct incrStruct
     //however often this is called... running through a list of structs doing .tick(deltaTime) will handle all the passive gains.
     public void tick(float _time)
     {
-        time -= _time;
-
-        if (time <= 0)
-        {
-            inc.addAmount(incAmount);
-            time = incTime;
-        }
+        //still gotta work this out.
     }
 }
 

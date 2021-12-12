@@ -6,10 +6,10 @@ using UnityEngine.Events;
 public class SkillManager : MonoBehaviour
 {
     // hold all possible skills.
-    SO_Skill[] SOSkillArray;
+    SO_Skill[] skillArray;
 
     // hold all learned skills.
-    List<Skill> skillList;
+    //List<Skill> skillList;
 
     // hold all skill incrementers
     List<SkillIncrementer> activeIncrementers;
@@ -36,8 +36,7 @@ public class SkillManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        skillList = new List<Skill>();
-        SOSkillArray = Utils.GetScriptableSkills<SO_Skill>();
+        skillArray = Utils.GetScriptableSkills<SO_Skill>();
         setupSkills();
         activeIncrementers = new List<SkillIncrementer>();
         timer = 0f;
@@ -45,32 +44,23 @@ public class SkillManager : MonoBehaviour
 
     void setupSkills()
     {
-        skillList.Clear();
-        foreach(SO_Skill skill in SOSkillArray)
+        foreach(SO_Skill skill in skillArray)
         {
-            skillList.Add(new Skill(skill));
             skill.reset();
         }
     }
 
     public bool hasSkill(string skillName)
     {
-        foreach (Skill skill in skillList)
-        {
-            if (skill.soSkill.nameTag == skillName)
-            {
-                //already have skill
-                return true;
-            }
-        }
-        return false;
+        if (getSkill(skillName) == null) return false;
+        return true;
     }
 
-    public Skill getSkill(string skillName)
+    public SO_Skill getSkill(string skillName)
     {
-        foreach (Skill skill in skillList)
+        foreach (SO_Skill skill in skillArray)
         {
-            if (skill.soSkill.nameTag == skillName)
+            if (skill.nameTag == skillName)
             {
                 //already have skill
                 return skill;
@@ -79,22 +69,9 @@ public class SkillManager : MonoBehaviour
         return null;
     }
 
-    public Skill getSkill(SO_Skill soSkill)
+    public SO_Skill getSkill(SO_Skill soSkill)
     {
         return getSkill(soSkill.nameTag);
-    }
-
-    private SO_Skill getScriptableObject(string prefabName)
-    {
-        foreach (SO_Skill soSkill in SOSkillArray)
-        {
-            if (soSkill.nameTag == prefabName)
-            {
-                //found the prefab.
-                return soSkill;
-            }
-        }
-        return null;
     }
 
     public void unlockSkill(SO_Skill skill)
@@ -112,9 +89,9 @@ public class SkillManager : MonoBehaviour
     {
         int i = 1;
         Debug.Log("==currentSkills===");
-        foreach (Skill skill in skillList)
+        foreach (SO_Skill skill in skillArray)
         {
-            Debug.Log("slot:" + i + "=" + skill.soSkill.nameTag + " Level:" + skill.getLevel() + " XP:" + skill.getAmount());
+            Debug.Log("slot:" + i + "=" + skill.nameTag + " Level:" + skill.getLevel() + " XP:" + skill.getAmount());
             i++;
         }
         Debug.Log("===================");
@@ -122,16 +99,16 @@ public class SkillManager : MonoBehaviour
 
     public void unlockSkill(string skillName)
     {
-        Skill skill = getSkill(skillName);
+        SO_Skill skill = getSkill(skillName);
         if (skill != null)
         {
-            unlockSkill(skill.soSkill);
+            unlockSkill(skill);
         }
     }
 
     public int getXP(string skillName)
     {
-        Skill skill = getSkill(skillName);
+        SO_Skill skill = getSkill(skillName);
         if(skill != null) return skill.getAmount();
         return 0;
     }
@@ -139,7 +116,7 @@ public class SkillManager : MonoBehaviour
     //for button mashing and events.
     public void addXP(string skillName, int amount)
     {
-        Skill skill = getSkill(skillName);
+        SO_Skill skill = getSkill(skillName);
         if (skill != null) skill.addAmount(amount);
     }
 
@@ -148,7 +125,7 @@ public class SkillManager : MonoBehaviour
     public void passiveXP(string tag, string skillName, int amount)
     {
         Debug.Log("SkillManager:passiveXP:" + skillName + ":" + amount);
-        Skill skill = getSkill(skillName);
+        SO_Skill skill = getSkill(skillName);
         if(skill != null)
         {
             SkillIncrementer inc = new SkillIncrementer(tag, skill, amount);

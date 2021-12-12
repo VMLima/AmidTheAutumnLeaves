@@ -5,14 +5,13 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
-    private List<Item> itemList;
-    private SO_Item[] soItemArray;
+    //private List<Item> itemList;
+    private SO_Item[] itemArray;
 
     void Awake()
     {
         instance = this;
-        itemList = new List<Item>();
-        soItemArray = Utils.GetSriptableItems<SO_Item>();
+        itemArray = Utils.GetSriptableItems<SO_Item>();
     }
 
     // Update is called once per frame
@@ -23,7 +22,7 @@ public class ItemManager : MonoBehaviour
 
     private SO_Item getScriptableObject(string prefabName)
     {
-        foreach (SO_Item soItem in soItemArray)
+        foreach (SO_Item soItem in itemArray)
         {
             if (soItem.nameTag == prefabName)
             {
@@ -34,11 +33,11 @@ public class ItemManager : MonoBehaviour
         return null;
     }
 
-    public Item getItem(string itemName)
+    public SO_Item getItem(string itemName)
     {
-        foreach(Item item in itemList)
+        foreach(SO_Item item in itemArray)
         {
-            if(item.soItem.nameTag == itemName)
+            if(item.nameTag == itemName)
             {
                 return item;
             }
@@ -46,33 +45,28 @@ public class ItemManager : MonoBehaviour
         return null;
     }
 
-    public Item getItem(SO_Item item)
+    public SO_Item getItem(SO_Item item)
     {
         return getItem(item.nameTag);
     }
 
-    private void addNewItem(SO_Item soItem, int amount = 1)
+    private void addItemToUI(SO_Item soItem)
     {
-        //given a prefab instanciate and add a new item.
-        Item newItem = new Item(soItem);
-        itemList.Add(newItem);
-
-        //any other stuff important to instantiating, like adding it to its UI, etc.
+        //UI adding removing stuff
     }
 
-    private void removeItemFromList(Item item)
+    private void removeItemToUI(SO_Item soItem)
     {
-        itemList.Remove(item);
-        //any other stuff important to removing, like removing from UI, etc.
+        //UI adding removing stuff
     }
 
     public void allItemsDebugLog()
     {
         int i = 1;
         Debug.Log("==currentInventory===");
-        foreach (Item item in itemList)
+        foreach (SO_Item item in itemArray)
         {
-            Debug.Log("slot:" + i + "=" + item.soItem.nameTag + " amount:" + item.getAmount());
+            Debug.Log("slot:" + i + "=" + item.nameTag + " amount:" + item.getAmount());
             i++;
         }
         Debug.Log("===================");
@@ -89,7 +83,7 @@ public class ItemManager : MonoBehaviour
             //Debug.Log("itemManager:additem: getScriptableObject=found");
             // find out if item already exists in inventory
 
-            Item item = getItem(itemName);
+            SO_Item item = getItem(itemName);
             if (item != null)
             {
                 //ITEM IS IN INVENTORY ALREADY
@@ -98,8 +92,9 @@ public class ItemManager : MonoBehaviour
             else
             {
                 //ITEM IS NOT IN INVENTORY
+                addItemToUI(item);
+                item.setAmount(amount);
                 Debug.Log("itemManager:additem: adding " + amount + " to inventory");
-                addNewItem(scriptableItem, amount);
             }
         }
         else
@@ -112,14 +107,14 @@ public class ItemManager : MonoBehaviour
     public void removeItem(string itemName, int amount = 1)
     {
         //Debug.Log("itemManager:removeItem: " + itemName);
-        Item item = getItem(itemName);
+        SO_Item item = getItem(itemName);
         if (item != null)
         {
             //Debug.Log("itemManager:removeItem: found item");
             if((item.addAmount((-1*amount)) <= 0) && (item.DeleteWhenEmpty))
             {
                 //all out of item and delete when empty.
-                removeItemFromList(item);
+                removeItemToUI(item);
             }
         }
         else

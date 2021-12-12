@@ -134,6 +134,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d206b86c0296fe24484401ec504f8fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toIncrementList:
+  - soBasic: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+    incTime: 0
+    incAmount: 15
+    descTooltip: 
+    descEffect: 
 --- !u!1 &7294096542116477248
 GameObject:
   m_ObjectHideFlags: 0

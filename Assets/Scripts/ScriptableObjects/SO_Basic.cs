@@ -36,4 +36,71 @@ public class SO_Basic : SO_Root
         maxStack = maxAmount;
         minStack = minAmount;
     }
+
+    public int getAmount()
+    {
+        return amount;
+    }
+
+    //adds amount to incremental
+    // returns the new amount.
+    // AddToAmountInterim can be overridien by inheriting classes to
+    // add functionality or tweak values before addition/subtraction.
+    public int addAmount(int _amount)
+    {
+        if (unlocked)
+        {
+            if (_amount > 0)
+            {
+                return addToAmountInterim(_amount);
+            }
+            else
+            {
+                return subToAmount((-1 * _amount));
+            }
+        }
+        return amount;
+    }
+
+    public virtual int addToAmountInterim(int _amount)
+    {
+        return addToAmount(_amount);
+    }
+
+    public virtual int subToAmountInterim(int _amount)
+    {
+        return subToAmount(_amount);
+    }
+
+    public int addToAmount(int _amount)
+    {
+        amount += _amount;
+        if (amount > maxStack)
+        {
+            amount = maxStack;
+        }
+        return amount;
+    }
+
+    public int subToAmount(int _amount)
+    {
+        amount -= _amount;
+        if (amount < minStack)
+        {
+            amount = minStack;
+        }
+        return amount;
+    }
+    public void setAmount(int _amount)
+    {
+        amount = _amount;
+        if (amount < minStack)
+        {
+            amount = minStack;
+        }
+        else if (amount > maxStack)
+        {
+            amount = maxStack;
+        }
+    }
 }

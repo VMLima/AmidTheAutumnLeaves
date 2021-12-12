@@ -38,7 +38,7 @@ public static class Utils
                 //find the actual created object
                 if (info.soBasic.GetType() == typeof(SO_Skill))
                 {
-                    Skill temp = SkillManager.instance.getSkill((SO_Skill)info.soBasic);
+                    SO_Skill temp = SkillManager.instance.getSkill((SO_Skill)info.soBasic);
                     if ((temp != null) && (temp.getLevel() >= info.amount))
                     {
                         //REQUIREMENT SUCCESS!!
@@ -55,7 +55,7 @@ public static class Utils
                 }
                 else if (info.soBasic.GetType() == typeof(SO_Item))
                 {
-                    Item temp = ItemManager.instance.getItem((SO_Item)info.soBasic);
+                    SO_Item temp = ItemManager.instance.getItem((SO_Item)info.soBasic);
                     //incTemp = ItemManager.instance.getItem((SO_Item)info.soBasic);
                     if((temp != null) && (temp.getAmount() >= info.amount))
                     {
