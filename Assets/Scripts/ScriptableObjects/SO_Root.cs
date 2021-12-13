@@ -29,9 +29,8 @@ public class SO_Root : ScriptableObject
     //gotta setup listeners for LockInfo stuff here!!!
     public SO_Root()
     {
-        //setupListeners();
-        //Instantiations persist through runs.  Restarting the game uses the last game's created object.
         //BE VERY CAREFUL DOING ANYTHING HERE.
+        //This happens only once.  Opening and closing the game 3 times will only call this first time.
     }
 
     public virtual void reset()
@@ -48,7 +47,7 @@ public class SO_Root : ScriptableObject
     {
         if(toUnlock != null)
         {
-            Debug.Log("Adding listener for " + nameTag);
+            //Debug.Log("Adding listener for " + nameTag);
             foreach (LockInfo info in toUnlock)
             {
                 if (info.soBasic.GetType() == typeof(SO_Skill))

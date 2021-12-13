@@ -52,7 +52,7 @@ public class SO_Basic : SO_Root
         {
             if (_amount > 0)
             {
-                return addToAmountInterim(_amount);
+                return addToAmountOverride(_amount);
             }
             else
             {
@@ -62,12 +62,12 @@ public class SO_Basic : SO_Root
         return amount;
     }
 
-    public virtual int addToAmountInterim(int _amount)
+    public virtual int addToAmountOverride(int _amount)
     {
         return addToAmount(_amount);
     }
 
-    public virtual int subToAmountInterim(int _amount)
+    public virtual int subToAmountOverride(int _amount)
     {
         return subToAmount(_amount);
     }

@@ -44,7 +44,7 @@ public class SO_Skill : SO_Basic
     //check if you are at max level.
     //check if your xp has dinged level up
     //BEWARE, currently overflow xp will be discarded (it will hit the cap, be thrown away, then checked for level up)
-    public override int addToAmountInterim(int _amount)
+    public override int addToAmountOverride(int _amount)
     {
         if (!atMax)
         {
@@ -57,7 +57,7 @@ public class SO_Skill : SO_Basic
         }
         return 0;
     }
-    public override int subToAmountInterim(int _amount)
+    public override int subToAmountOverride(int _amount)
     {
         if (!atMax)
         {

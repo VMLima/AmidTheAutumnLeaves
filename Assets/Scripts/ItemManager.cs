@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Exists as singleton manager for items.
+///     holds a list of items, 
+/// 
+/// 
+/// </summary>
+
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
