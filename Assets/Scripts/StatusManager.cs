@@ -45,20 +45,19 @@ public class StatusManager : MonoBehaviour
                 return;
             }
         }
+
+        //otherwise... get the status scriptable object... create its UI object and put it in the UI... start up the script.
         SO_StatusEffect status = getStatus(statusName);
         GameObject statusObject = (GameObject)Instantiate(status.UIObject, transform);
 
         statusObject.name = status.name;    //just to confirm I can refind it.
-        //set its duration
         StatusScript statusScript = statusObject.GetComponent<StatusScript>();
         statusObject.transform.SetParent(statusPanel.transform);
 
         if (statusScript != null)
         {
-            statusScript.setDuration(status.duration);
             statusScript.startCondition();
         }
-        
     }
 
     public void removeStatus(string statusName, bool removeAll = true)

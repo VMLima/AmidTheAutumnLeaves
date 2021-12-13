@@ -2,7 +2,7 @@
  * THIS IS A DESCRIPTION OF HOW TO MAKE STATUS EFFECTS
  * 
  * CREATE EMPTY COMPONENTS
- * 1. Create a scriptable object within this folder of type StatusEffect
+ * 1. Create a scriptable object within this folder
  * 2. Create a prefab element
  * 3. Create a C# script.
  * 

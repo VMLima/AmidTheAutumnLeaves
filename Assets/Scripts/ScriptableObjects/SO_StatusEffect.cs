@@ -23,8 +23,8 @@ public class SO_StatusEffect : ScriptableObject
     [Tooltip("Prefab Game object with the script that handles functionality and any UI elements")]
     public GameObject UIObject;
 
-    [Tooltip("Timer based duration of effect.  0 means no timer based removal.")]
-    public float duration = 0;
+    //[Tooltip("Timer based duration of effect.  0 means no timer based removal.")]
+    //public float duration = 0;
 
     public virtual void reset()
     {

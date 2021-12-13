@@ -11,7 +11,6 @@ using UnityEngine;
 
 public class StatusScript : MonoBehaviour
 {
-    [HideInInspector]
     public float duration;
     private bool onTimer = false;
     [HideInInspector]
@@ -89,15 +88,5 @@ public class StatusScript : MonoBehaviour
         onStopOverride();
         CancelInvoke();
         isActive = false;
-    }
-
-    public void setDuration(float _duration)
-    {
-        duration = _duration;
-        if (duration > 0)
-        {
-            onTimer = true;
-            resetDuration();
-        }
     }
 }

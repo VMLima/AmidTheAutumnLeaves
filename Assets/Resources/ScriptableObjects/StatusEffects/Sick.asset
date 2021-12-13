@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99d2b558897e3c4890c01e40ab7963f, type: 3}
   m_Name: Sick
   m_EditorClassIdentifier: 
-  nameTag: 
-  UIObject: {fileID: 0}
-  duration: 0
+  nameTag: Sick
+  UIObject: {fileID: 6544045023682538032, guid: 41ad07d1b3b51c047a1ce3b119811f00, type: 3}
+  duration: 120
