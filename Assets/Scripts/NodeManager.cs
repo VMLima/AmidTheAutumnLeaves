@@ -16,7 +16,7 @@ public class NodeManager : MonoBehaviour
     public SO_Node[] nodeArray;
 
     private SO_Node currentNode;
-    private List<SO_Feature> currentFeatures = new List<SO_Feature>();
+    private List<SO_Feature> currentFeatures;
 
     private string output;
     private string featureText;
@@ -26,18 +26,19 @@ public class NodeManager : MonoBehaviour
 
         Instance = this;
         //populate feature array
-        featureArray = Utils.GetAllFeatures<SO_Feature>();
+        featureArray = Utils.GetAllScriptableObjects<SO_Feature>();
         foreach (SO_Feature feature in featureArray)
         {
             feature.reset();
         }
         //populate node array
-        nodeArray = Utils.GetAllNodes<SO_Node>();
+        nodeArray = Utils.GetAllScriptableObjects<SO_Node>();
         foreach (SO_Node node in nodeArray)
         {
             node.reset();
+            Debug.Log(node.name);
         }
-
+        currentFeatures = new List<SO_Feature>();
     }
 
     void updateText(string text)
@@ -73,7 +74,7 @@ public class NodeManager : MonoBehaviour
     {
         
 
-        TEST();
+        //TEST();
         
 
     }

@@ -905,8 +905,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1910270601}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14703ea6f48625b4dbcc6329dde33f78, type: 3}
+  m_Script: {fileID: 11500000, guid: 5723e42e4e5258242b3bb6332b9fc314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   statusPanel: {fileID: 757659859}
-  health: 0
+  health: 100

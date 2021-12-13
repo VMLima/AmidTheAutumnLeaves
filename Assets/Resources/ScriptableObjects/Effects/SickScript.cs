@@ -8,26 +8,27 @@ public class SickScript : EffectScript
     public override void effectOverride()
     {
         EffectManager.instance.health -= damagePerSec;
-        Debug.Log("SickScript:effectOverride: currentHealth = " + EffectManager.instance.health + " duration: " + timeLeft);
+        Debug.Log("SickScript:effectOverride: sick tick : currentHealth = " + EffectManager.instance.health + " timeLeft: " + timeLeft);
     }
 
     public override void effectStackOverride()
     {
-        
-        //base.effectStackOverride(); //causes duration to be reset.
-        //damagePerSec++; //take  more damage per second on stack.
+        //this test effect is using 'Stack Effect' instead of reseting duration or some such on new effect application.
+        //only have this function still here as an example of how to right it and for the rough explanation.
     }
 
+    //when the effect starts.
     public override void onStartOverride()
     {
         EffectManager.instance.health -= 10;
-        Debug.Log("SickScript:onStartOverride: currentHealth = " + EffectManager.instance.health);
+        Debug.Log("SickScript:onStartOverride: You have gotten sick! currentHealth = " + EffectManager.instance.health);
     }
 
+    //when the effect ends.
     public override void onStopOverride()
     {
 
-        EffectManager.instance.health += 15;
-        Debug.Log("SickScript:onStopOverride: currentHealth = " + EffectManager.instance.health);
+        EffectManager.instance.health += 10;
+        Debug.Log("SickScript:onStopOverride: You have gotten better! currentHealth = " + EffectManager.instance.health);
     }
 }

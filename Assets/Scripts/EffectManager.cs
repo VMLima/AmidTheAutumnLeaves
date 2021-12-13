@@ -33,22 +33,22 @@ public class EffectManager : MonoBehaviour
         return null;
     }
 
-    public void addStatus(string statusName)
+    public void startEffect(GameObject effect)
     {
+        Debug.Log("Start effect" + effect.name);
         //first check if status effect is already on.
         //if so simply call effectStackOverride();
         foreach (Transform child in statusPanel.transform)
         {
             //child is your child transform
-            if (child.name == statusName)
+            if (child.name == effect.name)
             {
                 child.GetComponent<EffectScript>().effectStackOverride();
-                if(child.GetComponent<EffectScript>().stackEffect == false) return;
+                if(child.GetComponent<EffectScript>().stackEffects == false) return;
             }
         }
 
         //otherwise... get the status scriptable object... create its UI object and put it in the UI... start up the script.
-        GameObject effect = getEffect(statusName);
         GameObject effectObject = (GameObject)Instantiate(effect, transform);
 
         effectObject.name = effect.name;    //just to confirm I can refind it.
@@ -61,7 +61,18 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public void removeStatus(string statusName, bool removeAll = true)
+    public void startEffect(string statusName)
+    {
+        GameObject effect = getEffect(statusName);
+        startEffect(effect);
+    }
+
+    public void endEffect(GameObject effect, bool removeAll = true)
+    {
+        endEffect(effect.name, removeAll);
+    }
+
+    public void endEffect(string statusName, bool removeAll = true)
     {
         //get children of statusPanel, get 
         //foreach child in pane...
@@ -76,11 +87,12 @@ public class EffectManager : MonoBehaviour
             }
         }
     }
+
     void Awake()
     {
         instance = this;
         //statusArray = Utils.GetSriptableStatusEffects<SO_StatusEffect>();
-        effectArray = Utils.GetAllEffects();
+        effectArray = Utils.GetAllGameObjects(Utils.effectLocation);
     }
 
     // Update is called once per frame

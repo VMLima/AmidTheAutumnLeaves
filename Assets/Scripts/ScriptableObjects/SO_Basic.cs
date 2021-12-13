@@ -11,6 +11,9 @@ using TMPro;
 public class SO_Basic : SO_Root
 {
 
+    [Tooltip("Drag as many Prefab gameobjects holding 'EffectScript' classes here as the item needs.  Generally for on equip, ongoing effects, regen, damage, etc.")]
+    public GameObject[] effectObjects;
+
     [HideInInspector]
     public int amount = 0;
 
@@ -29,12 +32,49 @@ public class SO_Basic : SO_Root
     [Tooltip("The UI prefab to represent this item.")]
     public GameObject prefab;
 
+    private bool isActive = false;
+
+    //when isActive = true, create its effect objects, attach it to... manager? something?.
+
+    //when isActive = false, remove the object from... manager? something?
+
+    //  That object needs the amount.  Precise, up to date.  Maybe I can pass this SO_Basic to it.
+
+    public void activate(bool turnOn)
+    {
+        if(turnOn)
+        {
+            isActive = true;
+            if (effectObjects != null)
+            {
+                foreach (GameObject effectObject in effectObjects)
+                {
+                    if(effectObject != null) EffectManager.instance.startEffect(effectObject);
+                }
+            }
+        }
+        else
+        {
+            isActive = false;
+            foreach (GameObject effectObject in effectObjects)
+            {
+                EffectManager.instance.endEffect(effectObject);
+            }
+        }
+    }
+
     public override void reset()
     {
         base.reset();
+        foreach (GameObject effectObject in effectObjects)
+        {
+            effectObject.name = nameTag;
+        }
         amount = 0;
+        isActive = false;
         maxStack = maxAmount;
         minStack = minAmount;
+        activate(false);
     }
 
     public int getAmount()

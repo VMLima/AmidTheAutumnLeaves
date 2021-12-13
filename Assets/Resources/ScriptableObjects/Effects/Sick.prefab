@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6799446681307636086}
-  - component: {fileID: 6516681762642253162}
+  - component: {fileID: -7292703259547729911}
   m_Layer: 0
   m_Name: Sick
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6516681762642253162
+--- !u!114 &-7292703259547729911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624543db0b846e549b7335881a91328d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0
+  duration: 20
   frequency: 1
-  skipDurationEffects: 0
-  stackEffect: 1
+  stackEffects: 0
   timeLeft: 0
+  destroyObjectOnEnd: 1

@@ -5,8 +5,11 @@ using UnityEngine;
 /// <summary>
 /// Exists as singleton manager for items.
 ///     holds a list of items, 
-/// 
-/// 
+///     
+///     PERSONAL NOTES...
+///         items... added, incremented, etc.  It will be up to... either inspector tags or function calls to actually activate the effects.
+///         inspector tags: onGainQuantityActivate.  Would be like a resource in a way.
+///         function calls: onEquip, onUse.
 /// </summary>
 
 public class ItemManager : MonoBehaviour
@@ -18,7 +21,16 @@ public class ItemManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        itemArray = Utils.GetAllItems<SO_Item>();
+        itemArray = Utils.GetAllScriptableObjects<SO_Item>();
+        setupItems();
+    }
+
+    void setupItems()
+    {
+        foreach(SO_Item item in itemArray)
+        {
+            item.reset();
+        }
     }
 
     // Update is called once per frame

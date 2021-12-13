@@ -11,21 +11,24 @@ using UnityEngine;
 
 public class EffectScript : MonoBehaviour
 {
-    [Tooltip("0=forever, x>0 = x seconds")]
+    [Tooltip("Seconds.  0 means continue forever (or untill something else stops it).")]
     public float duration = 0;
-    [Tooltip("how often to trigger.  Default is every 1s")]
+    [Tooltip("Seconds between triggers. 0 means only onStartOverride() and, after Duration, onStopOverride() will be called.")]
     public float frequency = 1f;
-    [Tooltip("only call onStartOverride() and onStopOverride().  Disables above duration based effects")]
-    public bool skipDurationEffects = false;
+    //[Tooltip("Will not use Duration and Frequency.  Will only call onStartOverride() and onStopOverride() then be done.")]
+    //public bool skipDurationEffects = false;
 
-    [Tooltip("If the effect is applied again while already active... TRUE = create a new individual ticking effect, effectStackOverride() will be called on all existing effects... FALSE = effectStackOverride() will  be called on all existing effects (by default refreshes the duration)")]
-    public bool stackEffect = false;
+    [Tooltip("How this effect being applied while already applied is handled.  If checked then another individual effect will start.  If unchecked it won't, instead the duration will be reset.")]
+    public bool stackEffects = false;
 
     private bool onTimer = false;
     [HideInInspector]
     public float timeLeft;
     private bool isActive = false;
 
+    //[Tooltip("GENERALLY KEEP THIS CHECKED.  Will only be false if the object it is tied to UI element with a short term effect that needs to persist even when the effect of it ends.")]
+    [HideInInspector]
+    public bool destroyObjectOnEnd = true;
 
     void Start()
     {
@@ -56,7 +59,7 @@ public class EffectScript : MonoBehaviour
     public virtual void effectStackOverride()
     {
         //if effects aren't stacked when a new application happens... then, as the default, refresh the duration.
-        if(stackEffect == false) resetDuration();
+        if(stackEffects == false) resetDuration();
     }
 
     public virtual void onStartOverride()
@@ -64,13 +67,21 @@ public class EffectScript : MonoBehaviour
         //GUARANTEED TO BE CALLED ON EFFECT START
     }
 
+    public void endingCall()
+    {
+        onStopOverride();
+        if (destroyObjectOnEnd) deleteSelf();
+        else endCondition();
+    }
+
     public virtual void onStopOverride()
     {
         //GUARANTTED TO BE CALLED NO MATTER HOW THE EFFECT ENDS.
     }
 
-    public void deleteCondition()
+    public void deleteSelf()
     {
+        Debug.Log("deleting self");
         GameObject.Destroy(this.gameObject);
     }
 
@@ -79,35 +90,34 @@ public class EffectScript : MonoBehaviour
         
         if (onTimer)
         {
-            timeLeft = timeLeft - frequency;
-
             //it is not 0 because of float based imprecision.  it can get off by a 10^-8 very quickly.
             if(timeLeft <= 0.125)
             {
-                deleteCondition(); //triggers onDestroy();
+                if (destroyObjectOnEnd) deleteSelf(); //triggers onDestroy(); which triggers endCondition();
+                else endCondition();
             }
+            timeLeft = timeLeft - frequency;
         }
         effectOverride();
     }
 
-    public void startCondition()
+    public virtual void startCondition()
     {
         if (duration == 0)
         {
             onTimer = false;
         }
-        if (frequency <= 0.125)
+        if (frequency < 0)
         {
-            skipDurationEffects = true;
             Debug.LogError("StatusScript:startCondition: invalid FREQUENCY value in " + name + ".  Please fix inspector value.");
+            return;
         }
         if (duration < 0)
         {
-            skipDurationEffects = true;
             Debug.LogError("StatusScript:startCondition: invalid DURATION value in " + name + ".  Please fix inspector value.");
+            return;
         }
 
-        
         if (isActive)
         {
             //if the effect is already active, instead of adding a new game object, do this.
@@ -116,13 +126,10 @@ public class EffectScript : MonoBehaviour
         }
         else
         {
-            
-            if (skipDurationEffects)
+            if (frequency == 0)
             {
-                //if the effect doesn't want duration effects called.  Call start effects and end.
-                onStartOverride();
-                deleteCondition();
-                return;
+                //just make 1 call to the onStop... and then clean this all up.
+                Invoke("endingCall", duration);
             }
             else
             {
@@ -140,7 +147,7 @@ public class EffectScript : MonoBehaviour
                     timeLeft = duration;
                 }
                 //start the status condition in Xs, keep repeating it every Xs.
-                InvokeRepeating("effect", frequency, frequency);
+                InvokeRepeating("effect", 0f, frequency);
             }
         }
     }

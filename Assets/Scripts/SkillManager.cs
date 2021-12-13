@@ -12,7 +12,6 @@ public class SkillManager : MonoBehaviour
     //List<Skill> skillList;
 
     public static SkillManager instance;
-    private float timer;
 
     public UnityEvent skillLevelEvent = new UnityEvent();
 
@@ -33,9 +32,8 @@ public class SkillManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        skillArray = Utils.GetAllSkills<SO_Skill>();
+        skillArray = Utils.GetAllScriptableObjects<SO_Skill>();
         setupSkills();
-        timer = 0f;
     }
 
     void setupSkills()
