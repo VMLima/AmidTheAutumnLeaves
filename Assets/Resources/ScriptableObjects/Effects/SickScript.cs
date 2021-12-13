@@ -7,8 +7,8 @@ public class SickScript : EffectScript
     private int damagePerSec = 1;
     public override void effectOverride()
     {
-        StatusManager.instance.health -= damagePerSec;
-        Debug.Log("SickScript:effectOverride: currentHealth = " + StatusManager.instance.health + " duration: " + timeLeft);
+        EffectManager.instance.health -= damagePerSec;
+        Debug.Log("SickScript:effectOverride: currentHealth = " + EffectManager.instance.health + " duration: " + timeLeft);
     }
 
     public override void effectStackOverride()
@@ -20,14 +20,14 @@ public class SickScript : EffectScript
 
     public override void onStartOverride()
     {
-        StatusManager.instance.health -= 10;
-        Debug.Log("SickScript:onStartOverride: currentHealth = " + StatusManager.instance.health);
+        EffectManager.instance.health -= 10;
+        Debug.Log("SickScript:onStartOverride: currentHealth = " + EffectManager.instance.health);
     }
 
     public override void onStopOverride()
     {
 
-        StatusManager.instance.health += 15;
-        Debug.Log("SickScript:onStopOverride: currentHealth = " + StatusManager.instance.health);
+        EffectManager.instance.health += 15;
+        Debug.Log("SickScript:onStopOverride: currentHealth = " + EffectManager.instance.health);
     }
 }

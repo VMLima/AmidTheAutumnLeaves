@@ -7,7 +7,7 @@ public static class Utils
     private static string skillLocation = "ScriptableObjects/Skills";
     private static string nodeLocation = "ScriptableObjects/Nodes";
     private static string featureLocation = "ScriptableObjects/Features";
-    private static string statusEffectLocation = "ScriptableObjects/StatusEffects";
+    private static string statusEffectLocation = "ScriptableObjects/Effects";
 
     public static T[] GetAllSkills<T>() where T : SO_Skill
     {

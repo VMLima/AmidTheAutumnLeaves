@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatusManager : MonoBehaviour
+public class EffectManager : MonoBehaviour
 {
     //hold health, stamina, temperature.
     //add status effects that end based on conditions.
@@ -15,7 +15,7 @@ public class StatusManager : MonoBehaviour
     GameObject[] effectArray;
     public GameObject statusPanel;
 
-    public static StatusManager instance;
+    public static EffectManager instance;
 
     public int health;
     //add them to a gameObject as they become active.

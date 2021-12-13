@@ -11,9 +11,6 @@ public class SkillManager : MonoBehaviour
     // hold all learned skills.
     //List<Skill> skillList;
 
-    // hold all skill incrementers
-    List<SkillIncrementer> activeIncrementers;
-
     public static SkillManager instance;
     private float timer;
 
@@ -38,7 +35,6 @@ public class SkillManager : MonoBehaviour
         instance = this;
         skillArray = Utils.GetAllSkills<SO_Skill>();
         setupSkills();
-        activeIncrementers = new List<SkillIncrementer>();
         timer = 0f;
     }
 
@@ -118,54 +114,5 @@ public class SkillManager : MonoBehaviour
     {
         SO_Skill skill = getSkill(skillName);
         if (skill != null) skill.addAmount(amount);
-    }
-
-    //tag is the unique call by which the passiveGain can be stopped
-    //for periodic xp gain over a stretch of time.
-    public void passiveXP(string tag, string skillName, int amount)
-    {
-        Debug.Log("SkillManager:passiveXP:" + skillName + ":" + amount);
-        SO_Skill skill = getSkill(skillName);
-        if(skill != null)
-        {
-            SkillIncrementer inc = new SkillIncrementer(tag, skill, amount);
-            activeIncrementers.Add(inc);
-        }
-    }
-
-    //stops active incrementer(s) with the tag.
-    //if all is true, will stop all active incrementers with the tag.
-    //if all is false, will stop only 1 active incrementer with the tag.
-    public void stopPassiveXP(string tag, bool all = false)
-    {
-        for (int i = activeIncrementers.Count - 1; i >= 0; i--)
-        {
-            if(activeIncrementers[i].tag == tag)
-            {
-                activeIncrementers.RemoveAt(i);
-                if (!all) return;
-            }
-        }
-    }
-
-    private void tickPassive()
-    {
-        foreach(SkillIncrementer s in activeIncrementers)
-        {
-            s.tick();
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //every second update.
-        timer += Time.deltaTime;
-
-        if (timer >= 1f)
-        {
-            tickPassive();
-            timer -= 1f;
-        }
     }
 }

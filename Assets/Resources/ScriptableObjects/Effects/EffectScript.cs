@@ -26,6 +26,7 @@ public class EffectScript : MonoBehaviour
     public float timeLeft;
     private bool isActive = false;
 
+
     void Start()
     {
         
