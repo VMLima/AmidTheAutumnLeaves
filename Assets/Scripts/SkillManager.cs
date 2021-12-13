@@ -36,7 +36,7 @@ public class SkillManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        skillArray = Utils.GetScriptableSkills<SO_Skill>();
+        skillArray = Utils.GetAllSkills<SO_Skill>();
         setupSkills();
         activeIncrementers = new List<SkillIncrementer>();
         timer = 0f;

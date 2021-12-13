@@ -9,29 +9,29 @@ public static class Utils
     private static string featureLocation = "ScriptableObjects/Features";
     private static string statusEffectLocation = "ScriptableObjects/StatusEffects";
 
-    public static T[] GetScriptableSkills<T>() where T : SO_Skill
+    public static T[] GetAllSkills<T>() where T : SO_Skill
     {
         return Resources.LoadAll<T>(skillLocation);
     }
 
-    public static T[] GetSriptableItems<T>() where T : SO_Item
+    public static T[] GetAllItems<T>() where T : SO_Item
     {
         return Resources.LoadAll<T>(itemLocation);
     }
 
-    public static T[] GetSriptableNodes<T>() where T : SO_Node
+    public static T[] GetAllNodes<T>() where T : SO_Node
     {
         return Resources.LoadAll<T>(nodeLocation);
     }
 
-    public static T[] GetSriptableFeatures<T>() where T : SO_Feature
+    public static T[] GetAllFeatures<T>() where T : SO_Feature
     {
         return Resources.LoadAll<T>(featureLocation);
     }
 
-    public static T[] GetSriptableStatusEffects<T>() where T : SO_StatusEffect
+    public static GameObject[] GetAllEffects()
     {
-        return Resources.LoadAll<T>(statusEffectLocation);
+        return Resources.LoadAll<GameObject>(statusEffectLocation);
     }
 
     public static bool checkUnlocked(LockInfo[] lockList)

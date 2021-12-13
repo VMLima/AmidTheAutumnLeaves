@@ -18,7 +18,7 @@ public class ItemManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        itemArray = Utils.GetSriptableItems<SO_Item>();
+        itemArray = Utils.GetAllItems<SO_Item>();
     }
 
     // Update is called once per frame

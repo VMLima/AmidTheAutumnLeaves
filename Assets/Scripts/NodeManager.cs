@@ -26,13 +26,13 @@ public class NodeManager : MonoBehaviour
 
         Instance = this;
         //populate feature array
-        featureArray = Utils.GetSriptableFeatures<SO_Feature>();
+        featureArray = Utils.GetAllFeatures<SO_Feature>();
         foreach (SO_Feature feature in featureArray)
         {
             feature.reset();
         }
         //populate node array
-        nodeArray = Utils.GetSriptableNodes<SO_Node>();
+        nodeArray = Utils.GetAllNodes<SO_Node>();
         foreach (SO_Node node in nodeArray)
         {
             node.reset();

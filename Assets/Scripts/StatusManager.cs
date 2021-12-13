@@ -11,7 +11,8 @@ public class StatusManager : MonoBehaviour
 
 
     //get a list of status effect scriptableObjects
-    SO_StatusEffect[] statusArray;
+    //SO_StatusEffect[] statusArray;
+    GameObject[] effectArray;
     public GameObject statusPanel;
 
     public static StatusManager instance;
@@ -20,13 +21,13 @@ public class StatusManager : MonoBehaviour
     //add them to a gameObject as they become active.
     //remove them from a gameObject as they become inactive.
 
-    public SO_StatusEffect getStatus(string statusName)
+    public GameObject getEffect(string effectName)
     {
-        foreach(SO_StatusEffect status in statusArray)
+        foreach(GameObject effect in effectArray)
         {
-            if (status.nameTag == statusName)
+            if (effect.name == effectName)
             {
-                return status;
+                return effect;
             }
         }
         return null;
@@ -41,18 +42,18 @@ public class StatusManager : MonoBehaviour
             //child is your child transform
             if (child.name == statusName)
             {
-                child.GetComponent<StatusScript>().effectStackOverride();
-                return;
+                child.GetComponent<EffectScript>().effectStackOverride();
+                if(child.GetComponent<EffectScript>().stackEffect == false) return;
             }
         }
 
         //otherwise... get the status scriptable object... create its UI object and put it in the UI... start up the script.
-        SO_StatusEffect status = getStatus(statusName);
-        GameObject statusObject = (GameObject)Instantiate(status.UIObject, transform);
+        GameObject effect = getEffect(statusName);
+        GameObject effectObject = (GameObject)Instantiate(effect, transform);
 
-        statusObject.name = status.name;    //just to confirm I can refind it.
-        StatusScript statusScript = statusObject.GetComponent<StatusScript>();
-        statusObject.transform.SetParent(statusPanel.transform);
+        effectObject.name = effect.name;    //just to confirm I can refind it.
+        EffectScript statusScript = effectObject.GetComponent<EffectScript>();
+        effectObject.transform.SetParent(statusPanel.transform);
 
         if (statusScript != null)
         {
@@ -75,10 +76,11 @@ public class StatusManager : MonoBehaviour
             }
         }
     }
-    void Start()
+    void Awake()
     {
         instance = this;
-        statusArray = Utils.GetSriptableStatusEffects<SO_StatusEffect>();
+        //statusArray = Utils.GetSriptableStatusEffects<SO_StatusEffect>();
+        effectArray = Utils.GetAllEffects();
     }
 
     // Update is called once per frame
