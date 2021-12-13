@@ -29,8 +29,8 @@ public class SO_Basic : SO_Root
     [HideInInspector]
     public int minStack;
 
-    [Tooltip("The UI prefab to represent this item.")]
-    public GameObject prefab;
+    [Tooltip("The UI prefab to represent this item.  Okay if None.")]
+    public GameObject UIGameObject;
 
     private bool isActive = false;
 
@@ -39,6 +39,50 @@ public class SO_Basic : SO_Root
     //when isActive = false, remove the object from... manager? something?
 
     //  That object needs the amount.  Precise, up to date.  Maybe I can pass this SO_Basic to it.
+
+    public void startEffect(GameObject effect)
+    {
+        if (effect != null)
+        {
+
+            EffectScript effectScript = effect.GetComponent<EffectScript>();
+            if (effectScript != null)
+            {
+                EffectManager.instance.startEffect(effectScript);
+            }
+            else
+            {
+                Debug.Log("SO_Basic:startEffect: ERROR gameObject:" + effect.name + ": attached to :" + name + ": does not have an EffectScript");
+            }
+        }
+        else
+        {
+            Debug.Log("SO_Basic:startEffect: ERROR was passed empty game object");
+        }
+    }
+
+    public void startEffect(string _effectName)
+    {
+        GameObject effectObject = getEffect(_effectName);
+        if(effectObject != null)
+        {
+            startEffect(effectObject);
+        }
+        else
+        {
+            Debug.Log("SO_Basic:startEffect: ERROR string:" + _effectName + ":does not correspond to a game object on:" + name);
+        }
+    }
+
+    public GameObject getEffect(string effectName)
+    {
+        foreach (GameObject effectObject in effectObjects)
+        {
+            if (effectObject.name != effectName) return effectObject;
+        }
+        return null;
+    }
+
 
     public void activate(bool turnOn)
     {

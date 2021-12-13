@@ -23,25 +23,28 @@ public class EffectScript : MonoBehaviour
 
     private bool onTimer = false;
     [HideInInspector]
-    public float timeLeft;
+    //public float timeLeft;
+    
     private bool isActive = false;
+    private float floatRoundFactor = 0.03125f;
 
     //[Tooltip("GENERALLY KEEP THIS CHECKED.  Will only be false if the object it is tied to UI element with a short term effect that needs to persist even when the effect of it ends.")]
     [HideInInspector]
     public bool destroyObjectOnEnd = true;
+
+
+    private List<float> effectDurations = new List<float>();
+    private float timeToTick;
+
+    private int numEffects = 0;
 
     void Start()
     {
         
     }
 
-    private void OnDestroy()
-    {
-        endCondition();
-    }
-
     //the effect to happen every second.
-    public virtual void effectOverride()
+    public virtual void effectOverride(int numEffects)
     {
         //OVERRIDEN TO ADD STATUS EFFECT.
         //example.
@@ -51,62 +54,95 @@ public class EffectScript : MonoBehaviour
 
     public void resetDuration()
     {
-        timeLeft = duration;
-    }    
+        if(effectDurations != null)
+        {
+            for(int i = 0; i < effectDurations.Count; i++)
+            {
+                effectDurations[i] = duration - floatRoundFactor;
+                Debug.Log("resetDuration: reseting duration");
+            }
+        }
+    }
 
     //THIS IS CALLED WHENEVER...
     // a new effect is added of the same name as this one.  Can handle effect behavior then here.
     public virtual void effectStackOverride()
     {
         //if effects aren't stacked when a new application happens... then, as the default, refresh the duration.
-        if(stackEffects == false) resetDuration();
+        resetDuration();
     }
 
-    public virtual void onStartOverride()
+    public virtual void onStartOverride(int numSimultaneousEffects = 1)
     {
         //GUARANTEED TO BE CALLED ON EFFECT START
     }
 
-    public void endingCall()
-    {
-        onStopOverride();
-        if (destroyObjectOnEnd) deleteSelf();
-        else endCondition();
-    }
-
-    public virtual void onStopOverride()
+    public virtual void onStopOverride(int numSimultaneousEffects = 1)
     {
         //GUARANTTED TO BE CALLED NO MATTER HOW THE EFFECT ENDS.
     }
 
-    public void deleteSelf()
+    //returns false if effect has reached end.
+    public bool tick(float timePassed)
     {
-        Debug.Log("deleting self");
-        GameObject.Destroy(this.gameObject);
+        if (!isActive)
+        {
+            Debug.Log("EffectScript:effect: is not active, TERMINATING.");
+            return false;
+        }
+        if (timePassed >= timeToTick)
+        {
+            resetTimeToTick();
+            return effect();
+        }
+        else
+        {
+            timeToTick -= timePassed;
+            //Debug.Log("EffectScript:effect: timeToTick:" + timeToTick);
+        }
+        return true;
     }
 
-    public void effect()
+    public bool effect()
     {
-        
+        //check if past duration.
         if (onTimer)
         {
-            //it is not 0 because of float based imprecision.  it can get off by a 10^-8 very quickly.
-            if(timeLeft <= 0.125)
+            int toStop = 0;
+            for(int i = (effectDurations.Count - 1); i >= 0; i--)
             {
-                if (destroyObjectOnEnd) deleteSelf(); //triggers onDestroy(); which triggers endCondition();
-                else endCondition();
+                if (effectDurations[i] <= 0)
+                {
+                    Debug.Log("EffectScript:effect: ending an effect.");
+                    effectDurations.RemoveAt(i);
+                    toStop++;
+                    
+                }
             }
-            timeLeft = timeLeft - frequency;
+            if(toStop > 0)
+            {
+                onStopOverride(toStop);
+                numEffects -= toStop;
+            }
+            
+            if (effectDurations.Count <= 0)
+            {
+                Debug.Log("EffectScript:effect: no count left, TERMINATING.");
+                return false;
+            }
         }
-        effectOverride();
+        //if not past duration, do effect.
+        effectOverride(numEffects);
+        return true;
     }
 
-    public virtual void startCondition()
+    void resetTimeToTick()
     {
-        if (duration == 0)
-        {
-            onTimer = false;
-        }
+        timeToTick = frequency - floatRoundFactor;
+    }
+
+    public virtual void startEffect(int _numEffects = 1)
+    {
         if (frequency < 0)
         {
             Debug.LogError("StatusScript:startCondition: invalid FREQUENCY value in " + name + ".  Please fix inspector value.");
@@ -118,44 +154,100 @@ public class EffectScript : MonoBehaviour
             return;
         }
 
-        if (isActive)
+        int oldNumEffects = numEffects;
+        
+        if (!stackEffects)
         {
-            //if the effect is already active, instead of adding a new game object, do this.
-            //may change this later to be optional in inspector. Always create new instances on application.
-            effectStackOverride();
-        }
-        else
-        {
-            if (frequency == 0)
+            //NON STACKING EFFECTS WILL ONLY EVER HAVE 0 OR 1 STACK.
+            if (numEffects>=1)
             {
-                //just make 1 call to the onStop... and then clean this all up.
-                Invoke("endingCall", duration);
+                //got another effect while the current is already active.
+                effectStackOverride();
+                _numEffects = 0;
             }
             else
             {
-                onStartOverride();
-                isActive = true;
-                if (duration == 0)
+                //just starting
+                onStartOverride(1);
+                numEffects = 1;
+                _numEffects = 1;
+
+                if ((frequency == 0))
                 {
-                    //do not deal with stopping based on time.
-                    onTimer = false;
+                    //if there is a no frequency, just make 1 call at the end of the duration.
+                    timeToTick = duration - floatRoundFactor;
                 }
-                else
-                {
-                    //stop when timeLeft <= 0 (unless something else stops this first.
-                    onTimer = true;
-                    timeLeft = duration;
-                }
-                //start the status condition in Xs, keep repeating it every Xs.
-                InvokeRepeating("effect", 0f, frequency);
+            }
+
+        }
+        else
+        {
+            if(numEffects == 0)
+            {
+                resetTimeToTick();
+            }
+
+            onStartOverride(_numEffects);
+            numEffects += _numEffects;
+
+            
+            
+            if ((frequency == 0))
+            {
+                //if there is no frequency, just make 1 call at the end of the duration.
+                timeToTick = duration - floatRoundFactor;
             }
         }
+
+        if (duration == 0)
+        {
+            //no duration means go untill told from an outside source to stop/pause or amount goes to 0.
+            onTimer = false;
+        }
+        else
+        {
+            onTimer = true;
+            
+            //SLOPPY, BUT FUNCTIONAL UNLESS WE HAVE HUGE STACKS ADDED THIS WAY.
+            for (int i = 0; i<_numEffects;i++)
+            {
+                effectDurations.Add(duration - floatRoundFactor);
+            }
+        }
+        isActive = true;
     }
 
-    public void endCondition()
+    public void pauseEffect()
     {
-        onStopOverride();
-        CancelInvoke();
         isActive = false;
+    }
+
+    public int getNumEffects()
+    {
+        return numEffects;
+    }
+
+    public void endEffect(int _numEffects)
+    {
+        int toRemove = _numEffects;
+        if((_numEffects == 0) || (_numEffects >= numEffects))
+        {
+            //remove all
+            toRemove = numEffects;
+            isActive = false;   //will trigger the effect being popped from the effectList soon~
+        }
+
+        onStopOverride(toRemove);
+        numEffects -= toRemove;
+        
+
+        for(int i = 0; i < toRemove; i++)
+        {
+            if(effectDurations.Count>0)
+            {
+                effectDurations.RemoveAt(0);
+            }
+        }
+
     }
 }
