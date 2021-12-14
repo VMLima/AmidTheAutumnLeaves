@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTag: Sick
-  duration: 20
+  duration: 7
   frequency: 1
-  stackEffects: 1
+  maxStacks: 4
+  resetDurationOnStack: 0
   destroyObjectOnEnd: 1
 --- !u!114 &2782304737554104297
 MonoBehaviour:
@@ -64,5 +65,6 @@ MonoBehaviour:
   nameTag: Other
   duration: 0
   frequency: 1
-  stackEffects: 0
+  maxStacks: 0
+  resetDurationOnStack: 0
   destroyObjectOnEnd: 1
