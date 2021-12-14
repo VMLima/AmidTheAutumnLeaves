@@ -62,7 +62,7 @@ public class EffectManager : MonoBehaviour
                 if (((EffectScript)comp).nameTag == effectName)
                 {
                     effects.Add(((EffectScript)comp));
-                    Debug.Log("Found effect: " + effectName);
+                    //Debug.Log("Found effect: " + effectName);
                 }
             }
         }
@@ -103,13 +103,13 @@ public class EffectManager : MonoBehaviour
 
     public void startEffect(EffectScript effectScript, int stacks = 1)
     {
-        Debug.Log("Start effect:" + effectScript.nameTag);
+        //Debug.Log("Start effect:" + effectScript.nameTag);
         effectScript.startEffect(stacks);
         foreach (EffectScript script in activeEffects)
         {
             if (script == effectScript)
             {
-                Debug.Log("startEffect: already have effect");
+                //Debug.Log("startEffect: already have effect");
                 return;
             }
         }

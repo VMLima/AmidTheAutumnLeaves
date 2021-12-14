@@ -59,7 +59,6 @@ public class EffectScript : MonoBehaviour
             for(int i = 0; i < effectDurations.Count; i++)
             {
                 effectDurations[i] = duration - floatRoundFactor;
-                Debug.Log("resetDuration: reseting duration");
             }
         }
     }
@@ -87,7 +86,7 @@ public class EffectScript : MonoBehaviour
     {
         if (!isActive)
         {
-            Debug.Log("EffectScript:effect: is not active, TERMINATING.");
+            Debug.Log("EffectScript:effect: " + nameTag + " is not active, TERMINATING.");
             return false;
         }
         if (timePassed >= timeToTick)
@@ -113,7 +112,6 @@ public class EffectScript : MonoBehaviour
             {
                 if (effectDurations[i] <= 0)
                 {
-                    Debug.Log("EffectScript:effect: ending an effect.");
                     effectDurations.RemoveAt(i);
                     toStop++;
                     
@@ -127,7 +125,7 @@ public class EffectScript : MonoBehaviour
             
             if (effectDurations.Count <= 0)
             {
-                Debug.Log("EffectScript:effect: no count left, TERMINATING.");
+                Debug.Log("EffectScript:effect: " + nameTag + " no count left, TERMINATING.");
                 return false;
             }
         }
