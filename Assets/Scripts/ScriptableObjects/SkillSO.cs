@@ -10,7 +10,7 @@ using TMPro;
 /// </summary>
 
 [CreateAssetMenu(fileName = "NewSkill", menuName = "Scriptable Object/Basic/Skill")]
-public class SO_Skill : SO_Basic
+public class SkillSO : IncrementableSO
 {
     public int[] xpToLevel;
 

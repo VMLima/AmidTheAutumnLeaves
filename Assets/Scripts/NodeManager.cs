@@ -11,12 +11,12 @@ public class NodeManager : MonoBehaviour
     public static NodeManager Instance;
 
     [HideInInspector]
-    public SO_Feature[] featureArray;
+    public RoomFeatureSO[] featureArray;
     [HideInInspector]
-    public SO_Node[] nodeArray;
+    public RoomSO[] nodeArray;
 
-    private SO_Node currentNode;
-    private List<SO_Feature> currentFeatures;
+    private RoomSO currentNode;
+    private List<RoomFeatureSO> currentFeatures;
 
     private string output;
     private string featureText;
@@ -26,19 +26,19 @@ public class NodeManager : MonoBehaviour
 
         Instance = this;
         //populate feature array
-        featureArray = Utils.GetAllScriptableObjects<SO_Feature>();
-        foreach (SO_Feature feature in featureArray)
+        featureArray = Utils.GetAllScriptableObjects<RoomFeatureSO>();
+        foreach (RoomFeatureSO feature in featureArray)
         {
             feature.reset();
         }
         //populate node array
-        nodeArray = Utils.GetAllScriptableObjects<SO_Node>();
-        foreach (SO_Node node in nodeArray)
+        nodeArray = Utils.GetAllScriptableObjects<RoomSO>();
+        foreach (RoomSO node in nodeArray)
         {
             node.reset();
             Debug.Log(node.name);
         }
-        currentFeatures = new List<SO_Feature>();
+        currentFeatures = new List<RoomFeatureSO>();
     }
 
     void updateText(string text)
@@ -48,9 +48,9 @@ public class NodeManager : MonoBehaviour
         textGUI.text = output;
     }
 
-    SO_Node getNode(string name)
+    RoomSO getNode(string name)
     {
-        foreach(SO_Node node in nodeArray)
+        foreach(RoomSO node in nodeArray)
         {
             if(node.nameTag == name)
             {
@@ -81,7 +81,7 @@ public class NodeManager : MonoBehaviour
 
     //when an unlock is called from a listener, can easily do...
     //"NodeManager.instance.unlockFeature(thisFeature)"
-    public void unlockFeature(SO_Feature feature)
+    public void unlockFeature(RoomFeatureSO feature)
     {
         initFeature(feature);
     }
@@ -94,7 +94,7 @@ public class NodeManager : MonoBehaviour
         for (int i = 0; i < currentNode.numRandomFeatures; i++)
         {
             //REWRITE THIS SO IT REMOVES ONES FROM LIST OF POTENTIALS INSTEAD OF BRUTE FORCE RNG.
-            SO_Feature temp = currentFeatures[0];
+            RoomFeatureSO temp = currentFeatures[0];
             int j = 0;
             while ((currentFeatures.Contains(temp)) && (j < 5))
             {
@@ -112,7 +112,7 @@ public class NodeManager : MonoBehaviour
         //settting up buttons and text.
         if(currentFeatures.Count > 0)
         {
-            foreach (SO_Feature feature in currentFeatures)
+            foreach (RoomFeatureSO feature in currentFeatures)
             {
                 if (!feature.unlocked)
                 {
@@ -129,7 +129,7 @@ public class NodeManager : MonoBehaviour
         
     }
 
-    void initFeature(SO_Feature feature)
+    void initFeature(RoomFeatureSO feature)
     {
         //setting up buttons and text.
         for (int i = 0; i < feature.buttons.Length; i++)
@@ -140,7 +140,7 @@ public class NodeManager : MonoBehaviour
         }
     }
 
-    void setNode(SO_Node node)
+    void setNode(RoomSO node)
     {
         //creating a list of features for this scene
         setupCurrentFeatures();

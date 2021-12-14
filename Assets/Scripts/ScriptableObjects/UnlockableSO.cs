@@ -15,7 +15,7 @@ using TMPro;
 
 
 //[CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
-public class SO_Root : ScriptableObject
+public class UnlockableSO : ScriptableObject
 {
     [Tooltip("MUST USE THIS EXACT NAME TO REFERENCE IT IN CODE")]
     public string nameTag;
@@ -27,7 +27,7 @@ public class SO_Root : ScriptableObject
     public bool unlocked = false;
 
     //gotta setup listeners for LockInfo stuff here!!!
-    public SO_Root()
+    public UnlockableSO()
     {
         //BE VERY CAREFUL DOING ANYTHING HERE.
         //This happens only once.  Opening and closing the game 3 times will only call this first time.
@@ -50,19 +50,19 @@ public class SO_Root : ScriptableObject
             //Debug.Log("Adding listener for " + nameTag);
             foreach (LockInfo info in toUnlock)
             {
-                if (info.soBasic.GetType() == typeof(SO_Skill))
+                if (info.soBasic.GetType() == typeof(SkillSO))
                 {
                     //SKILL LISTENER.  attach to the 'skillLevelEvent' in SkillManager.
                     //  some day I will set it up better.  Listening for specific skill's levelUp,
                     //  instead of just checking on every one's.
                     SkillManager.instance.skillLevelEvent.AddListener(updateUnlocked);
                 }
-                else if (info.soBasic.GetType() == typeof(SO_Resource))
+                else if (info.soBasic.GetType() == typeof(ResourceSO))
                 {
                     Debug.LogError("Incremental:setupListeners: Resources not set up yet.");
                     //ALSO ADD A LINE IN unsubscribeFromListners, when setting up.
                 }
-                else if (info.soBasic.GetType() == typeof(SO_Item))
+                else if (info.soBasic.GetType() == typeof(ItemSO))
                 {
                     Debug.LogError("Incremental:setupListeners: Item not set up yet.");
                     //ALSO ADD A LINE IN unsubscribeFromListners, when setting up.

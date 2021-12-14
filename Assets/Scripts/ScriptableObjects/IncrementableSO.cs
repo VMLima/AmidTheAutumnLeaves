@@ -8,7 +8,7 @@ using TMPro;
 
 
 //[CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
-public class SO_Basic : SO_Root
+public class IncrementableSO : UnlockableSO
 {
 
     [Tooltip("Drag as many Prefab gameobjects holding 'EffectScript' classes here as the item needs.  Generally for on equip, ongoing effects, regen, damage, etc.")]
@@ -28,6 +28,7 @@ public class SO_Basic : SO_Root
 
     [HideInInspector]
     public int minStack;
+
 
     [Tooltip("The UI prefab to represent this item.  Okay if None.")]
     public GameObject UIGameObject;

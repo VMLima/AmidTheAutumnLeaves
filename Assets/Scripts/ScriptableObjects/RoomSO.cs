@@ -14,13 +14,13 @@ using TMPro;
 /// </summary>
 
 [CreateAssetMenu(fileName = "NewNode", menuName = "Scriptable Object/Node")]
-public class SO_Node : SO_Root
+public class RoomSO : UnlockableSO
 {
     //public string description;
     //public Button[] buttons;
 
     public int numRandomFeatures;
-    public SO_Feature[] presetFeatures;
+    public RoomFeatureSO[] presetFeatures;
 
     //UI to be added to
     //placement order in UI

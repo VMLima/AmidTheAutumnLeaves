@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f226f364df0929409af443f7a7d2de6, type: 3}
+  m_Script: {fileID: 11500000, guid: a7810ebf041aaed4ca00d5842813a3de, type: 3}
   m_Name: Berries
   m_EditorClassIdentifier: 
-  nameTag: Berries
+  nameTag: 
   toUnlock: []
   unlocked: 0
+  effectObject: {fileID: 0}
   amount: 0
-  maxAmount: 10
-  maxStack: 10
+  maxAmount: 1
+  maxStack: 0
   minAmount: 0
   minStack: 0
-  prefab: {fileID: 0}
+  UIGameObject: {fileID: 0}

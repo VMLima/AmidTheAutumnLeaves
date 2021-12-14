@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class SkillManager : MonoBehaviour
 {
     // hold all possible skills.
-    SO_Skill[] skillArray;
+    SkillSO[] skillArray;
 
     // hold all learned skills.
     //List<Skill> skillList;
@@ -32,13 +32,13 @@ public class SkillManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        skillArray = Utils.GetAllScriptableObjects<SO_Skill>();
+        skillArray = Utils.GetAllScriptableObjects<SkillSO>();
         setupSkills();
     }
 
     void setupSkills()
     {
-        foreach(SO_Skill skill in skillArray)
+        foreach(SkillSO skill in skillArray)
         {
             skill.reset();
         }
@@ -50,9 +50,9 @@ public class SkillManager : MonoBehaviour
         return true;
     }
 
-    public SO_Skill getSkill(string skillName)
+    public SkillSO getSkill(string skillName)
     {
-        foreach (SO_Skill skill in skillArray)
+        foreach (SkillSO skill in skillArray)
         {
             if (skill.nameTag == skillName)
             {
@@ -63,12 +63,12 @@ public class SkillManager : MonoBehaviour
         return null;
     }
 
-    public SO_Skill getSkill(SO_Skill soSkill)
+    public SkillSO getSkill(SkillSO soSkill)
     {
         return getSkill(soSkill.nameTag);
     }
 
-    public void unlockSkill(SO_Skill skill)
+    public void unlockSkill(SkillSO skill)
     {
         //start up GUI
         if(skill != null)
@@ -83,7 +83,7 @@ public class SkillManager : MonoBehaviour
     {
         int i = 1;
         Debug.Log("==currentSkills===");
-        foreach (SO_Skill skill in skillArray)
+        foreach (SkillSO skill in skillArray)
         {
             Debug.Log("slot:" + i + "=" + skill.nameTag + " Level:" + skill.getLevel() + " XP:" + skill.getAmount());
             i++;
@@ -93,7 +93,7 @@ public class SkillManager : MonoBehaviour
 
     public void unlockSkill(string skillName)
     {
-        SO_Skill skill = getSkill(skillName);
+        SkillSO skill = getSkill(skillName);
         if (skill != null)
         {
             unlockSkill(skill);
@@ -102,7 +102,7 @@ public class SkillManager : MonoBehaviour
 
     public int getXP(string skillName)
     {
-        SO_Skill skill = getSkill(skillName);
+        SkillSO skill = getSkill(skillName);
         if(skill != null) return skill.getAmount();
         return 0;
     }
@@ -110,7 +110,7 @@ public class SkillManager : MonoBehaviour
     //for button mashing and events.
     public void addXP(string skillName, int amount)
     {
-        SO_Skill skill = getSkill(skillName);
+        SkillSO skill = getSkill(skillName);
         if (skill != null) skill.addAmount(amount);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 [CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
-public class SO_Item : SO_Basic
+public class ItemSO : IncrementableSO
 {
     [Tooltip("Removes the item from the inventory list when quantity hits 0")]
     public bool DeleteWhenEmpty = false; //can have certain inventory items first/second/third, etc.
