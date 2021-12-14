@@ -2,6 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+/// EFFECTS:
+///     effects are scripts attached to effect prefab objects that are placed in a scriptable object's field.
+///     most scriptable objects have an Effect Object field to drag a prefab into.
+///     if the prefab has a prefab there and that prefab has scripts attached to it that inherit EffectScript...
+///         doing .startEffect() on the item will end up sending adding all the effects there to this manager.
+///         alternatively .startEffect("Sick", 2) will start only the effects named sick in the object, and give it a stack count of 2.
+///         
+///     this class is made to take EffectScripts, throw them in a list, and do .tick() on them every set amount of time.
+///         it can add scripts to that.
+///         it can remove scripts from that.
+///         
+///         the effects each have their own scripted functionality to do when .tick()'ed
+///         
+///     This is built more for performance than ease of use.
+///         Invoke and Listneres have more overhead.  So it is a bit messier in having to hold a list of all active effects.
+///         has to search it for effects when removing them.
+///         has to deal with adding them to lists.
+///         has to deal with instantiating/destroying objects.
+///         
+
+
 public class EffectManager : MonoBehaviour
 {
     //hold health, stamina, temperature.
@@ -25,16 +48,29 @@ public class EffectManager : MonoBehaviour
     //add them to a gameObject as they become active.
     //remove them from a gameObject as they become inactive.
 
-    public GameObject getEffect(string effectName)
+    public EffectScript[] getEffect(string effectName)
     {
-        foreach(GameObject effect in effectArray)
+        List<EffectScript> effects = new List<EffectScript>();
+        
+        //change from searching for game object matching name to script tag matching name.
+        
+        foreach (GameObject effect in effectArray)
         {
-            if (effect.name == effectName)
+            Component[] components = effect.GetComponents(typeof(EffectScript));
+            foreach (Component comp in components)
             {
-                return effect;
+                if (((EffectScript)comp).nameTag == effectName)
+                {
+                    effects.Add(((EffectScript)comp));
+                    Debug.Log("Found effect: " + effectName);
+                }
             }
         }
-        return null;
+        if(effects.Count == 0)
+        {
+            Debug.LogError("EffectManager: getEffect: could not find effect named:" + effectName);
+        }
+        return effects.ToArray();
     }
 
     //loose gameObjects... I gotta handle this better.  Stop creating and deleting in here.
@@ -57,49 +93,43 @@ public class EffectManager : MonoBehaviour
     }
 
     //start an effect by passing a script.
-    public void startEffect(EffectScript effectScript)
+    public void startEffect(EffectScript[] effectScripts, int stacks = 1)
     {
-        effectScript.startEffect();
+        foreach(EffectScript script in effectScripts)
+        {
+            startEffect(script, stacks);
+        }
+    }
+
+    public void startEffect(EffectScript effectScript, int stacks = 1)
+    {
+        Debug.Log("Start effect:" + effectScript.nameTag);
+        effectScript.startEffect(stacks);
+        foreach (EffectScript script in activeEffects)
+        {
+            if (script == effectScript)
+            {
+                Debug.Log("startEffect: already have effect");
+                return;
+            }
+        }
         activeEffects.Add(effectScript);
     }
 
-    public void startEffect(GameObject effectObject)
+    //search for the effect in a list of loose effects.
+    //gonna be attached to player object at some point.
+    public void startEffect(string effectName, int stacks = 1)
     {
-        Debug.Log("Start effect" + effectObject.name);
-        //first check if status effect is already on.
-        //if so simply call effectStackOverride();
-        foreach (Transform child in statusPanel.transform)
+        EffectScript[] effects = getEffect(effectName);
+        if (effects != null)
         {
-            //child is your child transform
-            if (child.name == effectObject.name)
-            {
-                child.GetComponent<EffectScript>().effectStackOverride();
-                if(child.GetComponent<EffectScript>().stackEffects == false) return;
-            }
+            startEffect(effects, stacks);
         }
-
-        //otherwise... get the status scriptable object... create its UI object and put it in the UI... start up the script.
-        GameObject effectInstance = (GameObject)Instantiate(effectObject, transform);
-
-        EffectScript effectScript = effectInstance.GetComponent<EffectScript>();
-
-        if (effectScript != null)
+        else
         {
-            effectInstance.transform.SetParent(statusPanel.transform);
-            effectScript.name = effectInstance.name;
-            effectObject.name = effectInstance.name;
-            startEffect(effectScript);
+            Debug.LogError("EffectManageR:startEffect:Could not find effect by name: " + effectName);
         }
     }
-
-    //search for the effect in a compiled list of loose effects.
-    //gonna be 'attached to player object'
-    public void startEffect(string statusName)
-    {
-        GameObject effect = getEffect(statusName);
-        startEffect(effect);
-    }
-
 
     public void endEffect(GameObject effect, int toRemove = 0)
     {
@@ -116,11 +146,20 @@ public class EffectManager : MonoBehaviour
         {
             foreach (EffectScript script in activeEffects)
             {
-                if(script.name == effectName)
+                if (script.nameTag == effectName)
                 {
                     script.endEffect(toRemove);
                 }
             }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        //Any instantiated objects need to be destroyed or else weird lingering data stuff can happen.
+        for(int i = (effectArray.Length - 1); i >= 0; i--)
+        {
+            GameObject.Destroy(effectArray[i]);
         }
     }
 
@@ -129,6 +168,24 @@ public class EffectManager : MonoBehaviour
         instance = this;
         //statusArray = Utils.GetSriptableStatusEffects<SO_StatusEffect>();
         effectArray = Utils.GetAllGameObjects(Utils.effectLocation);
+        for(int i = 0; i<effectArray.Length;i++)
+        {
+            string nameTag = effectArray[i].name;
+            //I am creating a clone of the base prefab.  Setting the name to the actual though (since that matters for effects)
+            //I must create a clone or else it edits the prefab which persists even out of game.
+            effectArray[i] = (GameObject)Instantiate(effectArray[i], transform);
+            effectArray[i].name = nameTag;
+
+            //gets all components of the prefab that are EffectScripts.
+            //I want to carry the name above in them so I can find and remove them from the activeEffects array.
+            Component[] components = effectArray[i].GetComponents(typeof(EffectScript));
+            foreach(Component effect in components)
+            {
+                //((EffectScript)effect).nameTag = effectArray[i].name;
+                //Debug.Log("awake: for loop name:" + effectArray[i].name);
+            }
+            //Debug.Log("awake: effect name:" + effectArray[i].name);
+        }
         activeEffects = new List<EffectScript>();
         timer = 0;
     }
@@ -142,13 +199,13 @@ public class EffectManager : MonoBehaviour
         {
             timer = 0;
             //Debug.Log("tick"); 
-            for(int i = (activeEffects.Count - 1); i>= 0; i--)
+            for (int i = (activeEffects.Count - 1); i >= 0; i--)
             {
                 if (!activeEffects[i].tick(0.5f))
                 {
                     removeObject(activeEffects[i]);
                     activeEffects.RemoveAt(i);
-                    
+
                 }
             }
         }

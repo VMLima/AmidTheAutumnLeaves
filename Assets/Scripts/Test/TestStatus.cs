@@ -12,7 +12,7 @@ public class TestStatus : MonoBehaviour
         Debug.Log("TestStart: setting health 100");
         EffectManager.instance.health = 100;
         Debug.Log("TestStart: adding Sick condition");
-        EffectManager.instance.startEffect("Sick");
+        EffectManager.instance.startEffect("Sick", 2);
     }
 
     // Update is called once per frame

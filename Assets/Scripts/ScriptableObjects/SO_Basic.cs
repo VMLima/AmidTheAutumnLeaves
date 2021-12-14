@@ -12,7 +12,7 @@ public class SO_Basic : SO_Root
 {
 
     [Tooltip("Drag as many Prefab gameobjects holding 'EffectScript' classes here as the item needs.  Generally for on equip, ongoing effects, regen, damage, etc.")]
-    public GameObject[] effectObjects;
+    public GameObject effectObject;
 
     [HideInInspector]
     public int amount = 0;
@@ -34,39 +34,15 @@ public class SO_Basic : SO_Root
 
     private bool isActive = false;
 
-    //when isActive = true, create its effect objects, attach it to... manager? something?.
-
-    //when isActive = false, remove the object from... manager? something?
-
-    //  That object needs the amount.  Precise, up to date.  Maybe I can pass this SO_Basic to it.
-
-    public void startEffect(GameObject effect)
+    //starts an effect script in the effect object matching effectName.
+    //if effectName is blank, start every effect attached to the effect object.
+    public void startEffect(string _effectName = "", int stacks = 1)
     {
-        if (effect != null)
+        EffectScript[] effects = getEffect(_effectName);
+        
+        if(effects != null)
         {
-
-            EffectScript effectScript = effect.GetComponent<EffectScript>();
-            if (effectScript != null)
-            {
-                EffectManager.instance.startEffect(effectScript);
-            }
-            else
-            {
-                Debug.Log("SO_Basic:startEffect: ERROR gameObject:" + effect.name + ": attached to :" + name + ": does not have an EffectScript");
-            }
-        }
-        else
-        {
-            Debug.Log("SO_Basic:startEffect: ERROR was passed empty game object");
-        }
-    }
-
-    public void startEffect(string _effectName)
-    {
-        GameObject effectObject = getEffect(_effectName);
-        if(effectObject != null)
-        {
-            startEffect(effectObject);
+            EffectManager.instance.startEffect(effects, stacks);
         }
         else
         {
@@ -74,35 +50,32 @@ public class SO_Basic : SO_Root
         }
     }
 
-    public GameObject getEffect(string effectName)
+    public EffectScript[] getEffect(string effectName = "")
     {
-        foreach (GameObject effectObject in effectObjects)
+        //get all components of this.
+        List<EffectScript> effects = new List<EffectScript>();
+        Component[] components = effectObject.GetComponents(typeof(EffectScript));
+        foreach (Component effect in components)
         {
-            if (effectObject.name != effectName) return effectObject;
-        }
-        return null;
-    }
-
-
-    public void activate(bool turnOn)
-    {
-        if(turnOn)
-        {
-            isActive = true;
-            if (effectObjects != null)
+            if((effectName == "") || (((EffectScript)effect).nameTag == effectName))
             {
-                foreach (GameObject effectObject in effectObjects)
-                {
-                    if(effectObject != null) EffectManager.instance.startEffect(effectObject);
-                }
+                effects.Add(((EffectScript)effect));
             }
         }
-        else
+        return effects.ToArray();
+    }
+
+    //ends an effect script in the effect object matching effectName.
+    //if effectName is blank, end every effect attached to this object.
+    public void endEffect(string effectName = "")
+    {
+        List<EffectScript> effects = new List<EffectScript>();
+        Component[] components = effectObject.GetComponents(typeof(EffectScript));
+        foreach (Component effect in components)
         {
-            isActive = false;
-            foreach (GameObject effectObject in effectObjects)
+            if ((effectName == "") || (((EffectScript)effect).nameTag == effectName))
             {
-                EffectManager.instance.endEffect(effectObject);
+                EffectManager.instance.endEffect(((EffectScript)effect).nameTag);
             }
         }
     }
@@ -110,15 +83,10 @@ public class SO_Basic : SO_Root
     public override void reset()
     {
         base.reset();
-        foreach (GameObject effectObject in effectObjects)
-        {
-            effectObject.name = nameTag;
-        }
         amount = 0;
         isActive = false;
         maxStack = maxAmount;
         minStack = minAmount;
-        activate(false);
     }
 
     public int getAmount()

@@ -11,6 +11,8 @@ using UnityEngine;
 
 public class EffectScript : MonoBehaviour
 {
+    [Tooltip("VERY IMPORTANT. Make sure it is a unique name.")]
+    public string nameTag;
     [Tooltip("Seconds.  0 means continue forever (or untill something else stops it).")]
     public float duration = 0;
     [Tooltip("Seconds between triggers. 0 means only onStartOverride() and, after Duration, onStopOverride() will be called.")]
@@ -22,8 +24,6 @@ public class EffectScript : MonoBehaviour
     public bool stackEffects = false;
 
     private bool onTimer = false;
-    [HideInInspector]
-    //public float timeLeft;
     
     private bool isActive = false;
     private float floatRoundFactor = 0.03125f;
