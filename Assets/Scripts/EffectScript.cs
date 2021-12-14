@@ -28,6 +28,7 @@ public class EffectScript : MonoBehaviour
     private bool onTimer = false;
     
     private bool isActive = false;
+    private bool isPaused = false;
     private float floatRoundFactor = 0.03125f;
 
     //[Tooltip("GENERALLY KEEP THIS CHECKED.  Will only be false if the object it is tied to UI element with a short term effect that needs to persist even when the effect of it ends.")]
@@ -39,6 +40,18 @@ public class EffectScript : MonoBehaviour
     private float timeToTick;
 
     private int numEffects = 0;
+
+    private string dataType;
+
+    public void setType(string _dataType)
+    {
+        dataType = _dataType;
+    }
+
+    public string getType()
+    {
+        return dataType;
+    }
 
     void Start()
     {
@@ -78,6 +91,7 @@ public class EffectScript : MonoBehaviour
     //returns false if effect has reached end.
     public bool tick(float timePassed)
     {
+        if (isPaused) return true;
         if (!isActive)
         {
             Debug.Log("EffectScript:effect: " + nameTag + " is not active, TERMINATING.");
@@ -194,9 +208,16 @@ public class EffectScript : MonoBehaviour
         isActive = true;
     }
 
-    public void pauseEffect()
+    //can pause all item effects.
+    //can pause all region effects... etc.
+    public void pauseEffect(string _dataType = "")
     {
-        isActive = false;
+        if((_dataType == "") || (dataType == _dataType)) isPaused = true;
+    }
+
+    public void unPauseEffect(string _dataType = "")
+    {
+        if ((_dataType == "") || (dataType == _dataType)) isPaused = false;
     }
 
     public int getNumEffects()

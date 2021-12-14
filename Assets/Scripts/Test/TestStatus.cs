@@ -13,6 +13,7 @@ public class TestStatus : MonoBehaviour
         EffectManager.instance.health = 100;
         Debug.Log("TestStart: adding Sick condition");
         EffectManager.instance.startEffect("Sick", 2);
+        EffectManager.instance.pauseActiveEffect();
     }
     
     // Update is called once per frame
@@ -27,6 +28,7 @@ public class TestStatus : MonoBehaviour
         }
         if ((timer >= 10f) && (timer <= 11f))
         {
+            EffectManager.instance.unPauseActiveEffect();
             Debug.Log("TestStart: adding status Sick");
             EffectManager.instance.startEffect("Sick", 5);
             timer++;

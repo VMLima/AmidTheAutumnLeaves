@@ -48,27 +48,38 @@ public class EffectManager : MonoBehaviour
     //add them to a gameObject as they become active.
     //remove them from a gameObject as they become inactive.
 
-    public EffectScript[] getEffect(string effectName)
+    public EffectScript[] getEffect(string effectName = "")
     {
         List<EffectScript> effects = new List<EffectScript>();
         
         //change from searching for game object matching name to script tag matching name.
-        
         foreach (GameObject effect in effectArray)
         {
-            Component[] components = effect.GetComponents(typeof(EffectScript));
-            foreach (Component comp in components)
-            {
-                if (((EffectScript)comp).nameTag == effectName)
-                {
-                    effects.Add(((EffectScript)comp));
-                    //Debug.Log("Found effect: " + effectName);
-                }
-            }
+            effects.AddRange(getEffect(effect, effectName));
         }
         if(effects.Count == 0)
         {
             Debug.LogError("EffectManager: getEffect: could not find effect named:" + effectName);
+        }
+        return effects.ToArray();
+    }
+
+    public EffectScript[] getEffect(GameObject effectObject, string effectName = "")
+    {
+        List<EffectScript> effects = new List<EffectScript>();
+
+        //change from searching for game object matching name to script tag matching name.
+
+        Component[] components = effectObject.GetComponents(typeof(EffectScript));
+        foreach (Component comp in components)
+        {
+            if (effectName == "") effects.Add(((EffectScript)comp));
+            else if ((effectName != "") && (((EffectScript)comp).nameTag == effectName)) effects.Add(((EffectScript)comp));
+        }
+        
+        if (effects.Count == 0)
+        {
+            Debug.LogError("EffectManager: getEffect: could not find effects in:" + effectObject.name + ": with criteria:" + effectName);
         }
         return effects.ToArray();
     }
@@ -114,6 +125,57 @@ public class EffectManager : MonoBehaviour
             }
         }
         activeEffects.Add(effectScript);
+    }
+
+    //PAUSING - doesn't change the state of anything, simply ignores all .tick() commands.
+    //UNPAUSING - causes the .tick() commands to function normally again.
+    //      useful for equiping/unequiping. useful for pausing the game, or certain features for a bit.
+
+    //search in the given effectObject for components that are effectScripts.
+    //pause those effects.
+    public void pauseEffect(GameObject effectObject, string effectName = "", string effectType = "")
+    {
+        EffectScript[] effects = getEffect(effectObject, effectName);
+        if (effects != null)
+        {
+            foreach (EffectScript e in effects)
+            {
+                e.pauseEffect(effectType);
+            }
+        }
+    }
+
+    public void unPauseEffect(GameObject effectObject, string effectName = "", string effectType = "")
+    {
+        EffectScript[] effects = getEffect(effectObject, effectName);
+        if (effects != null)
+        {
+            foreach (EffectScript e in effects)
+            {
+                e.unPauseEffect(effectType);
+            }
+        }
+    }
+
+
+
+    //search through all active effects, pause all by name or by type.
+    public void pauseActiveEffect(string effectName = "", string effectType = "")
+    {
+        foreach(EffectScript e in activeEffects)
+        {
+            if (effectName == "")           e.pauseEffect(effectType);
+            else if (effectName == e.nameTag) e.pauseEffect(effectType);
+        }
+    }
+    //search through all active effects, unpause all by name or by type.
+    public void unPauseActiveEffect(string effectName = "", string effectType = "")
+    {
+        foreach (EffectScript e in activeEffects)
+        {
+            if (effectName == "") e.unPauseEffect(effectType);
+            else if (effectName == e.nameTag) e.unPauseEffect(effectType);
+        }
     }
 
     //search for the effect in a list of loose effects.
