@@ -44,7 +44,7 @@ public class EffectManager : MonoBehaviour
 
     private float timer;
 
-    public int health;
+    public float health;
     //add them to a gameObject as they become active.
     //remove them from a gameObject as they become inactive.
 
@@ -257,19 +257,21 @@ public class EffectManager : MonoBehaviour
     {
         //every half second call .tick(float deltaTime); to all effects in list.
         timer += Time.deltaTime;
-        if (timer >= 0.5f)
+        if (timer >= 1.0f)
         {
             timer = 0;
             //Debug.Log("tick"); 
+            
             for (int i = (activeEffects.Count - 1); i >= 0; i--)
             {
-                if (!activeEffects[i].tick(0.5f))
+                if (!activeEffects[i].tick(1.0f))
                 {
                     removeObject(activeEffects[i]);
                     activeEffects.RemoveAt(i);
-
                 }
             }
+            //should be last, since also cleans up float rounding funkiness in its values.
+            Player.instance.everySecond();
         }
     }
 }

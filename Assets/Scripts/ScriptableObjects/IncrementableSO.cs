@@ -11,29 +11,48 @@ using TMPro;
 public class IncrementableSO : UnlockableSO
 {
 
-    [Tooltip("Drag as many Prefab gameobjects holding 'EffectScript' classes here as the item needs.  Generally for on equip, ongoing effects, regen, damage, etc.")]
-    public GameObject effectObject;
+    //[Tooltip("A Prefab gameobjects with 'EffectScript' inheriting classes thrown on it.  Generally for on equip, ongoing effects, regen, damage, etc.")]
+    //public GameObject effectObject;
 
-    [HideInInspector]
-    public int amount = 0;
+    [Tooltip("Current amount.")]
+    public float amount = 0;
 
-    [Tooltip("Starting max quantity of item.")]
+    [Tooltip("Current max amount.")]
     public int maxAmount = 1;
 
     [HideInInspector]
     public int maxStack;
 
-    [Tooltip("Starting min quantity of item.")]
+    [HideInInspector]
     public int minAmount = 0;
 
     [HideInInspector]
     public int minStack;
 
 
-    [Tooltip("The UI prefab to represent this item.  Okay if None.")]
+    [Tooltip("The UI prefab to represent this item.  Okay if empty game object.  Any 'EffectScripts' attached to it will be activatable.")]
     public GameObject UIGameObject;
 
-    private bool isActive = false;
+    public TextMeshProUGUI textDisplay;
+
+    [HideInInspector]
+    public bool removeFromUIOnEmpty = false;    //when setting up UI panel ID, set this.
+    [HideInInspector]
+    public int UIPanelID = 0;   //will be an Enum that correlates to a panel.  be used in IncManager to add/remove from correct panel.
+
+    [HideInInspector]
+    public bool UIActive = false;
+
+    [HideInInspector]
+    public bool hasUI = false;
+
+    void setupUIPanel()
+    {
+        //STILL GOTTA HOOK UP.
+        removeFromUIOnEmpty = false;
+        UIPanelID = 0;
+        hasUI = false;
+    }
 
     //starts an effect script in the effect object matching effectName.
     //if effectName is blank, start every effect attached to the effect object.
@@ -55,7 +74,7 @@ public class IncrementableSO : UnlockableSO
     {
         //get all components of this.
         List<EffectScript> effects = new List<EffectScript>();
-        Component[] components = effectObject.GetComponents(typeof(EffectScript));
+        Component[] components = UIGameObject.GetComponents(typeof(EffectScript));
         foreach (Component effect in components)
         {
             if((effectName == "") || (((EffectScript)effect).nameTag == effectName))
@@ -71,7 +90,7 @@ public class IncrementableSO : UnlockableSO
     public void endEffect(string effectName = "")
     {
         List<EffectScript> effects = new List<EffectScript>();
-        Component[] components = effectObject.GetComponents(typeof(EffectScript));
+        Component[] components = UIGameObject.GetComponents(typeof(EffectScript));
         foreach (Component effect in components)
         {
             if ((effectName == "") || (((EffectScript)effect).nameTag == effectName))
@@ -81,16 +100,20 @@ public class IncrementableSO : UnlockableSO
         }
     }
 
+    
+
     public override void reset()
     {
         base.reset();
         amount = 0;
-        isActive = false;
+        UIActive = false;
+        setupUIPanel();
+        //SETUP UI PANEL STUFF
         maxStack = maxAmount;
         minStack = minAmount;
     }
 
-    public int getAmount()
+    public float getAmount()
     {
         return amount;
     }
@@ -99,52 +122,56 @@ public class IncrementableSO : UnlockableSO
     // returns the new amount.
     // AddToAmountInterim can be overridien by inheriting classes to
     // add functionality or tweak values before addition/subtraction.
-    public int addAmount(int _amount)
+    public float addAmount(float _amount)
     {
         if (unlocked)
         {
             if (_amount > 0)
             {
-                return addToAmountOverride(_amount);
+                addToAmountOverride(_amount);
             }
             else
             {
-                return subToAmount((-1 * _amount));
+                subToAmountOverride((-1 * _amount));
+            }
+
+            if (textDisplay != null)
+            {
+                textDisplay.text = amount.ToString();
             }
         }
+
         return amount;
     }
 
-    public virtual int addToAmountOverride(int _amount)
+    public virtual void addToAmountOverride(float _amount)
     {
-        return addToAmount(_amount);
+         addToAmount(_amount);
     }
 
-    public virtual int subToAmountOverride(int _amount)
+    public virtual void subToAmountOverride(float _amount)
     {
-        return subToAmount(_amount);
+         subToAmount(_amount);
     }
 
-    public int addToAmount(int _amount)
+    public void addToAmount(float _amount)
     {
         amount += _amount;
         if (amount > maxStack)
         {
             amount = maxStack;
         }
-        return amount;
     }
 
-    public int subToAmount(int _amount)
+    public void subToAmount(float _amount)
     {
         amount -= _amount;
         if (amount < minStack)
         {
             amount = minStack;
         }
-        return amount;
     }
-    public void setAmount(int _amount)
+    public void setAmount(float _amount)
     {
         amount = _amount;
         if (amount < minStack)

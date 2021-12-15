@@ -10,32 +10,25 @@ public class TestItems : MonoBehaviour
     void Start()
     {
         Debug.Log("Adding a sword");
-        ItemManager.instance.addItem("Sword");
-        ItemManager.instance.allItemsDebugLog();
+        IncManager.instance.AddAmount<ItemSO>("Sword");
 
         Debug.Log("Adding a sword");
-        ItemManager.instance.addItem("Sword");
-        ItemManager.instance.allItemsDebugLog();
+        IncManager.instance.AddAmount<ItemSO>("Sword");
 
         Debug.Log("Removing a sword");
-        ItemManager.instance.removeItem("Sword");
-        ItemManager.instance.allItemsDebugLog();
+        IncManager.instance.AddAmount<ItemSO>("Sword", -1);
 
         Debug.Log("Adding a gold");
-        ItemManager.instance.addItem("Gold");
-        ItemManager.instance.allItemsDebugLog();
+        IncManager.instance.AddAmount<ItemSO>("Gold");
 
         Debug.Log("Adding 20 gold. Max gold is 10.");
-        ItemManager.instance.addItem("Gold", 20);
-        ItemManager.instance.allItemsDebugLog();
+        IncManager.instance.AddAmount<ItemSO>("Gold", 20);
 
         Debug.Log("Removing a gold");
-        ItemManager.instance.removeItem("Gold");
-        ItemManager.instance.allItemsDebugLog();
+        IncManager.instance.AddAmount<ItemSO>("Gold", -1);
 
         Debug.Log("Removing 15 gold");
-        ItemManager.instance.removeItem("Gold", 15);
-        ItemManager.instance.allItemsDebugLog();
+        IncManager.instance.AddAmount<ItemSO>("Gold", -15);
 
     }
 

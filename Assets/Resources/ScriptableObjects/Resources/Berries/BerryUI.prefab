@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6544045023682538032
+--- !u!1 &7352281612241169272
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6799446681307636086}
-  - component: {fileID: -7292703259547729911}
-  - component: {fileID: 2782304737554104297}
+  - component: {fileID: 3872485024900787715}
+  - component: {fileID: 403919601669700556}
   m_Layer: 0
-  m_Name: MiscEffects
+  m_Name: BerryUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6799446681307636086
+--- !u!4 &3872485024900787715
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544045023682538032}
+  m_GameObject: {fileID: 7352281612241169272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,37 +31,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7292703259547729911
+--- !u!114 &403919601669700556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544045023682538032}
+  m_GameObject: {fileID: 7352281612241169272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624543db0b846e549b7335881a91328d, type: 3}
+  m_Script: {fileID: 11500000, guid: 047c3a585a105f3459e173e18aa95ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameTag: Sick
-  duration: 20
-  frequency: 1
-  maxStacks: 4
-  resetDurationOnStack: 0
-  destroyObjectOnEnd: 1
---- !u!114 &2782304737554104297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544045023682538032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a8a5632b95abe43a8cacbf6385cfba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameTag: Other
+  nameTag: BerryHealing
   duration: 0
   frequency: 1
   maxStacks: 0

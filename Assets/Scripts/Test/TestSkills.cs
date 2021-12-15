@@ -11,8 +11,8 @@ public class TestSkills : MonoBehaviour
         timer = 0f;
 
         Debug.Log("===Adding skill Foraging======");
-        SkillManager.instance.unlockSkill("Foraging");
-        SkillManager.instance.allSkillsDebugLog();
+        IncManager.instance.Unlock<SkillSO>("Foraging");
+        IncManager.instance.allSkillsDebugLog();
         /*
         Debug.Log("======Adding 10xp to Foraging");
         SkillManager.instance.addXP("Foraging", 10);

@@ -39,7 +39,7 @@ public class EffectScript : MonoBehaviour
     private List<float> effectDurations = new List<float>();
     private float timeToTick;
 
-    private int numEffects = 0;
+    private int numStacks = 0;
 
     private string dataType;
 
@@ -59,7 +59,7 @@ public class EffectScript : MonoBehaviour
     }
 
     //the effect to happen every second.
-    public virtual void effectOverride(int numEffects)
+    public virtual void onTick(int numEffects)
     {
         //OVERRIDEN TO ADD STATUS EFFECT.
         //example.
@@ -78,12 +78,12 @@ public class EffectScript : MonoBehaviour
         }
     }
 
-    public virtual void onStartOverride(int oldNumStacks, int addingStacks)
+    public virtual void onStart(int oldNumStacks, int addingStacks)
     {
         //GUARANTEED TO BE CALLED ON EFFECT START
     }
 
-    public virtual void onStopOverride(int oldNumStacks, int removingStacks)
+    public virtual void onStop(int oldNumStacks, int removingStacks)
     {
         //GUARANTTED TO BE CALLED NO MATTER HOW THE EFFECT ENDS.
     }
@@ -100,7 +100,7 @@ public class EffectScript : MonoBehaviour
         if (timePassed >= timeToTick)
         {
             resetTimeToTick();
-            return effect();
+            return onTickHidden();
         }
         else
         {
@@ -114,13 +114,14 @@ public class EffectScript : MonoBehaviour
     //  a frequency of 1 and duration of 1 should tick once then remove instantly.
     //  passes the boolean returned to tick() which passes it to effectManager.
     //      if false, then remove the effect from the list.  No more .tick() will be called.
-    public bool effect()
+    
+    bool onTickHidden()
     {
         //check if past duration.
         if (onTimer)
         {
             //tick every effect in list
-            effectOverride(numEffects);
+            onTick(numStacks);
 
             int toStop = 0;
             for (int i = (effectDurations.Count - 1); i >= 0; i--)
@@ -133,12 +134,12 @@ public class EffectScript : MonoBehaviour
                 }
             }
 
-            if (toStop > 0) onStopOverride(numEffects, toStop);
-            numEffects -= toStop;
+            if (toStop > 0) onStop(numStacks, toStop);
+            numStacks -= toStop;
 
             if (effectDurations.Count <= 0)
             {
-                if (numEffects > 0) Debug.LogError("EffectScript:effect:" + nameTag + ": out of effectDuration yet still effect count.");
+                if (numStacks > 0) Debug.LogError("EffectScript:effect:" + nameTag + ": out of effectDuration yet still effect count.");
                 else Debug.Log("EffectScript:effect: " + nameTag + " no count left, TERMINATING.");
                 return false;
             }
@@ -153,7 +154,7 @@ public class EffectScript : MonoBehaviour
         else timeToTick = frequency - floatRoundFactor;
     }
 
-    public virtual void startEffect(int _numEffects = 1)
+    public void startEffect(int _numEffects = 1)
     {
         if (frequency < 0)
         {
@@ -166,12 +167,12 @@ public class EffectScript : MonoBehaviour
             return;
         }
 
-        int oldNumEffects = numEffects;
-        numEffects += _numEffects;
-        if ((maxStacks != 0) && (numEffects > maxStacks))
+        int oldNumEffects = numStacks;
+        numStacks += _numEffects;
+        if ((maxStacks != 0) && (numStacks > maxStacks))
         {
             //if adding more stacks than the maximum, only add enough to reach the maximum.
-            numEffects = maxStacks;
+            numStacks = maxStacks;
             _numEffects = maxStacks - oldNumEffects;
         }
 
@@ -183,7 +184,7 @@ public class EffectScript : MonoBehaviour
         //if in the end you are still adding a positive number of stacks.
         if (_numEffects > 0)
         {
-            onStartOverride(oldNumEffects, _numEffects);
+            onStart(oldNumEffects, _numEffects);
             //if there were no stacks, so just starting up again...
             if (oldNumEffects <= 0)
             {
@@ -220,23 +221,23 @@ public class EffectScript : MonoBehaviour
         if ((_dataType == "") || (dataType == _dataType)) isPaused = false;
     }
 
-    public int getNumEffects()
+    public int getNumStacks()
     {
-        return numEffects;
+        return numStacks;
     }
 
     public void endEffect(int _numEffects)
     {
         int toRemove = _numEffects;
-        if((_numEffects == 0) || (_numEffects >= numEffects))
+        if((_numEffects == 0) || (_numEffects >= numStacks))
         {
             //remove all
-            toRemove = numEffects;
+            toRemove = numStacks;
             isActive = false;   //will trigger the effect being popped from the effectList soon~
         }
 
-        onStopOverride(numEffects, toRemove);
-        numEffects -= toRemove;
+        onStop(numStacks, toRemove);
+        numStacks -= toRemove;
         
         for(int i = 0; i < toRemove; i++)
         {

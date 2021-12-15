@@ -44,7 +44,7 @@ public class SkillSO : IncrementableSO
     //check if you are at max level.
     //check if your xp has dinged level up
     //BEWARE, currently overflow xp will be discarded (it will hit the cap, be thrown away, then checked for level up)
-    public override int addToAmountOverride(int _amount)
+    public override void addToAmountOverride(float _amount)
     {
         if (!atMax)
         {
@@ -53,17 +53,14 @@ public class SkillSO : IncrementableSO
             {
                 levelUp();
             }
-            return amount;
         }
-        return 0;
     }
-    public override int subToAmountOverride(int _amount)
+    public override void subToAmountOverride(float _amount)
     {
         if (!atMax)
         {
-            return subToAmount(_amount);
+            subToAmount(_amount);
         }
-        return 0;
     }
 
     //advance to the next level.
@@ -90,7 +87,7 @@ public class SkillSO : IncrementableSO
                 maxStack = xpToLevel[currentLevel];
             }
             Debug.Log("Skill:levelUp:" + nameTag + " Current:" + currentLevel + " MaxLevel:" + maxLevel);
-            SkillManager.instance.skillLevelEvent.Invoke();
+            IncManager.instance.skillLevelEvent.Invoke();
         }
     }
 }

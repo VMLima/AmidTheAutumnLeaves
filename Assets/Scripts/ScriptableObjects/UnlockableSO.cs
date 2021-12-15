@@ -26,6 +26,8 @@ public class UnlockableSO : ScriptableObject
     [HideInInspector]
     public bool unlocked = false;
 
+    private IncManager manager;
+
     //gotta setup listeners for LockInfo stuff here!!!
     public UnlockableSO()
     {
@@ -37,35 +39,40 @@ public class UnlockableSO : ScriptableObject
     {
         //where you should reset and call all things that need to be reset/called upon new game.
         //every SO_~~~ should have reset() called during Start()
+        manager = IncManager.instance;
         unsubscribeFromListeners();
-        unlocked = false;
-        setupListeners();
+
+        //if there are things to listen for... it is locked.  Which means you cannot gain quantity or see it in UI.
+        unlocked = setupListeners();
     }
 
     //take the list of toUnlock and create listeners for the right triggers to unlock.
-    void setupListeners()
+    bool setupListeners()
     {
+        bool _unlocked = true;
         if(toUnlock != null)
         {
             //Debug.Log("Adding listener for " + nameTag);
             foreach (LockInfo info in toUnlock)
             {
-                if (info.soBasic.GetType() == typeof(SkillSO))
+                if(info.soBasic == null)
                 {
-                    //SKILL LISTENER.  attach to the 'skillLevelEvent' in SkillManager.
-                    //  some day I will set it up better.  Listening for specific skill's levelUp,
-                    //  instead of just checking on every one's.
-                    SkillManager.instance.skillLevelEvent.AddListener(updateUnlocked);
+
+                }
+                else if (info.soBasic.GetType() == typeof(SkillSO))
+                {
+                    manager.skillLevelEvent.AddListener(updateUnlocked);
+                    _unlocked = false;
                 }
                 else if (info.soBasic.GetType() == typeof(ResourceSO))
                 {
-                    Debug.LogError("Incremental:setupListeners: Resources not set up yet.");
-                    //ALSO ADD A LINE IN unsubscribeFromListners, when setting up.
+                    manager.resourceEvent.AddListener(updateUnlocked);
+                    _unlocked = false;
                 }
                 else if (info.soBasic.GetType() == typeof(ItemSO))
                 {
-                    Debug.LogError("Incremental:setupListeners: Item not set up yet.");
-                    //ALSO ADD A LINE IN unsubscribeFromListners, when setting up.
+                    manager.itemEvent.AddListener(updateUnlocked);
+                    _unlocked = false;
                 }
                 else
                 {
@@ -73,7 +80,7 @@ public class UnlockableSO : ScriptableObject
                 }
             }
         }
-        
+        return _unlocked;
     }
 
     public virtual void whenUnlocked()
@@ -88,7 +95,7 @@ public class UnlockableSO : ScriptableObject
 
     void unsubscribeFromListeners()
     {
-        SkillManager.instance.skillLevelEvent.RemoveListener(updateUnlocked);
+        manager.skillLevelEvent.RemoveListener(updateUnlocked);
         //NEED TO ADD OTHER MANAGERS.
     }
 

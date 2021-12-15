@@ -10,18 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bdd16aa9fa6096a489eb741f44990d1d, type: 3}
-  m_Name: Foraging
+  m_Name: NatureSense
   m_EditorClassIdentifier: 
-  nameTag: Foraging
-  toUnlock: []
-  unlocked: 0
-  effectObject: {fileID: 0}
-  amount: 0
-  maxAmount: 10
-  maxStack: 10
+  nameTag: NatureSence
+  toUnlock:
+  - soBasic: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+    amount: 1
+  unlocked: 1
+  amount: 14
+  maxAmount: 5
+  maxStack: 30
   minAmount: 0
   minStack: 0
   UIGameObject: {fileID: 0}
-  xpToLevel: 0a000000140000001e0000002800000032000000
-  currentLevel: 0
+  textDisplay: {fileID: 0}
+  removeFromUIOnEmpty: 0
+  UIPanelID: 0
+  UIActive: 0
+  hasUI: 0
+  xpToLevel: 140000001e000000
+  currentLevel: 1
   atMax: 0

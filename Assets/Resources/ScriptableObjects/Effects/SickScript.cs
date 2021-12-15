@@ -4,43 +4,57 @@ using UnityEngine;
 
 public class SickScript : EffectScript
 {
-    private int damagePerSec = 1;
-    public override void effectOverride(int _currentStacks = 1)
+    private int healthPerSec = -1;
+    SkillSO Foraging;
+    SkillSO NatureSence;
+    IncManager incM;
+    Player player;
+    public override void onTick(int _currentStacks = 1)
     {
-        EffectManager.instance.health -= damagePerSec* _currentStacks;
-        Debug.Log("SickScript:effectOverride: sick tick : currentHealth = " + EffectManager.instance.health);
+        Player.instance.modHealth(healthPerSec * _currentStacks);
+        incM.AddAmount(Foraging, 1);
+        incM.AddAmount(NatureSence, 1);
+        Debug.Log("Foraging:" + Foraging.getAmount() + " Nature Sence:" + NatureSence.getAmount());
+        Debug.Log("SickScript:effectOverride: sick tick : currentHealth = " + player.getHealth());
     }
 
-    //when (addingStacks) stacks of the effect start.
-    public override void onStartOverride(int oldNumStacks, int addingStacks)
+    //when (addingStacks) stacks.
+    public override void onStart(int oldNumStacks, int addingStacks)
     {
+        
+        incM = IncManager.instance;
+        player = Player.instance;
+
+        Foraging = incM.Get<SkillSO>("Foraging");
+        NatureSence = incM.Get<SkillSO>("NatureSence");
+
         bool firstSick = false;
         //remove 10 max health for the first stack of sickness and 2 more max health for each extra stack of sickness you get.
         if (oldNumStacks == 0)
         {
             //if this is our first stack of sickness, remove 10 max health.
-            EffectManager.instance.health -= 10;
+            incM.AddAmount(Foraging, 8);
+            player.modHealth(-10);
             addingStacks--;
             firstSick = true;
-            
         }
         //for each additional stack of sickness we get, remove 2 more max health.
-        EffectManager.instance.health -= 2* addingStacks;
+        player.modHealth(-2 * addingStacks);
 
         //DEBUG LOG OUTPUT FOR MY OWN TESTING PURPOSES
         if (firstSick)
         {
-            Debug.Log("SickScript:onStartOverride: You have gotten " + (addingStacks+1) + " sick! currentHealth = " + EffectManager.instance.health);
+            Debug.Log("SickScript:onStartOverride: You have gotten " + (addingStacks+1) + " sick! currentHealth = " + player.getHealth());
         }
         else
         {
-            Debug.Log("SickScript:onStartOverride: You have gotten " + addingStacks + " MORE sick! currentHealth = " + EffectManager.instance.health);
+            Debug.Log("SickScript:onStartOverride: You have gotten " + addingStacks + " MORE sick! currentHealth = " + player.getHealth());
         }
     }
 
-    //when (removingStacks) stacks of the effect ends.
+    //when (removingStacks) stacks.
     //  removingStacks is a positive number.
-    public override void onStopOverride(int oldNumStacks, int removingStacks)
+    public override void onStop(int oldNumStacks, int removingStacks)
     {
         bool finalSick = false;
         //inverse of above.
@@ -49,22 +63,21 @@ public class SickScript : EffectScript
         if((oldNumStacks-removingStacks)<=0)
         {
             //if removing the last stack of sickness, restore 10 health.
-            
-            EffectManager.instance.health += 10;
+            player.modHealth(10);
             removingStacks--;
             finalSick = true;
         }
         //gain 2 health back for each additional stack of sickness that ends.
-        EffectManager.instance.health += 2 * (removingStacks);
+        player.modHealth(2 * (removingStacks));
 
         //DEBUG LOG OUTPUT FOR MY OWN TESTING PURPOSES
         if (finalSick)
         {
-            Debug.Log("SickScript:onStopOverride: You have gotten " + (removingStacks+1) + " better! currentHealth = " + EffectManager.instance.health);
+            Debug.Log("SickScript:onStopOverride: You have gotten " + (removingStacks+1) + " better! currentHealth = " + player.getHealth());
         }
         else
         {
-            Debug.Log("SickScript:onStopOverride: You have gotten " + removingStacks + " LESS sick! currentHealth = " + EffectManager.instance.health);
+            Debug.Log("SickScript:onStopOverride: You have gotten " + removingStacks + " LESS sick! currentHealth = " + player.getHealth());
         }
     }
 }

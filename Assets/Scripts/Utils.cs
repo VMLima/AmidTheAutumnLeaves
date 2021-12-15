@@ -25,7 +25,8 @@ public static class Utils
                 //find the actual created object
                 if (info.soBasic.GetType() == typeof(SkillSO))
                 {
-                    SkillSO temp = SkillManager.instance.getSkill((SkillSO)info.soBasic);
+                    SkillSO temp = (SkillSO)info.soBasic;
+                    //SkillSO temp = SkillManager.instance.Get((SkillSO)info.soBasic);
                     if ((temp != null) && (temp.getLevel() >= info.amount))
                     {
                         //REQUIREMENT SUCCESS!!
@@ -37,12 +38,20 @@ public static class Utils
                 }
                 else if (info.soBasic.GetType() == typeof(ResourceSO))
                 {
-                    //incTemp = ResourceManager.instance.getResource((SO_Resource)info.soBasic);
-                    Debug.LogError("Incremental:checkIfLocked: Resources not set up yet.");
+                    ResourceSO temp = ((ResourceSO)info.soBasic);
+                    //incTemp = ItemManager.instance.getItem((SO_Item)info.soBasic);
+                    if ((temp != null) && (temp.getAmount() >= info.amount))
+                    {
+                        //REQUIREMENT SUCCESS!!!
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else if (info.soBasic.GetType() == typeof(ItemSO))
                 {
-                    ItemSO temp = ItemManager.instance.getItem((ItemSO)info.soBasic);
+                    ItemSO temp = ((ItemSO)info.soBasic);
                     //incTemp = ItemManager.instance.getItem((SO_Item)info.soBasic);
                     if((temp != null) && (temp.getAmount() >= info.amount))
                     {

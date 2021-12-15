@@ -9,16 +9,16 @@ public class TestStatus : MonoBehaviour
     void Start()
     {
         timer = 0;
-        Debug.Log("TestStart: setting health 100");
-        EffectManager.instance.health = 100;
+        Debug.Log("TestStart: health = " + Player.instance.getHealth());
         Debug.Log("TestStart: adding Sick condition");
         EffectManager.instance.startEffect("Sick", 2);
-        EffectManager.instance.pauseActiveEffect();
+        
     }
     
     // Update is called once per frame
     void Update()
     {
+        /*
         timer += Time.deltaTime;
         if ((timer >= 15f) && (timer <= 16f))
         {
@@ -28,17 +28,22 @@ public class TestStatus : MonoBehaviour
         }
         if ((timer >= 10f) && (timer <= 11f))
         {
-            EffectManager.instance.unPauseActiveEffect();
             Debug.Log("TestStart: adding status Sick");
             EffectManager.instance.startEffect("Sick", 5);
+            Debug.Log("TestStart: unPausing all effects");
+            //EffectManager.instance.unPauseActiveEffect();
             timer++;
         }
         if ((timer >= 5f) && (timer <= 6f))
         {
+            
             Debug.Log("TestStart: adding status Sick");
             EffectManager.instance.startEffect("Sick");
+            Debug.Log("TestStart: Pausing all effects");
+            //EffectManager.instance.pauseActiveEffect();
             timer++;
         }
+        */
         
     }
     
