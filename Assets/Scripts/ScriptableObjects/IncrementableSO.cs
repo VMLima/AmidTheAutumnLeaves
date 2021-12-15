@@ -45,6 +45,8 @@ public class IncrementableSO : UnlockableSO
     [HideInInspector]
     public bool hasUI = false;
 
+    [HideInInspector] public EffectManager effectManager;
+
     void setupUIPanel()
     {
         //STILL GOTTA HOOK UP.
@@ -61,7 +63,7 @@ public class IncrementableSO : UnlockableSO
         
         if(effects != null)
         {
-            EffectManager.instance.startEffect(effects, stacks);
+            effectManager.startEffect(effects, stacks);
         }
         else
         {
@@ -94,7 +96,7 @@ public class IncrementableSO : UnlockableSO
         {
             if ((effectName == "") || (((EffectScript)effect).nameTag == effectName))
             {
-                EffectManager.instance.endEffect(((EffectScript)effect).nameTag);
+                effectManager.endEffect(((EffectScript)effect).nameTag);
             }
         }
     }
@@ -110,6 +112,7 @@ public class IncrementableSO : UnlockableSO
         //SETUP UI PANEL STUFF
         maxStack = maximum;
         minStack = minAmount;
+        effectManager = EffectManager.instance;
     }
 
     public float getAmount()

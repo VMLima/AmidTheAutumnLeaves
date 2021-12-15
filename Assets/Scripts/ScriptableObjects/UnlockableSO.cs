@@ -23,10 +23,10 @@ public class UnlockableSO : ScriptableObject
     [Tooltip("Requirements to unlock.  When unlocked stays unlocked.")]
     public LockInfo[] toUnlock = new LockInfo[0];
 
-    [HideInInspector]
-    public bool unlocked = false;
 
-    private IncManager manager;
+    [ReadOnly] public bool unlocked = false;
+
+    [HideInInspector] public IncManager incManager;
 
     //gotta setup listeners for LockInfo stuff here!!!
     public UnlockableSO()
@@ -39,7 +39,7 @@ public class UnlockableSO : ScriptableObject
     {
         //where you should reset and call all things that need to be reset/called upon new game.
         //every SO_~~~ should have reset() called during Start()
-        manager = IncManager.instance;
+        incManager = IncManager.instance;
         unsubscribeFromListeners();
 
         //if there are things to listen for... it is locked.  Which means you cannot gain quantity or see it in UI.
@@ -61,17 +61,17 @@ public class UnlockableSO : ScriptableObject
                 }
                 else if (info.soBasic.GetType() == typeof(SkillSO))
                 {
-                    manager.skillLevelEvent.AddListener(updateUnlocked);
+                    incManager.skillLevelEvent.AddListener(updateUnlocked);
                     _unlocked = false;
                 }
                 else if (info.soBasic.GetType() == typeof(ResourceSO))
                 {
-                    manager.resourceEvent.AddListener(updateUnlocked);
+                    incManager.resourceEvent.AddListener(updateUnlocked);
                     _unlocked = false;
                 }
                 else if (info.soBasic.GetType() == typeof(ItemSO))
                 {
-                    manager.itemEvent.AddListener(updateUnlocked);
+                    incManager.itemEvent.AddListener(updateUnlocked);
                     _unlocked = false;
                 }
                 else
@@ -95,7 +95,7 @@ public class UnlockableSO : ScriptableObject
 
     void unsubscribeFromListeners()
     {
-        manager.skillLevelEvent.RemoveListener(updateUnlocked);
+        incManager.skillLevelEvent.RemoveListener(updateUnlocked);
         //NEED TO ADD OTHER MANAGERS.
     }
 

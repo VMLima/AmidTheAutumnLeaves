@@ -95,7 +95,7 @@ public class SkillSO : IncrementableSO
                 xpToLevel += levelXPAddition;
             }
             Debug.Log("Skill:levelUp:" + nameTag + " Current:" + currentLevel + " MaxLevel:" + maxLevel);
-            IncManager.instance.skillLevelEvent.Invoke();
+            incManager.skillLevelEvent.Invoke();
         }
     }
 }
