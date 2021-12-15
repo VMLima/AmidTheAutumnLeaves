@@ -2,30 +2,17 @@ using UnityEngine;
 
 public static class Utils
 {
-    //get all scriptable objects within folder "location"
-    private static string itemLocation = "ScriptableObjects/Items";
-    private static string skillLocation = "ScriptableObjects/Skills";
-    private static string nodeLocation = "ScriptableObjects/Nodes";
-    private static string featureLocation = "ScriptableObjects/Features";
+    //effects are in GameObjects which every object is... so to just get the ones I want it needs to be only ones in a certain folder.
+    public static string effectLocation = "ScriptableObjects/Effects";
 
-    public static T[] GetScriptableSkills<T>() where T : SO_Skill
+    public static T[] GetAllScriptableObjects<T>() where T : UnlockableSO
     {
-        return Resources.LoadAll<T>(skillLocation);
+        return (T[])Resources.FindObjectsOfTypeAll(typeof(T));
     }
 
-    public static T[] GetSriptableItems<T>() where T : SO_Item
+    public static GameObject[] GetAllGameObjects(string folder)
     {
-        return Resources.LoadAll<T>(itemLocation);
-    }
-
-    public static T[] GetSriptableNodes<T>() where T : SO_Node
-    {
-        return Resources.LoadAll<T>(nodeLocation);
-    }
-
-    public static T[] GetSriptableFeatures<T>() where T : SO_Feature
-    {
-        return Resources.LoadAll<T>(featureLocation);
+        return Resources.LoadAll<GameObject>(folder);
     }
 
     public static bool checkUnlocked(LockInfo[] lockList)
@@ -36,9 +23,10 @@ public static class Utils
             {
                 //get its type
                 //find the actual created object
-                if (info.soBasic.GetType() == typeof(SO_Skill))
+                if (info.soBasic.GetType() == typeof(SkillSO))
                 {
-                    SO_Skill temp = SkillManager.instance.getSkill((SO_Skill)info.soBasic);
+                    SkillSO temp = (SkillSO)info.soBasic;
+                    //SkillSO temp = SkillManager.instance.Get((SkillSO)info.soBasic);
                     if ((temp != null) && (temp.getLevel() >= info.amount))
                     {
                         //REQUIREMENT SUCCESS!!
@@ -48,14 +36,22 @@ public static class Utils
                         return false;
                     }
                 }
-                else if (info.soBasic.GetType() == typeof(SO_Resource))
+                else if (info.soBasic.GetType() == typeof(ResourceSO))
                 {
-                    //incTemp = ResourceManager.instance.getResource((SO_Resource)info.soBasic);
-                    Debug.LogError("Incremental:checkIfLocked: Resources not set up yet.");
+                    ResourceSO temp = ((ResourceSO)info.soBasic);
+                    //incTemp = ItemManager.instance.getItem((SO_Item)info.soBasic);
+                    if ((temp != null) && (temp.getAmount() >= info.amount))
+                    {
+                        //REQUIREMENT SUCCESS!!!
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else if (info.soBasic.GetType() == typeof(SO_Item))
+                else if (info.soBasic.GetType() == typeof(ItemSO))
                 {
-                    SO_Item temp = ItemManager.instance.getItem((SO_Item)info.soBasic);
+                    ItemSO temp = ((ItemSO)info.soBasic);
                     //incTemp = ItemManager.instance.getItem((SO_Item)info.soBasic);
                     if((temp != null) && (temp.getAmount() >= info.amount))
                     {

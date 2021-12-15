@@ -5,13 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public struct incrStruct
 {
-    public SO_Basic soBasic;
+    public IncrementableSO soBasic;
     public float incTime;
     public int incAmount;
     private float time;
     public string descTooltip;
     public string descEffect;
-    public incrStruct(SO_Basic _soBasic, int _incAmount = 1, float _incTime = 1f, string _descTooltip = "", string _descEffect = "")
+    public incrStruct(IncrementableSO _soBasic, int _incAmount = 1, float _incTime = 1f, string _descTooltip = "", string _descEffect = "")
     {
         //something to be incremented
         soBasic = _soBasic;
@@ -45,7 +45,7 @@ public struct incrStruct
 [System.Serializable]
 public struct LockInfo
 {
-    public SO_Basic soBasic;
+    public IncrementableSO soBasic;
     public int amount;
 }
 

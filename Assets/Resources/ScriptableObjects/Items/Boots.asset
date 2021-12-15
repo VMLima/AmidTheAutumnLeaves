@@ -9,15 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f226f364df0929409af443f7a7d2de6, type: 3}
-  m_Name: Berries
+  m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
+  m_Name: Boots
   m_EditorClassIdentifier: 
-  nameTag: Berries
+  nameTag: Boots
   toUnlock: []
   unlocked: 0
   amount: 0
-  maxAmount: 10
-  maxStack: 10
+  maxAmount: 2
+  maxStack: 0
   minAmount: 0
   minStack: 0
   prefab: {fileID: 0}
+  DeleteWhenEmpty: 1
+  UIIndex: 0

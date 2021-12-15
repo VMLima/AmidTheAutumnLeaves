@@ -11,7 +11,7 @@ using TMPro;
 /// </summary>
 
 [CreateAssetMenu(fileName = "NewFeature", menuName = "Scriptable Object/Feature")]
-public class SO_Feature : SO_Root
+public class RoomFeatureSO : UnlockableSO
 {
     public string description;
     public GameObject[] buttons;
