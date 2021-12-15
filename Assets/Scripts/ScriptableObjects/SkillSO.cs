@@ -12,12 +12,19 @@ using TMPro;
 [CreateAssetMenu(fileName = "NewSkill", menuName = "Scriptable Object/Basic/Skill")]
 public class SkillSO : IncrementableSO
 {
-    public int[] xpToLevel;
+    //public int[] xpToLevel;
+    [Tooltip("How much xp to reach lvl 1.")]
+    public int baseXP = 100;
+    [Tooltip("Each level takes X times as much xp as the last.")]
+    public float levelXPMultiplier = 1.25f;
+    [Tooltip("Each level takes X more xp than the last.")]
+    public float levelXPAddition = 50;
 
-    [HideInInspector]
-    public int currentLevel;
-    [HideInInspector]
-    public bool atMax;
+    [ReadOnly] public int currentLevel;
+
+    [ReadOnly] public float xpToLevel;
+
+    [HideInInspector] public bool atMax;
 
     private int maxLevel;
     //UI to be added to
@@ -28,7 +35,8 @@ public class SkillSO : IncrementableSO
         base.reset();
         currentLevel = 0;
         atMax = false;
-        maxLevel = xpToLevel.Length;
+        maxLevel = maximum;
+        xpToLevel = baseXP;
     }
 
     public override void whenUnlocked()
@@ -48,8 +56,8 @@ public class SkillSO : IncrementableSO
     {
         if (!atMax)
         {
-            addToAmount(_amount);
-            if (amount >= maxStack)
+            amount += _amount;
+            if (amount >= xpToLevel)
             {
                 levelUp();
             }
@@ -69,7 +77,7 @@ public class SkillSO : IncrementableSO
     {
         if (!atMax)
         {
-            amount -= xpToLevel[currentLevel];
+            amount -= xpToLevel;
             if (amount < 0)
             {
                 amount = 0;
@@ -80,11 +88,11 @@ public class SkillSO : IncrementableSO
             {
                 //have reached max level
                 atMax = true;
-                maxStack = 1;
             }
             else
             {
-                maxStack = xpToLevel[currentLevel];
+                xpToLevel *= levelXPMultiplier; 
+                xpToLevel += levelXPAddition;
             }
             Debug.Log("Skill:levelUp:" + nameTag + " Current:" + currentLevel + " MaxLevel:" + maxLevel);
             IncManager.instance.skillLevelEvent.Invoke();

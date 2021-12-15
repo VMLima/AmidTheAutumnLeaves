@@ -24,7 +24,9 @@ public class IncManager : MonoBehaviour
 
     [HideInInspector]
     public UnityEvent skillLevelEvent = new UnityEvent();
+    [HideInInspector]
     public UnityEvent resourceEvent = new UnityEvent();
+    [HideInInspector]
     public UnityEvent itemEvent = new UnityEvent();
 
     public GameObject ItemPanel;

@@ -21,15 +21,19 @@ public class NodeManager : MonoBehaviour
     private string output;
     private string featureText;
 
+    private List<GameObject> activeButtons;
+
     private void Awake()
     {
 
         Instance = this;
         //populate feature array
+        activeButtons = new List<GameObject>();
         featureArray = Utils.GetAllScriptableObjects<RoomFeatureSO>();
         foreach (RoomFeatureSO feature in featureArray)
         {
             feature.reset();
+            Debug.Log(feature.name);
         }
         //populate node array
         nodeArray = Utils.GetAllScriptableObjects<RoomSO>();
@@ -38,7 +42,18 @@ public class NodeManager : MonoBehaviour
             node.reset();
             Debug.Log(node.name);
         }
+        Debug.Log("done nodes");
         currentFeatures = new List<RoomFeatureSO>();
+    }
+
+    private void OnDestroy()
+    {
+        //clean up instantiated buttons.
+        for(int i = (activeButtons.Count - 1); i>= 0;i--)
+        {
+            Destroy(activeButtons[i].gameObject);
+        }
+        activeButtons.Clear();
     }
 
     void updateText(string text)
@@ -72,11 +87,7 @@ public class NodeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-
-        //TEST();
-        
-
+        TEST();
     }
 
     //when an unlock is called from a listener, can easily do...
@@ -137,6 +148,8 @@ public class NodeManager : MonoBehaviour
             updateText(feature.description);
             GameObject button = (GameObject)Instantiate(feature.buttons[0], transform);
             button.transform.SetParent(buttonPanel.transform);
+            button.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            activeButtons.Add(button);
         }
     }
 

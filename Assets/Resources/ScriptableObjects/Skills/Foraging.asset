@@ -14,14 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameTag: Foraging
   toUnlock: []
-  unlocked: 0
-  effectObject: {fileID: 0}
-  amount: 0
-  maxAmount: 10
+  unlocked: 1
+  amount: 15.5
+  maximum: 10
   maxStack: 10
   minAmount: 0
   minStack: 0
   UIGameObject: {fileID: 0}
-  xpToLevel: 0a000000140000001e0000002800000032000000
-  currentLevel: 0
+  textDisplay: {fileID: 0}
+  removeFromUIOnEmpty: 0
+  UIPanelID: 0
+  UIActive: 0
+  hasUI: 0
+  baseXP: 10
+  levelXPMultiplier: 1.5
+  levelXPAddition: 5
+  currentLevel: 4
+  xpToLevel: 91.25
   atMax: 0

@@ -39,7 +39,8 @@ public class ButtonEffect : MonoBehaviour
         {
             foreach (incrStruct info in toIncrementList)
             {
-                if(info.soBasic != null) info.soBasic.addAmount(info.incAmount);
+                
+                if(info.soBasic != null) IncManager.instance.AddAmount(info.soBasic, info.incAmount);
                 Debug.Log("OnClick");
             }
         }

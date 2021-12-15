@@ -1,5 +1,35 @@
 using UnityEngine;
+using UnityEditor;
 
+
+//CREATING A READ ONLY INSPECTOR ELEMENT
+// I copied and pasted this from elsewhere
+public class ReadOnlyAttribute : PropertyAttribute
+{
+
+}
+
+[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+public class ReadOnlyDrawer : PropertyDrawer
+{
+    public override float GetPropertyHeight(SerializedProperty property,
+                                            GUIContent label)
+    {
+        return EditorGUI.GetPropertyHeight(property, label, true);
+    }
+
+    public override void OnGUI(Rect position,
+                               SerializedProperty property,
+                               GUIContent label)
+    {
+        GUI.enabled = false;
+        EditorGUI.PropertyField(position, property, label, true);
+        GUI.enabled = true;
+    }
+}
+
+
+//static utility functions.
 public static class Utils
 {
     //effects are in GameObjects which every object is... so to just get the ones I want it needs to be only ones in a certain folder.

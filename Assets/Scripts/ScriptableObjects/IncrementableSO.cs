@@ -14,11 +14,10 @@ public class IncrementableSO : UnlockableSO
     //[Tooltip("A Prefab gameobjects with 'EffectScript' inheriting classes thrown on it.  Generally for on equip, ongoing effects, regen, damage, etc.")]
     //public GameObject effectObject;
 
-    [Tooltip("Current amount.")]
-    public float amount = 0;
+    [ReadOnly] public float amount = 0;
 
-    [Tooltip("Current max amount.")]
-    public int maxAmount = 1;
+    [Tooltip("Max amount/level.")]
+    public int maximum = 1;
 
     [HideInInspector]
     public int maxStack;
@@ -109,7 +108,7 @@ public class IncrementableSO : UnlockableSO
         UIActive = false;
         setupUIPanel();
         //SETUP UI PANEL STUFF
-        maxStack = maxAmount;
+        maxStack = maximum;
         minStack = minAmount;
     }
 

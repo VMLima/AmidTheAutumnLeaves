@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 5371986101292956776}
   - component: {fileID: -43764616911731828}
   m_Layer: 5
-  m_Name: RiverButton
+  m_Name: ForestRiverButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -17,9 +17,9 @@ MonoBehaviour:
   - soBasic: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
     amount: 1
   unlocked: 1
-  amount: 14
-  maxAmount: 5
-  maxStack: 30
+  amount: 10
+  maximum: 5
+  maxStack: 5
   minAmount: 0
   minStack: 0
   UIGameObject: {fileID: 0}
@@ -28,6 +28,9 @@ MonoBehaviour:
   UIPanelID: 0
   UIActive: 0
   hasUI: 0
-  xpToLevel: 140000001e000000
+  baseXP: 10
+  levelXPMultiplier: 2
+  levelXPAddition: 5
   currentLevel: 1
+  xpToLevel: 25
   atMax: 0
