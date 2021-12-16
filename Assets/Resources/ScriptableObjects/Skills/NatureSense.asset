@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd16aa9fa6096a489eb741f44990d1d, type: 3}
   m_Name: NatureSense
   m_EditorClassIdentifier: 
-  nameTag: NatureSence
+  name: NatureSence
   toUnlock:
   - unlocker: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
     amount: 1

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047c3a585a105f3459e173e18aa95ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameTag: BerryHealing
+  name: BerryHealing
   duration: 0
   frequency: 1
   maxStacks: 0

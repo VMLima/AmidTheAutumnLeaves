@@ -67,7 +67,7 @@ public class NodeManager : MonoBehaviour
     {
         foreach(RoomSO node in nodeArray)
         {
-            if(node.nameTag == name)
+            if(node.name == name)
             {
                 return node;
             }
@@ -152,7 +152,7 @@ public class NodeManager : MonoBehaviour
     {
         if(feature.button != null)
         { 
-            updateText(feature.description);
+            updateText(feature.inactiveDescripton);
             GameObject button = (GameObject)Instantiate(feature.button, transform);
             button.transform.SetParent(buttonPanel.transform);
             button.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);

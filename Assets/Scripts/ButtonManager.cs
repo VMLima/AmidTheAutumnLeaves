@@ -47,7 +47,7 @@ public class ButtonManager : MonoBehaviour
         {
             foreach(RoomFeatureSO feature in buttonArray)
             {
-                if (feature.nameTag == _name) return feature;
+                if (feature.name == _name) return feature;
             }
         }
         Debug.LogError("ButtonManager:GetButton: invalid name:" + _name);
@@ -60,7 +60,7 @@ public class ButtonManager : MonoBehaviour
         {
             foreach (RoomFeatureArraySO featureArray in buttonArrayArray)
             {
-                if (featureArray.nameTag == _name) return featureArray;
+                if (featureArray.name == _name) return featureArray;
             }
         }
         Debug.LogError("ButtonManager:GetButtonArray: invalid name:" + _name);
@@ -69,13 +69,17 @@ public class ButtonManager : MonoBehaviour
 
     public void refreshText()
     {
-        string text = "";
         TextManager.instance.setText("");
         if (activeButtons != null)
         {
-            foreach(RoomFeatureSO feature in activeButtons)
+            foreach (RoomFeatureSO feature in activeButtons)
             {
-                TextManager.instance.addText(feature.description);
+                TextManager.instance.addText(feature.getDescription(true));
+            }
+            TextManager.instance.addText("  ");
+            foreach (RoomFeatureSO feature in activeButtons)
+            {
+                TextManager.instance.addText(feature.getDescription(false));
             }
         }
     }
@@ -83,31 +87,13 @@ public class ButtonManager : MonoBehaviour
     public void activateButton(RoomFeatureSO feature, bool turnOn = true)
     {
         if (feature == null) return;
-        else if (turnOn)
-        {
-            if (hasButton(feature))
-            {
-                feature.buttonInstance.SetActive(true);
-            }
-            else
-            {
-                if (feature.unlocked) feature.buttonInstance.SetActive(true);
-                else feature.buttonInstance.SetActive(false);
 
-                feature.buttonInstance.transform.SetParent(buttonPanel.transform);
-                feature.buttonInstance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                activeButtons.Add(feature);
-            }
-        }
-        else if (activeButtons != null)
+        feature.activate(turnOn);   //toggles if it shows even if parented to the buttonPanel. and changes the text output. 
+        if (turnOn && !hasButton(feature))
         {
-            foreach (RoomFeatureSO f in activeButtons)
-            {
-                if (f == feature)
-                {
-                    feature.buttonInstance.SetActive(false);
-                }
-            }
+            feature.buttonInstance.transform.SetParent(buttonPanel.transform);
+            feature.buttonInstance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            activeButtons.Add(feature);
         }
         refreshText();
     }
@@ -115,9 +101,9 @@ public class ButtonManager : MonoBehaviour
     {
         if(buttonArray != null)
         {
-            foreach(RoomFeatureSO f in buttonArray.features)
+            foreach(RoomFeatureSO feature in buttonArray.features)
             {
-                activateButton(f, turnOn);
+                activateButton(feature, turnOn);
             }
         }
         //adds buttons to scene
@@ -126,9 +112,8 @@ public class ButtonManager : MonoBehaviour
 
     public void unlockButton(RoomFeatureSO feature)
     {
-        feature.buttonInstance.SetActive(false);
+        feature.unlock();
     }
-
 
     // Start is called before the first frame update
     void Awake()
@@ -144,7 +129,7 @@ public class ButtonManager : MonoBehaviour
         resetButtons();
         instantiateButtons();
 
-        activateButtonArray("SparseVegetation");
+        activateButtonArray("Start");
     }
 
     private void OnDestroy()
@@ -152,9 +137,9 @@ public class ButtonManager : MonoBehaviour
         //clean up instantiation.
         if (buttonArray != null)
         {
-            foreach (RoomFeatureSO button in buttonArray)
+            foreach (RoomFeatureSO feature in buttonArray)
             {
-                button.destroyButton();
+                feature.destroyButton();
             }
         }
     }
@@ -163,9 +148,9 @@ public class ButtonManager : MonoBehaviour
     {
         if (buttonArray != null)
         {
-            foreach (RoomFeatureSO button in buttonArray)
+            foreach (RoomFeatureSO feature in buttonArray)
             {
-                button.instantiateButton();
+                feature.instantiateButton();
             }
         }
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5b5bf2de53aba4d8b75673baaf83a4, type: 3}
   m_Name: Forest
   m_EditorClassIdentifier: 
-  nameTag: Forest
+  name: Forest
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}

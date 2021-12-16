@@ -9,10 +9,16 @@ public class TextManager : MonoBehaviour
     [HideInInspector] public static TextManager instance;
     public TextMeshProUGUI textPanel;
     private string text;
+    //private List<string> texts;
+
     public void addText(string toAdd)
     {
-        text = text + toAdd + " \n ";
-        textPanel.text = text;
+        if(toAdd != "")
+        {
+            text = text + toAdd + " \n";
+            textPanel.text = text;
+        }
+        
     }
 
     public void setText(string _text)

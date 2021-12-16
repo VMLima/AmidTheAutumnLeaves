@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeac184f5dcdd2c4495a524133f6dc2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameTag: ForestRiverScript
+  name: ForestRiverScript
   duration: 0
   frequency: 1
   maxStacks: 0

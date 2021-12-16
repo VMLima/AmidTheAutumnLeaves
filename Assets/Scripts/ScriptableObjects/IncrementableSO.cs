@@ -113,7 +113,7 @@ public class IncrementableSO : UnlockableSO
         Component[] components = EffectObject.GetComponents(typeof(EffectScript));
         foreach (Component effect in components)
         {
-            if((effectName == "") || (((EffectScript)effect).nameTag == effectName))
+            if((effectName == "") || (((EffectScript)effect).name == effectName))
             {
                 effects.Add(((EffectScript)effect));
             }
@@ -129,9 +129,9 @@ public class IncrementableSO : UnlockableSO
         Component[] components = EffectObject.GetComponents(typeof(EffectScript));
         foreach (Component effect in components)
         {
-            if ((effectName == "") || (((EffectScript)effect).nameTag == effectName))
+            if ((effectName == "") || (((EffectScript)effect).name == effectName))
             {
-                effectManager.endEffect(((EffectScript)effect).nameTag);
+                effectManager.endEffect(((EffectScript)effect).name);
             }
         }
     }

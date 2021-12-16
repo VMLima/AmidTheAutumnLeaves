@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d206b86c0296fe24484401ec504f8fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameTag: ForestStoneScript
+  name: ForestStoneScript
   duration: 0
   frequency: 1
   maxStacks: 0

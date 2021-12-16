@@ -72,7 +72,7 @@ public class EffectManager : MonoBehaviour
         foreach (Component comp in components)
         {
             if (effectName == "") effects.Add(((EffectScript)comp));
-            else if ((effectName != "") && (((EffectScript)comp).nameTag == effectName)) effects.Add(((EffectScript)comp));
+            else if ((effectName != "") && (((EffectScript)comp).name == effectName)) effects.Add(((EffectScript)comp));
         }
         
         if (effects.Count == 0)
@@ -118,7 +118,7 @@ public class EffectManager : MonoBehaviour
         {
             if (script == effectScript)
             {
-                Debug.Log("startEffect: already have effect");
+                //Debug.Log("startEffect: already have effect");
                 return;
             }
         }
@@ -178,7 +178,7 @@ public class EffectManager : MonoBehaviour
         foreach(EffectScript e in activeEffects)
         {
             if (effectName == "")           e.pauseEffect(effectType);
-            else if (effectName == e.nameTag) e.pauseEffect(effectType);
+            else if (effectName == e.name) e.pauseEffect(effectType);
         }
     }
     //search through all active effects, unpause all by name or by type.
@@ -187,7 +187,7 @@ public class EffectManager : MonoBehaviour
         foreach (EffectScript e in activeEffects)
         {
             if (effectName == "") e.unPauseEffect(effectType);
-            else if (effectName == e.nameTag) e.unPauseEffect(effectType);
+            else if (effectName == e.name) e.unPauseEffect(effectType);
         }
     }
 
@@ -202,7 +202,7 @@ public class EffectManager : MonoBehaviour
         {
             if (_name != "")
             {
-                if (effectScript.nameTag == _name) endEffect(effectScript, toRemove);
+                if (effectScript.name == _name) endEffect(effectScript, toRemove);
             }
             else endEffect(effectScript, toRemove);
         }
@@ -219,7 +219,7 @@ public class EffectManager : MonoBehaviour
         {
             foreach (EffectScript script in activeEffects)
             {
-                if (script.nameTag == effectName)
+                if (script.name == effectName)
                 {
                     endEffect(script, toRemove);
                 }
@@ -282,13 +282,13 @@ public class EffectManager : MonoBehaviour
             {
                 if (!activeEffects[i].tick(1.0f))
                 {
-                    Debug.Log("EffectManager:Update: removing effect: " + activeEffects[i].nameTag);
+                    //Debug.Log("EffectManager:Update: removing effect: " + activeEffects[i].nameTag);
                     removeObject(activeEffects[i]);
                     activeEffects.RemoveAt(i);
                 }
                 else
                 {
-                    Debug.Log("EffectManager:Update: continueing effect: " + activeEffects[i].nameTag);
+                    //Debug.Log("EffectManager:Update: continueing effect: " + activeEffects[i].nameTag);
                 }
             }
             //should be last, since also cleans up float rounding funkiness in its values.

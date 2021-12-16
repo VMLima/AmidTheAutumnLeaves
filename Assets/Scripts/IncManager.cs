@@ -102,7 +102,7 @@ public class IncManager : MonoBehaviour
         {
             foreach (IncrementableSO inc in tempArray)
             {
-                if (inc.nameTag == _name)
+                if (inc.name == _name)
                 {
                     //already have skill
                     return (T)inc;
@@ -120,7 +120,7 @@ public class IncManager : MonoBehaviour
         Debug.Log("==currentSkills===");
         foreach (SkillSO skill in skillArray)
         {
-            Debug.Log("slot:" + i + "=" + skill.nameTag + " Level:" + skill.getLevel() + " XP:" + skill.getAmount());
+            Debug.Log("slot:" + i + "=" + skill.name + " Level:" + skill.getLevel() + " XP:" + skill.getAmount());
             i++;
         }
         Debug.Log("===================");

@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1d32d570f8e0141b146ec716499a4e, type: 3}
   m_Name: ForestStone
   m_EditorClassIdentifier: 
-  nameTag: ForestStone
+  name: ForestStone
   toUnlock:
   - unlocker: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
     amount: 3
   unlocked: 1
   incManager: {fileID: 0}
-  description: You see loose stones
+  activeDescription: There are many useful small stones around.
+  inactiveDescripton: The land is harsh with boulders and rubble.
   button: {fileID: 4293528735765515577, guid: 564b07ebee3ed08499eb3b32f66ae201, type: 3}
   buttonInstance: {fileID: 0}

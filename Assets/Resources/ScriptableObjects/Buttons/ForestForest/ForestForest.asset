@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1d32d570f8e0141b146ec716499a4e, type: 3}
   m_Name: ForestForest
   m_EditorClassIdentifier: 
-  nameTag: ForestForest
+  name: ForestForest
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
-  description: You are in a forest.
+  activeDescription: You are in a forest.
+  inactiveDescripton: 
   button: {fileID: 5715040496820633644, guid: a2106aac3cc0763488535f9a1ad70b58, type: 3}
   buttonInstance: {fileID: 0}

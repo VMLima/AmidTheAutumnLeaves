@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6799446681307636086}
   - component: {fileID: -7292703259547729911}
-  - component: {fileID: 2782304737554104297}
   m_Layer: 0
   m_Name: MiscEffects
   m_TagString: Untagged
@@ -44,27 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624543db0b846e549b7335881a91328d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameTag: Sick
+  name: Sick
   duration: 20
   frequency: 1
   maxStacks: 4
-  resetDurationOnStack: 0
-  destroyObjectOnEnd: 1
---- !u!114 &2782304737554104297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544045023682538032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a8a5632b95abe43a8cacbf6385cfba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameTag: Other
-  duration: 0
-  frequency: 1
-  maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1

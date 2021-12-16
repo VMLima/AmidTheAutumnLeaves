@@ -19,7 +19,7 @@ public class ButtonEffect : EffectScript
 
     //list of effects to have happen on button press.
     //public incrStruct[] toIncrementList;
-    [Tooltip("")] public string description;
+    //[Tooltip("")] public string description;
     [Tooltip("")] public bool toggleButton = true;
     private bool isToggled = false;
     private ColorBlock ToggleBlock;

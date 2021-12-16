@@ -12,23 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd16aa9fa6096a489eb741f44990d1d, type: 3}
   m_Name: Foraging
   m_EditorClassIdentifier: 
-  nameTag: Foraging
+  name: Foraging
   toUnlock: []
   unlocked: 1
-  amount: 15.5
+  incManager: {fileID: 0}
+  amount: 50.375
   maximum: 10
   maxStack: 10
   minAmount: 0
   minStack: 0
-  UIGameObject: {fileID: 0}
-  textDisplay: {fileID: 0}
+  EffectObject: {fileID: 0}
+  UIImage: {fileID: 0}
   removeFromUIOnEmpty: 0
   UIPanelID: 0
-  UIActive: 0
-  hasUI: 0
+  UIActive: 1
+  hasUI: 1
+  effectManager: {fileID: 0}
   baseXP: 10
   levelXPMultiplier: 1.5
   levelXPAddition: 5
-  currentLevel: 4
-  xpToLevel: 91.25
+  currentLevel: 6
+  xpToLevel: 217.8125
   atMax: 0

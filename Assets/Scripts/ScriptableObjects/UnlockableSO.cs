@@ -18,7 +18,7 @@ using TMPro;
 public class UnlockableSO : ScriptableObject
 {
     [Tooltip("MUST USE THIS EXACT NAME TO REFERENCE IT IN CODE")]
-    public string nameTag;
+    public new string name;
 
     [Tooltip("Requirements to unlock.  When unlocked stays unlocked.")]
     public LockInfoSO[] toUnlock = new LockInfoSO[0];
@@ -86,7 +86,7 @@ public class UnlockableSO : ScriptableObject
 
     public virtual void whenUnlocked()
     {
-        Debug.LogError("SO_Root:whenUnlocked: USING DEFAULT in " + nameTag);
+        Debug.LogError("SO_Root:whenUnlocked: NO UNLOCK FUNCTIONALITY IN " + name);
     }
 
     private void OnDestroy()
@@ -100,15 +100,20 @@ public class UnlockableSO : ScriptableObject
         //NEED TO ADD OTHER MANAGERS.
     }
 
+    public virtual void unlock()
+    {
+        Debug.Log("SO_Root:updateUnlocked: unlock... " + name);
+        unlocked = true;
+        whenUnlocked();
+    }
+
     void updateUnlocked()
     {
         if (!unlocked)
         {
             if (Utils.checkUnlocked(toUnlock))
             {
-                Debug.Log("SO_Root:updateUnlocked: unlocking... " + nameTag);
-                unlocked = true;
-                whenUnlocked();
+                unlock();
             }
         }
         if (unlocked)

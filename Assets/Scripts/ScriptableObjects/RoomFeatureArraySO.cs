@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewFeatureArray", menuName = "Scriptable Object/FeatureArray")]
 public class RoomFeatureArraySO : ScriptableObject
 {
-    public string nameTag;
+    public new string name;
     public RoomFeatureSO[] features;
 }
