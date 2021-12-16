@@ -39,6 +39,10 @@ public class SkillSO : IncrementableSO
         xpToLevel = baseXP;
     }
 
+    public override float getUnlockValue()
+    {
+        return currentLevel;
+    }
     public override void whenUnlocked()
     {
         //active skill UI

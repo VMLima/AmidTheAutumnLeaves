@@ -51,6 +51,11 @@ public class IncrementableSO : UnlockableSO
 
     [HideInInspector] public EffectManager effectManager;
 
+    public virtual float getUnlockValue()
+    {
+        return amount;
+    }
+
     public virtual void connectToUI()
     {
         //getResourcePrefab()
@@ -81,7 +86,7 @@ public class IncrementableSO : UnlockableSO
         if (hasUI)
         {
             //imageDisplay.image = ResourceImage;
-            textDisplay.text = amount.ToString();
+            //textDisplay.text = amount.ToString();
         }
     }
 

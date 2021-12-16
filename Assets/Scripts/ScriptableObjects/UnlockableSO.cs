@@ -80,6 +80,7 @@ public class UnlockableSO : ScriptableObject
                 }
             }
         }
+        //Debug.Log("setupListeners: unlockState: " + nameTag + ":" + _unlocked);
         return _unlocked;
     }
 

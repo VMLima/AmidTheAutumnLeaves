@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameTag: ForestRiver
   toUnlock:
-  - soBasic: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+  - unlocker: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
     amount: 1
   unlocked: 1
+  incManager: {fileID: 0}
   description: You see a small river
   buttons:
   - {fileID: 5895366186889219798, guid: 687202cdc0e0f5341a12fc1f819c1b1d, type: 3}

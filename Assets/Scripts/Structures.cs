@@ -43,9 +43,9 @@ public struct incrStruct
 //      something to do with listeners
 
 [System.Serializable]
-public struct LockInfo
+public struct LockInfoSO
 {
-    public IncrementableSO soBasic;
+    public IncrementableSO unlocker;
     public int amount;
 }
 
