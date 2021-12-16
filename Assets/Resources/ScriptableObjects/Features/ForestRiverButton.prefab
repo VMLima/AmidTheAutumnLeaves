@@ -233,7 +233,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.5803922}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -268,9 +268,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeac184f5dcdd2c4495a524133f6dc2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toIncrementList:
-  - soBasic: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
-    incTime: 0
-    incAmount: 10
-    descTooltip: 
-    descEffect: 
+  nameTag: ForestRiverScript
+  duration: 0
+  frequency: 1
+  maxStacks: 0
+  resetDurationOnStack: 0
+  destroyObjectOnEnd: 1
+  description: 
+  toggleButton: 1

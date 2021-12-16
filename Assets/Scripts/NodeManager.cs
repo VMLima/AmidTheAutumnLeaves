@@ -100,7 +100,15 @@ public class NodeManager : MonoBehaviour
     void setupCurrentFeatures()
     {
         currentFeatures.Clear();
-        currentFeatures.AddRange(currentNode.presetFeatures);
+        if(currentNode != null && currentNode.presetFeatures != null)
+        {
+            currentFeatures.AddRange(currentNode.presetFeatures);
+        }
+        else
+        {
+            Debug.LogError("UNABLE TO GET CURRENT NODE:");
+            return;
+        }
         int index = 0;
         for (int i = 0; i < currentNode.numRandomFeatures; i++)
         {

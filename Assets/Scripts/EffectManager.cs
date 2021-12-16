@@ -120,11 +120,26 @@ public class EffectManager : MonoBehaviour
         {
             if (script == effectScript)
             {
-                //Debug.Log("startEffect: already have effect");
+                Debug.Log("startEffect: already have effect");
                 return;
             }
         }
         activeEffects.Add(effectScript);
+    }
+
+    //search for the effect in a list of loose effects.
+    //gonna be attached to player object at some point.
+    public void startEffect(string effectName, int stacks = 1)
+    {
+        EffectScript[] effects = getEffect(effectName);
+        if (effects != null)
+        {
+            startEffect(effects, stacks);
+        }
+        else
+        {
+            Debug.LogError("EffectManageR:startEffect:Could not find effect by name: " + effectName);
+        }
     }
 
     //PAUSING - doesn't change the state of anything, simply ignores all .tick() commands.
@@ -178,26 +193,24 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    //search for the effect in a list of loose effects.
-    //gonna be attached to player object at some point.
-    public void startEffect(string effectName, int stacks = 1)
+    
+
+    //sending a game object.
+    //get all scripts in it, possibly matching a name
+    //remove toRemove stacks from them (if toRemove is 0, just end the effect)
+    public void endEffect(GameObject effectObject, string _name = "", int toRemove = 0)
     {
-        EffectScript[] effects = getEffect(effectName);
-        if (effects != null)
+        foreach (EffectScript effectScript in getEffect(effectObject))
         {
-            startEffect(effects, stacks);
-        }
-        else
-        {
-            Debug.LogError("EffectManageR:startEffect:Could not find effect by name: " + effectName);
+            if (_name != "")
+            {
+                if (effectScript.nameTag == _name) endEffect(effectScript, toRemove);
+            }
+            else endEffect(effectScript, toRemove);
         }
     }
 
-    public void endEffect(GameObject effect, int toRemove = 0)
-    {
-        endEffect(effect.name, toRemove);
-    }
-
+    //sending a string, get the script.
     public void endEffect(string effectName, int toRemove = 0)
     {
         //get children of statusPanel, get 
@@ -210,10 +223,15 @@ public class EffectManager : MonoBehaviour
             {
                 if (script.nameTag == effectName)
                 {
-                    script.endEffect(toRemove);
+                    endEffect(script, toRemove);
                 }
             }
         }
+    }
+    //sending a script, end it.
+    public void endEffect(EffectScript effectScript, int toRemove = 0)
+    {
+        effectScript.endEffect(toRemove);
     }
 
     private void OnDestroy()
@@ -266,8 +284,13 @@ public class EffectManager : MonoBehaviour
             {
                 if (!activeEffects[i].tick(1.0f))
                 {
+                    Debug.Log("EffectManager:Update: removing effect: " + activeEffects[i].nameTag);
                     removeObject(activeEffects[i]);
                     activeEffects.RemoveAt(i);
+                }
+                else
+                {
+                    Debug.Log("EffectManager:Update: continueing effect: " + activeEffects[i].nameTag);
                 }
             }
             //should be last, since also cleans up float rounding funkiness in its values.

@@ -53,7 +53,7 @@ public class EffectScript : MonoBehaviour
         return dataType;
     }
 
-    void Start()
+    protected virtual void Awake()
     {
         
     }
@@ -61,13 +61,15 @@ public class EffectScript : MonoBehaviour
     //the effect to happen every second.
     public virtual void onTick(int numEffects)
     {
+
+        Debug.Log("EffectScript: DEFUALT onTICK:" + nameTag);
         //OVERRIDEN TO ADD STATUS EFFECT.
         //example.
         //SkillManager.instance.Addxp("Foraging", 5);
         // this status effect will give 5 foraging xp every second.
     }
 
-    public void resetDuration()
+    public void resetAllDurations()
     {
         if(effectDurations != null)
         {
@@ -117,12 +119,12 @@ public class EffectScript : MonoBehaviour
     
     bool onTickHidden()
     {
-        //check if past duration.
+        //tick every effect in list.
+        //a duration of 1 and frequency of 1 should tick once at 1s.
+        onTick(numStacks);
         if (onTimer)
         {
-            //tick every effect in list
-            onTick(numStacks);
-
+            //if some at or past time, remove them.
             int toStop = 0;
             for (int i = (effectDurations.Count - 1); i >= 0; i--)
             {
@@ -178,7 +180,7 @@ public class EffectScript : MonoBehaviour
 
         if(resetDurationOnStack)
         {
-            resetDuration();
+            resetAllDurations();
         }
 
         //if in the end you are still adding a positive number of stacks.

@@ -5,31 +5,23 @@ using UnityEngine;
 [System.Serializable]
 public struct incrStruct
 {
-    public IncrementableSO soBasic;
-    public float incTime;
-    public int incAmount;
-    private float time;
-    public string descTooltip;
-    public string descEffect;
-    public incrStruct(IncrementableSO _soBasic, int _incAmount = 1, float _incTime = 1f, string _descTooltip = "", string _descEffect = "")
+    public IncrementableSO incrementableSO;
+    
+    public int amount;
+    public float frequency;
+    public bool toggle;
+    //public string descTooltip;
+    //public string descEffect;
+    public incrStruct(IncrementableSO _incrementableSO, int _amount = 1, float _frequency = 1f, bool _toggle = false)//, string _descTooltip = "", string _descEffect = "")
     {
-        //something to be incremented
-        soBasic = _soBasic;
-        //how often to be incremented
-        incTime = _incTime;
-        time = incTime;
-        //how much to be incremented
-        incAmount = _incAmount;
+        incrementableSO = _incrementableSO;
+        frequency = _frequency;
+        amount = _amount;
+        toggle = _toggle;
         //tooltip description
-        descTooltip = _descTooltip;
+        //descTooltip = _descTooltip;
         //extra effect description
-        descEffect = _descEffect;
-    }
-
-    //however often this is called... running through a list of structs doing .tick(deltaTime) will handle all the passive gains.
-    public void tick(float _time)
-    {
-        //still gotta work this out.
+        //descEffect = _descEffect;
     }
 }
 
