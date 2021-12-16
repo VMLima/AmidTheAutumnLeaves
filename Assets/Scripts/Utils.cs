@@ -35,7 +35,7 @@ public static class Utils
     //effects are in GameObjects which every object is... so to just get the ones I want it needs to be only ones in a certain folder.
     public static string effectLocation = "ScriptableObjects/Effects";
 
-    public static T[] GetAllScriptableObjects<T>() where T : UnlockableSO
+    public static T[] GetAllScriptableObjects<T>() where T : ScriptableObject
     {
         return (T[])Resources.FindObjectsOfTypeAll(typeof(T));
     }

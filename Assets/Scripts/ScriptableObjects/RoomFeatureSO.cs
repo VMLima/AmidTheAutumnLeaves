@@ -14,16 +14,31 @@ using TMPro;
 public class RoomFeatureSO : UnlockableSO
 {
     public string description;
-    public GameObject[] buttons;
+    public GameObject button;
+    [HideInInspector] public GameObject buttonInstance;
     public override void whenUnlocked()
     {
-        Debug.LogError("SO_Root:whenUnlocked: USING DEFAULT in " + nameTag);
-        NodeManager.Instance.unlockFeature(this);
+        Debug.Log("RoomFeatureSO:whenUnlocked: unlocking: " + nameTag);
+        //NodeManager.Instance.unlockFeature(this);
+        if (buttonInstance == null) Debug.LogError("RoomFeatureSO:whenUnlocked: NO BUTTON: " + nameTag);
+        else ButtonManager.instance.unlockButton(this);
+        buttonInstance.SetActive(true);
     }
 
     public override void reset()
     {
         //ANYTHING ADDED THAT SHOULD BE RESET ON NEW GAME NEEDS TO BE RESET HERE.
         base.reset();
+    }
+
+    public void destroyButton()
+    {
+        if (button == null) Debug.LogError("RoomFeatureSO:instantiateButton: NO BUTTON: " + nameTag);
+        else Destroy(buttonInstance.gameObject);
+    }
+    public void instantiateButton()
+    {
+        if(button == null) Debug.LogError("RoomFeatureSO:instantiateButton: NO BUTTON: " + nameTag);
+        else buttonInstance = (GameObject)Instantiate(button);
     }
 }

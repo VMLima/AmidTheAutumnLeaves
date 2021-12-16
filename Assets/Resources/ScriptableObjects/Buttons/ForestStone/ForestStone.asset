@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e1d32d570f8e0141b146ec716499a4e, type: 3}
-  m_Name: ForestForest
+  m_Name: ForestStone
   m_EditorClassIdentifier: 
-  nameTag: ForestForest
-  toUnlock: []
+  nameTag: ForestStone
+  toUnlock:
+  - unlocker: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+    amount: 3
   unlocked: 1
-  description: You are in a forest.
-  buttons:
-  - {fileID: 5715040496820633644, guid: a2106aac3cc0763488535f9a1ad70b58, type: 3}
+  incManager: {fileID: 0}
+  description: You see loose stones
+  button: {fileID: 4293528735765515577, guid: 564b07ebee3ed08499eb3b32f66ae201, type: 3}
+  buttonInstance: {fileID: 0}

@@ -150,11 +150,10 @@ public class NodeManager : MonoBehaviour
 
     void initFeature(RoomFeatureSO feature)
     {
-        //setting up buttons and text.
-        for (int i = 0; i < feature.buttons.Length; i++)
-        {
+        if(feature.button != null)
+        { 
             updateText(feature.description);
-            GameObject button = (GameObject)Instantiate(feature.buttons[0], transform);
+            GameObject button = (GameObject)Instantiate(feature.button, transform);
             button.transform.SetParent(buttonPanel.transform);
             button.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             activeButtons.Add(button);

@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8d8e51bea589c0409a8dc265f356731, type: 3}
-  m_Name: HeavyVegetation
+  m_Name: SparseVegetation
   m_EditorClassIdentifier: 
-  name: HeavyVegetation
-  features: []
+  nameTag: SparseVegetation
+  features:
+  - {fileID: 11400000, guid: 488bdaece8729724aaa0e5ed40a995db, type: 2}
+  - {fileID: 11400000, guid: e5970b31b9d8db2409bd8e6cfc2e8592, type: 2}
+  - {fileID: 11400000, guid: 6849093697189dc43b484e5335dbeb47, type: 2}

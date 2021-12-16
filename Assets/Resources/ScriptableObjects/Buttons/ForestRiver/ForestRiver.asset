@@ -19,5 +19,5 @@ MonoBehaviour:
   unlocked: 1
   incManager: {fileID: 0}
   description: You see a small river
-  buttons:
-  - {fileID: 5895366186889219798, guid: 687202cdc0e0f5341a12fc1f819c1b1d, type: 3}
+  button: {fileID: 5895366186889219798, guid: 687202cdc0e0f5341a12fc1f819c1b1d, type: 3}
+  buttonInstance: {fileID: 0}

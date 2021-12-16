@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 /// EFFECTS:
 ///     effects are scripts attached to effect prefab objects that are placed in a scriptable object's field.
 ///     most scriptable objects have an Effect Object field to drag a prefab into.
