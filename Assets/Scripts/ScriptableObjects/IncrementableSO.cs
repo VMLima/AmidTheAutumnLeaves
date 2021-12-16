@@ -29,10 +29,14 @@ public class IncrementableSO : UnlockableSO
     public int minStack;
 
 
-    [Tooltip("The UI prefab to represent this item.  Okay if empty game object.  Any 'EffectScripts' attached to it will be activatable.")]
-    public GameObject UIGameObject;
+    [Tooltip("Any 'EffectScripts' attached to this BLANK PREFAB will be activatable.")]
+    public GameObject EffectObject;
 
-    public TextMeshProUGUI textDisplay;
+    public Image UIImage;
+    private TextMeshProUGUI textDisplay;
+    private GameObject imageDisplay;
+    private GameObject UIObject;
+    private bool instantiatedUI;
 
     [HideInInspector]
     public bool removeFromUIOnEmpty = false;    //when setting up UI panel ID, set this.
@@ -47,12 +51,38 @@ public class IncrementableSO : UnlockableSO
 
     [HideInInspector] public EffectManager effectManager;
 
-    void setupUIPanel()
+    public virtual void connectToUI()
+    {
+        //getResourcePrefab()
+        //instantiate. Creates a copy of it.
+        //UIObject = ~~~~~
+        //imageDisplay = to UIObject child... OutputImage.
+        //set textDisplay = to UIObject child.... OutputText.
+        instantiatedUI = false;
+        hasUI = true;
+        UIPanelID = 0;
+        removeFromUIOnEmpty = false;
+        refreshUI();
+    }
+
+    public void destroyInstantiations()
+    {
+        if(instantiatedUI) Destroy(UIObject);
+    }
+
+    public GameObject getUI()
+    {
+        return UIObject;
+    }
+
+    void refreshUI()
     {
         //STILL GOTTA HOOK UP.
-        removeFromUIOnEmpty = false;
-        UIPanelID = 0;
-        hasUI = false;
+        if (hasUI)
+        {
+            //imageDisplay.image = ResourceImage;
+            textDisplay.text = amount.ToString();
+        }
     }
 
     //starts an effect script in the effect object matching effectName.
@@ -75,7 +105,7 @@ public class IncrementableSO : UnlockableSO
     {
         //get all components of this.
         List<EffectScript> effects = new List<EffectScript>();
-        Component[] components = UIGameObject.GetComponents(typeof(EffectScript));
+        Component[] components = EffectObject.GetComponents(typeof(EffectScript));
         foreach (Component effect in components)
         {
             if((effectName == "") || (((EffectScript)effect).nameTag == effectName))
@@ -91,7 +121,7 @@ public class IncrementableSO : UnlockableSO
     public void endEffect(string effectName = "")
     {
         List<EffectScript> effects = new List<EffectScript>();
-        Component[] components = UIGameObject.GetComponents(typeof(EffectScript));
+        Component[] components = EffectObject.GetComponents(typeof(EffectScript));
         foreach (Component effect in components)
         {
             if ((effectName == "") || (((EffectScript)effect).nameTag == effectName))
@@ -108,11 +138,12 @@ public class IncrementableSO : UnlockableSO
         base.reset();
         amount = 0;
         UIActive = false;
-        setupUIPanel();
+        connectToUI();
         //SETUP UI PANEL STUFF
         maxStack = maximum;
         minStack = minAmount;
         effectManager = EffectManager.instance;
+        
     }
 
     public float getAmount()

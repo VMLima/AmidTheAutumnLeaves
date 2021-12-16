@@ -61,6 +61,18 @@ public class IncManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        List<IncrementableSO> inc = new List<IncrementableSO>();
+        inc.AddRange(skillArray);
+        inc.AddRange(itemArray);
+        inc.AddRange(resourceArray);
+        foreach(IncrementableSO i in inc)
+        {
+            i.destroyInstantiations();
+        }
+    }
+
 
     void setup(IncrementableSO[] incArray)
     {

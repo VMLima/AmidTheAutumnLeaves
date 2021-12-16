@@ -21,7 +21,7 @@ public class UnlockableSO : ScriptableObject
     public string nameTag;
 
     [Tooltip("Requirements to unlock.  When unlocked stays unlocked.")]
-    public LockInfo[] toUnlock = new LockInfo[0];
+    public LockInfoSO[] toUnlock = new LockInfoSO[0];
 
 
     [ReadOnly] public bool unlocked = false;
@@ -53,23 +53,23 @@ public class UnlockableSO : ScriptableObject
         if(toUnlock != null)
         {
             //Debug.Log("Adding listener for " + nameTag);
-            foreach (LockInfo info in toUnlock)
+            foreach (LockInfoSO info in toUnlock)
             {
-                if(info.soBasic == null)
+                if(info.unlocker == null)
                 {
 
                 }
-                else if (info.soBasic.GetType() == typeof(SkillSO))
+                else if (info.unlocker.GetType() == typeof(SkillSO))
                 {
                     incManager.skillLevelEvent.AddListener(updateUnlocked);
                     _unlocked = false;
                 }
-                else if (info.soBasic.GetType() == typeof(ResourceSO))
+                else if (info.unlocker.GetType() == typeof(ResourceSO))
                 {
                     incManager.resourceEvent.AddListener(updateUnlocked);
                     _unlocked = false;
                 }
-                else if (info.soBasic.GetType() == typeof(ItemSO))
+                else if (info.unlocker.GetType() == typeof(ItemSO))
                 {
                     incManager.itemEvent.AddListener(updateUnlocked);
                     _unlocked = false;
