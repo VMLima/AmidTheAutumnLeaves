@@ -18,7 +18,9 @@ MonoBehaviour:
     amount: 1
   unlocked: 1
   incManager: {fileID: 0}
+  UIPrefab: {fileID: 5895366186889219798, guid: 687202cdc0e0f5341a12fc1f819c1b1d, type: 3}
+  UIPanel: {fileID: 0}
+  isActive: 1
   activeDescription: You have found a nice pool of water.
   inactiveDescripton: You hear water trickling somewhere in the distance
   button: {fileID: 5895366186889219798, guid: 687202cdc0e0f5341a12fc1f819c1b1d, type: 3}
-  buttonInstance: {fileID: 0}

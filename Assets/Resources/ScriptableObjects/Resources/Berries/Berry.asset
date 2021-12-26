@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: Berry
   m_EditorClassIdentifier: 
   name: Berry
-  toUnlock:
-  - unlocker: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
-    amount: 2
-  - unlocker: {fileID: 11400000, guid: 05b0ac94bd278a54d988ba0bf05e1d21, type: 2}
-    amount: 1
+  toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
-  amount: 1
-  maximum: 10
-  maxStack: 1
+  UIPrefab: {fileID: 0}
+  UIPanel: {fileID: 0}
+  isActive: 0
+  amount: 12
+  maximum: 15
+  maxStack: 15
   minAmount: 0
   minStack: 0
   EffectObject: {fileID: 7352281612241169272, guid: a2b0d00f475f63148bef991388fc93dc, type: 3}
   UIImage: {fileID: 0}
+  textDisplay: {fileID: 0}
   removeFromUIOnEmpty: 0
   UIPanelID: 0
   UIActive: 1

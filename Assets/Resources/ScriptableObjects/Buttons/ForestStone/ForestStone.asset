@@ -18,7 +18,9 @@ MonoBehaviour:
     amount: 3
   unlocked: 1
   incManager: {fileID: 0}
+  UIPrefab: {fileID: 4293528735765515577, guid: 564b07ebee3ed08499eb3b32f66ae201, type: 3}
+  UIPanel: {fileID: 0}
+  isActive: 1
   activeDescription: There are many useful small stones around.
   inactiveDescripton: The land is harsh with boulders and rubble.
   button: {fileID: 4293528735765515577, guid: 564b07ebee3ed08499eb3b32f66ae201, type: 3}
-  buttonInstance: {fileID: 0}

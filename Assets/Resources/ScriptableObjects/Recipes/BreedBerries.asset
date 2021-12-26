@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa1a8835c6036047877911f5dff48f3, type: 3}
   m_Name: BreedBerries
   m_EditorClassIdentifier: 
-  name: BreedBerry
+  name: BreedBerries
   toUnlock:
   - unlocker: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
     amount: 2
-  unlocked: 0
+  unlocked: 1
   incManager: {fileID: 0}
   UIPrefab: {fileID: 0}
   UIPanel: {fileID: 0}
