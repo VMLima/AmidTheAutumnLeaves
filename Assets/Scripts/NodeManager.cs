@@ -30,18 +30,8 @@ public class NodeManager : MonoBehaviour
         //populate feature array
         activeButtons = new List<GameObject>();
         featureArray = Utils.GetAllScriptableObjects<RoomFeatureSO>();
-        foreach (RoomFeatureSO feature in featureArray)
-        {
-            feature.reset();
-            Debug.Log(feature.name);
-        }
-        //populate node array
         nodeArray = Utils.GetAllScriptableObjects<RoomSO>();
-        foreach (RoomSO node in nodeArray)
-        {
-            node.reset();
-            Debug.Log(node.name);
-        }
+
         Debug.Log("done nodes");
         currentFeatures = new List<RoomFeatureSO>();
     }
@@ -150,6 +140,7 @@ public class NodeManager : MonoBehaviour
 
     void initFeature(RoomFeatureSO feature)
     {
+        /*
         if(feature.button != null)
         { 
             updateText(feature.inactiveDescripton);
@@ -158,6 +149,7 @@ public class NodeManager : MonoBehaviour
             button.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             activeButtons.Add(button);
         }
+        */
     }
 
     void setNode(RoomSO node)

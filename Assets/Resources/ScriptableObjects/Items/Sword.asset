@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   name: Sword
-  toUnlock: []
+  toUnlock:
+  - unlocker: {fileID: 0}
+    amount: 0
   unlocked: 1
   incManager: {fileID: 0}
   amount: 0

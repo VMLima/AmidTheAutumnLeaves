@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ForestStonesButton : ButtonEffect
+public class ForestStonesButton : ButtonEffectScript
 {
     IncManager inc;
     SkillSO Foraging;
@@ -27,7 +27,7 @@ public class ForestStonesButton : ButtonEffect
     public override void onTick()
     {
         Debug.Log("GOT " + name + " Tick");
-        inc.AddAmount(Foraging, 1);
+        inc.AddAmount(Foraging, 25);
     }
 
 }

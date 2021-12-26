@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa1a8835c6036047877911f5dff48f3, type: 3}
+  m_Name: BreedBerries
+  m_EditorClassIdentifier: 
+  name: BreedBerry
+  toUnlock:
+  - unlocker: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
+    amount: 2
+  unlocked: 0
+  incManager: {fileID: 0}
+  UIPrefab: {fileID: 0}
+  UIPanel: {fileID: 0}
+  isActive: 0
+  toCraft: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
+  amountCrafted: 5
+  costArray:
+  - unlocker: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
+    amount: 2

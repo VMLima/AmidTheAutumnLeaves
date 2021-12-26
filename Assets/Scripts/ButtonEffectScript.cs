@@ -14,7 +14,7 @@ using UnityEngine.UI;
 ///         onStart on toggle on
 /// </summary>
 
-public class ButtonEffect : EffectScript
+public class ButtonEffectScript : EffectScript
 {
 
     //list of effects to have happen on button press.

@@ -35,15 +35,22 @@ public class UnlockableSO : ScriptableObject
         //This happens only once.  Opening and closing the game 3 times will only call this first time.
     }
 
+    public virtual void destroyInstantiations()
+    {
+        //probably not necessary, but I have it anyway.  Whatever prefabs this object has created, this can be called to destroy them.
+    }
+
     public virtual void reset()
     {
         //where you should reset and call all things that need to be reset/called upon new game.
         //every SO_~~~ should have reset() called during Start()
+        destroyInstantiations();
         incManager = IncManager.instance;
         unsubscribeFromListeners();
 
         //if there are things to listen for... it is locked.  Which means you cannot gain quantity or see it in UI.
         unlocked = setupListeners();
+        //Debug.Log("Unlockable: " + name);
     }
 
     //take the list of toUnlock and create listeners for the right triggers to unlock.
@@ -57,7 +64,7 @@ public class UnlockableSO : ScriptableObject
             {
                 if(info.unlocker == null)
                 {
-
+                    _unlocked = false;
                 }
                 else if (info.unlocker.GetType() == typeof(SkillSO))
                 {
@@ -86,7 +93,7 @@ public class UnlockableSO : ScriptableObject
 
     public virtual void whenUnlocked()
     {
-        Debug.LogError("SO_Root:whenUnlocked: NO UNLOCK FUNCTIONALITY IN " + name);
+        //Debug.LogError("SO_Root:whenUnlocked: NO UNLOCK FUNCTIONALITY IN " + name);
     }
 
     private void OnDestroy()
@@ -97,6 +104,8 @@ public class UnlockableSO : ScriptableObject
     void unsubscribeFromListeners()
     {
         incManager.skillLevelEvent.RemoveListener(updateUnlocked);
+        incManager.resourceEvent.RemoveListener(updateUnlocked);
+        incManager.itemEvent.RemoveListener(updateUnlocked);
         //NEED TO ADD OTHER MANAGERS.
     }
 
@@ -104,11 +113,13 @@ public class UnlockableSO : ScriptableObject
     {
         Debug.Log("SO_Root:updateUnlocked: unlock... " + name);
         unlocked = true;
+        unsubscribeFromListeners();
         whenUnlocked();
     }
 
     void updateUnlocked()
     {
+        //Debug.Log("checking lock..." + name);
         if (!unlocked)
         {
             if (Utils.checkUnlocked(toUnlock))
@@ -116,9 +127,9 @@ public class UnlockableSO : ScriptableObject
                 unlock();
             }
         }
-        if (unlocked)
-        {
-            unsubscribeFromListeners();
-        }
+        //if (unlocked)
+        //{
+        //    unsubscribeFromListeners();
+        //}
     }
 }

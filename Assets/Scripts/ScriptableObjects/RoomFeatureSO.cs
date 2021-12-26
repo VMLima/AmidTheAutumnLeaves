@@ -11,63 +11,48 @@ using TMPro;
 /// </summary>
 
 [CreateAssetMenu(fileName = "NewFeature", menuName = "Scriptable Object/Feature")]
-public class RoomFeatureSO : UnlockableSO
+public class RoomFeatureSO : UnlockableObjectSO
 {
     public string activeDescription;
     public string inactiveDescripton;
     
-    private bool isActive;
+    //private bool isActive;
     public GameObject button;
-    [HideInInspector] public GameObject buttonInstance;
+    //[HideInInspector] public GameObject buttonInstance;
 
     //core functionality of unlocking the feature.
     //unlock() sets unlocked=true then goes here.
-    public override void whenUnlocked()
-    {
-        //Debug.Log("RoomFeatureSO:whenUnlocked: unlocking: " + name);
-        if (buttonInstance == null) Debug.LogError("RoomFeatureSO:whenUnlocked: NO BUTTON: " + name);
-        else activate(true);
-    }
 
-    public override void reset()
+    public override void activate(bool turnOn)
     {
-        //ANYTHING ADDED THAT SHOULD BE RESET ON NEW GAME NEEDS TO BE RESET HERE.
-        base.reset();
-        isActive = false;
-    }
-
-    public void activate(bool turnOn)
-    {
-        if (unlocked)
-        {
-            buttonInstance.SetActive(turnOn);
-            isActive = turnOn;
-        }
-        else
-        {
-            buttonInstance.SetActive(false);
-            isActive = false;
-        }
+        base.activate(turnOn);
         ButtonManager.instance.refreshText();
     }
 
+    public override void declareUI()
+    {
+        UIPrefab = button;
+        UIPanel = ButtonManager.instance.buttonPanel;
+    }   
+
     public string getDescription(bool _activeDescription)
     {
-        if (_activeDescription && isActive) return activeDescription;
+        if (_activeDescription && isActive && unlocked) return activeDescription;
         else if(!_activeDescription) return inactiveDescripton;
         return "";
     }
-
+    /*
     public void destroyButton()
     {
         //cleaning up the instantiated button.
-        if (button == null) Debug.LogError("RoomFeatureSO:instantiateButton: NO BUTTON: " + name);
-        else Destroy(buttonInstance.gameObject);
+        if (buttonInstance != null) Destroy(buttonInstance.gameObject);
     }
     public void instantiateButton()
     {
         //giving prefab button an instance to add to menus.
-        if(button == null) Debug.LogError("RoomFeatureSO:instantiateButton: NO BUTTON: " + name);
+        Debug.Log("RoomFeatureSO:instantiateButton: " + name);
+        if (button == null) Debug.LogError("RoomFeatureSO:instantiateButton: NO BUTTON: " + name);
         else buttonInstance = (GameObject)Instantiate(button);
     }
+    */
 }

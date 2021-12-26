@@ -18,10 +18,10 @@ MonoBehaviour:
     amount: 2
   - unlocker: {fileID: 11400000, guid: 05b0ac94bd278a54d988ba0bf05e1d21, type: 2}
     amount: 1
-  unlocked: 0
+  unlocked: 1
   incManager: {fileID: 0}
-  amount: 0
-  maximum: 1
+  amount: 1
+  maximum: 10
   maxStack: 1
   minAmount: 0
   minStack: 0
@@ -29,6 +29,6 @@ MonoBehaviour:
   UIImage: {fileID: 0}
   removeFromUIOnEmpty: 0
   UIPanelID: 0
-  UIActive: 0
+  UIActive: 1
   hasUI: 1
   effectManager: {fileID: 0}

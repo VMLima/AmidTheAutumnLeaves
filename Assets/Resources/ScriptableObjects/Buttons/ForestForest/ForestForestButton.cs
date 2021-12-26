@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ForestForestButton : ButtonEffect
+public class ForestForestButton : ButtonEffectScript
 {
     IncManager inc;
     SkillSO Foraging;

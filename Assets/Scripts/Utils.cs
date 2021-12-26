@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -45,7 +47,29 @@ public static class Utils
         return Resources.LoadAll<GameObject>(folder);
     }
 
-    public static bool checkUnlocked(LockInfoSO[] lockList)
+    public static T GetScriptableObjects<T>(string objName) where T : ScriptableObject
+    {
+        T[] items = (T[])Resources.FindObjectsOfTypeAll(typeof(T));
+        List<T> matchingItems = new List<T>();
+        foreach(T i in items)
+        {
+            if (i.name == objName) matchingItems.Add(i);
+        }
+
+        if (matchingItems.Count == 1) return matchingItems[0];
+        else if (matchingItems.Count > 1)
+        {
+            Debug.LogError("Utils.GetScriptableObjects: found multiple objects of name:" + objName);
+            return matchingItems[0];
+        }
+        else
+        {
+            Debug.LogError("Utils.GetScriptableObjects: could not find object of name:" + objName);
+        }
+        return null;
+    }
+
+    public static bool checkUnlocked(LockInfoSO[] lockList, float times = 1)
     {
         if ((lockList != null) && (lockList.Length > 0))
         {
@@ -53,7 +77,7 @@ public static class Utils
             {
                 //get its type
                 //find the actual created object
-                if ((info.unlocker != null) && (info.unlocker.getUnlockValue() < info.amount)) return false;
+                if ((info.unlocker != null) && (info.unlocker.getUnlockValue() < (info.amount * times))) return false;
             }
             //all requirements are a success!!
         }

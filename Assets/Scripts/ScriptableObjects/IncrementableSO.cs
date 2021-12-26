@@ -8,7 +8,7 @@ using TMPro;
 
 
 //[CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
-public class IncrementableSO : UnlockableSO
+public class IncrementableSO : UnlockableObjectSO
 {
 
     //[Tooltip("A Prefab gameobjects with 'EffectScript' inheriting classes thrown on it.  Generally for on equip, ongoing effects, regen, damage, etc.")]
@@ -33,10 +33,8 @@ public class IncrementableSO : UnlockableSO
     public GameObject EffectObject;
 
     public Image UIImage;
-    private TextMeshProUGUI textDisplay;
+    [HideInInspector] public TextMeshProUGUI textDisplay;
     private GameObject imageDisplay;
-    private GameObject UIObject;
-    private bool instantiatedUI;
 
     [HideInInspector]
     public bool removeFromUIOnEmpty = false;    //when setting up UI panel ID, set this.
@@ -63,21 +61,8 @@ public class IncrementableSO : UnlockableSO
         //UIObject = ~~~~~
         //imageDisplay = to UIObject child... OutputImage.
         //set textDisplay = to UIObject child.... OutputText.
-        instantiatedUI = false;
-        hasUI = true;
-        UIPanelID = 0;
         removeFromUIOnEmpty = false;
         refreshUI();
-    }
-
-    public void destroyInstantiations()
-    {
-        if(instantiatedUI) Destroy(UIObject);
-    }
-
-    public GameObject getUI()
-    {
-        return UIObject;
     }
 
     void refreshUI()
@@ -142,12 +127,15 @@ public class IncrementableSO : UnlockableSO
     {
         base.reset();
         amount = 0;
-        UIActive = false;
-        connectToUI();
-        //SETUP UI PANEL STUFF
         maxStack = maximum;
         minStack = minAmount;
         effectManager = EffectManager.instance;
+
+        //add all objects to the UIs.
+        //will activate/deactivate like ButtonUnlockSO.
+        UIActive = false;
+        connectToUI();
+        //SETUP UI PANEL STUFF
         
     }
 

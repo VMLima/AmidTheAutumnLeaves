@@ -11,6 +11,7 @@ public class ButtonManager : MonoBehaviour
     List<RoomFeatureSO> activeButtons;
     RoomFeatureSO[] buttonArray;
     RoomFeatureArraySO[] buttonArrayArray;
+    CraftSO[] craftArray;
 
     public GameObject buttonPanel;
 
@@ -56,6 +57,7 @@ public class ButtonManager : MonoBehaviour
 
     RoomFeatureArraySO GetButtonArray(string _name)
     {
+
         if (buttonArray != null)
         {
             foreach (RoomFeatureArraySO featureArray in buttonArrayArray)
@@ -84,16 +86,15 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
-    public void activateButton(RoomFeatureSO feature, bool turnOn = true)
+    public void activateButton(RoomFeatureSO button, bool turnOn = true)
     {
-        if (feature == null) return;
+        
+        if (button == null) return;
 
-        feature.activate(turnOn);   //toggles if it shows even if parented to the buttonPanel. and changes the text output. 
-        if (turnOn && !hasButton(feature))
+        button.activate(turnOn);   //toggles if it shows even if parented to the buttonPanel. and changes the text output. 
+        if (turnOn && !hasButton(button))
         {
-            feature.buttonInstance.transform.SetParent(buttonPanel.transform);
-            feature.buttonInstance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            activeButtons.Add(feature);
+            activeButtons.Add(button);
         }
         refreshText();
     }
@@ -122,47 +123,33 @@ public class ButtonManager : MonoBehaviour
         activeButtons = new List<RoomFeatureSO>();
         buttonArray = Utils.GetAllScriptableObjects<RoomFeatureSO>();
         buttonArrayArray = Utils.GetAllScriptableObjects<RoomFeatureArraySO>();
+        craftArray = Utils.GetAllScriptableObjects<CraftSO>();
+    }
+
+    public void craft(string toCraft, float numCrafts = 1)
+    {
+        if (craftArray == null) return;
+        foreach(CraftSO c in craftArray)
+        {
+            if (c.name == toCraft)
+            {
+                c.craft(numCrafts);
+                return;
+            }
+        }
+        Debug.LogError("ButtonManager:craft: could not find name:" + name);
+    }
+
+    public void craft(CraftSO recipe, float numCrafts = 1)
+    {
+        recipe.craft(numCrafts);
     }
 
     private void Start()
     {
-        resetButtons();
-        instantiateButtons();
+        //resetButtons();
+        //instantiateButtons();
 
         activateButtonArray("Start");
-    }
-
-    private void OnDestroy()
-    {
-        //clean up instantiation.
-        if (buttonArray != null)
-        {
-            foreach (RoomFeatureSO feature in buttonArray)
-            {
-                feature.destroyButton();
-            }
-        }
-    }
-
-    void instantiateButtons()
-    {
-        if (buttonArray != null)
-        {
-            foreach (RoomFeatureSO feature in buttonArray)
-            {
-                feature.instantiateButton();
-            }
-        }
-    }
-
-    void resetButtons()
-    {
-        if(buttonArray != null)
-        {
-            foreach(RoomFeatureSO button in buttonArray)
-            {
-                button.reset();
-            }
-        }
     }
 }
