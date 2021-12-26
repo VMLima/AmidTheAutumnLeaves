@@ -18,6 +18,9 @@ MonoBehaviour:
     amount: 1
   unlocked: 1
   incManager: {fileID: 0}
+  UIPrefab: {fileID: 0}
+  UIPanel: {fileID: 0}
+  isActive: 0
   amount: 0
   maximum: 5
   maxStack: 5
@@ -25,6 +28,7 @@ MonoBehaviour:
   minStack: 0
   EffectObject: {fileID: 0}
   UIImage: {fileID: 0}
+  textDisplay: {fileID: 0}
   removeFromUIOnEmpty: 0
   UIPanelID: 0
   UIActive: 0

@@ -15,7 +15,7 @@ using TMPro;
 
 
 //[CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
-public class UnlockableSO : ScriptableObject
+public class CommonBaseSO : ScriptableObject
 {
     [Tooltip("MUST USE THIS EXACT NAME TO REFERENCE IT IN CODE")]
     public new string name;
@@ -29,7 +29,7 @@ public class UnlockableSO : ScriptableObject
     [HideInInspector] public IncManager incManager;
 
     //gotta setup listeners for LockInfo stuff here!!!
-    public UnlockableSO()
+    public CommonBaseSO()
     {
         //BE VERY CAREFUL DOING ANYTHING HERE.
         //This happens only once.  Opening and closing the game 3 times will only call this first time.

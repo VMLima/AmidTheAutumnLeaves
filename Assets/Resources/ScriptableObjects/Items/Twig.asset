@@ -9,26 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7810ebf041aaed4ca00d5842813a3de, type: 3}
-  m_Name: Berry
+  m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
+  m_Name: Twig
   m_EditorClassIdentifier: 
-  name: Berry
+  name: Twig
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
-  UIPrefab: {fileID: 0}
+  UIInstance: {fileID: 0}
+  UIPrefab: {fileID: 77532610994766148, guid: 14385605e8c10f341b9de80d34dcfd82, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 0
+  isActive: 1
   amount: 12
   maximum: 0
   maxStack: 0
   minAmount: 0
   minStack: 0
-  EffectObject: {fileID: 7352281612241169272, guid: a2b0d00f475f63148bef991388fc93dc, type: 3}
-  UIImage: {fileID: 0}
+  EffectObject: {fileID: 0}
+  UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
+  imageDisplay: {fileID: 0}
   removeFromUIOnEmpty: 0
   UIPanelID: 0
-  UIActive: 1
-  hasUI: 1
+  UIActive: 0
+  hasUI: 0
   effectManager: {fileID: 0}
+  DeleteWhenEmpty: 1

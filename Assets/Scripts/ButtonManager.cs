@@ -11,7 +11,7 @@ public class ButtonManager : MonoBehaviour
     List<RoomFeatureSO> activeButtons;
     RoomFeatureSO[] buttonArray;
     RoomFeatureArraySO[] buttonArrayArray;
-    CraftSO[] craftArray;
+    CraftRecipeSO[] craftArray;
 
     public GameObject buttonPanel;
 
@@ -123,13 +123,13 @@ public class ButtonManager : MonoBehaviour
         activeButtons = new List<RoomFeatureSO>();
         buttonArray = Utils.GetAllScriptableObjects<RoomFeatureSO>();
         buttonArrayArray = Utils.GetAllScriptableObjects<RoomFeatureArraySO>();
-        craftArray = Utils.GetAllScriptableObjects<CraftSO>();
+        craftArray = Utils.GetAllScriptableObjects<CraftRecipeSO>();
     }
 
     public void craft(string toCraft, float numCrafts = 1)
     {
         if (craftArray == null) return;
-        foreach(CraftSO c in craftArray)
+        foreach(CraftRecipeSO c in craftArray)
         {
             if (c.name == toCraft)
             {
@@ -140,7 +140,7 @@ public class ButtonManager : MonoBehaviour
         Debug.LogError("ButtonManager:craft: could not find name:" + name);
     }
 
-    public void craft(CraftSO recipe, float numCrafts = 1)
+    public void craft(CraftRecipeSO recipe, float numCrafts = 1)
     {
         recipe.craft(numCrafts);
     }

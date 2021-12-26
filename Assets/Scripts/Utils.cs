@@ -36,6 +36,7 @@ public static class Utils
 {
     //effects are in GameObjects which every object is... so to just get the ones I want it needs to be only ones in a certain folder.
     public static string effectLocation = "ScriptableObjects/Effects";
+    public static string prefabLocation = "Prefabs";
 
     public static T[] GetAllScriptableObjects<T>() where T : ScriptableObject
     {
@@ -45,6 +46,17 @@ public static class Utils
     public static GameObject[] GetAllGameObjects(string folder)
     {
         return Resources.LoadAll<GameObject>(folder);
+    }
+
+    public static GameObject GetPrefab(string _name)
+    {
+        GameObject[] objects = Resources.LoadAll<GameObject>(prefabLocation);
+        foreach(GameObject obj in objects)
+        {
+            if (obj.name == _name) return obj;
+        }
+        Debug.LogError("Utils.GetPrefab:could not find prefab:" + _name);
+        return null;
     }
 
     public static T GetScriptableObjects<T>(string objName) where T : ScriptableObject

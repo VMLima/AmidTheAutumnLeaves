@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnlockableObjectSO : UnlockableSO
+public class UIMenuSO : CommonBaseSO
 {
-    private GameObject UIInstance;
+    [HideInInspector]
+    public GameObject UIInstance;
     [HideInInspector]
     public GameObject UIPrefab;
     [HideInInspector]
@@ -79,6 +80,7 @@ public class UnlockableObjectSO : UnlockableSO
             {
                 if (unlocked && _isActive)
                 {
+                    Debug.Log("UIMenuSO:activate:is activating:" + name);
                     reorderUI();
                     UIInstance.SetActive(true);
                 }

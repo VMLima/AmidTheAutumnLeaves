@@ -9,11 +9,7 @@ public class ResourceSO : IncrementableSO
 {
     public override void declareUI()
     {
-        UIPrefab = null;    //still gotta make and hook up to the prefab.
-        //UIImage
-        //name
-        //will be fed into the prefab.
-        //textDisplay = (numerical text output panel.  Will get updated on addAmount())
+        UIPrefab = Utils.GetPrefab("ResourcePrefab");    //still gotta make and hook up to the prefab.
         UIPanel = IncManager.instance.ResourcePanel;
     }
 }

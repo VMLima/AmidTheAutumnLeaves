@@ -7,7 +7,7 @@ public class TextManager : MonoBehaviour
 {
     
     [HideInInspector] public static TextManager instance;
-    public TextMeshProUGUI textPanel;
+    public TextMeshProUGUI textBox;
     private string text;
     //private List<string> texts;
 
@@ -16,7 +16,7 @@ public class TextManager : MonoBehaviour
         if(toAdd != "")
         {
             text = text + toAdd + " \n";
-            textPanel.text = text;
+            textBox.text = text;
         }
         
     }
@@ -24,7 +24,7 @@ public class TextManager : MonoBehaviour
     public void setText(string _text)
     {
         text = _text;
-        textPanel.text = text;
+        textBox.text = text;
     }
 
     // Start is called before the first frame update

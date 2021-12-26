@@ -19,7 +19,7 @@ public class TestCraft : MonoBehaviour
             doOnce = false;
 
             ResourceSO berry = IncManager.instance.Get<ResourceSO>("Berry");
-            CraftSO BreedBerries = Utils.GetScriptableObjects<CraftSO>("BreedBerries");
+            CraftRecipeSO BreedBerries = Utils.GetScriptableObjects<CraftRecipeSO>("BreedBerries");
             //IncManager.instance.Unlock(berry);
 
             Debug.Log("Test: num berries = " + berry.getAmount());

@@ -8,7 +8,7 @@ using TMPro;
 
 
 //[CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
-public class IncrementableSO : UnlockableObjectSO
+public class IncrementableSO : UIMenuSO
 {
 
     //[Tooltip("A Prefab gameobjects with 'EffectScript' inheriting classes thrown on it.  Generally for on equip, ongoing effects, regen, damage, etc.")]
@@ -16,8 +16,8 @@ public class IncrementableSO : UnlockableObjectSO
 
     [ReadOnly] public float amount = 0;
 
-    [Tooltip("Max amount/level.")]
-    public int maximum = 1;
+    [Tooltip("Max amount/level. 0 means unlimited.")]
+    public int maximum = 0;
 
     [HideInInspector]
     public int maxStack;
@@ -28,13 +28,12 @@ public class IncrementableSO : UnlockableObjectSO
     [HideInInspector]
     public int minStack;
 
-
     [Tooltip("Any 'EffectScripts' attached to this BLANK PREFAB will be activatable.")]
     public GameObject EffectObject;
 
-    public Image UIImage;
+    public Sprite UISprite;
     [HideInInspector] public TextMeshProUGUI textDisplay;
-    private GameObject imageDisplay;
+    [HideInInspector] public Image imageDisplay;
 
     [HideInInspector]
     public bool removeFromUIOnEmpty = false;    //when setting up UI panel ID, set this.
@@ -47,6 +46,8 @@ public class IncrementableSO : UnlockableObjectSO
     [HideInInspector]
     public bool hasUI = false;
 
+    private float incRate = 1;
+
     [HideInInspector] public EffectManager effectManager;
 
     public virtual float getUnlockValue()
@@ -54,25 +55,11 @@ public class IncrementableSO : UnlockableObjectSO
         return amount;
     }
 
-    public virtual void connectToUI()
-    {
-        //getResourcePrefab()
-        //instantiate. Creates a copy of it.
-        //UIObject = ~~~~~
-        //imageDisplay = to UIObject child... OutputImage.
-        //set textDisplay = to UIObject child.... OutputText.
-        removeFromUIOnEmpty = false;
-        refreshUI();
-    }
-
     void refreshUI()
     {
         //STILL GOTTA HOOK UP.
-        if (hasUI)
-        {
-            //imageDisplay.image = ResourceImage;
-            //textDisplay.text = amount.ToString();
-        }
+        if(imageDisplay != null) imageDisplay.sprite = UISprite;
+        if(textDisplay != null) textDisplay.text = amount.ToString();
     }
 
     //starts an effect script in the effect object matching effectName.
@@ -121,22 +108,31 @@ public class IncrementableSO : UnlockableObjectSO
         }
     }
 
-    
-
     public override void reset()
     {
         base.reset();
         amount = 0;
         maxStack = maximum;
         minStack = minAmount;
+        incRate = 1;
         effectManager = EffectManager.instance;
-
-        //add all objects to the UIs.
-        //will activate/deactivate like ButtonUnlockSO.
-        UIActive = false;
-        connectToUI();
-        //SETUP UI PANEL STUFF
-        
+        foreach (Transform eachChild in UIInstance.transform)
+        {
+            if (eachChild.name == "HookImage")
+            {
+                imageDisplay = eachChild.GetComponent<Image>();
+                imageDisplay.sprite = UISprite;
+            }
+            else if (eachChild.name == "HookName")
+            {
+                eachChild.GetComponent<TextMeshProUGUI>().text = name;
+            }
+            else if (eachChild.name == "HookQuantity")
+            {
+                textDisplay = eachChild.GetComponent<TextMeshProUGUI>();
+                textDisplay.text = "0";
+            }
+        }
     }
 
     public float getAmount()
@@ -163,7 +159,8 @@ public class IncrementableSO : UnlockableObjectSO
 
             if (textDisplay != null)
             {
-                textDisplay.text = amount.ToString();
+                Debug.Log("IncremtableSO:addAmount: textDisplay is not null:" + name);
+                textDisplay.text = getUnlockValue().ToString();
             }
         }
 
@@ -183,7 +180,7 @@ public class IncrementableSO : UnlockableObjectSO
     public void addToAmount(float _amount)
     {
         amount += _amount;
-        if (amount > maxStack)
+        if ((maxStack > 0) && (amount > maxStack))
         {
             amount = maxStack;
         }
@@ -204,7 +201,7 @@ public class IncrementableSO : UnlockableObjectSO
         {
             amount = minStack;
         }
-        else if (amount > maxStack)
+        else if ((maxStack > 0) && (amount > maxStack))
         {
             amount = maxStack;
         }

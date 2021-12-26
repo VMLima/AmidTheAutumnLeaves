@@ -69,7 +69,7 @@ public class IncManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        foreach(UnlockableSO i in Utils.GetAllScriptableObjects<UnlockableSO>())
+        foreach(CommonBaseSO i in Utils.GetAllScriptableObjects<CommonBaseSO>())
         {
             i.destroyInstantiations();
         }
@@ -129,15 +129,12 @@ public class IncManager : MonoBehaviour
             //dirty but functional till we need something better.
             //Add to UI anything that isn't active in UI and is unlocked and is being incremented.
             //Remove from UI if a flag is checked based on which UI panel it is a part of.
-            if(inc.hasUI)
-            {
-                if (inc.addAmount(amount) <= 0 && inc.removeFromUIOnEmpty) addToUI(inc, false);
-                else if (!inc.UIActive && inc.unlocked) addToUI(inc, true);
-            }
-            else
-            {
-                inc.addAmount(amount);
-            }
+
+            //add the quantity.  If it's new, activate.
+            //if its empty and remove when empty.  deactivate.
+            inc.addAmount(amount);
+            if (inc.isActive == false) inc.activate(true);
+            else if (inc.removeFromUIOnEmpty && inc.getAmount() <= 0) inc.activate(false);
 
             //GOTTA UPDATE THIS ALL TOO.  Better listening for unlocks.
             //at least now having a bunch of resource ticks a second isn't screaming repeatedly in the same frame.
@@ -173,33 +170,6 @@ public class IncManager : MonoBehaviour
         if (inc != null)
         {
             Unlock(inc);
-        }
-    }
-
-    public void addToUI<T>(string _name, bool toActivate) where T : IncrementableSO
-    {
-        IncrementableSO inc = Get<T>(_name);
-        addToUI(inc, toActivate);
-    }
-
-    public void addToUI(IncrementableSO inc, bool toActivate)
-    {
-        if (inc == null) return;
-        else if (inc.UIActive != toActivate)
-        {
-            inc.UIActive = toActivate;
-            //inc.UIGameObject;
-            // ADDING TO CORRECT PANEL.
-            //  can create an enum for it.  EquipPanel = 1, DebuffPanel = 2, ResourcePanel = 3....
-            //      then in ItemSO/ResourceSO set the panelID.
-            if (toActivate)
-            {
-                //adding to UI
-            }
-            else
-            {
-                //removing from UI
-            }
         }
     }
 
@@ -253,7 +223,7 @@ public class IncManager : MonoBehaviour
         }
         if (!found) Debug.LogError("IncManager:resetAllUnlockable: could not find any... RoomFeatureSO");
         found = true;
-        foreach (CraftSO unl in Utils.GetAllScriptableObjects<CraftSO>())
+        foreach (CraftRecipeSO unl in Utils.GetAllScriptableObjects<CraftRecipeSO>())
         {
             unl.reset();
             //Debug.Log("name:" + unl.name);

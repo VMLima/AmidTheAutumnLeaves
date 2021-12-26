@@ -11,7 +11,7 @@ using TMPro;
 /// </summary>
 
 [CreateAssetMenu(fileName = "NewFeature", menuName = "Scriptable Object/Feature")]
-public class RoomFeatureSO : UnlockableObjectSO
+public class RoomFeatureSO : UIMenuSO
 {
     public string activeDescription;
     public string inactiveDescripton;

@@ -6,18 +6,25 @@ using UnityEngine;
 public struct incrStruct
 {
     public IncrementableSO incrementableSO;
-    
-    public int amount;
+
+    [Tooltip("UNUSED.  Concept though is that all future gains of said resource will have this % added to it. 100 = 100% increase.")]
+    public int rateIncrease;
+    [Tooltip("Each Frequency will add this amount of resource.")]
+    public int amountIncrease;
+    [Tooltip("How often to trigger amount increases.")]
     public float frequency;
-    public bool toggle;
+    [Tooltip("How long increases will last.  0 means untill this object is removed.")]
+    public float duration;
+    
     //public string descTooltip;
     //public string descEffect;
-    public incrStruct(IncrementableSO _incrementableSO, int _amount = 1, float _frequency = 1f, bool _toggle = false)//, string _descTooltip = "", string _descEffect = "")
+    public incrStruct(IncrementableSO _incrementableSO, int _rateIncrease = 0, int _amountIncrease = 0, float _frequency = 1f, float _duration = 0)//, string _descTooltip = "", string _descEffect = "")
     {
         incrementableSO = _incrementableSO;
+        rateIncrease = _rateIncrease;
         frequency = _frequency;
-        amount = _amount;
-        toggle = _toggle;
+        amountIncrease = _amountIncrease;
+        duration = _duration;
         //tooltip description
         //descTooltip = _descTooltip;
         //extra effect description

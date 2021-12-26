@@ -4,7 +4,7 @@ using UnityEngine;
 
 //inherits unlocking and button activating.
 [CreateAssetMenu(fileName = "CraftRecipe", menuName = "Scriptable Object/CraftRecipe")]
-public class CraftSO : UnlockableObjectSO
+public class CraftRecipeSO : UIMenuSO
 {
     public IncrementableSO toCraft;
     public int amountCrafted;
