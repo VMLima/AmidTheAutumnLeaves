@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewFeatureArray", menuName = "Scriptable Object/FeatureArray")]
-public class RoomFeatureArraySO : ScriptableObject
+public class RoomFeatureArraySO : CommonBaseSO
 {
-    public new string name;
     public RoomFeatureSO[] features;
 }

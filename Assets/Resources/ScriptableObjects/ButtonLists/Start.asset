@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Start
   m_EditorClassIdentifier: 
   name: Start
+  toUnlock: []
+  unlocked: 1
+  incManager: {fileID: 0}
   features:
   - {fileID: 11400000, guid: 488bdaece8729724aaa0e5ed40a995db, type: 2}
   - {fileID: 11400000, guid: e5970b31b9d8db2409bd8e6cfc2e8592, type: 2}

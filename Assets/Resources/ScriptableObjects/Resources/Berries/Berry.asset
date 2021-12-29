@@ -16,17 +16,19 @@ MonoBehaviour:
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
-  UIPrefab: {fileID: 0}
+  UIInstance: {fileID: 0}
+  UIPrefab: {fileID: 5766463783397515592, guid: cc84a6b97b60a7b47891dcc8973269a9, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 0
-  amount: 12
+  isActive: 1
+  amount: 20
   maximum: 0
   maxStack: 0
   minAmount: 0
   minStack: 0
   EffectObject: {fileID: 7352281612241169272, guid: a2b0d00f475f63148bef991388fc93dc, type: 3}
-  UIImage: {fileID: 0}
+  UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
+  imageDisplay: {fileID: 0}
   removeFromUIOnEmpty: 0
   UIPanelID: 0
   UIActive: 1

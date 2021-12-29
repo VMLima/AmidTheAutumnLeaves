@@ -20,7 +20,7 @@ MonoBehaviour:
   UIPrefab: {fileID: 77532610994766148, guid: 14385605e8c10f341b9de80d34dcfd82, type: 3}
   UIPanel: {fileID: 0}
   isActive: 1
-  amount: 12
+  amount: 8
   maximum: 0
   maxStack: 0
   minAmount: 0

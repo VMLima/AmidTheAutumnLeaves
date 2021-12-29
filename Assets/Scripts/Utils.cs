@@ -38,6 +38,8 @@ public static class Utils
     public static string effectLocation = "ScriptableObjects/Effects";
     public static string prefabLocation = "Prefabs";
 
+    //wanna get the object and add to it....
+
     public static T[] GetAllScriptableObjects<T>() where T : ScriptableObject
     {
         return (T[])Resources.FindObjectsOfTypeAll(typeof(T));

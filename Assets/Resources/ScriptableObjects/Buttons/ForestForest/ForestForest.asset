@@ -16,6 +16,7 @@ MonoBehaviour:
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
+  UIInstance: {fileID: 0}
   UIPrefab: {fileID: 5715040496820633644, guid: a2106aac3cc0763488535f9a1ad70b58, type: 3}
   UIPanel: {fileID: 0}
   isActive: 1

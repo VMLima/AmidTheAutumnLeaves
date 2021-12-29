@@ -29,6 +29,9 @@ public class IncManager : MonoBehaviour
     [HideInInspector]
     public UnityEvent itemEvent = new UnityEvent();
 
+    public DataStorageSO dataStorage;
+    public DataStorageSO incrementables;
+
     public GameObject ItemPanel;
     public GameObject ResourcePanel;
     public GameObject SkillPanel;
@@ -44,7 +47,6 @@ public class IncManager : MonoBehaviour
         itemArray = Utils.GetAllScriptableObjects<ItemSO>();
         resourceArray = Utils.GetAllScriptableObjects<ResourceSO>();
     }
-
     private void Start()
     {
         resetAllUnlockable();   
@@ -79,6 +81,15 @@ public class IncManager : MonoBehaviour
     public T Get<T>(string _name) where T : IncrementableSO
     {
         IncrementableSO[] tempArray = null;
+        foreach (IncrementableSO inc in incrementables.get())
+        {
+            if (inc.name == _name)
+            {
+                //already have skill
+                return (T)inc;
+            }
+        }
+        /*
         if(typeof(T) == typeof(SkillSO))
         {
             tempArray = skillArray;
@@ -103,6 +114,8 @@ public class IncManager : MonoBehaviour
                 }
             }
         }
+        */
+        Debug.LogError("IncManager:Get:Could not get:" + _name);
         return null;
     }
 
@@ -173,63 +186,34 @@ public class IncManager : MonoBehaviour
         }
     }
 
+    void clearDataStorage()
+    {
+        dataStorage.clear();
+        incrementables.clear();
+    }
+
+    void addToDataStorage(CommonBaseSO unl)
+    {
+        //add to master list
+        dataStorage.add(unl);
+        //add to subtype list.
+        if(unl.GetType().IsSubclassOf(typeof(IncrementableSO)))
+        {
+            incrementables.add(unl);
+        }
+    }
     void resetAllUnlockable()
     {
-        /*
-        foreach (UnlockableSO unl in Utils.GetAllScriptableObjects<UnlockableSO>())
+        //clearDataStorage();
+
+        foreach (CommonBaseSO unl in Utils.GetAllScriptableObjects<CommonBaseSO>())
         {
             unl.reset();
-            Debug.Log("name:" + unl.name);
-        }
-        */
-        bool found = false;
-        foreach (ResourceSO unl in Utils.GetAllScriptableObjects<ResourceSO>())
-        {
-            unl.reset();
+            
+            addToDataStorage(unl);
+            
             //Debug.Log("name:" + unl.name);
-            found = true;
         }
-        if (!found) Debug.LogError("IncManager:resetAllUnlockable: could not find any... ResourceSO");
-        found = true;
-        foreach (ItemSO unl in Utils.GetAllScriptableObjects<ItemSO>())
-        {
-            unl.reset();
-            //Debug.Log("name:" + unl.name);
-            found = true;
-        }
-        if (!found) Debug.LogError("IncManager:resetAllUnlockable: could not find any... ItemSO");
-        found = true;
-        foreach (SkillSO unl in Utils.GetAllScriptableObjects<SkillSO>())
-        {
-            unl.reset();
-            //Debug.Log("name:" + unl.name);
-            found = true;
-        }
-        if (!found) Debug.LogError("IncManager:resetAllUnlockable: could not find any... SkillSO");
-        found = true;
-        foreach (RoomSO unl in Utils.GetAllScriptableObjects<RoomSO>())
-        {
-            unl.reset();
-            //Debug.Log("name:" + unl.name);
-            found = true;
-        }
-        if (!found) Debug.LogError("IncManager:resetAllUnlockable: could not find any... RoomSO");
-        found = true;
-        foreach (RoomFeatureSO unl in Utils.GetAllScriptableObjects<RoomFeatureSO>())
-        {
-            unl.reset();
-            //Debug.Log("name:" + unl.name);
-            found = true;
-        }
-        if (!found) Debug.LogError("IncManager:resetAllUnlockable: could not find any... RoomFeatureSO");
-        found = true;
-        foreach (CraftRecipeSO unl in Utils.GetAllScriptableObjects<CraftRecipeSO>())
-        {
-            unl.reset();
-            //Debug.Log("name:" + unl.name);
-            found = true;
-        }
-        if (!found) Debug.LogError("IncManager:resetAllUnlockable: could not find any... CraftSO");
     }
 
     public void allSkillsDebugLog()

@@ -159,11 +159,10 @@ public class IncrementableSO : UIMenuSO
 
             if (textDisplay != null)
             {
-                Debug.Log("IncremtableSO:addAmount: textDisplay is not null:" + name);
+                //Debug.Log("IncremtableSO:addAmount: textDisplay is not null:" + name);
                 textDisplay.text = getUnlockValue().ToString();
             }
         }
-
         return amount;
     }
 

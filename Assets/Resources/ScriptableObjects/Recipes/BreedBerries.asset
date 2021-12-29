@@ -16,8 +16,9 @@ MonoBehaviour:
   toUnlock:
   - unlocker: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
     amount: 2
-  unlocked: 0
+  unlocked: 1
   incManager: {fileID: 0}
+  UIInstance: {fileID: 0}
   UIPrefab: {fileID: 0}
   UIPanel: {fileID: 0}
   isActive: 0
