@@ -30,6 +30,8 @@ public class ReadOnlyDrawer : PropertyDrawer
     }
 }
 
+enum direction { Item = 1, Skill = 2, Resource = 3, Craftable = 4, Other = 5 };
+
 
 //static utility functions.
 public static class Utils

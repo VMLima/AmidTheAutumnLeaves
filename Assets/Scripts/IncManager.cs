@@ -16,9 +16,9 @@ using UnityEngine.Events;
 public class IncManager : MonoBehaviour
 {
     // hold all possible skills.
-    SkillSO[] skillArray;
-    ItemSO[] itemArray;
-    ResourceSO[] resourceArray;
+    //SkillSO[] skillArray;
+    //ItemSO[] itemArray;
+    //ResourceSO[] resourceArray;
 
     public static IncManager instance;
 
@@ -30,7 +30,6 @@ public class IncManager : MonoBehaviour
     public UnityEvent itemEvent = new UnityEvent();
 
     public DataStorageSO dataStorage;
-    public DataStorageSO incrementables;
 
     public GameObject ItemPanel;
     public GameObject ResourcePanel;
@@ -39,20 +38,24 @@ public class IncManager : MonoBehaviour
     private bool gotResourceEvent = false;
     private bool gotItemEvent = false;
 
+    void startGame()
+    {
+        ButtonManager.instance.activateButtonArray("Start");
+    }
+
     void Awake()
     {
         instance = this;
-        
-        skillArray = Utils.GetAllScriptableObjects<SkillSO>();
-        itemArray = Utils.GetAllScriptableObjects<ItemSO>();
-        resourceArray = Utils.GetAllScriptableObjects<ResourceSO>();
+
+        compileDataStorage();   
+        //updates and compiles the dataStorage scriptable object.  
+        //links to all other scriptable objects and dataStorage.get<type>(_name) will return any scriptable object.
     }
     private void Start()
     {
-        resetAllUnlockable();   
-        //gets everything that inherits UnlockableSO and does a .reset() on it.
-        //has to be after awake because some of the functionality requires ButtonManager.instance or the likes.
-        //      Which is done during awake().
+        //functions that require everything setup to work.
+        resetAllUnlockable();
+        startGame();
     }
 
     private void Update()
@@ -78,45 +81,9 @@ public class IncManager : MonoBehaviour
     }
 
     //get a scriptable object of type T and name _name.
-    public T Get<T>(string _name) where T : IncrementableSO
+    public T Get<T>(string _name) where T : CommonBaseSO
     {
-        IncrementableSO[] tempArray = null;
-        foreach (IncrementableSO inc in incrementables.get())
-        {
-            if (inc.name == _name)
-            {
-                //already have skill
-                return (T)inc;
-            }
-        }
-        /*
-        if(typeof(T) == typeof(SkillSO))
-        {
-            tempArray = skillArray;
-        }
-        else if (typeof(T) == typeof(ResourceSO))
-        {
-            tempArray = resourceArray;
-        }
-        else if (typeof(T) == typeof(ItemSO))
-        {
-            tempArray = itemArray;
-        }
-
-        if(tempArray != null)
-        {
-            foreach (IncrementableSO inc in tempArray)
-            {
-                if (inc.name == _name)
-                {
-                    //already have skill
-                    return (T)inc;
-                }
-            }
-        }
-        */
-        Debug.LogError("IncManager:Get:Could not get:" + _name);
-        return null;
+        return dataStorage.get<T>(_name);
     }
 
     //get the amount in a scriptable object of type T and name _name
@@ -131,6 +98,7 @@ public class IncManager : MonoBehaviour
     {
         AddAmount(Get<T>(_name), amount);
     }
+
     //ADD AMOUNT
     //either hand over an object to increment by amount
     // or give the type and a name.
@@ -189,42 +157,24 @@ public class IncManager : MonoBehaviour
     void clearDataStorage()
     {
         dataStorage.clear();
-        incrementables.clear();
     }
 
     void addToDataStorage(CommonBaseSO unl)
     {
-        //add to master list
         dataStorage.add(unl);
-        //add to subtype list.
-        if(unl.GetType().IsSubclassOf(typeof(IncrementableSO)))
+    }
+
+    void compileDataStorage()
+    {
+        clearDataStorage();
+        foreach (CommonBaseSO unl in Utils.GetAllScriptableObjects<CommonBaseSO>())
         {
-            incrementables.add(unl);
+            addToDataStorage(unl);
+            //Debug.Log("name:" + unl.name);
         }
     }
     void resetAllUnlockable()
     {
-        //clearDataStorage();
-
-        foreach (CommonBaseSO unl in Utils.GetAllScriptableObjects<CommonBaseSO>())
-        {
-            unl.reset();
-            
-            addToDataStorage(unl);
-            
-            //Debug.Log("name:" + unl.name);
-        }
-    }
-
-    public void allSkillsDebugLog()
-    {
-        int i = 1;
-        Debug.Log("==currentSkills===");
-        foreach (SkillSO skill in skillArray)
-        {
-            Debug.Log("slot:" + i + "=" + skill.name + " Level:" + skill.getLevel() + " XP:" + skill.getAmount());
-            i++;
-        }
-        Debug.Log("===================");
+        dataStorage.resetAll();
     }
 }

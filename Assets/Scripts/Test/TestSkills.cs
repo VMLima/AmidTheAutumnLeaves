@@ -12,7 +12,7 @@ public class TestSkills : MonoBehaviour
 
         Debug.Log("===Adding skill Foraging======");
         IncManager.instance.Unlock<SkillSO>("Foraging");
-        IncManager.instance.allSkillsDebugLog();
+        //IncManager.instance.allSkillsDebugLog();
         /*
         Debug.Log("======Adding 10xp to Foraging");
         SkillManager.instance.addXP("Foraging", 10);

@@ -5,13 +5,7 @@ using UnityEngine;
 public class ButtonManager : MonoBehaviour
 {
 
-    //get all buttons
-    //get all button lists.
-
     List<RoomFeatureSO> activeButtons;
-    RoomFeatureSO[] buttonArray;
-    RoomFeatureArraySO[] buttonArrayArray;
-    CraftRecipeSO[] craftArray;
 
     public GameObject buttonPanel;
 
@@ -44,29 +38,12 @@ public class ButtonManager : MonoBehaviour
 
     RoomFeatureSO GetButton(string _name)
     {
-        if(buttonArray != null)
-        {
-            foreach(RoomFeatureSO feature in buttonArray)
-            {
-                if (feature.name == _name) return feature;
-            }
-        }
-        Debug.LogError("ButtonManager:GetButton: invalid name:" + _name);
-        return null;
+        return IncManager.instance.Get<RoomFeatureSO>(_name);
     }
 
     RoomFeatureArraySO GetButtonArray(string _name)
     {
-
-        if (buttonArray != null)
-        {
-            foreach (RoomFeatureArraySO featureArray in buttonArrayArray)
-            {
-                if (featureArray.name == _name) return featureArray;
-            }
-        }
-        Debug.LogError("ButtonManager:GetButtonArray: invalid name:" + _name);
-        return null;
+        return IncManager.instance.Get<RoomFeatureArraySO>(_name);
     }
 
     public void refreshText()
@@ -121,23 +98,13 @@ public class ButtonManager : MonoBehaviour
     {
         instance = this;
         activeButtons = new List<RoomFeatureSO>();
-        buttonArray = Utils.GetAllScriptableObjects<RoomFeatureSO>();
-        buttonArrayArray = Utils.GetAllScriptableObjects<RoomFeatureArraySO>();
-        craftArray = Utils.GetAllScriptableObjects<CraftRecipeSO>();
     }
 
-    public void craft(string toCraft, float numCrafts = 1)
+    public void craft(string _name, float numCrafts = 1)
     {
-        if (craftArray == null) return;
-        foreach(CraftRecipeSO c in craftArray)
-        {
-            if (c.name == toCraft)
-            {
-                c.craft(numCrafts);
-                return;
-            }
-        }
-        Debug.LogError("ButtonManager:craft: could not find name:" + name);
+        CraftRecipeSO c = IncManager.instance.Get<CraftRecipeSO>(_name);
+        if (c != null) c.craft(numCrafts);
+        return;
     }
 
     public void craft(CraftRecipeSO recipe, float numCrafts = 1)
@@ -147,9 +114,6 @@ public class ButtonManager : MonoBehaviour
 
     private void Start()
     {
-        //resetButtons();
-        //instantiateButtons();
-
-        activateButtonArray("Start");
+        
     }
 }
