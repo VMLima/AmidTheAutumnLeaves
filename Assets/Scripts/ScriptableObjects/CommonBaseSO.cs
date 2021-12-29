@@ -21,7 +21,7 @@ public class CommonBaseSO : ScriptableObject
     public new string name;
 
     [Tooltip("Requirements to unlock.  When unlocked stays unlocked.")]
-    public LockInfoSO[] toUnlock = new LockInfoSO[0];
+    public IncrementalValuePair[] toUnlock = new IncrementalValuePair[0];
 
 
     [ReadOnly] public bool unlocked = false;
@@ -60,23 +60,23 @@ public class CommonBaseSO : ScriptableObject
         if(toUnlock != null)
         {
             //Debug.Log("Adding listener for " + nameTag);
-            foreach (LockInfoSO info in toUnlock)
+            foreach (IncrementalValuePair info in toUnlock)
             {
-                if(info.unlocker == null)
+                if(info.incrementable == null)
                 {
                     _unlocked = false;
                 }
-                else if (info.unlocker.GetType() == typeof(SkillSO))
+                else if (info.incrementable.GetType() == typeof(SkillSO))
                 {
                     incManager.skillLevelEvent.AddListener(updateUnlocked);
                     _unlocked = false;
                 }
-                else if (info.unlocker.GetType() == typeof(ResourceSO))
+                else if (info.incrementable.GetType() == typeof(ResourceSO))
                 {
                     incManager.resourceEvent.AddListener(updateUnlocked);
                     _unlocked = false;
                 }
-                else if (info.unlocker.GetType() == typeof(ItemSO))
+                else if (info.incrementable.GetType() == typeof(ItemSO))
                 {
                     incManager.itemEvent.AddListener(updateUnlocked);
                     _unlocked = false;

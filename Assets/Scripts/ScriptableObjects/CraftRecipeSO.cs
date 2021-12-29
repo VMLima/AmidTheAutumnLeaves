@@ -8,7 +8,7 @@ public class CraftRecipeSO : UIMenuSO
 {
     public IncrementableSO toCraft;
     public int amountCrafted;
-    public LockInfoSO[] costArray = new LockInfoSO[0];
+    public IncrementalValuePair[] costArray = new IncrementalValuePair[0];
 
     /*
     public override void setButtonInfo()
@@ -47,15 +47,15 @@ public class CraftRecipeSO : UIMenuSO
     {
         if ((costArray != null) && (costArray.Length > 0))
         {
-            foreach (LockInfoSO cost in costArray)
+            foreach (IncrementalValuePair cost in costArray)
             {
                 //get its type
                 //find the actual created object
-                if (cost.unlocker != null)
+                if (cost.incrementable != null)
                 {
                     if (modifyValues == false)
                     {
-                        if (cost.unlocker.getAmount() < (cost.amount * numCrafts))
+                        if (cost.incrementable.getAmount() < (cost.amount * numCrafts))
                         {
                             //if you do not have the resources... and checking to see if all resource requirements exist...
                             return false;
@@ -65,7 +65,7 @@ public class CraftRecipeSO : UIMenuSO
                     {
                         //if you are modifying values...
                         //Debug.Log("CraftSO:costFunction: modifying values..." + cost.unlocker.getAmount() + " " + cost.amount * -1 * numCrafts);
-                        IncManager.instance.AddAmount(cost.unlocker, cost.amount * -1 * numCrafts);
+                        IncManager.instance.AddAmount(cost.incrementable, cost.amount * -1 * numCrafts);
                     }
                 }
             }

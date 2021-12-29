@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: NatureSence
   toUnlock:
-  - unlocker: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+  - incrementable: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
     amount: 1
   unlocked: 1
   incManager: {fileID: 0}

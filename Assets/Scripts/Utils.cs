@@ -85,15 +85,15 @@ public static class Utils
         return null;
     }
 
-    public static bool checkUnlocked(LockInfoSO[] lockList, float times = 1)
+    public static bool checkUnlocked(IncrementalValuePair[] lockList, float times = 1)
     {
         if ((lockList != null) && (lockList.Length > 0))
         {
-            foreach (LockInfoSO info in lockList)
+            foreach (IncrementalValuePair info in lockList)
             {
                 //get its type
                 //find the actual created object
-                if ((info.unlocker != null) && (info.unlocker.getUnlockValue() < (info.amount * times))) return false;
+                if ((info.incrementable != null) && (info.incrementable.getUnlockValue() < (info.amount * times))) return false;
             }
             //all requirements are a success!!
         }

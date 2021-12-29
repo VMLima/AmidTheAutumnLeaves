@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// =====================COMPLETELY UNUSED CLASS=============================  
+/// Just keeping around in case I want to copy/paste parts when merging with Spencer code.
+/// </summary>
+
 public class NodeManager : MonoBehaviour
 {
     public TextMeshProUGUI textGUI;

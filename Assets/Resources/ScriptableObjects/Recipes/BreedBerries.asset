@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: BreedBerries
   toUnlock:
-  - unlocker: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
+  - incrementable: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
     amount: 2
   unlocked: 1
   incManager: {fileID: 0}
@@ -25,5 +25,5 @@ MonoBehaviour:
   toCraft: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
   amountCrafted: 5
   costArray:
-  - unlocker: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
+  - incrementable: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
     amount: 2
