@@ -9,36 +9,39 @@ public class DataStorageSO : CommonBaseSO
     //THIS IS A SCRIPTABLE OBJECT THAT HOLDS A REFERENCE TO ALL OTHER SCRIPTABLE OBJECTS.
     //  unity kinda needs this or else it has trouble finding unreferenced scriptable objects.
     //  it also holds a dictionary of <string type, List of objects of type> for easy scriptable object searching.
-    public List<CommonBaseSO> dataStore;
+    public List<CommonBaseSO> references;
     [SerializeField]
-    public Dictionary<string, List<CommonBaseSO>> typeStorage;
+    public Dictionary<string, List<CommonBaseSO>> dataDictionary;
 
     public void clear()
     {
         //dataStore.Clear();
-        dataStore = new List<CommonBaseSO>();
-        typeStorage = new Dictionary<string, List<CommonBaseSO>>();
+        references = new List<CommonBaseSO>();
+        dataDictionary = new Dictionary<string, List<CommonBaseSO>>();
     }
 
-    public void add(CommonBaseSO toAdd)
+    public void compileReferences()
     {
         //Debug.Log("add:" + toAdd.GetType().ToString());
-        string dataType = toAdd.GetType().ToString();
-        if (!typeStorage.ContainsKey(dataType)) typeStorage.Add(dataType, new List<CommonBaseSO>());
-        if (!typeStorage[dataType].Contains(toAdd)) typeStorage[dataType].Add(toAdd);
-
-        //if it already exists, skip.
-        for (int i = 0; i < dataStore.Count; i++)
+        foreach (CommonBaseSO unl in Utils.GetAllScriptableObjects<CommonBaseSO>())
         {
-            if (dataStore[i] == toAdd) return;
+            //Debug.Log("name:" + unl.name);
+            string dataType = unl.GetType().ToString();
+            if (!dataDictionary.ContainsKey(dataType)) dataDictionary.Add(dataType, new List<CommonBaseSO>());
+            if (!dataDictionary[dataType].Contains(unl)) dataDictionary[dataType].Add(unl);
+
+            //if it already exists, skip.
+            for (int i = 0; i < references.Count; i++)
+            {
+                if (references[i] == unl) return;
+            }
+            references.Add(unl);
         }
-        dataStore.Add(toAdd);
-        
     }
 
-    public void resetAll()
+    public void resetAllScriptableObjects()
     {
-        foreach (KeyValuePair<string, List<CommonBaseSO>> ele in typeStorage)
+        foreach (KeyValuePair<string, List<CommonBaseSO>> ele in dataDictionary)
         {
             if(ele.Value != null && ele.Value.Count > 0)
             {
@@ -54,9 +57,9 @@ public class DataStorageSO : CommonBaseSO
     {
         string stringType = typeof(T).ToString();
         //Debug.Log("DataStorage:Get:trying for:" + stringType + ":" + _name);
-        if(typeStorage.ContainsKey(stringType))
+        if(dataDictionary.ContainsKey(stringType))
         {
-            foreach (CommonBaseSO t in typeStorage[stringType])
+            foreach (CommonBaseSO t in dataDictionary[stringType])
             {
                 if (t.name == _name) return (T)t;
             }

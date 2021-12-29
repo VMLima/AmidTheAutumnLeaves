@@ -54,7 +54,7 @@ public class IncManager : MonoBehaviour
     private void Start()
     {
         //functions that require everything setup to work.
-        resetAllUnlockable();
+        resetAllScriptableObjects();
         startGame();
     }
 
@@ -154,27 +154,13 @@ public class IncManager : MonoBehaviour
         }
     }
 
-    void clearDataStorage()
-    {
-        dataStorage.clear();
-    }
-
-    void addToDataStorage(CommonBaseSO unl)
-    {
-        dataStorage.add(unl);
-    }
-
     void compileDataStorage()
     {
-        clearDataStorage();
-        foreach (CommonBaseSO unl in Utils.GetAllScriptableObjects<CommonBaseSO>())
-        {
-            addToDataStorage(unl);
-            //Debug.Log("name:" + unl.name);
-        }
+        dataStorage.clear();
+        dataStorage.compileReferences();
     }
-    void resetAllUnlockable()
+    void resetAllScriptableObjects()
     {
-        dataStorage.resetAll();
+        dataStorage.resetAllScriptableObjects();
     }
 }
