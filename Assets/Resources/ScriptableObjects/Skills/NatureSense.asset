@@ -21,8 +21,8 @@ MonoBehaviour:
   UIInstance: {fileID: 0}
   UIPrefab: {fileID: 7117491633077158859, guid: ce29c042715984f4a83c28e1ef1c1e8b, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 1
-  amount: 50
+  isActive: 0
+  amount: 0
   maximum: 5
   maxStack: 5
   minAmount: 0
@@ -39,6 +39,6 @@ MonoBehaviour:
   baseXP: 10
   levelXPMultiplier: 2
   levelXPAddition: 5
-  currentLevel: 3
-  xpToLevel: 115
+  currentLevel: 0
+  xpToLevel: 10
   atMax: 0
