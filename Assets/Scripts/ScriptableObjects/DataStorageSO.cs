@@ -16,13 +16,14 @@ public class DataStorageSO : CommonBaseSO
     public void clear()
     {
         //dataStore.Clear();
-        references = new List<CommonBaseSO>();
-        dataDictionary = new Dictionary<string, List<CommonBaseSO>>();
+        //references = new List<CommonBaseSO>();
+        
     }
 
     public void compileReferences()
     {
         //Debug.Log("add:" + toAdd.GetType().ToString());
+        dataDictionary = new Dictionary<string, List<CommonBaseSO>>();
         foreach (CommonBaseSO unl in Utils.GetAllScriptableObjects<CommonBaseSO>())
         {
             //Debug.Log("name:" + unl.name);
@@ -33,7 +34,7 @@ public class DataStorageSO : CommonBaseSO
             //if it already exists, skip.
             for (int i = 0; i < references.Count; i++)
             {
-                if (references[i] == unl) return;
+                if (references[i] == unl) break;
             }
             references.Add(unl);
         }
