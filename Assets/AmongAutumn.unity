@@ -1109,7 +1109,6 @@ GameObject:
   - component: {fileID: 1910270605}
   - component: {fileID: 1910270606}
   - component: {fileID: 1910270603}
-  - component: {fileID: 1910270608}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1139,7 +1138,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   dataStorage: {fileID: 11400000, guid: 9ff06edb30371d94e8bffa04a10bc469, type: 2}
-  incrementables: {fileID: 11400000, guid: 68552aa2445ddde428297f8340323923, type: 2}
   ItemPanel: {fileID: 1207209951}
   ResourcePanel: {fileID: 1550533663}
   SkillPanel: {fileID: 1543195094}
@@ -1209,18 +1207,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusPanel: {fileID: 757659859}
   health: 100
---- !u!114 &1910270608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910270601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e010609c41583cc43bbe9ae27e4d22fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1940907179
 GameObject:
   m_ObjectHideFlags: 0

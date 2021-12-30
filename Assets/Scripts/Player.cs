@@ -76,20 +76,28 @@ public class Player : MonoBehaviour
     {
         return healthCurrent;
     }
-    
+    public float getStamina()
+    {
+        return staminaCurrent;
+    }
+    public float getWarmth()
+    {
+        return warmthCurrent;
+    }
+
     public void modHealth(float _amount)
     {
         regen(ref healthCurrent, _amount, healthMax);
     }
 
-    public float getStamina()
-    {
-        return staminaCurrent;
-    }
-
     public void modStamina(float _amount)
     {
         regen(ref staminaCurrent, _amount, staminaMax);
+    }
+
+    public void modWarmth(float _amount)
+    {
+        regen(ref warmthCurrent, _amount, warmthMax);
     }
 
     void regen(ref float current, float rate, float max, float min = 0)

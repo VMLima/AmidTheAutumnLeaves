@@ -39,6 +39,7 @@ public static class Utils
     //effects are in GameObjects which every object is... so to just get the ones I want it needs to be only ones in a certain folder.
     public static string effectLocation = "ScriptableObjects/Effects";
     public static string prefabLocation = "Prefabs";
+    public static string weatherLocation = "Effects/Weather";
 
     //wanna get the object and add to it....
 
@@ -50,6 +51,15 @@ public static class Utils
     public static GameObject[] GetAllGameObjects(string folder)
     {
         return Resources.LoadAll<GameObject>(folder);
+    }
+
+    public static GameObject GetWeatherObject(string _name)
+    {
+        GameObject[] temp = Resources.LoadAll<GameObject>(weatherLocation);
+        if (temp != null && temp.Length >= 1) return temp[0];
+
+        Debug.LogError("Utils:GetWeatherObject:could not find name:" + _name);
+        return null;
     }
 
     public static GameObject GetPrefab(string _name)

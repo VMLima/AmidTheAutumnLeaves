@@ -23,34 +23,49 @@ using UnityEngine;
 ///         
 
 
+enum weather { autumn = 0, winter = 1, spring = 2, summer = 3};
+
 public class EffectManager : MonoBehaviour
 {
 
     GameObject[] effectArray;
     public GameObject statusPanel;
-
     List<EffectScript> activeEffects;
-
-    //ASH WEATHER VARIABLES.
-    List<EffectScript> summerEffects;
-    List<EffectScript> springEffects;
-    List<EffectScript> winterEffects;
-    List<EffectScript> autumnEffects;
-
-    string season = "autumn";
-
     public static EffectManager instance;
-
     private float timer;
-
     public float health;
 
+    //ASH WEATHER VARIABLES.
+    //
+    List<EffectScript> summerEffects;
+    GameObject summerObject;
+    List<EffectScript> springEffects;
+    GameObject springObject;
+    List<EffectScript> winterEffects;
+    GameObject winterObject;
+    EffectScript[] autumnEffects;   //is a list of all the effects.
+    GameObject autumnObject;    //can ignore the objects
+
+    string season = "autumn";   //at some point seasons may change, for now this is good enough.
+
+    //THE GAME STARTS AND CALLS THIS FUNCTION.
+    //still has to be added to the onStop() of weather effects or else after 1 weather ends no more will begin.
     public void pickRandomWeather()
     {
         //do stuff with weatherEffects
-        //different seasons have different weathers.
-
+        if (season == "autumn")
+        {
+            //the line below starts the effect of the 0th index autumn effect.
+            startEffect(autumnEffects[0]);
+            //the line below starts an autumnEffect named "rainy"
+            //startEffect(getEffect(autumnEffects, "rainy"));
+        }
     }
+
+    //FUNCTIONS BELOW SHOULD NOT BE PERSONALLY ACCESSED.  EXCEPT FOR WEATHER STUFF.
+    //Items/skills/etc call these functions.  Not normal game runtime stuff.
+    //if you want an effect of an item to start.  use things like item.startEffect();
+    //that will link into the functions below and add it to the effect tick loop.
 
     void Awake()
     {
@@ -86,17 +101,10 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    //FUNCTIONS BELOW SHOULD NOT BE PERSONALLY ACCESSED.
-    //Items/skills/etc call these functions.  Not normal game runtime stuff.
-    //if you want an effect of an item to start.  use things like item.startEffect();
-    //that will link into the functions below and add it to the effect tick loop.
-
-    //      MISC NOTES.
     //start an effect....
     //  given a list of effectScripts
     //  given an effectScript
     //  given an effect string (so search loose effects)
-
     public void startEffect(EffectScript[] effectScripts, int stacks = 1)
     {
         foreach (EffectScript script in effectScripts)
@@ -135,6 +143,7 @@ public class EffectManager : MonoBehaviour
     //get effect(s)
     //  from string... searches the loose effects.
     //  from an object...
+    //  from a list of effects
     public EffectScript[] getEffect(string effectName = "")
     {
         List<EffectScript> effects = new List<EffectScript>();
@@ -149,6 +158,15 @@ public class EffectManager : MonoBehaviour
             Debug.LogError("EffectManager: getEffect: could not find effect named:" + effectName);
         }
         return effects.ToArray();
+    }
+
+    public EffectScript getEffect(EffectScript[] effects, string _name)
+    {
+        foreach(EffectScript effect in effects)
+        {
+            if (effect.name == _name) return effect;
+        }
+        return null;
     }
 
     public EffectScript[] getEffect(GameObject effectObject, string effectName = "")
@@ -288,6 +306,7 @@ public class EffectManager : MonoBehaviour
         {
             GameObject.Destroy(effectArray[i]);
         }
+        GameObject.Destroy(autumnObject);
     }
 
     //atm have misc effects held on a game object attached to EffectManager.
@@ -295,6 +314,7 @@ public class EffectManager : MonoBehaviour
     void loadLooseEffects()
     {
         effectArray = Utils.GetAllGameObjects(Utils.effectLocation);
+        
         for (int i = 0; i < effectArray.Length; i++)
         {
             string nameTag = effectArray[i].name;
@@ -312,6 +332,14 @@ public class EffectManager : MonoBehaviour
                 //Debug.Log("awake: for loop name:" + effectArray[i].name);
             }
             //Debug.Log("awake: effect name:" + effectArray[i].name);
+        }
+
+        autumnObject = Utils.GetWeatherObject("AutumnEffects");
+        autumnObject = (GameObject)Instantiate(autumnObject, transform);
+        autumnEffects = autumnObject.GetComponents<EffectScript>();
+        for (int i = 0; i < autumnEffects.Length; i++)
+        {
+            Debug.Log("autumnEffect loaded:" + autumnEffects[i].name);
         }
     }
 }

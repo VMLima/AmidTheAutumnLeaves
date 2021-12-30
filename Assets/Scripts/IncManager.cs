@@ -41,6 +41,7 @@ public class IncManager : MonoBehaviour
     void startGame()
     {
         ButtonManager.instance.activateButtonArray("Start");
+        EffectManager.instance.pickRandomWeather();
     }
 
     void Awake()
