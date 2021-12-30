@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [CreateAssetMenu(fileName = "newDataStore", menuName = "Scriptable Object/DataStorage")]
 public class DataStorageSO : CommonBaseSO
@@ -18,6 +19,14 @@ public class DataStorageSO : CommonBaseSO
         //dataStore.Clear();
         //references = new List<CommonBaseSO>();
         
+    }
+
+    class SOComparer : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            return (new CaseInsensitiveComparer()).Compare(((CommonBaseSO)x).GetType(), ((CommonBaseSO)y).GetType());
+        }
     }
 
     public void compileReferences()
@@ -41,7 +50,13 @@ public class DataStorageSO : CommonBaseSO
                     break;
                 }
             }
-            if (toAdd) references.Add(unl);
+            if (toAdd)
+            {
+                references.Add(unl);
+                //sorts the list by type.  Looks all nice and pretty.
+                references.Sort((x, y) => x.GetType().ToString().CompareTo(y.GetType().ToString()));
+                EditorUtility.SetDirty(this);
+            }
             
         }
     }

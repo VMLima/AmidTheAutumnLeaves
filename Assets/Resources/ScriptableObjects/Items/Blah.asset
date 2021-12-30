@@ -9,22 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdd16aa9fa6096a489eb741f44990d1d, type: 3}
-  m_Name: NatureSense
+  m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
+  m_Name: Blah
   m_EditorClassIdentifier: 
-  name: Nature Sence
-  toUnlock:
-  - incrementable: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
-    amount: 1
-  unlocked: 1
+  name: 
+  toUnlock: []
+  unlocked: 0
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 7117491633077158859, guid: ce29c042715984f4a83c28e1ef1c1e8b, type: 3}
+  UIPrefab: {fileID: 0}
   UIPanel: {fileID: 0}
-  isActive: 1
-  amount: 35
-  maximum: 5
-  maxStack: 5
+  isActive: 0
+  amount: 0
+  maximum: 0
+  maxStack: 0
   minAmount: 0
   minStack: 0
   EffectObject: {fileID: 0}
@@ -34,11 +32,6 @@ MonoBehaviour:
   removeFromUIOnEmpty: 0
   UIPanelID: 0
   UIActive: 0
-  hasUI: 1
+  hasUI: 0
   effectManager: {fileID: 0}
-  baseXP: 10
-  levelXPMultiplier: 2
-  levelXPAddition: 5
-  currentLevel: 2
-  xpToLevel: 55
-  atMax: 0
+  DeleteWhenEmpty: 0

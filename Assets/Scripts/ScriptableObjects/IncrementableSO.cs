@@ -6,7 +6,6 @@ using TMPro;
 
 
 
-
 //[CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
 public class IncrementableSO : UIMenuSO
 {
