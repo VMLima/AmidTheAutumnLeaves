@@ -18,6 +18,15 @@ public class Player : MonoBehaviour
     private float warmthCurrent;
     private float warmthRate;
 
+    //thirst
+    //weather -> warmth -> thirst/hunger rate change.
+    //    weather-> Effects.  Since it ticks every duration.
+    //    warmth -> EverySecond() below, can be another function called in that function that tags along and computes.
+    //      thirst/hunger rate change
+
+    //items -> +thirst/hunger.
+    //     Tim got dis.
+
     public static Player instance;
     private void Awake()
     {
@@ -46,6 +55,13 @@ public class Player : MonoBehaviour
         regen(ref healthCurrent, healthRate, healthMax);
         regen(ref staminaCurrent, staminaRate, staminaMax);
         regen(ref warmthCurrent, warmthRate, warmthMax);
+
+        //warmthCurrent
+        //THIRST/HUNGER RATE CALCULATIONS
+        //thirst += (warmthCurrent - meanTemp)*blah
+
+        //Debug.Log("Player:everySecond: warmthCurrent:" + warmthCurrent);
+
         cleanUpValue(ref healthCurrent);
         cleanUpValue(ref staminaCurrent);
         cleanUpValue(ref warmthCurrent);

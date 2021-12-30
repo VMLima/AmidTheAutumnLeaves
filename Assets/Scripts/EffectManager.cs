@@ -31,11 +31,26 @@ public class EffectManager : MonoBehaviour
 
     List<EffectScript> activeEffects;
 
+    //ASH WEATHER VARIABLES.
+    List<EffectScript> summerEffects;
+    List<EffectScript> springEffects;
+    List<EffectScript> winterEffects;
+    List<EffectScript> autumnEffects;
+
+    string season = "autumn";
+
     public static EffectManager instance;
 
     private float timer;
 
     public float health;
+
+    public void pickRandomWeather()
+    {
+        //do stuff with weatherEffects
+        //different seasons have different weathers.
+
+    }
 
     void Awake()
     {
