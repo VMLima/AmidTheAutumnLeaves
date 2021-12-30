@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55564282c5188724cae99fb54d254cd4, type: 3}
   m_Name: MateStones
   m_EditorClassIdentifier: 
-  name: 
-  toUnlock: []
-  unlocked: 0
+  name: Mate Stones
+  toUnlock:
+  - incrementable: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
+    amount: 15
+  unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 0}
+  UIPrefab: {fileID: 2331072130200821675, guid: da2a45bcfb6197247ba7c76857fac707, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 0
-  craftArray: []
-  costArray: []
+  isActive: 1
+  craftArray:
+  - incrementable: {fileID: 11400000, guid: 25c6d56db4e616c469098cccaf932c09, type: 2}
+    amount: 2
+  costArray:
+  - incrementable: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
+    amount: 15

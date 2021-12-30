@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55564282c5188724cae99fb54d254cd4, type: 3}
   m_Name: BreedBerries
   m_EditorClassIdentifier: 
-  name: BreedBerries
+  name: Breed Berries
   toUnlock:
-  - incrementable: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
+  - incrementable: {fileID: 11400000, guid: dc7cf4a706358c644ae2372f03222445, type: 2}
     amount: 2
   unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 0}
+  UIPrefab: {fileID: 2331072130200821675, guid: da2a45bcfb6197247ba7c76857fac707, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 0
+  isActive: 1
   craftArray:
   - incrementable: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
     amount: 5
   costArray:
-  - incrementable: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
+  - incrementable: {fileID: 11400000, guid: dc7cf4a706358c644ae2372f03222445, type: 2}
     amount: 2

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd16aa9fa6096a489eb741f44990d1d, type: 3}
   m_Name: NatureSense
   m_EditorClassIdentifier: 
-  name: NatureSence
+  name: Nature Sence
   toUnlock:
   - incrementable: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
     amount: 1
@@ -21,8 +21,8 @@ MonoBehaviour:
   UIInstance: {fileID: 0}
   UIPrefab: {fileID: 7117491633077158859, guid: ce29c042715984f4a83c28e1ef1c1e8b, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 0
-  amount: 0
+  isActive: 1
+  amount: 50
   maximum: 5
   maxStack: 5
   minAmount: 0
@@ -39,6 +39,6 @@ MonoBehaviour:
   baseXP: 10
   levelXPMultiplier: 2
   levelXPAddition: 5
-  currentLevel: 0
-  xpToLevel: 10
+  currentLevel: 3
+  xpToLevel: 115
   atMax: 0
