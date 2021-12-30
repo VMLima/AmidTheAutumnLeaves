@@ -31,9 +31,20 @@ public class RoomFeatureSO : UIMenuSO
 
     public override void declareUI()
     {
-        UIPrefab = button;
-        UIPanel = ButtonManager.instance.buttonPanel;
-    }   
+        UIPrefab = button;// IncManager.instance.ButtonPrefab;
+        UIPanel = IncManager.instance.ButtonPanel;
+    }
+
+    public override void setUIData()
+    {
+        foreach (Transform eachChild in UIInstance.transform)
+        {
+            if (eachChild.name == "HookName")
+            {
+                eachChild.GetComponent<TextMeshProUGUI>().text = name;
+            }
+        }
+    }
 
     public string getDescription(bool _activeDescription)
     {

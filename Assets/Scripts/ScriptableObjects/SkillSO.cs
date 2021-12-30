@@ -43,7 +43,7 @@ public class SkillSO : IncrementableSO
     public override void declareUI()
     {
         UIPanel = IncManager.instance.SkillPanel;
-        UIPrefab = Utils.GetPrefab("SkillPrefab");    //still gotta make and hook up to the prefab.
+        UIPrefab = IncManager.instance.SkillPrefab;    //still gotta make and hook up to the prefab.
     }
 
     public override float getUnlockValue()

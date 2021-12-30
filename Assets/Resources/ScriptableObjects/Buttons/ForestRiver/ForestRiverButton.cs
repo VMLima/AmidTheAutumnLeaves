@@ -7,12 +7,14 @@ public class ForestRiverButton : ButtonEffectScript
 {
     IncManager inc;
     SkillSO Foraging;
+    SkillSO NatureSense;
 
     protected override void Awake()
     {
         base.Awake();   //all the garbage in the method call is to ensure the ButtonEffect still calls it's Awake()
         inc = IncManager.instance;
         Foraging = inc.Get<SkillSO>("Foraging");
+        NatureSense = inc.Get<SkillSO>("Nature Sence");
     }
 
 
@@ -28,6 +30,7 @@ public class ForestRiverButton : ButtonEffectScript
     {
         Debug.Log("GOT " + name + " Tick");
         inc.AddAmount(Foraging, 10);
+        inc.AddAmount(NatureSense, 5);
     }
 
 }

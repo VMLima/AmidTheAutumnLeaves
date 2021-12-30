@@ -1,42 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 //inherits unlocking and button activating.
 [CreateAssetMenu(fileName = "CraftRecipe", menuName = "Scriptable Object/CraftRecipe")]
 public class CraftRecipeSO : UIMenuSO
 {
-    public IncrementableSO toCraft;
-    public int amountCrafted;
-    public IncrementalValuePair[] costArray = new IncrementalValuePair[0];
-
-    /*
-    public override void setButtonInfo()
-    {
-        //HAVE TO SET THE VALUES STILL.
-        UIPanel = null;
-        buttonPrefab = null;
-    }
-    */
+    public IncrementalValuePair[] craftArray;
+    public IncrementalValuePair[] costArray;
 
     public override void declareUI()
     {
-        UIPrefab = null;    //still gotta make and hook up to the prefab.
-        //UIImage
-        //name
-        //will be fed into the prefab.
-        //textDisplay = (numerical text output panel.  Will get updated on addAmount())
-        UIPanel = IncManager.instance.SkillPanel;
+        UIPrefab = IncManager.instance.CraftPrefab;
+        UIPanel = IncManager.instance.CraftPanel;
+        
+        //get the CraftPrefab's Component of CraftEffectScript
+        //set its craftArray to yours, and CostArray;
     }
+
+    public override void whenUnlocked()
+    {
+        isActive = true;
+        base.whenUnlocked();
+    }
+
+    public override void setUIData()
+    {
+        foreach (Transform eachChild in UIInstance.transform)
+        {
+            if (eachChild.name == "HookName")
+            {
+                eachChild.GetComponent<TextMeshProUGUI>().text = name;
+            }
+        }
+        CraftEffectScript c = UIInstance.GetComponent<CraftEffectScript>();
+        c.setArrays(craftArray, costArray, this);
+    }
+
     public bool canCraft(float numCrafts = 1)
     {
-        //if you have more than enough of each to craft X times...
-        //can be a decimal too.
-        if(!toCraft.unlocked || !unlocked)
+        //check if everything is unlocked.
+        if (!unlocked) return false;
+        foreach(IncrementalValuePair pair in craftArray)
         {
-            return false;
+            if (!pair.incrementable.unlocked)
+            {
+                Debug.LogError("CraftRecipeSO:canCraft: cannot craft, results not unlocked");
+                return false;
+            }
         }
 
+        //if you have the required resources.
         bool _canCraft = costFunction(false, numCrafts);
         //Debug.Log("CraftSO:canCraft: " + _canCraft);
         return _canCraft;
@@ -72,7 +87,10 @@ public class CraftRecipeSO : UIMenuSO
             if(modifyValues)
             {
                 //Debug.Log("CraftSO:costFunction: modifying values..." + toCraft.getAmount() + " +" + amountCrafted * numCrafts);
-                IncManager.instance.AddAmount(toCraft, amountCrafted * numCrafts);
+                foreach(IncrementalValuePair craft in craftArray)
+                {
+                    IncManager.instance.AddAmount(craft.incrementable, craft.amount * numCrafts);
+                }
             }
             //all requirements are a success!!
         }

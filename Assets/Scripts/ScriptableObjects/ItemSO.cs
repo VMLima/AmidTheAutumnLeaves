@@ -15,7 +15,7 @@ public class ItemSO : IncrementableSO
 
     public override void declareUI()
     {
-        UIPrefab = Utils.GetPrefab("ItemPrefab");    //still gotta make and hook up to the prefab.
+        UIPrefab = IncManager.instance.ItemPrefab;    //still gotta make and hook up to the prefab.
         UIPanel = IncManager.instance.ItemPanel;
     }
 

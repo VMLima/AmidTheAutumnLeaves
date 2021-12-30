@@ -42,8 +42,6 @@ public class ButtonEffectScript : EffectScript
         NormalBlock = button.colors;
         NormalBlock.normalColor = normalColor;
         NormalBlock.selectedColor = normalColor;
-
-
     }
 
 

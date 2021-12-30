@@ -52,7 +52,14 @@ public class UIMenuSO : CommonBaseSO
         UIInstance = (GameObject)Instantiate(UIPrefab);
         UIInstance.transform.SetParent(UIPanel.transform);
         UIInstance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+        setUIData();
         activate(false);
+    }
+
+    public virtual void setUIData()
+    {
+
     }
 
     public void reorderUI()

@@ -9,7 +9,7 @@ public class ResourceSO : IncrementableSO
 {
     public override void declareUI()
     {
-        UIPrefab = Utils.GetPrefab("ResourcePrefab");    //still gotta make and hook up to the prefab.
+        UIPrefab = IncManager.instance.ResourcePrefab;    //still gotta make and hook up to the prefab.
         UIPanel = IncManager.instance.ResourcePanel;
     }
 }

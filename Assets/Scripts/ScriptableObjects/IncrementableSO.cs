@@ -116,6 +116,10 @@ public class IncrementableSO : UIMenuSO
         minStack = minAmount;
         incRate = 1;
         effectManager = EffectManager.instance;
+    }
+
+    public override void setUIData()
+    {
         foreach (Transform eachChild in UIInstance.transform)
         {
             if (eachChild.name == "HookImage")

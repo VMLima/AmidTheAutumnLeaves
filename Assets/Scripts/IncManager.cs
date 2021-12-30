@@ -32,8 +32,15 @@ public class IncManager : MonoBehaviour
     public DataStorageSO dataStorage;
 
     public GameObject ItemPanel;
+    public GameObject ItemPrefab;
     public GameObject ResourcePanel;
+    public GameObject ResourcePrefab;
     public GameObject SkillPanel;
+    public GameObject SkillPrefab;
+    public GameObject CraftPanel;
+    public GameObject CraftPrefab;
+    public GameObject ButtonPanel;
+    public GameObject ButtonPrefab;
 
     private bool gotResourceEvent = false;
     private bool gotItemEvent = false;
