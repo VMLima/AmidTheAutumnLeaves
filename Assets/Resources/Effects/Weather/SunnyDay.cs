@@ -44,6 +44,6 @@ public class SunnyDay : EffectScript
         //stop everything changed in start
 
         //TIE INTO FUNCTION THAT GETS NEW RANDOM WEATHER
-        EffectManager.instance.pickRandomWeather();
+        WeatherManager.instance.pickRandomWeather();
     }
 }

@@ -22,9 +22,6 @@ using UnityEngine;
 ///         has to deal with instantiating/destroying objects.
 ///         
 
-
-enum weather { autumn = 0, winter = 1, spring = 2, summer = 3};
-
 public class EffectManager : MonoBehaviour
 {
 
@@ -34,33 +31,6 @@ public class EffectManager : MonoBehaviour
     public static EffectManager instance;
     private float timer;
     public float health;
-
-    //ASH WEATHER VARIABLES.
-    //
-    List<EffectScript> summerEffects;
-    GameObject summerObject;
-    List<EffectScript> springEffects;
-    GameObject springObject;
-    List<EffectScript> winterEffects;
-    GameObject winterObject;
-    EffectScript[] autumnEffects;   //is a list of all the effects.
-    GameObject autumnObject;    //can ignore the objects
-
-    string season = "autumn";   //at some point seasons may change, for now this is good enough.
-
-    //THE GAME STARTS AND CALLS THIS FUNCTION.
-    //still has to be added to the onStop() of weather effects or else after 1 weather ends no more will begin.
-    public void pickRandomWeather()
-    {
-        //do stuff with weatherEffects
-        if (season == "autumn")
-        {
-            //the line below starts the effect of the 0th index autumn effect.
-            startEffect(autumnEffects[0]);
-            //the line below starts an autumnEffect named "rainy"
-            //startEffect(getEffect(autumnEffects, "rainy"));
-        }
-    }
 
     //FUNCTIONS BELOW SHOULD NOT BE PERSONALLY ACCESSED.  EXCEPT FOR WEATHER STUFF.
     //Items/skills/etc call these functions.  Not normal game runtime stuff.
@@ -115,6 +85,7 @@ public class EffectManager : MonoBehaviour
     public void startEffect(EffectScript effectScript, int stacks = 1)
     {
         //Debug.Log("Start effect:" + effectScript.nameTag);
+        
         effectScript.startEffect(stacks);
         foreach (EffectScript script in activeEffects)
         {
@@ -127,16 +98,16 @@ public class EffectManager : MonoBehaviour
         activeEffects.Add(effectScript);
     }
 
-    public void startEffect(string effectName, int stacks = 1)
+    public void startEffect(string _name, int stacks = 1)
     {
-        EffectScript[] effects = getEffect(effectName);
+        EffectScript[] effects = getEffect(_name);
         if (effects != null)
         {
             startEffect(effects, stacks);
         }
         else
         {
-            Debug.LogError("EffectManageR:startEffect:Could not find effect by name: " + effectName);
+            Debug.LogError("EffectManageR:startEffect:Could not find effect by name: " + _name);
         }
     }
 
@@ -144,18 +115,24 @@ public class EffectManager : MonoBehaviour
     //  from string... searches the loose effects.
     //  from an object...
     //  from a list of effects
-    public EffectScript[] getEffect(string effectName = "")
+    public EffectScript[] getEffect(string _name = "")
     {
         List<EffectScript> effects = new List<EffectScript>();
         
         //change from searching for game object matching name to script tag matching name.
         foreach (GameObject effect in effectArray)
         {
-            effects.AddRange(getEffect(effect, effectName));
+            effects.AddRange(getEffect(effect, _name));
         }
         if(effects.Count == 0)
         {
-            Debug.LogError("EffectManager: getEffect: could not find effect named:" + effectName);
+            Debug.LogError("EffectManager: getEffect: could not find effect named:" + _name);
+            Debug.LogError("EffectManager: getEffect: valid effect names are...");
+            foreach (EffectScript effect in effects)
+            {
+                Debug.Log("EffectManager: getEffect:" + effect.name);
+            }
+            return null;
         }
         return effects.ToArray();
     }
@@ -166,25 +143,43 @@ public class EffectManager : MonoBehaviour
         {
             if (effect.name == _name) return effect;
         }
+        Debug.LogError("EffectManager: getEffect: could not find effect named:" + _name);
+        Debug.LogError("EffectManager: getEffect: valid effect names are...");
+        foreach (EffectScript effect in effects)
+        {
+            Debug.Log("EffectManager: getEffect:" + effect.name);
+        }
         return null;
     }
 
-    public EffectScript[] getEffect(GameObject effectObject, string effectName = "")
+    public EffectScript[] getEffect(GameObject effectObject, string _name = "")
     {
         List<EffectScript> effects = new List<EffectScript>();
 
         //change from searching for game object matching name to script tag matching name.
 
         Component[] components = effectObject.GetComponents(typeof(EffectScript));
-        foreach (Component comp in components)
+        if(components != null)
         {
-            if (effectName == "") effects.Add(((EffectScript)comp));
-            else if ((effectName != "") && (((EffectScript)comp).name == effectName)) effects.Add(((EffectScript)comp));
+            foreach (Component comp in components)
+            {
+                if (_name == "") effects.Add(((EffectScript)comp));
+                else if ((_name != "") && (((EffectScript)comp).name == _name)) effects.Add(((EffectScript)comp));
+            }
         }
-        
+        else
+        {
+            Debug.LogError("EffectManager: getEffect: could not find EffectScripts attached to:" + effectObject.name);
+            return null;
+        }
         if (effects.Count == 0)
         {
-            Debug.LogError("EffectManager: getEffect: could not find effects in:" + effectObject.name + ": with criteria:" + effectName);
+            Debug.LogError("EffectManager: getEffect: could not find named effect:" + _name + ": in :"+ effectObject.name);
+            Debug.LogError("EffectManager: getEffect: valid effect names are...");
+            foreach (Component comp in components)
+            {
+                Debug.Log("EffectManager: getEffect:" + comp.name);
+            }
         }
         return effects.ToArray();
     }
@@ -206,7 +201,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public void endEffect(string effectName, int toRemove = 0)
+    public void endEffect(string _name, int toRemove = 0)
     {
         //get children of statusPanel, get 
         //foreach child in pane...
@@ -216,7 +211,7 @@ public class EffectManager : MonoBehaviour
         {
             foreach (EffectScript script in activeEffects)
             {
-                if (script.name == effectName)
+                if (script.name == _name)
                 {
                     endEffect(script, toRemove);
                 }
@@ -306,7 +301,6 @@ public class EffectManager : MonoBehaviour
         {
             GameObject.Destroy(effectArray[i]);
         }
-        GameObject.Destroy(autumnObject);
     }
 
     //atm have misc effects held on a game object attached to EffectManager.
@@ -332,14 +326,6 @@ public class EffectManager : MonoBehaviour
                 //Debug.Log("awake: for loop name:" + effectArray[i].name);
             }
             //Debug.Log("awake: effect name:" + effectArray[i].name);
-        }
-
-        autumnObject = Utils.GetWeatherObject("AutumnEffects");
-        autumnObject = (GameObject)Instantiate(autumnObject, transform);
-        autumnEffects = autumnObject.GetComponents<EffectScript>();
-        for (int i = 0; i < autumnEffects.Length; i++)
-        {
-            Debug.Log("autumnEffect loaded:" + autumnEffects[i].name);
         }
     }
 }
