@@ -32,11 +32,17 @@ public class DataStorageSO : CommonBaseSO
             if (!dataDictionary[dataType].Contains(unl)) dataDictionary[dataType].Add(unl);
 
             //if it already exists, skip.
+            bool toAdd = true;
             for (int i = 0; i < references.Count; i++)
             {
-                if (references[i] == unl) break;
+                if (references[i] == unl)
+                {
+                    toAdd = false;
+                    break;
+                }
             }
-            references.Add(unl);
+            if (toAdd) references.Add(unl);
+            
         }
     }
 
