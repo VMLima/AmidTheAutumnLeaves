@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7717836792739958387}
   - component: {fileID: 321599028567363751}
   - component: {fileID: 6983234826045989483}
-  - component: {fileID: -3973809072033776750}
+  - component: {fileID: -8127062505109742723}
   m_Layer: 5
   m_Name: ForestStonesButton
   m_TagString: Untagged
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &-3973809072033776750
+--- !u!114 &-8127062505109742723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4293528735765515577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d206b86c0296fe24484401ec504f8fc4, type: 3}
+  m_Script: {fileID: 11500000, guid: 784318379bd6d4044854d64554490b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   name: ForestStoneScript
@@ -140,8 +140,14 @@ MonoBehaviour:
   maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
-  description: 
   toggleButton: 1
+  onStartEffect: []
+  onTickEffect:
+  - incrementable: {fileID: 11400000, guid: 25c6d56db4e616c469098cccaf932c09, type: 2}
+    amount: 1
+  - incrementable: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+    amount: 33
+  mirrorStartonStop: 1
 --- !u!1 &7294096542116477248
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,7 +52,7 @@ public class IncrementableSO : UIMenuSO
     private Button clickButton;
     private void onPress()
     {
-        if (this.getAmount() <= 0) return;
+        if (this.getAmount() < 1) return;
 
         if (clickEffects != null && clickEffects.Length > 0)
         {
@@ -66,7 +66,7 @@ public class IncrementableSO : UIMenuSO
 
     public virtual float getUnlockValue()
     {
-        return amount;
+        return (int)amount;
     }
 
     void refreshUI()

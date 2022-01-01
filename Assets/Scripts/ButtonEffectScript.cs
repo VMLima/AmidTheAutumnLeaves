@@ -27,6 +27,9 @@ public class ButtonEffectScript : EffectScript
     private Button button;
     private Color32 normalColor;
     private Color32 pressedColor;
+    public List<IncrementalValuePair> onStartEffect;
+    public List<IncrementalValuePair> onTickEffect;
+    public bool mirrorStartonStop = true;
 
 
     protected override void Awake()
@@ -48,16 +51,40 @@ public class ButtonEffectScript : EffectScript
     //since buttons don't deal with stacks.  Am changing the methods to not deal with parameters.
     public override void onStart(int oldNumStacks, int addingStacks)
     {
+        if(onStartEffect != null && onStartEffect.Count > 0)
+        {
+            foreach(IncrementalValuePair pair in onStartEffect)
+            {
+                IncManager.instance.AddAmount(pair.incrementable, pair.amount);
+            }
+        }
         onStart();
     }
 
     public override void onStop(int oldNumStacks, int removingStacks)
     {
+        if(mirrorStartonStop)
+        {
+            if (onStartEffect != null && onStartEffect.Count > 0)
+            {
+                foreach (IncrementalValuePair pair in onStartEffect)
+                {
+                    IncManager.instance.AddAmount(pair.incrementable, -1*pair.amount);
+                }
+            }
+        }
         onStop();
     }
 
     public override void onTick(int numEffects)
     {
+        if (onTickEffect != null && onTickEffect.Count > 0)
+        {
+            foreach (IncrementalValuePair pair in onTickEffect)
+            {
+                IncManager.instance.AddAmount(pair.incrementable, pair.amount);
+            }
+        }
         onTick();
     }
 

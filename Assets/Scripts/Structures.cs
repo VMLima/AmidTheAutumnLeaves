@@ -33,7 +33,12 @@ public struct effectStruct
 public struct IncrementalValuePair
 {
     public IncrementableSO incrementable;
-    public int amount;
+    public float amount;
+    public IncrementalValuePair(IncrementableSO _incrementable, float _amount)
+    {
+        incrementable = _incrementable;
+        amount = _amount;
+    }
 }
 
 public class Structures

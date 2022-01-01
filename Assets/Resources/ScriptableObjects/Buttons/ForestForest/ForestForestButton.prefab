@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5248244219066735961}
   - component: {fileID: 6185118771930386344}
   - component: {fileID: 6530753603494373717}
-  - component: {fileID: 7602399675593791272}
+  - component: {fileID: 4050979142751541051}
   m_Layer: 5
   m_Name: ForestForestButton
   m_TagString: Untagged
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7602399675593791272
+--- !u!114 &4050979142751541051
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5715040496820633644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4733e3585b273dc49ad4cb2b84b68d30, type: 3}
+  m_Script: {fileID: 11500000, guid: 784318379bd6d4044854d64554490b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   name: ForestForestScript
@@ -140,8 +140,16 @@ MonoBehaviour:
   maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
-  description: 
   toggleButton: 1
+  onStartEffect: []
+  onTickEffect:
+  - incrementable: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+    amount: 5
+  - incrementable: {fileID: 11400000, guid: dc7cf4a706358c644ae2372f03222445, type: 2}
+    amount: 1
+  - incrementable: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
+    amount: 0.25
+  mirrorStartonStop: 1
 --- !u!1 &8208917657298964743
 GameObject:
   m_ObjectHideFlags: 0
