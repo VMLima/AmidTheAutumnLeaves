@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIMenuSO : CommonBaseSO
 {
@@ -12,13 +13,21 @@ public class UIMenuSO : CommonBaseSO
     public GameObject UIPanel;
     [HideInInspector]
     public bool isActive;
+
+    
+
+    public IncrementalValuePair[] clickEffects;
+    //public IncrementalValuePair[] passiveEffects;
     public override void reset()
     {
         base.reset();
         declareUI();
         instantiateUI();
         activate(false);
+        
     }
+
+    
 
     public virtual void declareUI()
     {
@@ -53,6 +62,9 @@ public class UIMenuSO : CommonBaseSO
         UIInstance.transform.SetParent(UIPanel.transform);
         UIInstance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
+        //search UIInstance for any buttons.
+        
+
         setUIData();
         activate(false);
     }
@@ -77,6 +89,7 @@ public class UIMenuSO : CommonBaseSO
         }
         else Destroy(UIInstance.gameObject);
     }
+
 
     public virtual void activate(bool _isActive)
     {

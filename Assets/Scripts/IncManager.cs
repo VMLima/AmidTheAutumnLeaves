@@ -41,6 +41,8 @@ public class IncManager : MonoBehaviour
     public GameObject CraftPrefab;
     public GameObject ButtonPanel;
     public GameObject ButtonPrefab;
+    public GameObject StatPanel;
+    public GameObject StatPrefab;
 
     private bool gotResourceEvent = false;
     private bool gotItemEvent = false;

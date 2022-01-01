@@ -9,21 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7810ebf041aaed4ca00d5842813a3de, type: 3}
-  m_Name: Wood
+  m_Script: {fileID: 11500000, guid: b7ae7e832adc39e418525b891e9ce570, type: 3}
+  m_Name: Thirst
   m_EditorClassIdentifier: 
-  name: Wood
+  name: Thirst
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 5766463783397515592, guid: cc84a6b97b60a7b47891dcc8973269a9, type: 3}
+  UIPrefab: {fileID: 6213645488307479781, guid: e568b82f400cddc48be73c26a81d8842, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 0
+  isActive: 1
   clickEffects: []
-  amount: 0
-  maximum: 0
-  maxStack: 0
+  amount: 42.7
+  maximum: 100
+  maxStack: 100
   minAmount: 0
   minStack: 0
   EffectObject: {fileID: 0}

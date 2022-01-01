@@ -17,7 +17,7 @@ public class RoomFeatureSO : UIMenuSO
     public string inactiveDescripton;
     
     //private bool isActive;
-    public GameObject button;
+    public Button button;
     //[HideInInspector] public GameObject buttonInstance;
 
     //core functionality of unlocking the feature.
@@ -31,7 +31,7 @@ public class RoomFeatureSO : UIMenuSO
 
     public override void declareUI()
     {
-        UIPrefab = button;// IncManager.instance.ButtonPrefab;
+        UIPrefab = button.gameObject;// IncManager.instance.ButtonPrefab;
         UIPanel = IncManager.instance.ButtonPanel;
     }
 

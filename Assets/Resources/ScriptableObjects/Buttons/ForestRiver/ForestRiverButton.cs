@@ -8,6 +8,7 @@ public class ForestRiverButton : ButtonEffectScript
     IncManager inc;
     SkillSO Foraging;
     SkillSO NatureSense;
+    PlayerAttributeSO Thirst;
 
     protected override void Awake()
     {
@@ -15,6 +16,7 @@ public class ForestRiverButton : ButtonEffectScript
         inc = IncManager.instance;
         Foraging = inc.Get<SkillSO>("Foraging");
         NatureSense = inc.Get<SkillSO>("Nature Sence");
+        Thirst = inc.Get<PlayerAttributeSO>("Thirst");
     }
 
 
@@ -31,6 +33,7 @@ public class ForestRiverButton : ButtonEffectScript
         Debug.Log("GOT " + name + " Tick");
         inc.AddAmount(Foraging, 10);
         inc.AddAmount(NatureSense, 5);
+        inc.AddAmount(Thirst, -1);
     }
 
 }

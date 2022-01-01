@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     private float warmthCurrent;
     private float warmthRate;
 
+    public PlayerAttributeSO hunger;
+    public PlayerAttributeSO thirst;
+
     //thirst
     //weather -> warmth -> thirst/hunger rate change.
     //    weather-> Effects.  Since it ticks every duration.
@@ -55,6 +58,8 @@ public class Player : MonoBehaviour
         regen(ref healthCurrent, healthRate, healthMax);
         regen(ref staminaCurrent, staminaRate, staminaMax);
         regen(ref warmthCurrent, warmthRate, warmthMax);
+        IncManager.instance.AddAmount(hunger, 1);
+        IncManager.instance.AddAmount(thirst, 0.1f);
 
         //warmthCurrent
         //THIRST/HUNGER RATE CALCULATIONS

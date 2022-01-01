@@ -49,6 +49,21 @@ public class IncrementableSO : UIMenuSO
 
     [HideInInspector] public EffectManager effectManager;
 
+    private Button clickButton;
+    private void onPress()
+    {
+        if (this.getAmount() <= 0) return;
+
+        if (clickEffects != null && clickEffects.Length > 0)
+        {
+            foreach (IncrementalValuePair pair in clickEffects)
+            {
+                if(pair.incrementable != null) IncManager.instance.AddAmount(pair.incrementable, pair.amount);
+            }
+        }
+        IncManager.instance.AddAmount(this, -1);
+    }
+
     public virtual float getUnlockValue()
     {
         return amount;
@@ -135,6 +150,15 @@ public class IncrementableSO : UIMenuSO
                 textDisplay = eachChild.GetComponent<TextMeshProUGUI>();
                 textDisplay.text = "0";
             }
+            else if (eachChild.name == "HookButton")
+            {
+                clickButton = eachChild.GetComponent<Button>();
+                if(clickEffects != null)
+                {
+                    clickButton.onClick.RemoveListener(onPress);
+                    clickButton.onClick.AddListener(onPress);
+                }
+            }
         }
     }
 
@@ -182,6 +206,7 @@ public class IncrementableSO : UIMenuSO
     public void addToAmount(float _amount)
     {
         amount += _amount;
+        amount = Mathf.Round(amount * 100f) / 100f;
         if ((maxStack > 0) && (amount > maxStack))
         {
             amount = maxStack;
@@ -191,6 +216,7 @@ public class IncrementableSO : UIMenuSO
     public void subToAmount(float _amount)
     {
         amount -= _amount;
+        amount = Mathf.Round(amount * 100f) / 100f;
         if (amount < minStack)
         {
             amount = minStack;
@@ -199,6 +225,7 @@ public class IncrementableSO : UIMenuSO
     public void setAmount(float _amount)
     {
         amount = _amount;
+        amount = Mathf.Round(amount * 100f) / 100f;
         if (amount < minStack)
         {
             amount = minStack;
