@@ -30,10 +30,6 @@ public class IncrementableSO : UIMenuSO
     [Tooltip("Any 'EffectScripts' attached to this BLANK PREFAB will be activatable.")]
     public GameObject EffectObject;
 
-    public Sprite UISprite;
-    [HideInInspector] public TextMeshProUGUI textDisplay;
-    [HideInInspector] public Image imageDisplay;
-
     [HideInInspector]
     public bool removeFromUIOnEmpty = false;    //when setting up UI panel ID, set this.
     [HideInInspector]
@@ -49,8 +45,8 @@ public class IncrementableSO : UIMenuSO
 
     [HideInInspector] public EffectManager effectManager;
 
-    private Button clickButton;
-    private void onPress()
+    
+    public override void onPress()
     {
         if (this.getAmount() < 1) return;
 
@@ -67,13 +63,6 @@ public class IncrementableSO : UIMenuSO
     public virtual float getUnlockValue()
     {
         return (int)amount;
-    }
-
-    void refreshUI()
-    {
-        //STILL GOTTA HOOK UP.
-        if(imageDisplay != null) imageDisplay.sprite = UISprite;
-        if(textDisplay != null) textDisplay.text = amount.ToString();
     }
 
     //starts an effect script in the effect object matching effectName.
@@ -130,36 +119,6 @@ public class IncrementableSO : UIMenuSO
         minStack = minAmount;
         incRate = 1;
         effectManager = EffectManager.instance;
-    }
-
-    public override void setUIData()
-    {
-        foreach (Transform eachChild in UIInstance.transform)
-        {
-            if (eachChild.name == "HookImage")
-            {
-                imageDisplay = eachChild.GetComponent<Image>();
-                imageDisplay.sprite = UISprite;
-            }
-            else if (eachChild.name == "HookName")
-            {
-                eachChild.GetComponent<TextMeshProUGUI>().text = name;
-            }
-            else if (eachChild.name == "HookQuantity")
-            {
-                textDisplay = eachChild.GetComponent<TextMeshProUGUI>();
-                textDisplay.text = "0";
-            }
-            else if (eachChild.name == "HookButton")
-            {
-                clickButton = eachChild.GetComponent<Button>();
-                if(clickEffects != null)
-                {
-                    clickButton.onClick.RemoveListener(onPress);
-                    clickButton.onClick.AddListener(onPress);
-                }
-            }
-        }
     }
 
     public float getAmount()

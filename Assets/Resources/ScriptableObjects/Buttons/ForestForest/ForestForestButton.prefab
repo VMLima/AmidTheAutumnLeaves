@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6185118771930386344}
   - component: {fileID: 6530753603494373717}
   - component: {fileID: 4050979142751541051}
+  - component: {fileID: -6257650585336977707}
   m_Layer: 5
   m_Name: ForestForestButton
   m_TagString: Untagged
@@ -150,6 +151,18 @@ MonoBehaviour:
   - incrementable: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
     amount: 0.25
   mirrorStartonStop: 1
+--- !u!114 &-6257650585336977707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715040496820633644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23af9cdab99bec145879123719da25e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8208917657298964743
 GameObject:
   m_ObjectHideFlags: 0

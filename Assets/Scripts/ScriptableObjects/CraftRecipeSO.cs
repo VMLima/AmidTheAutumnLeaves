@@ -25,6 +25,41 @@ public class CraftRecipeSO : UIMenuSO
         base.whenUnlocked();
     }
 
+    public override string compileTooltip()
+    {
+        if (craftArray == null || craftArray.Length <= 0) return "";
+        string output = "";
+        bool doAnd;
+        if (costArray == null || costArray.Length <= 0)
+        {
+
+        }
+        else
+        {
+            output += "Recipe = ";
+            doAnd = false;
+            foreach (IncrementalValuePair pair in costArray)
+            {
+                if (doAnd) output += " and ";
+                doAnd = true;
+                output += pair.amount + " " + pair.incrementable.name;
+                
+            }
+            output += "\n";
+        }
+        output += "Result = ";
+        doAnd = false;
+        foreach (IncrementalValuePair pair in craftArray)
+        {
+            if (doAnd) output += " and ";
+            doAnd = true;
+            output += pair.amount + " " + pair.incrementable.name;
+            
+        }
+        Debug.Log("UIMenuSO:compileTooltip:" + output);
+        return output;
+    }
+
     public override void setUIData()
     {
         foreach (Transform eachChild in UIInstance.transform)

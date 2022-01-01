@@ -146,7 +146,8 @@ GameObject:
   - component: {fileID: 901959893271667202}
   - component: {fileID: 3719640475844103064}
   - component: {fileID: 706046353018194211}
-  - component: {fileID: 7048693966635577547}
+  - component: {fileID: 8601303016074748007}
+  - component: {fileID: -3670011892741392161}
   m_Layer: 5
   m_Name: CraftPrefab
   m_TagString: Untagged
@@ -256,7 +257,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7048693966635577547
+--- !u!114 &8601303016074748007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2331072130200821675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23af9cdab99bec145879123719da25e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3670011892741392161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,4 +287,7 @@ MonoBehaviour:
   maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
-  toggleButton: 0
+  toggleButton: 1
+  onStartEffect: []
+  onTickEffect: []
+  mirrorStartonStop: 1

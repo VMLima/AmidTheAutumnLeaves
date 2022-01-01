@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIMenuSO : CommonBaseSO
 {
@@ -14,7 +15,10 @@ public class UIMenuSO : CommonBaseSO
     [HideInInspector]
     public bool isActive;
 
-    
+    public Sprite UISprite;
+    [HideInInspector] public TextMeshProUGUI textDisplay;
+    [HideInInspector] public Image imageDisplay;
+    [HideInInspector] public Button clickButton;
 
     public IncrementalValuePair[] clickEffects;
     //public IncrementalValuePair[] passiveEffects;
@@ -39,11 +43,31 @@ public class UIMenuSO : CommonBaseSO
         //      the UI panel to add the button to.
     }
 
+    public virtual void onPress()
+    {
+        //IF THE UI ELEMENT IS A BUTTON... CAN OVERRIDE THIS FUNCTION FOR WHAT HAPPENS ON IT'S PRESS.
+    }
+
     public override void whenUnlocked()
     {
         //Debug.Log("ButtonUnlockSO:whenUnlocked:" + name + ":isActive=" + isActive);
         activate(isActive);
         //if already activated, but unlock blocked, now will activate.
+    }
+
+    public virtual string  compileTooltip()
+    {
+        if (clickEffects == null || clickEffects.Length <= 0) return "";
+
+        string output = "Use 1 = ";
+        bool doAnd = false;
+        foreach (IncrementalValuePair pair in clickEffects)
+        {
+            if (doAnd) output += " and ";
+            output += pair.amount + " " + pair.incrementable.name;
+            doAnd = true;
+        }
+        return output;
     }
 
     public void instantiateUI()
@@ -62,8 +86,12 @@ public class UIMenuSO : CommonBaseSO
         UIInstance.transform.SetParent(UIPanel.transform);
         UIInstance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-        //search UIInstance for any buttons.
-        
+        Tooltip temp = UIInstance.GetComponent<Tooltip>();
+        if(temp)
+        {
+            temp.setTooltip(compileTooltip());
+            //Debug.Log("UIMENUSO:instantiateUI: found tooltip:" + name);
+        }
 
         setUIData();
         activate(false);
@@ -71,8 +99,36 @@ public class UIMenuSO : CommonBaseSO
 
     public virtual void setUIData()
     {
+        Transform temp = UIInstance.transform.Find("HookImage");
+        if (temp)
+        {
+            imageDisplay = temp.GetComponent<Image>();
+            imageDisplay.sprite = UISprite;
+        }
 
+        temp = UIInstance.transform.Find("HookName");
+        if (temp)
+        {
+            temp.GetComponent<TextMeshProUGUI>().text = name;
+        }
+
+        temp = UIInstance.transform.Find("HookQuantity");
+        if (temp)
+        {
+            textDisplay = temp.GetComponent<TextMeshProUGUI>();
+            textDisplay.text = "0";
+        }
+
+        temp = UIInstance.transform.Find("HookButton");
+        if (temp && clickEffects != null && clickEffects.Length > 0)
+        {
+            clickButton = temp.GetComponent<Button>();
+            clickButton.onClick.RemoveListener(onPress);
+            clickButton.onClick.AddListener(onPress);
+        }
     }
+
+    
 
     public void reorderUI()
     {

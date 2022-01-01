@@ -29,6 +29,16 @@ public class RoomFeatureSO : UIMenuSO
         ButtonManager.instance.refreshText();
     }
 
+    public override string compileTooltip()
+    {
+        ButtonEffectScript temp = button.GetComponent<ButtonEffectScript>();
+        if(temp != null)
+        {
+            return temp.compileTooltip();
+        }
+        return "";
+    }
+
     public override void declareUI()
     {
         UIPrefab = button.gameObject;// IncManager.instance.ButtonPrefab;

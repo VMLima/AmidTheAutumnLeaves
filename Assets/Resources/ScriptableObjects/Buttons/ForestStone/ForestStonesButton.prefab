@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7717836792739958387}
   - component: {fileID: 321599028567363751}
   - component: {fileID: 6983234826045989483}
+  - component: {fileID: -4760972704954013101}
   - component: {fileID: -8127062505109742723}
   m_Layer: 5
   m_Name: ForestStonesButton
@@ -122,6 +123,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-4760972704954013101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4293528735765515577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23af9cdab99bec145879123719da25e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-8127062505109742723
 MonoBehaviour:
   m_ObjectHideFlags: 0

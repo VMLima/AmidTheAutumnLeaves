@@ -45,8 +45,44 @@ public class ButtonEffectScript : EffectScript
         NormalBlock = button.colors;
         NormalBlock.normalColor = normalColor;
         NormalBlock.selectedColor = normalColor;
+        //button effect script needs to tell tooltip
     }
 
+
+    public virtual string compileTooltip()
+    {
+        string output = "";
+        bool doAnd;
+
+        if (onStartEffect != null && onStartEffect.Count >= 1)
+        {
+            output += "On Press = ";
+            doAnd = false;
+            foreach (IncrementalValuePair pair in onStartEffect)
+            {
+                if (doAnd) output += " and ";
+                doAnd = true;
+                output += pair.amount + " " + pair.incrementable.name;
+            }
+            output += "\n";
+        }
+        if (toggleButton)
+        {
+            if (onTickEffect != null && onTickEffect.Count >= 1)
+            {
+                output += "Every " + frequency + " seconds = ";
+                doAnd = false;
+                foreach (IncrementalValuePair pair in onTickEffect)
+                {
+                    if (doAnd) output += " and ";
+                    doAnd = true;
+                    output += pair.amount + " " + pair.incrementable.name;
+                }
+                output += "\n";
+            }
+        }
+        return output;
+    }
 
     //since buttons don't deal with stacks.  Am changing the methods to not deal with parameters.
     public override void onStart(int oldNumStacks, int addingStacks)
