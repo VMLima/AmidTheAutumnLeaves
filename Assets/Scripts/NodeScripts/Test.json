@@ -1,0 +1,6 @@
+{
+"NodeName":"Stuff",
+"ConnectedNodes":["Left","Right","Up","Down"],
+"Description":"THe beautiful montains"
+
+}
