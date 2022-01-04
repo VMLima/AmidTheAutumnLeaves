@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// =====================COMPLETELY UNUSED CLASS=============================  
+/// Just keeping around in case I want to copy/paste parts when merging with Spencer code.
+/// </summary>
+
 public class NodeManager : MonoBehaviour
 {
     public TextMeshProUGUI textGUI;
@@ -21,24 +26,29 @@ public class NodeManager : MonoBehaviour
     private string output;
     private string featureText;
 
+    private List<GameObject> activeButtons;
+
     private void Awake()
     {
 
         Instance = this;
         //populate feature array
+        activeButtons = new List<GameObject>();
         featureArray = Utils.GetAllScriptableObjects<RoomFeatureSO>();
-        foreach (RoomFeatureSO feature in featureArray)
-        {
-            feature.reset();
-        }
-        //populate node array
         nodeArray = Utils.GetAllScriptableObjects<RoomSO>();
-        foreach (RoomSO node in nodeArray)
-        {
-            node.reset();
-            Debug.Log(node.name);
-        }
+
+        Debug.Log("done nodes");
         currentFeatures = new List<RoomFeatureSO>();
+    }
+
+    private void OnDestroy()
+    {
+        //clean up instantiated buttons.
+        for(int i = (activeButtons.Count - 1); i>= 0;i--)
+        {
+            Destroy(activeButtons[i].gameObject);
+        }
+        activeButtons.Clear();
     }
 
     void updateText(string text)
@@ -52,7 +62,7 @@ public class NodeManager : MonoBehaviour
     {
         foreach(RoomSO node in nodeArray)
         {
-            if(node.nameTag == name)
+            if(node.name == name)
             {
                 return node;
             }
@@ -72,11 +82,7 @@ public class NodeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-
-        //TEST();
-        
-
+        TEST();
     }
 
     //when an unlock is called from a listener, can easily do...
@@ -89,7 +95,15 @@ public class NodeManager : MonoBehaviour
     void setupCurrentFeatures()
     {
         currentFeatures.Clear();
-        currentFeatures.AddRange(currentNode.presetFeatures);
+        if(currentNode != null && currentNode.presetFeatures != null)
+        {
+            currentFeatures.AddRange(currentNode.presetFeatures);
+        }
+        else
+        {
+            Debug.LogError("UNABLE TO GET CURRENT NODE:");
+            return;
+        }
         int index = 0;
         for (int i = 0; i < currentNode.numRandomFeatures; i++)
         {
@@ -131,13 +145,16 @@ public class NodeManager : MonoBehaviour
 
     void initFeature(RoomFeatureSO feature)
     {
-        //setting up buttons and text.
-        for (int i = 0; i < feature.buttons.Length; i++)
-        {
-            updateText(feature.description);
-            GameObject button = (GameObject)Instantiate(feature.buttons[0], transform);
+        /*
+        if(feature.button != null)
+        { 
+            updateText(feature.inactiveDescripton);
+            GameObject button = (GameObject)Instantiate(feature.button, transform);
             button.transform.SetParent(buttonPanel.transform);
+            button.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            activeButtons.Add(button);
         }
+        */
     }
 
     void setNode(RoomSO node)

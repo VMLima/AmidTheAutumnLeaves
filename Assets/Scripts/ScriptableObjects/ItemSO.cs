@@ -13,6 +13,12 @@ public class ItemSO : IncrementableSO
     //public int UIIndex = 000; //can have certain inventory items first/second/third, etc.
     //placement order in UI
 
+    public override void declareUI()
+    {
+        UIPrefab = IncManager.instance.ItemPrefab;    //still gotta make and hook up to the prefab.
+        UIPanel = IncManager.instance.ItemPanel;
+    }
+
     public override void reset()
     {
         base.reset();

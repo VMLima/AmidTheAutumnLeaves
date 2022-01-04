@@ -12,22 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd16aa9fa6096a489eb741f44990d1d, type: 3}
   m_Name: NatureSense
   m_EditorClassIdentifier: 
-  nameTag: NatureSence
+  name: Nature Sence
   toUnlock:
-  - soBasic: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+  - incrementable: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
     amount: 1
   unlocked: 1
-  amount: 14
-  maxAmount: 5
-  maxStack: 30
+  incManager: {fileID: 0}
+  UIInstance: {fileID: 0}
+  UIPrefab: {fileID: 7117491633077158859, guid: ce29c042715984f4a83c28e1ef1c1e8b, type: 3}
+  UIPanel: {fileID: 0}
+  isActive: 1
+  amount: 35
+  maximum: 5
+  maxStack: 5
   minAmount: 0
   minStack: 0
-  UIGameObject: {fileID: 0}
+  EffectObject: {fileID: 0}
+  UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
+  imageDisplay: {fileID: 0}
   removeFromUIOnEmpty: 0
   UIPanelID: 0
   UIActive: 0
-  hasUI: 0
-  xpToLevel: 140000001e000000
-  currentLevel: 1
+  hasUI: 1
+  effectManager: {fileID: 0}
+  baseXP: 10
+  levelXPMultiplier: 2
+  levelXPAddition: 5
+  currentLevel: 2
+  xpToLevel: 55
   atMax: 0

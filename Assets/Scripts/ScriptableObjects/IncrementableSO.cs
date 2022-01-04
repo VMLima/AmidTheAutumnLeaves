@@ -6,19 +6,17 @@ using TMPro;
 
 
 
-
 //[CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
-public class IncrementableSO : UnlockableSO
+public class IncrementableSO : UIMenuSO
 {
 
     //[Tooltip("A Prefab gameobjects with 'EffectScript' inheriting classes thrown on it.  Generally for on equip, ongoing effects, regen, damage, etc.")]
     //public GameObject effectObject;
 
-    [Tooltip("Current amount.")]
-    public float amount = 0;
+    [ReadOnly] public float amount = 0;
 
-    [Tooltip("Current max amount.")]
-    public int maxAmount = 1;
+    [Tooltip("Max amount/level. 0 means unlimited.")]
+    public int maximum = 0;
 
     [HideInInspector]
     public int maxStack;
@@ -29,11 +27,8 @@ public class IncrementableSO : UnlockableSO
     [HideInInspector]
     public int minStack;
 
-
-    [Tooltip("The UI prefab to represent this item.  Okay if empty game object.  Any 'EffectScripts' attached to it will be activatable.")]
-    public GameObject UIGameObject;
-
-    public TextMeshProUGUI textDisplay;
+    [Tooltip("Any 'EffectScripts' attached to this BLANK PREFAB will be activatable.")]
+    public GameObject EffectObject;
 
     [HideInInspector]
     public bool removeFromUIOnEmpty = false;    //when setting up UI panel ID, set this.
@@ -46,12 +41,28 @@ public class IncrementableSO : UnlockableSO
     [HideInInspector]
     public bool hasUI = false;
 
-    void setupUIPanel()
+    private float incRate = 1;
+
+    [HideInInspector] public EffectManager effectManager;
+
+    
+    public override void onPress()
     {
-        //STILL GOTTA HOOK UP.
-        removeFromUIOnEmpty = false;
-        UIPanelID = 0;
-        hasUI = false;
+        if (this.getAmount() < 1) return;
+
+        if (clickEffects != null && clickEffects.Length > 0)
+        {
+            foreach (IncrementalValuePair pair in clickEffects)
+            {
+                if(pair.incrementable != null) IncManager.instance.AddAmount(pair.incrementable, pair.amount);
+            }
+        }
+        IncManager.instance.AddAmount(this, -1);
+    }
+
+    public virtual float getUnlockValue()
+    {
+        return (int)amount;
     }
 
     //starts an effect script in the effect object matching effectName.
@@ -62,7 +73,7 @@ public class IncrementableSO : UnlockableSO
         
         if(effects != null)
         {
-            EffectManager.instance.startEffect(effects, stacks);
+            effectManager.startEffect(effects, stacks);
         }
         else
         {
@@ -74,10 +85,10 @@ public class IncrementableSO : UnlockableSO
     {
         //get all components of this.
         List<EffectScript> effects = new List<EffectScript>();
-        Component[] components = UIGameObject.GetComponents(typeof(EffectScript));
+        Component[] components = EffectObject.GetComponents(typeof(EffectScript));
         foreach (Component effect in components)
         {
-            if((effectName == "") || (((EffectScript)effect).nameTag == effectName))
+            if((effectName == "") || (((EffectScript)effect).name == effectName))
             {
                 effects.Add(((EffectScript)effect));
             }
@@ -90,27 +101,24 @@ public class IncrementableSO : UnlockableSO
     public void endEffect(string effectName = "")
     {
         List<EffectScript> effects = new List<EffectScript>();
-        Component[] components = UIGameObject.GetComponents(typeof(EffectScript));
+        Component[] components = EffectObject.GetComponents(typeof(EffectScript));
         foreach (Component effect in components)
         {
-            if ((effectName == "") || (((EffectScript)effect).nameTag == effectName))
+            if ((effectName == "") || (((EffectScript)effect).name == effectName))
             {
-                EffectManager.instance.endEffect(((EffectScript)effect).nameTag);
+                effectManager.endEffect(((EffectScript)effect).name);
             }
         }
     }
-
-    
 
     public override void reset()
     {
         base.reset();
         amount = 0;
-        UIActive = false;
-        setupUIPanel();
-        //SETUP UI PANEL STUFF
-        maxStack = maxAmount;
+        maxStack = maximum;
         minStack = minAmount;
+        incRate = 1;
+        effectManager = EffectManager.instance;
     }
 
     public float getAmount()
@@ -137,10 +145,10 @@ public class IncrementableSO : UnlockableSO
 
             if (textDisplay != null)
             {
-                textDisplay.text = amount.ToString();
+                //Debug.Log("IncremtableSO:addAmount: textDisplay is not null:" + name);
+                textDisplay.text = getUnlockValue().ToString();
             }
         }
-
         return amount;
     }
 
@@ -157,7 +165,8 @@ public class IncrementableSO : UnlockableSO
     public void addToAmount(float _amount)
     {
         amount += _amount;
-        if (amount > maxStack)
+        amount = Mathf.Round(amount * 100f) / 100f;
+        if ((maxStack > 0) && (amount > maxStack))
         {
             amount = maxStack;
         }
@@ -166,6 +175,7 @@ public class IncrementableSO : UnlockableSO
     public void subToAmount(float _amount)
     {
         amount -= _amount;
+        amount = Mathf.Round(amount * 100f) / 100f;
         if (amount < minStack)
         {
             amount = minStack;
@@ -174,11 +184,12 @@ public class IncrementableSO : UnlockableSO
     public void setAmount(float _amount)
     {
         amount = _amount;
+        amount = Mathf.Round(amount * 100f) / 100f;
         if (amount < minStack)
         {
             amount = minStack;
         }
-        else if (amount > maxStack)
+        else if ((maxStack > 0) && (amount > maxStack))
         {
             amount = maxStack;
         }

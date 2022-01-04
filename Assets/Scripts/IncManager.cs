@@ -16,33 +16,56 @@ using UnityEngine.Events;
 public class IncManager : MonoBehaviour
 {
     // hold all possible skills.
-    SkillSO[] skillArray;
-    ItemSO[] itemArray;
-    ResourceSO[] resourceArray;
+    //SkillSO[] skillArray;
+    //ItemSO[] itemArray;
+    //ResourceSO[] resourceArray;
 
     public static IncManager instance;
 
     [HideInInspector]
     public UnityEvent skillLevelEvent = new UnityEvent();
+    [HideInInspector]
     public UnityEvent resourceEvent = new UnityEvent();
+    [HideInInspector]
     public UnityEvent itemEvent = new UnityEvent();
 
+    public DataStorageSO dataStorage;
+
     public GameObject ItemPanel;
+    public GameObject ItemPrefab;
     public GameObject ResourcePanel;
+    public GameObject ResourcePrefab;
     public GameObject SkillPanel;
+    public GameObject SkillPrefab;
+    public GameObject CraftPanel;
+    public GameObject CraftPrefab;
+    public GameObject ButtonPanel;
+    public GameObject ButtonPrefab;
+    public GameObject StatPanel;
+    public GameObject StatPrefab;
 
     private bool gotResourceEvent = false;
     private bool gotItemEvent = false;
+
+    void startGame()
+    {
+        ButtonManager.instance.activateButtonArray("Start");
+        WeatherManager.instance.pickRandomWeather();
+    }
+
     void Awake()
     {
         instance = this;
-        skillArray = Utils.GetAllScriptableObjects<SkillSO>();
-        itemArray = Utils.GetAllScriptableObjects<ItemSO>();
-        resourceArray = Utils.GetAllScriptableObjects<ResourceSO>();
 
-        setup(itemArray);
-        setup(skillArray);
-        setup(resourceArray);
+        compileDataStorage();   
+        //updates and compiles the dataStorage scriptable object.  
+        //links to all other scriptable objects and dataStorage.get<type>(_name) will return any scriptable object.
+    }
+    private void Start()
+    {
+        //functions that require everything setup to work.
+        resetAllScriptableObjects();
+        startGame();
     }
 
     private void Update()
@@ -59,58 +82,68 @@ public class IncManager : MonoBehaviour
         }
     }
 
-
-    void setup(IncrementableSO[] incArray)
+    private void OnDestroy()
     {
-        foreach (IncrementableSO inc in incArray)
+        foreach(CommonBaseSO i in Utils.GetAllScriptableObjects<CommonBaseSO>())
         {
-            inc.reset();
+            i.destroyInstantiations();
         }
     }
 
-    public T Get<T>(string _name) where T : IncrementableSO
+    //get a scriptable object of type T and name _name.
+    public T Get<T>(string _name) where T : CommonBaseSO
     {
-        IncrementableSO[] tempArray = null;
-        if(typeof(T) == typeof(SkillSO))
-        {
-            tempArray = skillArray;
-        }
-        else if (typeof(T) == typeof(ResourceSO))
-        {
-            tempArray = skillArray;
-        }
-        else if (typeof(T) == typeof(ItemSO))
-        {
-            tempArray = skillArray;
-        }
+        return dataStorage.get<T>(_name);
+    }
 
-        if(tempArray != null)
+    //get the amount in a scriptable object of type T and name _name
+    public float GetAmount<T>(string _name) where T : IncrementableSO
+    {
+        IncrementableSO inc = Get<T>(_name);
+        if (inc != null) return inc.getAmount();
+        return 0;
+    }
+
+    public void AddAmount<T>(string _name, float amount = 1) where T : IncrementableSO
+    {
+        AddAmount(Get<T>(_name), amount);
+    }
+
+    //ADD AMOUNT
+    //either hand over an object to increment by amount
+    // or give the type and a name.
+    public void AddAmount(IncrementableSO inc, float amount = 1)
+    {
+        //if not active in ui and unlocked... add to UI
+        if (inc != null)
         {
-            foreach (IncrementableSO inc in tempArray)
+            //dirty but functional till we need something better.
+            //Add to UI anything that isn't active in UI and is unlocked and is being incremented.
+            //Remove from UI if a flag is checked based on which UI panel it is a part of.
+
+            //add the quantity.  If it's new, activate.
+            //if its empty and remove when empty.  deactivate.
+            inc.addAmount(amount);
+            if (inc.isActive == false) inc.activate(true);
+            else if (inc.removeFromUIOnEmpty && inc.getAmount() <= 0) inc.activate(false);
+
+            //GOTTA UPDATE THIS ALL TOO.  Better listening for unlocks.
+            //at least now having a bunch of resource ticks a second isn't screaming repeatedly in the same frame.
+            if(!gotResourceEvent && inc.GetType() == typeof(ResourceSO))
             {
-                if (inc.nameTag == _name)
-                {
-                    //already have skill
-                    return (T)inc;
-                }
+                //gotResourceEvent = true;
+                //Debug.Log("Resource Event");
+                resourceEvent.Invoke();
+            }
+            else if (!gotItemEvent && inc.GetType() == typeof(ItemSO))
+            {
+                //gotItemEvent = true;
+                //Debug.Log("Item Event");
+                itemEvent.Invoke();
             }
         }
-        return null;
     }
-
-   
-
-    public void allSkillsDebugLog()
-    {
-        int i = 1;
-        Debug.Log("==currentSkills===");
-        foreach (SkillSO skill in skillArray)
-        {
-            Debug.Log("slot:" + i + "=" + skill.nameTag + " Level:" + skill.getLevel() + " XP:" + skill.getAmount());
-            i++;
-        }
-        Debug.Log("===================");
-    }
+    
 
     public void Unlock(IncrementableSO inc)
     {
@@ -131,77 +164,13 @@ public class IncManager : MonoBehaviour
         }
     }
 
-    public void addToUI<T>(string _name, bool toActivate) where T : IncrementableSO
+    void compileDataStorage()
     {
-        IncrementableSO inc = Get<T>(_name);
-        addToUI(inc, toActivate);
+        dataStorage.clear();
+        dataStorage.compileReferences();
     }
-
-    public void addToUI(IncrementableSO inc, bool toActivate)
+    void resetAllScriptableObjects()
     {
-        if (inc == null) return;
-        else if (inc.UIActive != toActivate)
-        {
-            inc.UIActive = toActivate;
-            //inc.UIGameObject;
-            // ADDING TO CORRECT PANEL.
-            //  can create an enum for it.  EquipPanel = 1, DebuffPanel = 2, ResourcePanel = 3....
-            //      then in ItemSO/ResourceSO set the panelID.
-            if (toActivate)
-            {
-                //adding to UI
-            }
-            else
-            {
-                //removing from UI
-            }
-        }
-    }
-
-    public float GetAmount<T>(string _name) where T : IncrementableSO
-    {
-        IncrementableSO inc = Get<T>(_name);
-        if (inc != null) return inc.getAmount();
-        return 0;
-    }
-
-
-    //ADD AMOUNT
-    //either hand over an object to increment by amount
-    // or give the type and a name.
-    public void AddAmount(IncrementableSO inc, float amount = 1)
-    {
-        //if not active in ui and unlocked... add to UI
-        if (inc != null)
-        {
-            //dirty but functional till we need something better.
-            //Add to UI anything that isn't active in UI and is unlocked and is being incremented.
-            //Remove from UI if a flag is checked based on which UI panel it is a part of.
-            if(inc.hasUI)
-            {
-                if (inc.addAmount(amount) <= 0 && inc.removeFromUIOnEmpty) addToUI(inc, false);
-                else if (!inc.UIActive && inc.unlocked) addToUI(inc, true);
-            }
-            else
-            {
-                inc.addAmount(amount);
-            }
-
-            //GOTTA UPDATE THIS ALL TOO.  Better listening for unlocks.
-            //at least now having a bunch of resource ticks a second isn't screaming repeatedly in the same frame.
-            if(!gotResourceEvent && inc.GetType() == typeof(ResourceSO))
-            {
-                gotResourceEvent = true;
-            }
-            else if (!gotItemEvent && inc.GetType() == typeof(ItemSO))
-            {
-                gotItemEvent = true;
-            }
-        }
-    }
-    //for button mashing and events.
-    public void AddAmount<T>(string _name, float amount = 1) where T : IncrementableSO
-    {
-        AddAmount(Get<T>(_name), amount);
+        dataStorage.resetAllScriptableObjects();
     }
 }

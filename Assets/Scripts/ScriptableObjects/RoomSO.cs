@@ -14,7 +14,7 @@ using TMPro;
 /// </summary>
 
 [CreateAssetMenu(fileName = "NewNode", menuName = "Scriptable Object/Node")]
-public class RoomSO : UnlockableSO
+public class RoomSO : CommonBaseSO
 {
     //public string description;
     //public Button[] buttons;

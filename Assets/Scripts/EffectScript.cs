@@ -12,7 +12,7 @@ using UnityEngine;
 public class EffectScript : MonoBehaviour
 {
     [Tooltip("VERY IMPORTANT. Make sure it is a unique name.")]
-    public string nameTag;
+    public new string name;
     [Tooltip("Seconds.  0 means continue forever (or untill something else stops it).")]
     public float duration = 0;
     [Tooltip("Seconds between triggers. 0 = only onStartOverride() and, after Duration, onStopOverride() will be called.")]
@@ -53,7 +53,7 @@ public class EffectScript : MonoBehaviour
         return dataType;
     }
 
-    void Start()
+    protected virtual void Awake()
     {
         
     }
@@ -61,13 +61,15 @@ public class EffectScript : MonoBehaviour
     //the effect to happen every second.
     public virtual void onTick(int numEffects)
     {
+
+        Debug.Log("EffectScript: DEFUALT onTICK:" + name);
         //OVERRIDEN TO ADD STATUS EFFECT.
         //example.
         //SkillManager.instance.Addxp("Foraging", 5);
         // this status effect will give 5 foraging xp every second.
     }
 
-    public void resetDuration()
+    public void resetAllDurations()
     {
         if(effectDurations != null)
         {
@@ -94,7 +96,7 @@ public class EffectScript : MonoBehaviour
         if (isPaused) return true;
         if (!isActive)
         {
-            Debug.Log("EffectScript:effect: " + nameTag + " is not active, TERMINATING.");
+            //Debug.Log("EffectScript:effect: " + nameTag + " is not active, TERMINATING.");
             return false;
         }
         if (timePassed >= timeToTick)
@@ -117,12 +119,12 @@ public class EffectScript : MonoBehaviour
     
     bool onTickHidden()
     {
-        //check if past duration.
+        //tick every effect in list.
+        //a duration of 1 and frequency of 1 should tick once at 1s.
+        onTick(numStacks);
         if (onTimer)
         {
-            //tick every effect in list
-            onTick(numStacks);
-
+            //if some at or past time, remove them.
             int toStop = 0;
             for (int i = (effectDurations.Count - 1); i >= 0; i--)
             {
@@ -139,8 +141,8 @@ public class EffectScript : MonoBehaviour
 
             if (effectDurations.Count <= 0)
             {
-                if (numStacks > 0) Debug.LogError("EffectScript:effect:" + nameTag + ": out of effectDuration yet still effect count.");
-                else Debug.Log("EffectScript:effect: " + nameTag + " no count left, TERMINATING.");
+                if (numStacks > 0) Debug.LogError("EffectScript:effect:" + name + ": out of effectDuration yet still effect count.");
+                //else Debug.Log("EffectScript:effect: " + nameTag + " no count left, TERMINATING.");
                 return false;
             }
         }
@@ -158,12 +160,12 @@ public class EffectScript : MonoBehaviour
     {
         if (frequency < 0)
         {
-            Debug.LogError("StatusScript:startCondition: invalid FREQUENCY value in " + name + ".  Please fix inspector value.");
+            Debug.LogError("StatusScript:startCondition: invalid FREQUENCY value in " + base.name + ".  Please fix inspector value.");
             return;
         }
         if (duration < 0)
         {
-            Debug.LogError("StatusScript:startCondition: invalid DURATION value in " + name + ".  Please fix inspector value.");
+            Debug.LogError("StatusScript:startCondition: invalid DURATION value in " + base.name + ".  Please fix inspector value.");
             return;
         }
 
@@ -178,7 +180,7 @@ public class EffectScript : MonoBehaviour
 
         if(resetDurationOnStack)
         {
-            resetDuration();
+            resetAllDurations();
         }
 
         //if in the end you are still adding a positive number of stacks.
