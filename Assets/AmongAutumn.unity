@@ -1615,6 +1615,8 @@ GameObject:
   - component: {fileID: 1910270606}
   - component: {fileID: 1910270603}
   - component: {fileID: 1910270608}
+  - component: {fileID: 1910270610}
+  - component: {fileID: 1910270609}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1697,6 +1699,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hunger: {fileID: 11400000, guid: 054c9e93f8e7b2c4c8b5fbafb3b73517, type: 2}
   thirst: {fileID: 11400000, guid: 4424c0c4f9add2f4e9e40a7e81ed809f, type: 2}
+  workDiff: 1
+  inShelter: 0
+  campfire: 0
 --- !u!114 &1910270606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1734,6 +1739,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0aee6872c28255e44b9ed749d6c4445a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deltaTemp: 0
+  deltaWet: 0
+  deltaThirst: 0
+  deltaFood: 0
+--- !u!114 &1910270609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910270601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3896f083c2ca75946a453d094019915c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1910270610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910270601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbbd0962c13875a4f97bb6e35cabae00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1940907179

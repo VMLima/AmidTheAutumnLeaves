@@ -24,12 +24,12 @@ public class TimeManager : MonoBehaviour
         times.Weekday = 5;
         times.WeekdayName = "Friday";
         times.DayMonth = 30;
-        times.NumMonth = 9;
-        times.Month = "Sep";
+        times.NumMonth = 7;
+        times.Month = "blank";
         times.Season = "blank";
         times.Years = 1;
         incrementSeason();
-
+        incrementMonth();
     }
     // Important to keep Day, Weekday, DayMonth, and NumMonth inits so the array doesn't start at 0.
     // Some of the time tracking functions could be unified, like month and season, but for long term sanitation reasons
@@ -82,8 +82,8 @@ public class TimeManager : MonoBehaviour
     void incrementMonth()
     {
         // Counts up and resets counts, checks to see if the season changed.
-        string[] months = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug","Sep","Oct","Nov","Dec" };
-        if (times.DayMonth >= 30)
+        string[] months = new string[] { "blank", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug","Sep","Oct","Nov","Dec" };
+        if (times.DayMonth > 30)
         {
             Debug.Log("incrementing month");
             times.DayMonth -= 30;
@@ -106,17 +106,17 @@ public class TimeManager : MonoBehaviour
     {
         
         // Updates Season by checking the number of the month
-        if (times.NumMonth == 1) { times.Season = "Spring"; }
-        if (times.NumMonth == 4) { times.Season = "Summer"; }
-        if (times.NumMonth == 7) { times.Season = "Fall"; }
-        if (times.NumMonth == 10) { times.Season = "Winter"; }
+        if (times.NumMonth >= 3 && times.NumMonth <=5) { times.Season = "Spring"; }
+        else if (times.NumMonth >= 6 && times.NumMonth <= 8) { times.Season = "Summer"; }
+        else if (times.NumMonth >= 9 && times.NumMonth <= 11) { times.Season = "Fall"; }
+        else if (times.NumMonth >= 12 || times.NumMonth <= 2) { times.Season = "Winter"; }
 
         // Changes base temperature depending on the season. Will eventually need to reference biome data
         // rather than just being static, but for now this is fine.
         if (times.Season == "Spring") { WeatherManager.instance.weather.SeasonTemp = 35f; }
-        if (times.Season == "Summer") { WeatherManager.instance.weather.SeasonTemp = 47f; }
-        if (times.Season == "Fall") { WeatherManager.instance.weather.SeasonTemp = 27f; }
-        if (times.Season == "Winter") { WeatherManager.instance.weather.SeasonTemp = 10f; }
+        else if (times.Season == "Summer") { WeatherManager.instance.weather.SeasonTemp = 47f; }
+        else if (times.Season == "Fall") { WeatherManager.instance.weather.SeasonTemp = 27f; }
+        else if (times.Season == "Winter") { WeatherManager.instance.weather.SeasonTemp = 10f; }
     }
 
     void incrementYear()

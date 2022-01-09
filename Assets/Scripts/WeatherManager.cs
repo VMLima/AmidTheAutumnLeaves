@@ -62,13 +62,16 @@ public class WeatherManager : MonoBehaviour
         TimeofDay(); // updates the time of day string
         Temperature(); // find the exterior weather temperature, must be before Wetness.
 
+ //       Debug.Log("Wetness before delta: " + Player.instance.Wetness + " BodyTemp before delta: " + Player.instance.BodyTemp);
+
         Player.instance.Wetness += Wetness(); // Sweat, evaporation, and rain. Must be before ChangeInTemp.
         Player.instance.BodyTemp += ChangeInTemperature(); // Temp change based on weather.
 
+//        Debug.Log("Wetness after delta: " + Player.instance.Wetness + " BodyTemp after delta: " + Player.instance.BodyTemp + "deltaTemp: " + deltaTemp + " deltaWetn: " + deltaWet);
         // Subtract sweat from player's current thirst.
         Thirst.addAmount(-1 * sweatRate);
 
-        Debug.Log("Sun:" + weather.Sun + " Temp:" + weather.CurrTemp + " deltaTemp:" + deltaTemp + " player wetness:" + Player.instance.Wetness);
+//        Debug.Log("Sun:" + weather.Sun + " Temp:" + weather.CurrTemp + " deltaTemp:" + deltaTemp + " player wetness:" + Player.instance.Wetness);
 
     }
 
@@ -170,7 +173,6 @@ public class WeatherManager : MonoBehaviour
         // Apply values to wetness change this second.
         WeatherManager.instance.deltaWet += WeatherManager.instance.sweatRate;
         WeatherManager.instance.deltaWet -= WeatherManager.instance.Evaporation;
-
         return deltaWet;
     }
     public float Sweat()
@@ -263,8 +265,13 @@ public class WeatherManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        TimeManager.instance.incrementSeason();
         loadSeasonData();
+    }
+
+    private void Start()
+    {
+        TimeManager.instance.incrementSeason();
+        PerDayWeather();
     }
 
     //called when game ends.
