@@ -90,6 +90,11 @@ public class EffectScript : MonoBehaviour
         //GUARANTTED TO BE CALLED NO MATTER HOW THE EFFECT ENDS.
     }
 
+    public void setActive(bool toSet)
+    {
+        isActive = toSet;
+    }
+
     //returns false if effect has reached end.
     public bool tick(float timePassed)
     {

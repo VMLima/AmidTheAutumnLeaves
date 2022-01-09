@@ -287,6 +287,9 @@ MonoBehaviour:
   maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
+  buttonTitle: 
+  buttonTooltip: 
+  buttonColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
   toggleButton: 1
   onStartEffect: []
   onTickEffect: []

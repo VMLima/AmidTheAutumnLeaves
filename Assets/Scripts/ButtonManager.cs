@@ -8,6 +8,7 @@ public class ButtonManager : MonoBehaviour
     List<RoomFeatureSO> activeButtons;
 
     public GameObject buttonPanel;
+    private int buttonIndex;
 
     [HideInInspector] public static ButtonManager instance;
 
@@ -28,12 +29,12 @@ public class ButtonManager : MonoBehaviour
 
     public void activateButton(string _name, bool turnOn = true)
     {
-        activateButton(GetButton(_name), turnOn);
+        addButtonToUI(GetButton(_name), turnOn);
     }
 
     public void activateButtonArray(string _name, bool turnOn = true)
     {
-        activateButtonArray(GetButtonArray(_name), turnOn);
+        addButtonArrayToUI(GetButtonArray(_name), turnOn);
     }
 
     RoomFeatureSO GetButton(string _name)
@@ -63,7 +64,27 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
-    public void activateButton(RoomFeatureSO button, bool turnOn = true)
+    //can be called to untoggle currently toggled buttons.
+    public void untoggleIfPressed(string _name)
+    {
+        untoggleIfPressed(GetButton(_name));
+    }
+
+    public void untoggleIfPressed(RoomFeatureSO button)
+    {
+        if(button != null) button.haltEffects();
+    }
+
+    public void hideButtonInUI(string _name)
+    {
+        hideButtonInUI(GetButton(_name));
+    }
+
+    public void hideButtonInUI(RoomFeatureSO button)
+    {
+        if (button != null) addButtonToUI(button, false);
+    }
+    public void addButtonToUI(RoomFeatureSO button, bool turnOn = true)
     {
         
         if (button == null) return;
@@ -71,17 +92,19 @@ public class ButtonManager : MonoBehaviour
         button.activate(turnOn);   //toggles if it shows even if parented to the buttonPanel. and changes the text output. 
         if (turnOn && !hasButton(button))
         {
+            button.setUIIndex(buttonIndex);
+            buttonIndex++;
             activeButtons.Add(button);
         }
         refreshText();
     }
-    public void activateButtonArray(RoomFeatureArraySO buttonArray, bool turnOn = true)
+    public void addButtonArrayToUI(RoomFeatureArraySO buttonArray, bool turnOn = true)
     {
         if(buttonArray != null)
         {
             foreach(RoomFeatureSO feature in buttonArray.features)
             {
-                activateButton(feature, turnOn);
+                addButtonToUI(feature, turnOn);
             }
         }
         //adds buttons to scene
@@ -98,6 +121,7 @@ public class ButtonManager : MonoBehaviour
     {
         instance = this;
         activeButtons = new List<RoomFeatureSO>();
+        buttonIndex = 0;
     }
 
     public void craft(string _name, float numCrafts = 1)

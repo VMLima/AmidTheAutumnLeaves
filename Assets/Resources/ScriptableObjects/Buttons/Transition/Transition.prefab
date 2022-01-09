@@ -147,9 +147,9 @@ GameObject:
   - component: {fileID: 2699394463113211254}
   - component: {fileID: 5371986101292956776}
   - component: {fileID: -99086701435429577}
-  - component: {fileID: -1875805556303994197}
+  - component: {fileID: 2134949358530096645}
   m_Layer: 5
-  m_Name: ForestRiverButton
+  m_Name: Transition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23af9cdab99bec145879123719da25e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1875805556303994197
+--- !u!114 &2134949358530096645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -278,22 +278,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5895366186889219798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c2bf182f0612c24488a88888a09a109, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ae5d1fc46a216f43b4fff0bd6f1c994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: ForestRiverButton
+  name: Transition
   duration: 0
   frequency: 1
   maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
-  buttonTitle: Enter Cave
-  ButtonTitleColor: {r: 1, g: 1, b: 1, a: 1}
-  buttonTooltip: Toggle Transition
-  buttonColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
+  buttonTitle: Go Back
+  ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
+  buttonTooltip: PRESS PLEASE
+  buttonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   toggleButton: 0
-  onStartEffect:
-  - incrementable: {fileID: 11400000, guid: 4424c0c4f9add2f4e9e40a7e81ed809f, type: 2}
-    amount: -1
+  onStartEffect: []
   onTickEffect: []
   mirrorStartonStop: 1

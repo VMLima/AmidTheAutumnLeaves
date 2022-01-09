@@ -15,6 +15,8 @@ public class UIMenuSO : CommonBaseSO
     [HideInInspector]
     public bool isActive;
 
+    [HideInInspector] public int UIIndex;
+
     public Sprite UISprite;
     [HideInInspector] public TextMeshProUGUI textDisplay;
     [HideInInspector] public Image imageDisplay;
@@ -85,14 +87,14 @@ public class UIMenuSO : CommonBaseSO
         UIInstance = (GameObject)Instantiate(UIPrefab);
         UIInstance.transform.SetParent(UIPanel.transform);
         UIInstance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
+        /*
         Tooltip temp = UIInstance.GetComponent<Tooltip>();
         if(temp)
         {
             temp.setTooltip(compileTooltip());
             //Debug.Log("UIMENUSO:instantiateUI: found tooltip:" + name);
         }
-
+        */
         setUIData();
         activate(false);
     }
@@ -128,11 +130,15 @@ public class UIMenuSO : CommonBaseSO
         }
     }
 
-    
+    public void setUIIndex(int indexvalue)
+    {
+        UIIndex = indexvalue;
+        UIInstance.transform.SetSiblingIndex(UIIndex);
+    }
 
     public void reorderUI()
     {
-        UIInstance.transform.SetAsLastSibling();
+        //UIInstance.transform.SetAsLastSibling();
     }
 
     public override void destroyInstantiations()
@@ -157,7 +163,7 @@ public class UIMenuSO : CommonBaseSO
                 if (unlocked && _isActive)
                 {
                     Debug.Log("UIMenuSO:activate:is activating:" + name);
-                    reorderUI();
+                    //reorderUI();
                     UIInstance.SetActive(true);
                 }
                 else

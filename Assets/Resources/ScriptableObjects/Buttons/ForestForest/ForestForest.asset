@@ -17,10 +17,14 @@ MonoBehaviour:
   unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 5715040496820633644, guid: a2106aac3cc0763488535f9a1ad70b58, type: 3}
+  UIPrefab: {fileID: 4342909923100268105, guid: a1f327f7d79659748b170a9041b65d15, type: 3}
   UIPanel: {fileID: 0}
   isActive: 1
+  UISprite: {fileID: 0}
+  textDisplay: {fileID: 0}
+  imageDisplay: {fileID: 0}
+  clickButton: {fileID: 0}
   clickEffects: []
   activeDescription: You are in a forest.
   inactiveDescripton: 
-  button: {fileID: 6530753603494373717, guid: a2106aac3cc0763488535f9a1ad70b58, type: 3}
+  button: {fileID: 3002528008586936112, guid: a1f327f7d79659748b170a9041b65d15, type: 3}

@@ -10,24 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e1d32d570f8e0141b146ec716499a4e, type: 3}
-  m_Name: ForestStone
+  m_Name: Transition
   m_EditorClassIdentifier: 
-  name: ForestStone
-  toUnlock:
-  - incrementable: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
-    amount: 2
+  name: Transition
+  toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 4293528735765515577, guid: 564b07ebee3ed08499eb3b32f66ae201, type: 3}
+  UIPrefab: {fileID: 5895366186889219798, guid: 9ef395ec406fcef4cbff3b9033f3356c, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 1
-  UIIndex: 2
+  isActive: 0
+  UIIndex: 3
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
   clickEffects: []
-  activeDescription: There are many useful small stones around.
-  inactiveDescripton: The land is harsh with boulders and rubble.
-  button: {fileID: 6983234826045989483, guid: 564b07ebee3ed08499eb3b32f66ae201, type: 3}
+  activeDescription: You have found a nice pool of water.
+  inactiveDescripton: You hear water trickling somewhere in the distance
+  button: {fileID: 5371986101292956776, guid: 9ef395ec406fcef4cbff3b9033f3356c, type: 3}

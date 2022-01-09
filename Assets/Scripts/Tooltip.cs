@@ -15,8 +15,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (tipMessage == "") return;
-        StopAllCoroutines();
-        StartCoroutine(startTimer());
+        showMessage();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -25,18 +24,39 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         hideMessage();
     }
 
-    private void showMessage()
+    public void clickReset(float _timeToWait = -1)
     {
-        TooltipManager.ShowTooltip_Static(tipMessage);
+        if (_timeToWait == -1) _timeToWait = timeToWait;
+        StopAllCoroutines();
+        TooltipManager.HideTooltip_Static();
+        StartCoroutine(startTimer(_timeToWait));
+        
     }
-    private void hideMessage()
+
+    public void setHoverDelay(float _timeToWait)
+    {
+        timeToWait = _timeToWait;
+    }
+
+    public void showMessage(float _timeToWait = -1)
+    {
+        if (_timeToWait == -1) _timeToWait = timeToWait;
+        StopAllCoroutines();
+        StartCoroutine(startTimer(_timeToWait));
+    }
+    public void hideMessage()
     {
         StopAllCoroutines();
         TooltipManager.HideTooltip_Static();
     }
-    private IEnumerator startTimer()
+
+    void managerDisplay()
     {
-        yield return new WaitForSeconds(timeToWait);
-        showMessage();
+        TooltipManager.ShowTooltip_Static(tipMessage);
+    }
+    private IEnumerator startTimer(float _timeToWait)
+    {
+        yield return new WaitForSeconds(_timeToWait);
+        managerDisplay();
     }
 }

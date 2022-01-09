@@ -18,6 +18,8 @@ public class RoomFeatureSO : UIMenuSO
     
     //private bool isActive;
     public Button button;
+    private ButtonEffectScript buttonEffect;
+    
     //[HideInInspector] public GameObject buttonInstance;
 
     //core functionality of unlocking the feature.
@@ -25,35 +27,41 @@ public class RoomFeatureSO : UIMenuSO
 
     public override void activate(bool turnOn)
     {
+        if (turnOn == false) haltEffects();
         base.activate(turnOn);
         ButtonManager.instance.refreshText();
     }
 
     public override string compileTooltip()
     {
-        ButtonEffectScript temp = button.GetComponent<ButtonEffectScript>();
-        if(temp != null)
+        
+        if(buttonEffect != null)
         {
-            return temp.compileTooltip();
+            return buttonEffect.compileTooltip();
         }
         return "";
     }
 
     public override void declareUI()
     {
-        UIPrefab = button.gameObject;// IncManager.instance.ButtonPrefab;
+        UIPrefab = button.gameObject;
         UIPanel = IncManager.instance.ButtonPanel;
+    }
+
+    public override void reset()
+    {
+        base.reset();
+        buttonEffect = UIInstance.GetComponent<ButtonEffectScript>();
     }
 
     public override void setUIData()
     {
-        foreach (Transform eachChild in UIInstance.transform)
-        {
-            if (eachChild.name == "HookName")
-            {
-                eachChild.GetComponent<TextMeshProUGUI>().text = name;
-            }
-        }
+        
+    }
+
+    public void haltEffects()
+    {
+        if (buttonEffect != null) buttonEffect.haltEffects();
     }
 
     public string getDescription(bool _activeDescription)
