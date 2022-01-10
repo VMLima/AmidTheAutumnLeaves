@@ -5,18 +5,18 @@ using UnityEngine;
 public class ButtonManager : MonoBehaviour
 {
 
-    List<RoomFeatureSO> activeButtons;
+    List<ButtonSO> activeButtons;
 
     public GameObject buttonPanel;
     private int buttonIndex;
 
     [HideInInspector] public static ButtonManager instance;
 
-    public bool hasButton(RoomFeatureSO feature)
+    public bool hasButton(ButtonSO feature)
     {
         if (activeButtons != null)
         {
-            foreach (RoomFeatureSO f in activeButtons)
+            foreach (ButtonSO f in activeButtons)
             {
                 if (f == feature)
                 {
@@ -37,14 +37,14 @@ public class ButtonManager : MonoBehaviour
         addButtonArrayToUI(GetButtonArray(_name), turnOn);
     }
 
-    RoomFeatureSO GetButton(string _name)
+    ButtonSO GetButton(string _name)
     {
-        return IncManager.instance.Get<RoomFeatureSO>(_name);
+        return IncManager.instance.Get<ButtonSO>(_name);
     }
 
-    RoomFeatureArraySO GetButtonArray(string _name)
+    ButtonArraySO GetButtonArray(string _name)
     {
-        return IncManager.instance.Get<RoomFeatureArraySO>(_name);
+        return IncManager.instance.Get<ButtonArraySO>(_name);
     }
 
     public void refreshText()
@@ -52,12 +52,12 @@ public class ButtonManager : MonoBehaviour
         TextManager.instance.setText("");
         if (activeButtons != null)
         {
-            foreach (RoomFeatureSO feature in activeButtons)
+            foreach (ButtonSO feature in activeButtons)
             {
                 TextManager.instance.addText(feature.getDescription(true));
             }
             TextManager.instance.addText("  ");
-            foreach (RoomFeatureSO feature in activeButtons)
+            foreach (ButtonSO feature in activeButtons)
             {
                 TextManager.instance.addText(feature.getDescription(false));
             }
@@ -70,7 +70,7 @@ public class ButtonManager : MonoBehaviour
         untoggleIfPressed(GetButton(_name));
     }
 
-    public void untoggleIfPressed(RoomFeatureSO button)
+    public void untoggleIfPressed(ButtonSO button)
     {
         if(button != null) button.haltEffects();
     }
@@ -80,11 +80,11 @@ public class ButtonManager : MonoBehaviour
         hideButtonInUI(GetButton(_name));
     }
 
-    public void hideButtonInUI(RoomFeatureSO button)
+    public void hideButtonInUI(ButtonSO button)
     {
         if (button != null) addButtonToUI(button, false);
     }
-    public void addButtonToUI(RoomFeatureSO button, bool turnOn = true)
+    public void addButtonToUI(ButtonSO button, bool turnOn = true)
     {
         
         if (button == null) return;
@@ -98,11 +98,11 @@ public class ButtonManager : MonoBehaviour
         }
         refreshText();
     }
-    public void addButtonArrayToUI(RoomFeatureArraySO buttonArray, bool turnOn = true)
+    public void addButtonArrayToUI(ButtonArraySO buttonArray, bool turnOn = true)
     {
         if(buttonArray != null)
         {
-            foreach(RoomFeatureSO feature in buttonArray.features)
+            foreach(ButtonSO feature in buttonArray.features)
             {
                 addButtonToUI(feature, turnOn);
             }
@@ -111,7 +111,7 @@ public class ButtonManager : MonoBehaviour
         //keeps tabs on buttons
     }
 
-    public void unlockButton(RoomFeatureSO feature)
+    public void unlockButton(ButtonSO feature)
     {
         feature.unlock();
     }
@@ -120,7 +120,7 @@ public class ButtonManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        activeButtons = new List<RoomFeatureSO>();
+        activeButtons = new List<ButtonSO>();
         buttonIndex = 0;
     }
 

@@ -12,8 +12,8 @@ public class SickScript : EffectScript
     public override void onTick(int _currentStacks = 1)
     {
         Player.instance.modHealth(healthPerSec * _currentStacks);
-        incM.AddAmount(Foraging, 1);
-        incM.AddAmount(NatureSence, 1);
+        incM.Add(Foraging, 1);
+        incM.Add(NatureSence, 1);
         Debug.Log("Foraging:" + Foraging.getAmount() + " Nature Sence:" + NatureSence.getAmount());
         Debug.Log("SickScript:effectOverride: sick tick : currentHealth = " + player.getHealth());
     }
@@ -33,7 +33,7 @@ public class SickScript : EffectScript
         if (oldNumStacks == 0)
         {
             //if this is our first stack of sickness, remove 10 max health.
-            incM.AddAmount(Foraging, 8);
+            incM.Add(Foraging, 8);
             player.modHealth(-10);
             addingStacks--;
             firstSick = true;

@@ -31,7 +31,13 @@ public class DataStorageSO : CommonBaseSO
 
     public void compileReferences()
     {
-        //Debug.Log("add:" + toAdd.GetType().ToString());
+        //go through compiled references, remove all nulls
+        for(int i = references.Count-1;i>=0;i--)
+        {
+            if (references[i] == null) references.RemoveAt(i);
+        }
+
+        //build up dictionary for quick game searching.
         dataDictionary = new Dictionary<string, List<CommonBaseSO>>();
         foreach (CommonBaseSO unl in Utils.GetAllScriptableObjects<CommonBaseSO>())
         {

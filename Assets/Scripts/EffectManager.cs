@@ -42,7 +42,7 @@ public class EffectManager : MonoBehaviour
         instance = this;
         activeEffects = new List<EffectScript>();
         timer = 0;
-        loadLooseEffects(); //effect scripts attached to a misc effect object attached to the EffectManager in the inspector.
+        //loadLooseEffects(); //effect scripts attached to a misc effect object attached to the EffectManager in the inspector.
     }
 
     void Update()
@@ -295,7 +295,7 @@ public class EffectManager : MonoBehaviour
         destroyLooseEffects();
     }
 
-    void destroyLooseEffects()
+    public void destroyLooseEffects()
     {
         for (int i = (effectArray.Length - 1); i >= 0; i--)
         {
@@ -305,7 +305,7 @@ public class EffectManager : MonoBehaviour
 
     //atm have misc effects held on a game object attached to EffectManager.
     //  for when an effect isn't tied to an item/resource/skill/button, it can be found here.
-    void loadLooseEffects()
+    public void loadLooseEffects()
     {
         effectArray = Utils.GetAllGameObjects(Utils.effectLocation);
         

@@ -115,7 +115,7 @@ public class CraftRecipeSO : UIMenuSO
                     {
                         //if you are modifying values...
                         //Debug.Log("CraftSO:costFunction: modifying values..." + cost.unlocker.getAmount() + " " + cost.amount * -1 * numCrafts);
-                        IncManager.instance.AddAmount(cost.incrementable, cost.amount * -1 * numCrafts);
+                        IncManager.instance.Add(cost.incrementable, cost.amount * -1 * numCrafts);
                     }
                 }
             }
@@ -124,7 +124,7 @@ public class CraftRecipeSO : UIMenuSO
                 //Debug.Log("CraftSO:costFunction: modifying values..." + toCraft.getAmount() + " +" + amountCrafted * numCrafts);
                 foreach(IncrementalValuePair craft in craftArray)
                 {
-                    IncManager.instance.AddAmount(craft.incrementable, craft.amount * numCrafts);
+                    IncManager.instance.Add(craft.incrementable, craft.amount * numCrafts);
                 }
             }
             //all requirements are a success!!

@@ -34,10 +34,10 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        defaultValues();
+        //defaultValues();
     }
 
-    void defaultValues()
+    public void defaultValues()
     {
         healthCurrent = healthMax;
         healthRate = 0.1f;
@@ -58,8 +58,8 @@ public class Player : MonoBehaviour
         regen(ref healthCurrent, healthRate, healthMax);
         regen(ref staminaCurrent, staminaRate, staminaMax);
         regen(ref warmthCurrent, warmthRate, warmthMax);
-        IncManager.instance.AddAmount(hunger, 1);
-        IncManager.instance.AddAmount(thirst, 0.1f);
+        IncManager.instance.Add(hunger, 1);
+        IncManager.instance.Add(thirst, 0.1f);
 
         //warmthCurrent
         //THIRST/HUNGER RATE CALCULATIONS

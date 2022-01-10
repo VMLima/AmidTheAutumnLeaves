@@ -54,10 +54,10 @@ public class IncrementableSO : UIMenuSO
         {
             foreach (IncrementalValuePair pair in clickEffects)
             {
-                if(pair.incrementable != null) IncManager.instance.AddAmount(pair.incrementable, pair.amount);
+                if(pair.incrementable != null) IncManager.instance.Add(pair.incrementable, pair.amount);
             }
         }
-        IncManager.instance.AddAmount(this, -1);
+        IncManager.instance.Add(this, -1);
     }
 
     public virtual float getUnlockValue()

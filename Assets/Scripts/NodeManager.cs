@@ -16,12 +16,12 @@ public class NodeManager : MonoBehaviour
     public static NodeManager Instance;
 
     [HideInInspector]
-    public RoomFeatureSO[] featureArray;
+    public ButtonSO[] featureArray;
     [HideInInspector]
     public RoomSO[] nodeArray;
 
     private RoomSO currentNode;
-    private List<RoomFeatureSO> currentFeatures;
+    private List<ButtonSO> currentFeatures;
 
     private string output;
     private string featureText;
@@ -34,11 +34,11 @@ public class NodeManager : MonoBehaviour
         Instance = this;
         //populate feature array
         activeButtons = new List<GameObject>();
-        featureArray = Utils.GetAllScriptableObjects<RoomFeatureSO>();
+        featureArray = Utils.GetAllScriptableObjects<ButtonSO>();
         nodeArray = Utils.GetAllScriptableObjects<RoomSO>();
 
         Debug.Log("done nodes");
-        currentFeatures = new List<RoomFeatureSO>();
+        currentFeatures = new List<ButtonSO>();
     }
 
     private void OnDestroy()
@@ -87,7 +87,7 @@ public class NodeManager : MonoBehaviour
 
     //when an unlock is called from a listener, can easily do...
     //"NodeManager.instance.unlockFeature(thisFeature)"
-    public void unlockFeature(RoomFeatureSO feature)
+    public void unlockFeature(ButtonSO feature)
     {
         initFeature(feature);
     }
@@ -108,7 +108,7 @@ public class NodeManager : MonoBehaviour
         for (int i = 0; i < currentNode.numRandomFeatures; i++)
         {
             //REWRITE THIS SO IT REMOVES ONES FROM LIST OF POTENTIALS INSTEAD OF BRUTE FORCE RNG.
-            RoomFeatureSO temp = currentFeatures[0];
+            ButtonSO temp = currentFeatures[0];
             int j = 0;
             while ((currentFeatures.Contains(temp)) && (j < 5))
             {
@@ -126,7 +126,7 @@ public class NodeManager : MonoBehaviour
         //settting up buttons and text.
         if(currentFeatures.Count > 0)
         {
-            foreach (RoomFeatureSO feature in currentFeatures)
+            foreach (ButtonSO feature in currentFeatures)
             {
                 if (!feature.unlocked)
                 {
@@ -143,7 +143,7 @@ public class NodeManager : MonoBehaviour
         
     }
 
-    void initFeature(RoomFeatureSO feature)
+    void initFeature(ButtonSO feature)
     {
         /*
         if(feature.button != null)

@@ -20,7 +20,7 @@ public class RoomSO : CommonBaseSO
     //public Button[] buttons;
 
     public int numRandomFeatures;
-    public RoomFeatureSO[] presetFeatures;
+    public ButtonSO[] presetFeatures;
 
     //UI to be added to
     //placement order in UI

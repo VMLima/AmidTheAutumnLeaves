@@ -28,7 +28,7 @@ public class TestCraft : MonoBehaviour
             Debug.Log("Test: num berries = " + berry.getAmount());
 
             Debug.Log("Test: ADDING 2 berry");
-            IncManager.instance.AddAmount(berry, 3);
+            IncManager.instance.Add(berry, 3);
             Debug.Log("Test: num berries = " + berry.getAmount());
 
             Debug.Log("Test: CRAFTING 1 BreedBerry");

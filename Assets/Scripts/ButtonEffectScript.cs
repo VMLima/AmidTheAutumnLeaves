@@ -26,7 +26,7 @@ public class ButtonEffectScript : EffectScript
     public Color ButtonTitleColor = Color.black;
     public string buttonTooltip;
     public Color buttonColor = Color.gray;
-    public Tooltip tooltip;
+    [HideInInspector] public Tooltip tooltip;
     private Image image;
     
     private TextMeshProUGUI titleGUI;
@@ -86,7 +86,8 @@ public class ButtonEffectScript : EffectScript
 
     public void refreshTooltip(float timeToWait = -1)
     {
-        tooltip.clickReset(timeToWait);
+        if (button.IsActive()) tooltip.clickReset(timeToWait);
+        else tooltip.hideMessage();
     }
 
     public void setButtonInfo(string newTitle, string newTooltip, Color newColor)
@@ -186,7 +187,7 @@ public class ButtonEffectScript : EffectScript
         {
             foreach(IncrementalValuePair pair in onStartEffect)
             {
-                IncManager.instance.AddAmount(pair.incrementable, pair.amount);
+                IncManager.instance.Add(pair.incrementable, pair.amount);
             }
         }
         onStart();
@@ -201,7 +202,7 @@ public class ButtonEffectScript : EffectScript
             {
                 foreach (IncrementalValuePair pair in onStartEffect)
                 {
-                    IncManager.instance.AddAmount(pair.incrementable, -1*pair.amount);
+                    IncManager.instance.Add(pair.incrementable, -1*pair.amount);
                 }
             }
         }
@@ -214,7 +215,7 @@ public class ButtonEffectScript : EffectScript
         {
             foreach (IncrementalValuePair pair in onTickEffect)
             {
-                IncManager.instance.AddAmount(pair.incrementable, pair.amount);
+                IncManager.instance.Add(pair.incrementable, pair.amount);
             }
         }
         onTick();

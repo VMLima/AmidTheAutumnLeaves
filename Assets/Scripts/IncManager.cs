@@ -46,6 +46,7 @@ public class IncManager : MonoBehaviour
 
     private bool gotResourceEvent = false;
     private bool gotItemEvent = false;
+    private int incIndex;
 
     void startGame()
     {
@@ -57,15 +58,21 @@ public class IncManager : MonoBehaviour
     {
         instance = this;
 
-        compileDataStorage();   
+        //compileDataStorage();   
         //updates and compiles the dataStorage scriptable object.  
         //links to all other scriptable objects and dataStorage.get<type>(_name) will return any scriptable object.
     }
     private void Start()
     {
         //functions that require everything setup to work.
-        resetAllScriptableObjects();
-        startGame();
+        //resetAllScriptableObjects();
+        //startGame();
+        setDefaultValues();
+    }
+
+    public void setDefaultValues()
+    {
+        incIndex = 0;
     }
 
     private void Update()
@@ -104,15 +111,15 @@ public class IncManager : MonoBehaviour
         return 0;
     }
 
-    public void AddAmount<T>(string _name, float amount = 1) where T : IncrementableSO
+    public void Add<T>(string _name, float amount = 1) where T : IncrementableSO
     {
-        AddAmount(Get<T>(_name), amount);
+        Add(Get<T>(_name), amount);
     }
 
     //ADD AMOUNT
     //either hand over an object to increment by amount
     // or give the type and a name.
-    public void AddAmount(IncrementableSO inc, float amount = 1)
+    public void Add(IncrementableSO inc, float amount = 1)
     {
         //if not active in ui and unlocked... add to UI
         if (inc != null)
@@ -124,7 +131,13 @@ public class IncManager : MonoBehaviour
             //add the quantity.  If it's new, activate.
             //if its empty and remove when empty.  deactivate.
             inc.addAmount(amount);
-            if (inc.isActive == false) inc.activate(true);
+            if (inc.isActive == false)
+            {
+                inc.activate(true);
+                //as things get added to UI, have them be in a static order based on first added.
+                inc.setUIIndex(incIndex);
+                incIndex++;
+            }
             else if (inc.removeFromUIOnEmpty && inc.getAmount() <= 0) inc.activate(false);
 
             //GOTTA UPDATE THIS ALL TOO.  Better listening for unlocks.
@@ -164,12 +177,12 @@ public class IncManager : MonoBehaviour
         }
     }
 
-    void compileDataStorage()
+    public void compileDataStorage()
     {
         dataStorage.clear();
         dataStorage.compileReferences();
     }
-    void resetAllScriptableObjects()
+    public void resetAllScriptableObjects()
     {
         dataStorage.resetAllScriptableObjects();
     }

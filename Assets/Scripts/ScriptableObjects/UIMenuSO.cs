@@ -14,7 +14,7 @@ public class UIMenuSO : CommonBaseSO
     public GameObject UIPanel;
     [HideInInspector]
     public bool isActive;
-
+    public string tooltipText = ""; 
     [HideInInspector] public int UIIndex;
 
     public Sprite UISprite;
