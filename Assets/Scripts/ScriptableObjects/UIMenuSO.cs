@@ -14,7 +14,8 @@ public class UIMenuSO : CommonBaseSO
     public GameObject UIPanel;
     [HideInInspector]
     public bool isActive;
-    public string tooltipText = ""; 
+    public string tooltipText = "";
+    public bool useOnlyTooltipText = false;
     [HideInInspector] public int UIIndex;
 
     public Sprite UISprite;
@@ -59,9 +60,11 @@ public class UIMenuSO : CommonBaseSO
 
     public virtual string  compileTooltip()
     {
-        if (clickEffects == null || clickEffects.Length <= 0) return "";
+        if (useOnlyTooltipText || clickEffects == null || clickEffects.Length <= 0) return tooltipText;
 
-        string output = "Use 1 = ";
+        string output = "";
+        if (tooltipText != "")  output += tooltipText + "\n";
+        output += "Use 1 = ";
         bool doAnd = false;
         foreach (IncrementalValuePair pair in clickEffects)
         {
@@ -87,15 +90,17 @@ public class UIMenuSO : CommonBaseSO
         UIInstance = (GameObject)Instantiate(UIPrefab);
         UIInstance.transform.SetParent(UIPanel.transform);
         UIInstance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        /*
+
+        setUIData();
+
         Tooltip temp = UIInstance.GetComponent<Tooltip>();
         if(temp)
         {
             temp.setTooltip(compileTooltip());
-            //Debug.Log("UIMENUSO:instantiateUI: found tooltip:" + name);
+            Debug.Log("UIMENUSO:instantiateUI: found tooltip:" + name + ":" + temp.getTooltip());
         }
-        */
-        setUIData();
+        
+        
         activate(false);
     }
 

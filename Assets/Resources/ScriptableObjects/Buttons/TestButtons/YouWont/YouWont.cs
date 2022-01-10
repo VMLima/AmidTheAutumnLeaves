@@ -26,7 +26,7 @@ public class YouWont : ButtonEffectScript
 
             setTooltipHoverDelay(1.0f); //when mousing over this button, how long it takes for the tooltip window to show up.
             refreshTooltip();  //the current tooltip will blink out.  After the time (no value means use hover delay) it will appear again and be updated.
-            PressDelay(5);  //this button will ignore being pressed again for 5 seconds.
+            PressDelay(1.5f);  //this button will ignore being pressed again for 5 seconds.
             
             //Red, you are dead
         }
@@ -37,7 +37,7 @@ public class YouWont : ButtonEffectScript
             setButtonInfo("JK", "Just a joke bro, why so mad.", Color.green);
             refreshTooltip(1.5f);
             setTooltipHoverDelay(1.5f);
-            PressDelay(5);
+            PressDelay(2.0f);
         }
         else if(stage == 2)
         {

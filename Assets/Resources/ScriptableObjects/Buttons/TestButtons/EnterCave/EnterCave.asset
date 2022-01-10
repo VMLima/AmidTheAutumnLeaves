@@ -12,20 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
   m_Name: EnterCave
   m_EditorClassIdentifier: 
-  name: 
-  toUnlock: []
-  unlocked: 0
+  name: EnterCave
+  toUnlock:
+  - incrementable: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
+    amount: 1
+  unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 0}
+  UIPrefab: {fileID: 5895366186889219798, guid: 687202cdc0e0f5341a12fc1f819c1b1d, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 0
-  UIIndex: 0
+  isActive: 1
+  tooltipText: 
+  useOnlyTooltipText: 0
+  UIIndex: 1
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
   clickEffects: []
-  activeDescription: 
-  inactiveDescripton: 
-  button: {fileID: 0}
+  button: {fileID: 5371986101292956776, guid: 687202cdc0e0f5341a12fc1f819c1b1d, type: 3}

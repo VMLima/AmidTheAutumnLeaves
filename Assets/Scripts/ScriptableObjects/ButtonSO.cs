@@ -34,12 +34,10 @@ public class ButtonSO : UIMenuSO
 
     public override string compileTooltip()
     {
-        
-        if(buttonEffect != null)
-        {
-            return buttonEffect.compileTooltip();
-        }
-        return "";
+        string output = "";
+        if (tooltipText != "") output += tooltipText + "\n";
+        if(buttonEffect != null) output += buttonEffect.compileTooltip();
+        return output;
     }
 
     public override void declareUI()
@@ -51,12 +49,12 @@ public class ButtonSO : UIMenuSO
     public override void reset()
     {
         base.reset();
-        buttonEffect = UIInstance.GetComponent<ButtonEffectScript>();
+        //buttonEffect = UIInstance.GetComponent<ButtonEffectScript>();
     }
 
     public override void setUIData()
     {
-        
+        buttonEffect = UIInstance.GetComponent<ButtonEffectScript>();
     }
 
     public void haltEffects()

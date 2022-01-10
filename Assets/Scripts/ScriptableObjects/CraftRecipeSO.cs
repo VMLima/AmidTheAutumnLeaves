@@ -27,8 +27,10 @@ public class CraftRecipeSO : UIMenuSO
 
     public override string compileTooltip()
     {
-        if (craftArray == null || craftArray.Length <= 0) return "";
+        Debug.Log("CraftRecipeSO:compileTooltip:");
+        if (craftArray == null || craftArray.Length <= 0) return tooltipText;
         string output = "";
+        if (tooltipText != "") output += tooltipText + "\n";
         bool doAnd;
         if (costArray == null || costArray.Length <= 0)
         {
@@ -56,7 +58,7 @@ public class CraftRecipeSO : UIMenuSO
             output += pair.amount + " " + pair.incrementable.name;
             
         }
-        Debug.Log("UIMenuSO:compileTooltip:" + output);
+        Debug.Log("CraftRecipeSO:compileTooltip:" + output);
         return output;
     }
 

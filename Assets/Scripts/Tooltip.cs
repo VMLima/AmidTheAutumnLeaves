@@ -8,6 +8,11 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private string tipMessage = "";
     private float timeToWait = 1.0f;
 
+    public string getTooltip()
+    {
+        return tipMessage;
+    }
+
     public void setTooltip(string message)
     {
         tipMessage = message;

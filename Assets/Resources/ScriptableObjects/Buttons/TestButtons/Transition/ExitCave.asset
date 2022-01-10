@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
   m_Name: ExitCave
   m_EditorClassIdentifier: 
-  name: 
+  name: ExitCave
   toUnlock: []
-  unlocked: 0
+  unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 0}
+  UIPrefab: {fileID: 5895366186889219798, guid: 9ef395ec406fcef4cbff3b9033f3356c, type: 3}
   UIPanel: {fileID: 0}
   isActive: 0
-  UIIndex: 0
+  tooltipText: 
+  useOnlyTooltipText: 0
+  UIIndex: 3
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
   clickEffects: []
-  button: {fileID: 0}
+  button: {fileID: 5371986101292956776, guid: 9ef395ec406fcef4cbff3b9033f3356c, type: 3}

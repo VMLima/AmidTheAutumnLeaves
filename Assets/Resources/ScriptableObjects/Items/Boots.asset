@@ -19,16 +19,21 @@ MonoBehaviour:
   UIInstance: {fileID: 0}
   UIPrefab: {fileID: 77532610994766148, guid: 14385605e8c10f341b9de80d34dcfd82, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 0
-  amount: 0
+  isActive: 1
+  tooltipText: At least it's not 1.
+  useOnlyTooltipText: 0
+  UIIndex: 1
+  UISprite: {fileID: 0}
+  textDisplay: {fileID: 0}
+  imageDisplay: {fileID: 0}
+  clickButton: {fileID: 0}
+  clickEffects: []
+  amount: 2
   maximum: 2
   maxStack: 2
   minAmount: 0
   minStack: 0
   EffectObject: {fileID: 0}
-  UISprite: {fileID: 0}
-  textDisplay: {fileID: 0}
-  imageDisplay: {fileID: 0}
   removeFromUIOnEmpty: 0
   UIPanelID: 0
   UIActive: 0

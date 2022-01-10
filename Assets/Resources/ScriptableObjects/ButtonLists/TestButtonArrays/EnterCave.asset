@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97e9e3b5d71a544492fde659d4d86b9, type: 3}
   m_Name: EnterCave
   m_EditorClassIdentifier: 
-  name: 
+  name: EnterCave
   toUnlock: []
-  unlocked: 0
+  unlocked: 1
   incManager: {fileID: 0}
-  features: []
+  features:
+  - {fileID: 11400000, guid: 9fdac55fc4154574399e1f6264643983, type: 2}
