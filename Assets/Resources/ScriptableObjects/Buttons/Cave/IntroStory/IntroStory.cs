@@ -14,9 +14,13 @@ public class IntroStory : ButtonEffectScript
     private void Start()
     {
         toggleButton = false;   //just making sure.  It is set in the inspector, but I've forgoten before.
+
+        //me setting the values I may use later for easy quick access.
         stamina = IncManager.instance.Get<PlayerAttributeSO>("Stamina");
         health = IncManager.instance.Get<PlayerAttributeSO>("Health");
         water = IncManager.instance.Get<PlayerAttributeSO>("Water");
+
+        //if the button needs to be reset (like new game) the stuff that needs to be set
         defaultValues();
     }
 
@@ -25,6 +29,15 @@ public class IntroStory : ButtonEffectScript
         stage = 0;
         onStart();
         setTooltipHoverDelay(0.5f);
+    }
+
+    //called on button press.
+    public override void onStart()
+    {
+        //stuff that happens specific to the current stage
+        stageStuff();
+        //stuff that happens every press
+        everyTime();
     }
 
     void stageStuff()
@@ -86,10 +99,5 @@ public class IntroStory : ButtonEffectScript
         stage++;
     }
 
-    public override void onStart()
-    {
-        //intro story stuff.
-        stageStuff();
-        everyTime();
-    }
+    
 }
