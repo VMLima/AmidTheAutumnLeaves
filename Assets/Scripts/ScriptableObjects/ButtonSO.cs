@@ -42,7 +42,8 @@ public class ButtonSO : UIMenuSO
 
     public override void declareUI()
     {
-        UIPrefab = button.gameObject;
+        if (button != null) UIPrefab = button.gameObject;
+        else Debug.LogError("ButtonSO:declareUI:ButtonSO named:" + name + ": does not have button linked in inspector.");
         UIPanel = IncManager.instance.ButtonPanel;
     }
 

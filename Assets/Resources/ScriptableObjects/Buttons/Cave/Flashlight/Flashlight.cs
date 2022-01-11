@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flashlight : MonoBehaviour
+public class Flashlight : ButtonEffectScript
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        toggleButton = true;
+        //IncManager.instance.startDarkness();
+        //IncManager.instance.endDarkness();
+        //ButtonManager.instance.activateButtonArray("DarknessArray");
+    }
+    bool toggle = false;
+    public override void onStart()
+    {
+        FlashlightManager.ShowFlashlight_Static();
         
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void onStop()
     {
-        
+        FlashlightManager.HideFlashlight_Static();
     }
 }

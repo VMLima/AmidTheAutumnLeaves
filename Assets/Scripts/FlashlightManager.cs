@@ -8,7 +8,6 @@ public class FlashlightManager : MonoBehaviour
 {
     [SerializeField]
     private Camera uiCamera;
-
     private static FlashlightManager instance;
     private bool isActive = false;
 
@@ -32,7 +31,7 @@ public class FlashlightManager : MonoBehaviour
         instance = this;
         //backgroundTransform = transform.Find("Background").GetComponent<RectTransform>();
         //tooltipText = transform.Find("Text").GetComponent<TextMeshProUGUI>();
-        show();
+        hide();
         //hide();
         //tooltipText = transform.Find("Text2").GetComponent<Text>();
         //showTooltip("YUAY3246234626426426426wrtyrteyerytertyertyert4363YASADD \nsdagasdg asfa asd sadfas asdagafasdfsdfasdfasdfadfad");

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 /// <summary>
 /// HANDLES ALL INCREMENTABLE OBJECTS
@@ -48,6 +49,14 @@ public class IncManager : MonoBehaviour
     private bool gotItemEvent = false;
     private int incIndex;
 
+    public void startDarkness()
+    {
+        ButtonPanel.GetComponent<Image>().color = Color.black;
+    }
+    public void endDarkness()
+    {
+        ButtonPanel.GetComponent<Image>().color = Color.grey;
+    }
     void startGame()
     {
         ButtonManager.instance.activateButtonArray("Start");

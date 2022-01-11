@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
-  m_Name: Flashlight
+  m_Name: Darkness1 4
   m_EditorClassIdentifier: 
-  nameTag: Flashlight
+  nameTag: Darkness1 4
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 7089106189974895573, guid: 0aed38e449d94da478231d47aa794b73, type: 3}
+  UIPrefab: {fileID: 5596108988157346803, guid: cb5016cb84c41804c87ca6aa0a8e95c5, type: 3}
   UIPanel: {fileID: 0}
   isActive: 1
   tooltipText: 
   useOnlyTooltipText: 0
-  UIIndex: 1
+  UIIndex: 5
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
   clickEffects: []
   tooltip: {fileID: 0}
-  button: {fileID: 8615265438549201580, guid: 0aed38e449d94da478231d47aa794b73, type: 3}
+  button: {fileID: 6361156051079293578, guid: cb5016cb84c41804c87ca6aa0a8e95c5, type: 3}
