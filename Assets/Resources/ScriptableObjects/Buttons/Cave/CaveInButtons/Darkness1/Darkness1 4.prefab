@@ -131,13 +131,20 @@ MonoBehaviour:
   maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
-  buttonTitle: Stand very still.
+  buttonTitle: Give yourself a concussion.
   ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
-  buttonTooltip: No escape from reality
+  buttonTooltip: and see!!!
+  tooltipHoverDelay: 0.2
   doNotShowCostsInTooltip: 1
   buttonColor: {r: 0, g: 0, b: 0, a: 1}
   tooltip: {fileID: 0}
   toggleButton: 0
-  onStartEffect: []
+  onStartEffect:
+  - incrementable: {fileID: 11400000, guid: 7f6a66a14bc42564692fd6891dbbd9b2, type: 2}
+    amount: -10
+  - incrementable: {fileID: 11400000, guid: 054c9e93f8e7b2c4c8b5fbafb3b73517, type: 2}
+    amount: -10
+  - incrementable: {fileID: 11400000, guid: 74787473e946ded4789e84ac8e65e598, type: 2}
+    amount: 1
   onTickEffect: []
   mirrorStartonStop: 1

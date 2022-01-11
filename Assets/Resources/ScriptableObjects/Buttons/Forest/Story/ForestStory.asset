@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
-  m_Name: TextExit
+  m_Name: ForestStory
   m_EditorClassIdentifier: 
-  nameTag: TestExit
+  nameTag: ForestStory
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 5895366186889219798, guid: 9ef395ec406fcef4cbff3b9033f3356c, type: 3}
+  UIPrefab: {fileID: 8423432684988153408, guid: ddba0859c2cd76c4cb77fc4847ddad67, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 0
+  isActive: 1
   tooltipText: 
   useOnlyTooltipText: 0
-  UIIndex: 3
+  UIIndex: 9
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
   clickEffects: []
   tooltip: {fileID: 0}
-  button: {fileID: 5371986101292956776, guid: 9ef395ec406fcef4cbff3b9033f3356c, type: 3}
+  button: {fileID: 6991849028857567033, guid: ddba0859c2cd76c4cb77fc4847ddad67, type: 3}

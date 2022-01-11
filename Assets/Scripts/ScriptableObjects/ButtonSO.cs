@@ -19,11 +19,24 @@ public class ButtonSO : UIMenuSO
     //private bool isActive;
     public Button button;
     private ButtonEffectScript buttonEffect;
+
+    private List<GameObject> extraInstances;
     
     //[HideInInspector] public GameObject buttonInstance;
 
     //core functionality of unlocking the feature.
     //unlock() sets unlocked=true then goes here.
+
+    public ButtonEffectScript createSpider(int siblingIndex = 0)
+    {
+        GameObject temp = (GameObject)Instantiate(UIPrefab);
+        temp.transform.SetParent(UIPanel.transform);
+        temp.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        if (siblingIndex != 0) temp.transform.SetSiblingIndex(siblingIndex);
+        ButtonEffectScript tempScript = temp.GetComponent<ButtonEffectScript>();
+        if (tempScript == null) Debug.LogError("ButtonSO:createSpider: could not get buttoneffectscrit");
+        return tempScript;
+    }
 
     public override void activate(bool turnOn)
     {
@@ -50,6 +63,7 @@ public class ButtonSO : UIMenuSO
     public override void reset()
     {
         base.reset();
+        extraInstances = new List<GameObject>();
         //buttonEffect = UIInstance.GetComponent<ButtonEffectScript>();
     }
 

@@ -121,7 +121,8 @@ MonoBehaviour:
   destroyObjectOnEnd: 1
   buttonTitle: Flashlight
   ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
-  buttonTooltip: Full charge.
+  buttonTooltip: open your eyes...
+  tooltipHoverDelay: 0.2
   doNotShowCostsInTooltip: 0
   buttonColor: {r: 0, g: 0, b: 0, a: 1}
   tooltip: {fileID: 0}

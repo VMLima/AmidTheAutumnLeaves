@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97e9e3b5d71a544492fde659d4d86b9, type: 3}
-  m_Name: DarknessArray
+  m_Name: CaveInArray
   m_EditorClassIdentifier: 
   nameTag: CaveIn
   toUnlock: []
@@ -19,6 +19,7 @@ MonoBehaviour:
   features:
   - {fileID: 11400000, guid: 968f112053f065349a6382f74c1f1f0a, type: 2}
   - {fileID: 11400000, guid: 19fe0babad290ba468e6b015d55b1469, type: 2}
+  - {fileID: 11400000, guid: 2ee72bd2d0d7e2747a57b5731df1ef2e, type: 2}
   - {fileID: 11400000, guid: f82ef82c2b5afd945a5458d95c2bbc44, type: 2}
-  - {fileID: 11400000, guid: 5ae522ff32e8d8349b08ce619e4736a6, type: 2}
   - {fileID: 11400000, guid: 3136c0c50fa69fb43aa22e2ddf515671, type: 2}
+  - {fileID: 11400000, guid: 5ae522ff32e8d8349b08ce619e4736a6, type: 2}

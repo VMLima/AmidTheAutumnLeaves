@@ -134,6 +134,7 @@ MonoBehaviour:
   buttonTitle: Headbutt a wall.
   ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
   buttonTooltip: Is this the real life...
+  tooltipHoverDelay: 0.2
   doNotShowCostsInTooltip: 1
   buttonColor: {r: 0, g: 0, b: 0, a: 1}
   tooltip: {fileID: 0}

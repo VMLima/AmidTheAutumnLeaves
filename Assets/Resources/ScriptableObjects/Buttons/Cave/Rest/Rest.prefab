@@ -120,13 +120,14 @@ MonoBehaviour:
   maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
-  buttonTitle: Doze off
+  buttonTitle: Survival Toggle
   ButtonTitleColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
-  buttonTooltip: It's calling to me....
-  buttonColor: {r: 0.3679245, g: 0.27941436, b: 0.27941436, a: 1}
+  buttonTooltip: 
+  tooltipHoverDelay: 1
+  doNotShowCostsInTooltip: 0
+  buttonColor: {r: 0, g: 0, b: 0, a: 1}
   tooltip: {fileID: 0}
   toggleButton: 1
-  staminaCost: -2
   onStartEffect: []
   onTickEffect: []
   mirrorStartonStop: 1

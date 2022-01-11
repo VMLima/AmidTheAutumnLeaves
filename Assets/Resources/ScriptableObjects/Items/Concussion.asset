@@ -9,24 +9,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
-  m_Name: TextExit
+  m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
+  m_Name: Concussion
   m_EditorClassIdentifier: 
-  nameTag: TestExit
+  nameTag: 
   toUnlock: []
-  unlocked: 1
+  unlocked: 0
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 5895366186889219798, guid: 9ef395ec406fcef4cbff3b9033f3356c, type: 3}
+  UIPrefab: {fileID: 0}
   UIPanel: {fileID: 0}
   isActive: 0
   tooltipText: 
   useOnlyTooltipText: 0
-  UIIndex: 3
+  UIIndex: 0
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
   clickEffects: []
   tooltip: {fileID: 0}
-  button: {fileID: 5371986101292956776, guid: 9ef395ec406fcef4cbff3b9033f3356c, type: 3}
+  amount: 0
+  maximum: 0
+  maxStack: 0
+  minAmount: 0
+  minStack: 0
+  EffectObject: {fileID: 0}
+  removeFromUIOnEmpty: 0
+  UIPanelID: 0
+  UIActive: 0
+  hasUI: 0
+  effectManager: {fileID: 0}
+  DeleteWhenEmpty: 0

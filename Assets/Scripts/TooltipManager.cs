@@ -11,7 +11,7 @@ public class TooltipManager : MonoBehaviour
 
     private static TooltipManager instance;
     private bool isActive = false;
-    private static bool isEvent = false;
+    public static bool isEvent = false;
     private TextMeshProUGUI tooltipText;
     //private Text tooltipText;
     private RectTransform backgroundTransform;
@@ -55,6 +55,7 @@ public class TooltipManager : MonoBehaviour
 
     public static void StartEvent_Static()
     {
+        instance.hideTooltip();
         isEvent = true;
     }
     public static void StopEvent_Static()

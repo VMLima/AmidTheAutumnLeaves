@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -37,10 +38,20 @@ public class ButtonManager : MonoBehaviour
         addButtonArrayToUI(GetButtonArray(_name), turnOn);
     }
 
+    public void deleteButtons(string _partialName)
+    {
+        for(int i = buttonPanel.transform.childCount-1;i>=0 ;i--)
+        {
+            if (buttonPanel.transform.GetChild(i).name.Contains(_partialName)) Destroy(buttonPanel.transform.GetChild(i).gameObject);
+        }
+    }
+
     public void deactivateAllButtons()
     {
+        
         for(int i = 0;i<activeButtons.Count;i++)
         {
+            
             addButtonToUI(activeButtons[i], false);
         }
     }

@@ -25,6 +25,7 @@ public class ButtonEffectScript : EffectScript
     public string buttonTitle;
     public Color ButtonTitleColor = Color.black;
     [TextArea]public string buttonTooltip;
+    public float tooltipHoverDelay = 1f;
     public bool doNotShowCostsInTooltip = false;
     public Color buttonColor = Color.gray;
     [HideInInspector] public Tooltip tooltip;
@@ -47,6 +48,16 @@ public class ButtonEffectScript : EffectScript
 
     bool cannotPress = false;
     float waitTime = 1;
+
+    public int getPanelIndex()
+    {
+        return button.transform.GetSiblingIndex();
+    }
+
+    public void deleteSelf()
+    {
+        Destroy(button.gameObject);
+    }
 
     public void PressDelay(float _waitTime = 1)
     {
@@ -90,7 +101,10 @@ public class ButtonEffectScript : EffectScript
 
     public void refreshTooltip(float timeToWait = -1)
     {
-        if (button.IsActive()) tooltip.clickReset(timeToWait);
+        if (button.IsActive())
+        {
+            tooltip.clickReset(timeToWait);
+        }
         else tooltip.hideMessage();
     }
 
@@ -138,6 +152,7 @@ public class ButtonEffectScript : EffectScript
 
         tooltip = button.GetComponent<Tooltip>();
         image = button.GetComponent<Image>();
+        setTooltipHoverDelay(tooltipHoverDelay);
 
         //Debug.Log("button name:" + button.name);
         normalColor = button.colors.normalColor;

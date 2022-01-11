@@ -28,6 +28,8 @@ public class IntroStory : ButtonEffectScript
     {
         stage = 0;
         onStart();
+
+        //the tooltip will show up after 0.5s of hovering over the button.  Default is 1s. Low values for more story/actiony things.
         setTooltipHoverDelay(0.5f);
     }
 
@@ -42,6 +44,7 @@ public class IntroStory : ButtonEffectScript
 
     void stageStuff()
     {
+        //index is there so I can easily insert stages into spots without having to renumber everything. again.
         int index = 0;
         if (stage == index)
         {
@@ -50,10 +53,12 @@ public class IntroStory : ButtonEffectScript
             //changing simple click effects of this one
                 //setStartEffect(stamina, 5);    //if there is a stamina cost, or if there isn't, the new stamina cost is 5.
                 //removeStartEffect(thirst);    //remove any thirst costs.
-            //setting name/tooltip of this one
+
+            //setting name/tooltip/color of this one
             setButtonText("introStory0", "introStory0 tooltip");
 
             //setting delay till can be pressed again.
+
             return;
         }
         index++;

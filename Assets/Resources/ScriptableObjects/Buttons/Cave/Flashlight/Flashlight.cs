@@ -15,10 +15,12 @@ public class Flashlight : ButtonEffectScript
     public override void onStart()
     {
         FlashlightManager.ShowFlashlight_Static();
+        TooltipManager.StartEvent_Static();
         
     }
     public override void onStop()
     {
         FlashlightManager.HideFlashlight_Static();
+        TooltipManager.StopEvent_Static();
     }
 }

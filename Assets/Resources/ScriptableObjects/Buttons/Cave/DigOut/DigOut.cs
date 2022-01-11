@@ -39,21 +39,21 @@ public class DigOut : ButtonEffectScript
         {
             setButtonText("digOut1", "digOut1 tooltip");
 
-            PressDelay(1.5f);
+            PressDelay(1.0f);
             return;
         }
         index++;
         if (stage == index)
         {
             setButtonText("digOut2", "digOut2 tooltip");
-            PressDelay(1.5f);
+            PressDelay(1.0f);
             return;
         }
         index++;
         if (stage == index)
         {
             setButtonText("digOut3", "digOut3 tooltip");
-            PressDelay(1.5f);
+            PressDelay(1.0f);
             return;
         }
         index++;
@@ -85,6 +85,7 @@ public class DigOut : ButtonEffectScript
         yield return new WaitForSeconds(0.35f);
         TooltipManager.StopEvent_Static();
         ButtonManager.instance.deactivateAllButtons();
+        IncManager.instance.startDarkness();
         ButtonManager.instance.addButtonArrayToUI("CaveIn");
     }
     void everyTime()

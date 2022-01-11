@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
       propertyPath: m_Name
-      value: Darkness1 2
+      value: ExitCave
       objectReference: {fileID: 0}
     - target: {fileID: 6530753603494373717, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
       propertyPath: m_Colors.m_PressedColor.b
@@ -114,7 +114,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
   m_PrefabInstance: {fileID: 209057244473066463}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-1428752761214120398
+--- !u!114 &-6455199778019352026
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5596108988157346803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 784318379bd6d4044854d64554490b74, type: 3}
+  m_Script: {fileID: 11500000, guid: 45e3769122e122c48893a615d18294c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0
@@ -131,16 +131,15 @@ MonoBehaviour:
   maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
-  buttonTitle: Stub your toe
+  buttonTitle: Search for a way out
   ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
-  buttonTooltip: Is this just fantasy...
+  buttonTooltip: Caught in a landslide...
   tooltipHoverDelay: 0.2
-  doNotShowCostsInTooltip: 1
+  doNotShowCostsInTooltip: 0
   buttonColor: {r: 0, g: 0, b: 0, a: 1}
   tooltip: {fileID: 0}
-  toggleButton: 0
-  onStartEffect:
-  - incrementable: {fileID: 11400000, guid: 7f6a66a14bc42564692fd6891dbbd9b2, type: 2}
-    amount: -1
+  toggleButton: 1
+  onStartEffect: []
   onTickEffect: []
   mirrorStartonStop: 1
+  spiderSwarm: {fileID: 11400000, guid: a04da9a6e1664ae459ee13350e8a2e12, type: 2}
