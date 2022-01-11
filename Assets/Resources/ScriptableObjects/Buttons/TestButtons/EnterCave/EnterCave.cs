@@ -7,8 +7,8 @@ public class EnterCave : ButtonEffectScript
     bool toggle = false;
     public override void onStart()
     {
-        ButtonManager.instance.activateButtonArray("StartingButtons", false);
-        ButtonManager.instance.activateButtonArray("EnterCave");
+        ButtonManager.instance.addButtonArrayToUI("StartingButtons", false);
+        ButtonManager.instance.addButtonArrayToUI("EnterCave");
         refreshTooltip();
     }
 }

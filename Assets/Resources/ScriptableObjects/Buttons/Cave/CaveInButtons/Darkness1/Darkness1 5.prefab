@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3255671007801687033
+--- !u!1001 &209057244473066463
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -93,25 +93,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
       propertyPath: m_Name
-      value: Flashlight
+      value: Darkness1 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6530753603494373717, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.79215693
+      objectReference: {fileID: 0}
+    - target: {fileID: 6530753603494373717, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.79215693
+      objectReference: {fileID: 0}
+    - target: {fileID: 6530753603494373717, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.79215693
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
---- !u!1 &7089106189974895573 stripped
+--- !u!1 &5596108988157346803 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
-  m_PrefabInstance: {fileID: 3255671007801687033}
+  m_PrefabInstance: {fileID: 209057244473066463}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-8414644143786220822
+--- !u!114 &-1428752761214120398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7089106189974895573}
+  m_GameObject: {fileID: 5596108988157346803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c47ed1ef82e3438488108c5a41019604, type: 3}
+  m_Script: {fileID: 11500000, guid: 784318379bd6d4044854d64554490b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0
@@ -119,13 +131,13 @@ MonoBehaviour:
   maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
-  buttonTitle: Flashlight
+  buttonTitle: Stand very still.
   ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
-  buttonTooltip: Full charge.
-  doNotShowCostsInTooltip: 0
+  buttonTooltip: 
+  doNotShowCostsInTooltip: 1
   buttonColor: {r: 0, g: 0, b: 0, a: 1}
   tooltip: {fileID: 0}
-  toggleButton: 1
+  toggleButton: 0
   onStartEffect: []
   onTickEffect: []
   mirrorStartonStop: 1

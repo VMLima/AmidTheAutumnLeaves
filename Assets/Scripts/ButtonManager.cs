@@ -32,9 +32,17 @@ public class ButtonManager : MonoBehaviour
         addButtonToUI(GetButton(_name), turnOn);
     }
 
-    public void activateButtonArray(string _name, bool turnOn = true)
+    public void addButtonArrayToUI(string _name, bool turnOn = true)
     {
         addButtonArrayToUI(GetButtonArray(_name), turnOn);
+    }
+
+    public void deactivateAllButtons()
+    {
+        for(int i = 0;i<activeButtons.Count;i++)
+        {
+            addButtonToUI(activeButtons[i], false);
+        }
     }
 
     ButtonSO GetButton(string _name)

@@ -17,5 +17,4 @@ MonoBehaviour:
   unlocked: 1
   incManager: {fileID: 0}
   features:
-  - {fileID: 11400000, guid: c04e2c1f7a8cd6842b6fbf48efc58da6, type: 2}
-  - {fileID: 11400000, guid: 3136c0c50fa69fb43aa22e2ddf515671, type: 2}
+  - {fileID: 11400000, guid: 1df977cbf82b3bb44b7952fb03f0eda3, type: 2}

@@ -10,22 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
-  m_Name: ExitCave
+  m_Name: testy
   m_EditorClassIdentifier: 
-  name: ExitCave
+  nameTag: testy
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 5895366186889219798, guid: 9ef395ec406fcef4cbff3b9033f3356c, type: 3}
+  UIPrefab: {fileID: 2649143121127526673, guid: 6c0aa266d68674c4dbf058efb12fb2da, type: 3}
   UIPanel: {fileID: 0}
   isActive: 0
   tooltipText: 
   useOnlyTooltipText: 0
-  UIIndex: 3
+  UIIndex: 0
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
   clickEffects: []
-  button: {fileID: 5371986101292956776, guid: 9ef395ec406fcef4cbff3b9033f3356c, type: 3}
+  tooltip: {fileID: 0}
+  button: {fileID: 3543672523036883048, guid: 6c0aa266d68674c4dbf058efb12fb2da, type: 3}

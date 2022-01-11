@@ -11,7 +11,7 @@ public class TooltipManager : MonoBehaviour
 
     private static TooltipManager instance;
     private bool isActive = false;
-
+    private static bool isEvent = false;
     private TextMeshProUGUI tooltipText;
     //private Text tooltipText;
     private RectTransform backgroundTransform;
@@ -52,12 +52,26 @@ public class TooltipManager : MonoBehaviour
             transform.localPosition = localPoint;
         }
     }
-    public static void ShowTooltip_Static(string tooltipString)
+
+    public static void StartEvent_Static()
     {
+        isEvent = true;
+    }
+    public static void StopEvent_Static()
+    {
+        isEvent = false;
+        StopTooltip_Static();
+    }
+
+    //hover tooltips.  Do not function if in the middle of an event.
+    public static void StartTooltip_Static(string tooltipString, bool eventInput = false)
+    {
+        if (isEvent && !eventInput) return;
         instance.showTooltip(tooltipString);
     }
-    public static void HideTooltip_Static()
+    public static void StopTooltip_Static(bool eventInput = false)
     {
+        if (isEvent && !eventInput) return;
         instance.hideTooltip();
     }
 }

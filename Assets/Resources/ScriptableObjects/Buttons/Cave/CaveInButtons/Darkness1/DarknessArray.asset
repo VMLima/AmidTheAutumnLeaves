@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97e9e3b5d71a544492fde659d4d86b9, type: 3}
   m_Name: DarknessArray
   m_EditorClassIdentifier: 
-  nameTag: DarknessArray
+  nameTag: CaveIn
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19fe0babad290ba468e6b015d55b1469, type: 2}
   - {fileID: 11400000, guid: f82ef82c2b5afd945a5458d95c2bbc44, type: 2}
   - {fileID: 11400000, guid: 5ae522ff32e8d8349b08ce619e4736a6, type: 2}
+  - {fileID: 11400000, guid: 3136c0c50fa69fb43aa22e2ddf515671, type: 2}

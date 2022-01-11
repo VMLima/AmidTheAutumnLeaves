@@ -49,7 +49,7 @@ public class GameHandler : MonoBehaviour
 
     void startGame()
     {
-        buttonM.activateButtonArray("StartingButtons");
+        buttonM.addButtonArrayToUI("StartingButtons");
     }
 
     // Update is called once per frame

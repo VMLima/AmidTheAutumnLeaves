@@ -121,7 +121,7 @@ MonoBehaviour:
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
   buttonTitle: 
-  ButtonTitleColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
+  ButtonTitleColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
   buttonTooltip: 
   doNotShowCostsInTooltip: 0
   buttonColor: {r: 0.122641504, g: 0.122063, b: 0.122063, a: 1}

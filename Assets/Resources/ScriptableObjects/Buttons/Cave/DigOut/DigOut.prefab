@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3255671007801687033
+--- !u!1001 &3685615265530818778
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -93,39 +93,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
       propertyPath: m_Name
-      value: Flashlight
+      value: DigOut
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
---- !u!1 &7089106189974895573 stripped
+--- !u!1 &8964987370882461942 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
-  m_PrefabInstance: {fileID: 3255671007801687033}
+  m_PrefabInstance: {fileID: 3685615265530818778}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-8414644143786220822
+--- !u!114 &1334891361801906080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7089106189974895573}
+  m_GameObject: {fileID: 8964987370882461942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c47ed1ef82e3438488108c5a41019604, type: 3}
+  m_Script: {fileID: 11500000, guid: f7a8a9121dac14b4c85c6c16c97adfe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0
-  frequency: 1
-  maxStacks: 0
-  resetDurationOnStack: 0
-  destroyObjectOnEnd: 1
-  buttonTitle: Flashlight
-  ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
-  buttonTooltip: Full charge.
-  doNotShowCostsInTooltip: 0
-  buttonColor: {r: 0, g: 0, b: 0, a: 1}
-  tooltip: {fileID: 0}
-  toggleButton: 1
-  onStartEffect: []
-  onTickEffect: []
-  mirrorStartonStop: 1

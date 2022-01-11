@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SearchArea : ButtonEffectScript
+public class IntroStory : ButtonEffectScript
 {
+
     bool toggle = false;
     int stage = 0;
     PlayerAttributeSO stamina;
@@ -31,14 +32,14 @@ public class SearchArea : ButtonEffectScript
         int index = 0;
         if (stage == index)
         {
-            setButtonText("SearchArea0", "SearchArea0 tooltip");
+            setButtonText("introStory0", "introStory0 tooltip");
             return;
         }
         index++;
         if (stage == index)
         {
-            IncManager.instance.Add<ItemSO>("MedKit");
-            setButtonText("SearchArea1", "SearchArea1 tooltip");
+            ButtonManager.instance.addButtonToUI("SearchArea");
+            setButtonText("introStory1", "introStory1 tooltip");
 
             PressDelay(1.5f);
             return;
@@ -46,8 +47,7 @@ public class SearchArea : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            ButtonManager.instance.addButtonToUI("Rest");
-            setButtonText("SearchArea2", "SearchArea2 tooltip");
+            setButtonText("introStory2", "introStory2 tooltip");
 
             PressDelay(1.5f);
             return;
@@ -55,15 +55,14 @@ public class SearchArea : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            ButtonManager.instance.addButtonToUI("DigOut");
-            setButtonText("SearchArea3", "SearchArea3 tooltip");
+            setButtonText("introStory3", "introStory3 tooltip");
             PressDelay(1.5f);
             return;
         }
         index++;
         if (stage == index)
         {
-            setButtonText("SearchArea4", "SearchArea4 tooltip");
+            setButtonText("introStory4", "introStory4 tooltip");
             PreventPresses();
             return;
         }

@@ -33,7 +33,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (_timeToWait == -1) _timeToWait = timeToWait;
         StopAllCoroutines();
-        TooltipManager.HideTooltip_Static();
+        TooltipManager.StopTooltip_Static();
         StartCoroutine(startTimer(_timeToWait));
         
     }
@@ -52,12 +52,12 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void hideMessage()
     {
         StopAllCoroutines();
-        TooltipManager.HideTooltip_Static();
+        TooltipManager.StopTooltip_Static();
     }
 
     void managerDisplay()
     {
-        TooltipManager.ShowTooltip_Static(tipMessage);
+        TooltipManager.StartTooltip_Static(tipMessage);
     }
     private IEnumerator startTimer(float _timeToWait)
     {

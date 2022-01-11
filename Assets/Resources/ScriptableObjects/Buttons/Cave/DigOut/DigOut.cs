@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SearchArea : ButtonEffectScript
+public class DigOut : ButtonEffectScript
 {
     bool toggle = false;
     int stage = 0;
@@ -31,14 +31,13 @@ public class SearchArea : ButtonEffectScript
         int index = 0;
         if (stage == index)
         {
-            setButtonText("SearchArea0", "SearchArea0 tooltip");
+            setButtonText("digOut0", "digOut0 tooltip");
             return;
         }
         index++;
         if (stage == index)
         {
-            IncManager.instance.Add<ItemSO>("MedKit");
-            setButtonText("SearchArea1", "SearchArea1 tooltip");
+            setButtonText("digOut1", "digOut1 tooltip");
 
             PressDelay(1.5f);
             return;
@@ -46,27 +45,47 @@ public class SearchArea : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            ButtonManager.instance.addButtonToUI("Rest");
-            setButtonText("SearchArea2", "SearchArea2 tooltip");
-
+            setButtonText("digOut2", "digOut2 tooltip");
             PressDelay(1.5f);
             return;
         }
         index++;
         if (stage == index)
         {
-            ButtonManager.instance.addButtonToUI("DigOut");
-            setButtonText("SearchArea3", "SearchArea3 tooltip");
+            setButtonText("digOut3", "digOut3 tooltip");
             PressDelay(1.5f);
             return;
         }
         index++;
         if (stage == index)
         {
-            setButtonText("SearchArea4", "SearchArea4 tooltip");
+            setButtonText("digOut4", "digOut4 tooltip");
+            return;
+        }
+        else
+        {
             PreventPresses();
-            return;
+            StartCoroutine(CaveIn());
         }
+    }
+    IEnumerator CaveIn()
+    {
+        TooltipManager.StartEvent_Static();
+        TooltipManager.StartTooltip_Static("rumble", true);
+        yield return new WaitForSeconds(2);
+        TooltipManager.StartTooltip_Static("RUMBLE", true);
+        yield return new WaitForSeconds(1.5f);
+        TooltipManager.StartTooltip_Static("BAM", true);
+        yield return new WaitForSeconds(0.75f);
+        TooltipManager.StartTooltip_Static("BOOM", true);
+        yield return new WaitForSeconds(0.5f);
+        TooltipManager.StartTooltip_Static("CRASH", true);
+        yield return new WaitForSeconds(0.5f);
+        TooltipManager.StartTooltip_Static("POP!", true);
+        yield return new WaitForSeconds(0.35f);
+        TooltipManager.StopEvent_Static();
+        ButtonManager.instance.deactivateAllButtons();
+        ButtonManager.instance.addButtonArrayToUI("CaveIn");
     }
     void everyTime()
     {

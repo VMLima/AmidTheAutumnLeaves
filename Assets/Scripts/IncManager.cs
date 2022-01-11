@@ -59,7 +59,7 @@ public class IncManager : MonoBehaviour
     }
     void startGame()
     {
-        ButtonManager.instance.activateButtonArray("Start");
+        ButtonManager.instance.addButtonArrayToUI("Start");
         WeatherManager.instance.pickRandomWeather();
     }
 
