@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97e9e3b5d71a544492fde659d4d86b9, type: 3}
   m_Name: StartingButtons
   m_EditorClassIdentifier: 
-  name: StartingButtons
+  nameTag: StartingButtons
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   features:
-  - {fileID: 11400000, guid: 987b9bb243690534fa3725d90a90efb1, type: 2}
-  - {fileID: 11400000, guid: 387993488e660b04ba1ac3e038cd76b5, type: 2}
-  - {fileID: 11400000, guid: 03a4c804cd5eaff49b07844eb08f5ee8, type: 2}
+  - {fileID: 11400000, guid: c04e2c1f7a8cd6842b6fbf48efc58da6, type: 2}

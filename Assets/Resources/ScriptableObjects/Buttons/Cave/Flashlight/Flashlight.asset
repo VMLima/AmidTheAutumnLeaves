@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
-  m_Name: SearchArea
+  m_Name: Flashlight
   m_EditorClassIdentifier: 
-  nameTag: SearchArea
+  nameTag: 
   toUnlock: []
-  unlocked: 1
+  unlocked: 0
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 4960844414316919975, guid: 32919e0eb771ad044bc62076d1a493a6, type: 3}
+  UIPrefab: {fileID: 0}
   UIPanel: {fileID: 0}
-  isActive: 1
-  tooltipText: It's so dark.
-  useOnlyTooltipText: 1
+  isActive: 0
+  tooltipText: 
+  useOnlyTooltipText: 0
   UIIndex: 0
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
@@ -29,4 +29,4 @@ MonoBehaviour:
   clickButton: {fileID: 0}
   clickEffects: []
   tooltip: {fileID: 0}
-  button: {fileID: 5851996116236768734, guid: 32919e0eb771ad044bc62076d1a493a6, type: 3}
+  button: {fileID: 0}

@@ -12,29 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7810ebf041aaed4ca00d5842813a3de, type: 3}
   m_Name: Snickers
   m_EditorClassIdentifier: 
-  nameTag: 
+  nameTag: Snickers
   toUnlock: []
-  unlocked: 0
+  unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 0}
+  UIPrefab: {fileID: 5766463783397515592, guid: cc84a6b97b60a7b47891dcc8973269a9, type: 3}
   UIPanel: {fileID: 0}
   isActive: 0
-  tooltipText: 
-  useOnlyTooltipText: 0
-  UIIndex: 0
+  tooltipText: Food for the hungry.
+  useOnlyTooltipText: 1
+  UIIndex: 4
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
-  clickEffects: []
+  clickEffects:
+  - incrementable: {fileID: 11400000, guid: 054c9e93f8e7b2c4c8b5fbafb3b73517, type: 2}
+    amount: 10
+  tooltip: {fileID: 0}
   amount: 0
   maximum: 0
   maxStack: 0
   minAmount: 0
   minStack: 0
   EffectObject: {fileID: 0}
-  removeFromUIOnEmpty: 0
+  removeFromUIOnEmpty: 1
   UIPanelID: 0
   UIActive: 0
   hasUI: 0

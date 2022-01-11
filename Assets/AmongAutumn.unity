@@ -1931,8 +1931,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf17a875f983764e9f95fc383e6be5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hunger: {fileID: 11400000, guid: 054c9e93f8e7b2c4c8b5fbafb3b73517, type: 2}
-  thirst: {fileID: 11400000, guid: 4424c0c4f9add2f4e9e40a7e81ed809f, type: 2}
+  stamina: {fileID: 11400000, guid: 054c9e93f8e7b2c4c8b5fbafb3b73517, type: 2}
+  water: {fileID: 11400000, guid: 4424c0c4f9add2f4e9e40a7e81ed809f, type: 2}
+  health: {fileID: 11400000, guid: 7f6a66a14bc42564692fd6891dbbd9b2, type: 2}
 --- !u!114 &1910270606
 MonoBehaviour:
   m_ObjectHideFlags: 0

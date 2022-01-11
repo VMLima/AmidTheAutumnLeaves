@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7810ebf041aaed4ca00d5842813a3de, type: 3}
   m_Name: WaterBottle
   m_EditorClassIdentifier: 
-  nameTag: Canteen
+  nameTag: Water Bottle
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
   UIPrefab: {fileID: 5766463783397515592, guid: cc84a6b97b60a7b47891dcc8973269a9, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 1
+  isActive: 0
   tooltipText: A drink for the thirsty.
   useOnlyTooltipText: 1
   UIIndex: 3
@@ -37,7 +37,7 @@ MonoBehaviour:
   minAmount: 0
   minStack: 0
   EffectObject: {fileID: 0}
-  removeFromUIOnEmpty: 0
+  removeFromUIOnEmpty: 1
   UIPanelID: 0
   UIActive: 0
   hasUI: 0

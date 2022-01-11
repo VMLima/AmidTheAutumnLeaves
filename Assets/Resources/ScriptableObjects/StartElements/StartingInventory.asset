@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57449e6dbe349474190f24c48eb0e2b1, type: 3}
   m_Name: StartingInventory
   m_EditorClassIdentifier: 
-  name: StartingInventory
+  nameTag: StartingInventory
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   IncrementableArray:
-  - incrementable: {fileID: 11400000, guid: 3b2f38060b180234c933e9542bf85d5c, type: 2}
+  - incrementable: {fileID: 11400000, guid: 522975d489dc6d7469c0d5673721d7a8, type: 2}
+    amount: 3
+  - incrementable: {fileID: 11400000, guid: daf110f4cb3e61a428de29dbf2c2a3ef, type: 2}
     amount: 1
-  - incrementable: {fileID: 11400000, guid: d5cdc701857a71c4a84b3cc49b6a921c, type: 2}
-    amount: 2
