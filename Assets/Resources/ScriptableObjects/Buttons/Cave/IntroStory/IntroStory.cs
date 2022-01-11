@@ -32,31 +32,44 @@ public class IntroStory : ButtonEffectScript
         int index = 0;
         if (stage == index)
         {
+            //complex effects from the last button name
+
+            //changing simple click effects of this one
+                //setStartEffect(stamina, 5);    //if there is a stamina cost, or if there isn't, the new stamina cost is 5.
+                //removeStartEffect(thirst);    //remove any thirst costs.
+            //setting name/tooltip of this one
             setButtonText("introStory0", "introStory0 tooltip");
+
+            //setting delay till can be pressed again.
             return;
         }
         index++;
         if (stage == index)
         {
+            //complex effects from the last button name
             ButtonManager.instance.addButtonToUI("SearchArea");
+
+            //changing simple click effects of this one
+            
+            //setting name/tooltip of this one
             setButtonText("introStory1", "introStory1 tooltip");
 
-            PressDelay(1.5f);
+            //setting delay till can be pressed again.
+            PressDelay(1.0f);
             return;
         }
         index++;
         if (stage == index)
         {
             setButtonText("introStory2", "introStory2 tooltip");
-
-            PressDelay(1.5f);
+            PressDelay(1.0f);
             return;
         }
         index++;
         if (stage == index)
         {
             setButtonText("introStory3", "introStory3 tooltip");
-            PressDelay(1.5f);
+            PressDelay(1.0f);
             return;
         }
         index++;
