@@ -27,7 +27,7 @@ public class CraftRecipeSO : UIMenuSO
 
     public override string compileTooltip()
     {
-        Debug.Log("CraftRecipeSO:compileTooltip:");
+        //Debug.Log("CraftRecipeSO:compileTooltip:");
         if (craftArray == null || craftArray.Length <= 0) return tooltipText;
         string output = "";
         if (tooltipText != "") output += tooltipText + "\n";
@@ -44,7 +44,7 @@ public class CraftRecipeSO : UIMenuSO
             {
                 if (doAnd) output += " and ";
                 doAnd = true;
-                output += pair.amount + " " + pair.incrementable.name;
+                output += pair.amount + " " + pair.incrementable.nameTag;
                 
             }
             output += "\n";
@@ -55,10 +55,10 @@ public class CraftRecipeSO : UIMenuSO
         {
             if (doAnd) output += " and ";
             doAnd = true;
-            output += pair.amount + " " + pair.incrementable.name;
+            output += pair.amount + " " + pair.incrementable.nameTag;
             
         }
-        Debug.Log("CraftRecipeSO:compileTooltip:" + output);
+        //Debug.Log("CraftRecipeSO:compileTooltip:" + output);
         return output;
     }
 
@@ -68,7 +68,7 @@ public class CraftRecipeSO : UIMenuSO
         {
             if (eachChild.name == "HookName")
             {
-                eachChild.GetComponent<TextMeshProUGUI>().text = name;
+                eachChild.GetComponent<TextMeshProUGUI>().text = nameTag;
             }
         }
         CraftEffectScript c = UIInstance.GetComponent<CraftEffectScript>();

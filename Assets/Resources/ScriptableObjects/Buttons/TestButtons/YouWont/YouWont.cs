@@ -22,7 +22,7 @@ public class YouWont : ButtonEffectScript
             //individually setting each value in a button.
             setTitle("You are dead.");
             setTooltip("Wat u going to do about it?");
-            setColor(Color.red);
+            setButtonColor(Color.red);
 
             setTooltipHoverDelay(1.0f); //when mousing over this button, how long it takes for the tooltip window to show up.
             refreshTooltip();  //the current tooltip will blink out.  After the time (no value means use hover delay) it will appear again and be updated.
@@ -34,14 +34,16 @@ public class YouWont : ButtonEffectScript
         {
             //setting them all in 1 line.
             //        (button title,    hover description,     button color)
-            setButtonInfo("JK", "Just a joke bro, why so mad.", Color.green);
+            setButtonText("JK", "Just a joke bro, why so mad.");
+            setButtonColor(Color.green);
             refreshTooltip(1.5f);
             setTooltipHoverDelay(1.5f);
             PressDelay(2.0f);
         }
         else if(stage == 2)
         {
-            setButtonInfo("Chill","You keep pushing my buttons like this and you may just be dead.",Color.yellow);
+            setButtonText("Chill","You keep pushing my buttons like this and you may just be dead.");
+            setButtonColor(Color.yellow);
             refreshTooltip(0.5f);
             setTooltipHoverDelay(2.0f);
             PreventPresses();

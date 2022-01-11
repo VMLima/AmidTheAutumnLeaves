@@ -27,7 +27,7 @@ public class ButtonManager : MonoBehaviour
         return false;
     }
 
-    public void activateButton(string _name, bool turnOn = true)
+    public void addButtonToUI(string _name, bool turnOn = true)
     {
         addButtonToUI(GetButton(_name), turnOn);
     }

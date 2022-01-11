@@ -39,6 +39,11 @@ public struct IncrementalValuePair
         incrementable = _incrementable;
         amount = _amount;
     }
+    public void setPair(IncrementableSO _incrementable, float _amount)
+    {
+        incrementable = _incrementable;
+        amount = _amount;
+    }
 }
 
 public class Structures

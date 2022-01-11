@@ -9,7 +9,7 @@ public class TestStatus : MonoBehaviour
     void Start()
     {
         timer = 0;
-        Debug.Log("TestStart: health = " + Player.instance.getHealth());
+        //Debug.Log("TestStart: health = " + Player.instance.getHealth());
         Debug.Log("TestStart: adding Sick condition");
         EffectManager.instance.startEffect("Sick", 2);
         

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5248244219066735961}
   - component: {fileID: 6185118771930386344}
   - component: {fileID: 6530753603494373717}
-  - component: {fileID: 4050979142751541051}
   - component: {fileID: -6257650585336977707}
   m_Layer: 5
   m_Name: ButtonPrefab
@@ -123,38 +122,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4050979142751541051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5715040496820633644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 784318379bd6d4044854d64554490b74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ForestForestScript
-  duration: 0
-  frequency: 1
-  maxStacks: 0
-  resetDurationOnStack: 0
-  destroyObjectOnEnd: 1
-  buttonTitle: Wood.
-  ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
-  buttonTooltip: Choppy Choppy.
-  buttonColor: {r: 0.43796724, g: 0.6981132, b: 0.50014853, a: 1}
-  toggleButton: 1
-  onStartEffect: []
-  onTickEffect:
-  - incrementable: {fileID: 11400000, guid: 6734ef05c81a88347935717284b8ded9, type: 2}
-    amount: 5
-  - incrementable: {fileID: 11400000, guid: dc7cf4a706358c644ae2372f03222445, type: 2}
-    amount: 1
-  - incrementable: {fileID: 11400000, guid: 0cf4adb9d9e661d4a82f4c5a74d86876, type: 2}
-    amount: 0.25
-  mirrorStartonStop: 1
 --- !u!114 &-6257650585336977707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,8 +168,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.24890137, y: 0.19989967}
+  m_SizeDelta: {x: -4.8963, y: -5.5978}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4209589017783761931
 CanvasRenderer:
@@ -262,9 +229,9 @@ MonoBehaviour:
   m_fontSize: 18
   m_fontSizeBase: 18
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 5
+  m_fontSizeMax: 18
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

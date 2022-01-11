@@ -89,7 +89,7 @@ public class DataStorageSO : CommonBaseSO
         {
             foreach (CommonBaseSO t in dataDictionary[stringType])
             {
-                if (t.name == _name) return (T)t;
+                if (t.nameTag == _name) return (T)t;
             }
             Debug.LogError("DataStorage:Get: Could not get name-value in dictionary:" + stringType + ":" + _name);
         }

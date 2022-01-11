@@ -111,6 +111,17 @@ public class IncManager : MonoBehaviour
         return 0;
     }
 
+    public void Set<T>(string _name, float amount) where T : IncrementableSO
+    {
+        Set(Get<T>(_name), amount);
+    }
+    public void Set(IncrementableSO inc, float amount)
+    {
+        //set 50, have 10
+        //add (50-10)
+        Add(inc, (amount - inc.getAmount()));
+    }
+
     public void Add<T>(string _name, float amount = 1) where T : IncrementableSO
     {
         Add(Get<T>(_name), amount);

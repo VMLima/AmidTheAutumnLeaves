@@ -9,7 +9,7 @@ public class BerryScript : EffectScript
 
     public override void onStart(int oldNumStacks, int addingStacks)
     {
-        //berries = ResourceManager.instance.Get("Berries");
+        berries = IncManager.instance.Get<ResourceSO>("Berries");
         foraging = IncManager.instance.Get<SkillSO>("Foraging");
     }
     public override void onTick(int numEffects)

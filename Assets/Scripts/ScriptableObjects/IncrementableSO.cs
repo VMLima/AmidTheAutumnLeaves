@@ -29,8 +29,9 @@ public class IncrementableSO : UIMenuSO
 
     [Tooltip("Any 'EffectScripts' attached to this BLANK PREFAB will be activatable.")]
     public GameObject EffectObject;
+    private GameObject EffectObjectInstance;
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool removeFromUIOnEmpty = false;    //when setting up UI panel ID, set this.
     [HideInInspector]
     public int UIPanelID = 0;   //will be an Enum that correlates to a panel.  be used in IncManager to add/remove from correct panel.
@@ -41,6 +42,9 @@ public class IncrementableSO : UIMenuSO
     [HideInInspector]
     public bool hasUI = false;
 
+    private EffectScript[] effectArray;
+    private bool hasEffects;
+
     private float incRate = 1;
 
     [HideInInspector] public EffectManager effectManager;
@@ -48,6 +52,7 @@ public class IncrementableSO : UIMenuSO
     
     public override void onPress()
     {
+        base.onPress();
         if (this.getAmount() < 1) return;
 
         if (clickEffects != null && clickEffects.Length > 0)
@@ -57,6 +62,7 @@ public class IncrementableSO : UIMenuSO
                 if(pair.incrementable != null) IncManager.instance.Add(pair.incrementable, pair.amount);
             }
         }
+        
         IncManager.instance.Add(this, -1);
     }
 
@@ -64,7 +70,16 @@ public class IncrementableSO : UIMenuSO
     {
         return (int)amount;
     }
-
+    public void addEffects(float oldAmount)
+    {
+        if (!hasEffects) return;
+        
+        if (oldAmount != amount)
+        {
+            Debug.Log("IncrementableSO:addEffects:" + nameTag + ":" + (amount - oldAmount));
+            effectManager.startEffect(effectArray, (int)(amount - oldAmount));
+        }
+    }
     //starts an effect script in the effect object matching effectName.
     //if effectName is blank, start every effect attached to the effect object.
     public void startEffect(string _effectName = "", int stacks = 1)
@@ -77,15 +92,16 @@ public class IncrementableSO : UIMenuSO
         }
         else
         {
-            Debug.Log("SO_Basic:startEffect: ERROR string:" + _effectName + ":does not correspond to a game object on:" + name);
+            Debug.Log("SO_Basic:startEffect: ERROR string:" + _effectName + ":does not correspond to a game object on:" + nameTag);
         }
     }
 
     public EffectScript[] getEffect(string effectName = "")
     {
         //get all components of this.
+        if (EffectObjectInstance == null) return null;
         List<EffectScript> effects = new List<EffectScript>();
-        Component[] components = EffectObject.GetComponents(typeof(EffectScript));
+        Component[] components = EffectObjectInstance.GetComponents(typeof(EffectScript));
         foreach (Component effect in components)
         {
             if((effectName == "") || (((EffectScript)effect).name == effectName))
@@ -118,7 +134,19 @@ public class IncrementableSO : UIMenuSO
         maxStack = maximum;
         minStack = minAmount;
         incRate = 1;
+        //effectArray
         effectManager = EffectManager.instance;
+        hasEffects = false;
+        if (EffectObject != null)
+        {
+            EffectObjectInstance = Instantiate(EffectObject);
+            effectArray = getEffect();
+            if (effectArray != null && effectArray.Length > 0) hasEffects = true;
+        }
+    }
+    private void OnDestroy()
+    {
+        if (EffectObjectInstance)  Destroy(EffectObjectInstance);
     }
 
     public float getAmount()
@@ -164,25 +192,30 @@ public class IncrementableSO : UIMenuSO
 
     public void addToAmount(float _amount)
     {
+        float oldAmount = amount;
         amount += _amount;
         amount = Mathf.Round(amount * 100f) / 100f;
         if ((maxStack > 0) && (amount > maxStack))
         {
             amount = maxStack;
         }
+        if(hasEffects) addEffects(oldAmount);
     }
 
     public void subToAmount(float _amount)
     {
+        float oldAmount = amount;
         amount -= _amount;
         amount = Mathf.Round(amount * 100f) / 100f;
         if (amount < minStack)
         {
             amount = minStack;
         }
+        if (hasEffects) addEffects(oldAmount);
     }
     public void setAmount(float _amount)
     {
+        float oldAmount = amount;
         amount = _amount;
         amount = Mathf.Round(amount * 100f) / 100f;
         if (amount < minStack)
@@ -193,5 +226,6 @@ public class IncrementableSO : UIMenuSO
         {
             amount = maxStack;
         }
+        if (hasEffects) addEffects(oldAmount);
     }
 }

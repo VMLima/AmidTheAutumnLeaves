@@ -29,7 +29,7 @@ public class CraftEffectScript : ButtonEffectScript
     {
         craftArray = _craftArray;
         costArray = _costArray;
-        name = _parent.name;
+        name = _parent.nameTag;
         parent = _parent;
     }
 

@@ -147,7 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f93ee86b0ac9a9418db9266e7983669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: YouWont
   duration: 0
   frequency: 1
   maxStacks: 0
@@ -159,6 +158,7 @@ MonoBehaviour:
   buttonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   tooltip: {fileID: 0}
   toggleButton: 0
+  staminaCost: 0
   onStartEffect: []
   onTickEffect: []
   mirrorStartonStop: 1

@@ -62,7 +62,7 @@ public class NodeManager : MonoBehaviour
     {
         foreach(RoomSO node in nodeArray)
         {
-            if(node.name == name)
+            if(node.nameTag == name)
             {
                 return node;
             }

@@ -9,29 +9,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ae7e832adc39e418525b891e9ce570, type: 3}
-  m_Name: Thirst
+  m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
+  m_Name: MedKit
   m_EditorClassIdentifier: 
-  name: Thirst
+  nameTag: 
   toUnlock: []
-  unlocked: 1
+  unlocked: 0
   incManager: {fileID: 0}
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 6213645488307479781, guid: e568b82f400cddc48be73c26a81d8842, type: 3}
+  UIPrefab: {fileID: 0}
   UIPanel: {fileID: 0}
-  isActive: 1
-  clickEffects: []
-  amount: 42.7
-  maximum: 100
-  maxStack: 100
-  minAmount: 0
-  minStack: 0
-  EffectObject: {fileID: 0}
+  isActive: 0
+  tooltipText: 
+  useOnlyTooltipText: 0
+  UIIndex: 0
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
+  clickButton: {fileID: 0}
+  clickEffects: []
+  amount: 0
+  maximum: 0
+  maxStack: 0
+  minAmount: 0
+  minStack: 0
+  EffectObject: {fileID: 0}
   removeFromUIOnEmpty: 0
   UIPanelID: 0
   UIActive: 0
   hasUI: 0
   effectManager: {fileID: 0}
+  DeleteWhenEmpty: 0

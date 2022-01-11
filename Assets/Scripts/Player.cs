@@ -18,8 +18,11 @@ public class Player : MonoBehaviour
     private float warmthCurrent;
     private float warmthRate;
 
-    public PlayerAttributeSO hunger;
-    public PlayerAttributeSO thirst;
+    public PlayerAttributeSO stamina;
+    public PlayerAttributeSO water;
+    public PlayerAttributeSO health;
+
+    private IncManager incM;
 
     //thirst
     //weather -> warmth -> thirst/hunger rate change.
@@ -39,12 +42,12 @@ public class Player : MonoBehaviour
 
     public void defaultValues()
     {
-        healthCurrent = healthMax;
-        healthRate = 0.1f;
-        staminaCurrent = 100;
-        staminaRate = 1;
-        warmthCurrent = 100;
-        warmthRate = 1;
+        health = incM.Get<PlayerAttributeSO>("Health");
+        stamina = incM.Get<PlayerAttributeSO>("Stamina");
+        water = incM.Get<PlayerAttributeSO>("Water");
+        incM.Set(health, 45);
+        incM.Set(stamina, 80);
+        incM.Set(water, 100);
     }
 
     //ideally stuff that effects healthRate and staminaRate will be added into the value.
@@ -55,21 +58,8 @@ public class Player : MonoBehaviour
     //      I dunno, I'll work it out later.
     public void everySecond()
     {
-        regen(ref healthCurrent, healthRate, healthMax);
-        regen(ref staminaCurrent, staminaRate, staminaMax);
-        regen(ref warmthCurrent, warmthRate, warmthMax);
-        IncManager.instance.Add(hunger, 1);
-        IncManager.instance.Add(thirst, 0.1f);
-
-        //warmthCurrent
-        //THIRST/HUNGER RATE CALCULATIONS
-        //thirst += (warmthCurrent - meanTemp)*blah
-
-        //Debug.Log("Player:everySecond: warmthCurrent:" + warmthCurrent);
-
-        cleanUpValue(ref healthCurrent);
-        cleanUpValue(ref staminaCurrent);
-        cleanUpValue(ref warmthCurrent);
+        incM.Add(stamina, -0.1f);
+        incM.Add(water, -0.1f);
     }
 
     void cleanUpValue(ref float value)
@@ -115,7 +105,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        incM = IncManager.instance;
     }
 
     // Update is called once per frame

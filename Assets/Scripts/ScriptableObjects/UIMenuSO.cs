@@ -14,7 +14,7 @@ public class UIMenuSO : CommonBaseSO
     public GameObject UIPanel;
     [HideInInspector]
     public bool isActive;
-    public string tooltipText = "";
+    [TextArea]public string tooltipText = "";
     public bool useOnlyTooltipText = false;
     [HideInInspector] public int UIIndex;
 
@@ -25,9 +25,11 @@ public class UIMenuSO : CommonBaseSO
 
     public IncrementalValuePair[] clickEffects;
     //public IncrementalValuePair[] passiveEffects;
+    [HideInInspector] public Tooltip tooltip;
     public override void reset()
     {
         base.reset();
+        
         declareUI();
         instantiateUI();
         activate(false);
@@ -38,7 +40,7 @@ public class UIMenuSO : CommonBaseSO
 
     public virtual void declareUI()
     {
-        Debug.LogError("UnlockableObjectSO:setButtonInfo: have not overridden this method in:" + name);
+        Debug.LogError("UnlockableObjectSO:setButtonInfo: have not overridden this method in:" + nameTag);
         //MUST OVERRIDE AND SET...
         // buttonPrefab
         //      the prefab to instantiate
@@ -49,6 +51,7 @@ public class UIMenuSO : CommonBaseSO
     public virtual void onPress()
     {
         //IF THE UI ELEMENT IS A BUTTON... CAN OVERRIDE THIS FUNCTION FOR WHAT HAPPENS ON IT'S PRESS.
+        tooltip.clickReset();
     }
 
     public override void whenUnlocked()
@@ -69,7 +72,7 @@ public class UIMenuSO : CommonBaseSO
         foreach (IncrementalValuePair pair in clickEffects)
         {
             if (doAnd) output += " and ";
-            output += pair.amount + " " + pair.incrementable.name;
+            output += pair.amount + " " + pair.incrementable.nameTag;
             doAnd = true;
         }
         return output;
@@ -79,25 +82,25 @@ public class UIMenuSO : CommonBaseSO
     {
         if(UIPrefab == null)
         {
-            Debug.LogError("UnlockableObjectSO:createButton:No Button Prefab in: " + name);
+            Debug.LogError("UnlockableObjectSO:createButton:No Button Prefab in: " + nameTag);
             return;
         }
         if(UIPanel == null)
         {
-            Debug.LogError("UnlockableObjectSO:createButton:No UI Panel in: " + name);
+            Debug.LogError("UnlockableObjectSO:createButton:No UI Panel in: " + nameTag);
             return;
         }
         UIInstance = (GameObject)Instantiate(UIPrefab);
         UIInstance.transform.SetParent(UIPanel.transform);
         UIInstance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
+        tooltip = UIInstance.GetComponent<Tooltip>();
         setUIData();
 
         Tooltip temp = UIInstance.GetComponent<Tooltip>();
         if(temp)
         {
             temp.setTooltip(compileTooltip());
-            Debug.Log("UIMENUSO:instantiateUI: found tooltip:" + name + ":" + temp.getTooltip());
+            //Debug.Log("UIMENUSO:instantiateUI: found tooltip:" + nameTag + ":" + temp.getTooltip());
         }
         
         
@@ -116,7 +119,7 @@ public class UIMenuSO : CommonBaseSO
         temp = UIInstance.transform.Find("HookName");
         if (temp)
         {
-            temp.GetComponent<TextMeshProUGUI>().text = name;
+            temp.GetComponent<TextMeshProUGUI>().text = nameTag;
         }
 
         temp = UIInstance.transform.Find("HookQuantity");
@@ -167,7 +170,7 @@ public class UIMenuSO : CommonBaseSO
             {
                 if (unlocked && _isActive)
                 {
-                    Debug.Log("UIMenuSO:activate:is activating:" + name);
+                    Debug.Log("UIMenuSO:activate:is activating:" + nameTag);
                     //reorderUI();
                     UIInstance.SetActive(true);
                 }

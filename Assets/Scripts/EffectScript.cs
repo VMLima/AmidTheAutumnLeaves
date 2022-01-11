@@ -11,8 +11,9 @@ using UnityEngine;
 
 public class EffectScript : MonoBehaviour
 {
-    [Tooltip("VERY IMPORTANT. Make sure it is a unique name.")]
-    public new string name;
+    //[Tooltip("VERY IMPORTANT. Make sure it is a unique name.")]
+    //public string nameTag;
+    //public new string name;
     [Tooltip("Seconds.  0 means continue forever (or untill something else stops it).")]
     public float duration = 0;
     [Tooltip("Seconds between triggers. 0 = only onStartOverride() and, after Duration, onStopOverride() will be called.")]
@@ -55,7 +56,7 @@ public class EffectScript : MonoBehaviour
 
     protected virtual void Awake()
     {
-        
+
     }
 
     //the effect to happen every second.
@@ -154,6 +155,7 @@ public class EffectScript : MonoBehaviour
         //if there are stacks left OR no time based restriction... return 
         return true;
     }
+
 
     void resetTimeToTick()
     {

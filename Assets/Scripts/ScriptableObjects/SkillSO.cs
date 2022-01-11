@@ -106,7 +106,7 @@ public class SkillSO : IncrementableSO
                 xpToLevel *= levelXPMultiplier; 
                 xpToLevel += levelXPAddition;
             }
-            Debug.Log("Skill:levelUp:" + name + " Current:" + currentLevel + " MaxLevel:" + maxLevel);
+            Debug.Log("Skill:levelUp:" + nameTag + " Current:" + currentLevel + " MaxLevel:" + maxLevel);
             incManager.skillLevelEvent.Invoke();
         }
         textDisplay.text = currentLevel.ToString();

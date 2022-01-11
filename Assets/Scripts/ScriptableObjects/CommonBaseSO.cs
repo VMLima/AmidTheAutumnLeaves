@@ -17,8 +17,9 @@ using TMPro;
 //[CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Object/Basic/Item")]
 public class CommonBaseSO : ScriptableObject
 {
-    [Tooltip("MUST USE THIS EXACT NAME TO REFERENCE IT IN CODE")]
-    public new string name;
+    [Tooltip("If empthy, auto sets on game run to object name.  Can custom set it here though.  MUST USE EXACTLY THIS STRING TO CALL THE OBJECT IN CODE.")]
+    //public new string nameTag;
+    public string nameTag;
 
     [Tooltip("Requirements to unlock.  When unlocked stays unlocked.")]
     public IncrementalValuePair[] toUnlock = new IncrementalValuePair[0];
@@ -44,6 +45,7 @@ public class CommonBaseSO : ScriptableObject
     {
         //where you should reset and call all things that need to be reset/called upon new game.
         //every SO_~~~ should have reset() called during Start()
+        if (nameTag == "") nameTag = name;
         destroyInstantiations();
         incManager = IncManager.instance;
         unsubscribeFromListeners();
@@ -111,7 +113,7 @@ public class CommonBaseSO : ScriptableObject
 
     public virtual void unlock()
     {
-        Debug.Log("SO_Root:updateUnlocked: unlock... " + name);
+        Debug.Log("SO_Root:updateUnlocked: unlock... " + nameTag);
         unlocked = true;
         unsubscribeFromListeners();
         whenUnlocked();

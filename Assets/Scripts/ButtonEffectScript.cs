@@ -24,7 +24,8 @@ public class ButtonEffectScript : EffectScript
 
     public string buttonTitle;
     public Color ButtonTitleColor = Color.black;
-    public string buttonTooltip;
+    [TextArea]public string buttonTooltip;
+    public bool doNotShowCostsInTooltip = false;
     public Color buttonColor = Color.gray;
     [HideInInspector] public Tooltip tooltip;
     private Image image;
@@ -37,6 +38,8 @@ public class ButtonEffectScript : EffectScript
     private Button button;
     private Color32 normalColor;
     private Color32 pressedColor;
+    [Tooltip("For a non-toggle button, it is the stamina lost on action.  For a toggle button, it is the stamina lost each tick.")]
+    //public float staminaCost;
     public List<IncrementalValuePair> onStartEffect;
     public List<IncrementalValuePair> onTickEffect;
     public bool mirrorStartonStop = true;
@@ -73,9 +76,10 @@ public class ButtonEffectScript : EffectScript
         {
             titleGUI.text = buttonTitle;
             titleGUI.color = ButtonTitleColor;
+            titleGUI.ForceMeshUpdate();
         }
         else Debug.LogError("ButtonEffectScript:updateButton:not titleGUI found in:" + button.name);
-        if (tooltip != null) tooltip.setTooltip(buttonTooltip);
+        if (tooltip != null) tooltip.setTooltip(compileTooltip());
         if (image != null) image.color = buttonColor;
     }
 
@@ -90,11 +94,10 @@ public class ButtonEffectScript : EffectScript
         else tooltip.hideMessage();
     }
 
-    public void setButtonInfo(string newTitle, string newTooltip, Color newColor)
+    public void setButtonText(string newTitle, string newTooltip = "")
     {
         if (newTitle != "") buttonTitle = newTitle;
         if (newTooltip != "") buttonTooltip = newTooltip;
-        if (newColor != null) buttonColor = newColor;
         updateButton();
     }
 
@@ -103,7 +106,13 @@ public class ButtonEffectScript : EffectScript
         buttonTitle = newTitle;
         updateButton();
     }
-    public void setColor(Color newColor)
+
+    public void setTextColor(Color newColor)
+    {
+        ButtonTitleColor = newColor;
+        updateButton();
+    }    
+    public void setButtonColor(Color newColor)
     {
         buttonColor = newColor;
         updateButton();
@@ -143,18 +152,28 @@ public class ButtonEffectScript : EffectScript
 
     public virtual string compileTooltip()
     {
-        return buttonTooltip;
-        /*
+        if (doNotShowCostsInTooltip) return buttonTooltip;
         string output = "";
+        bool hasTooltip = false;
+        if (buttonTooltip != "")
+        {
+            output += buttonTooltip;
+            hasTooltip = true;
+        }
         bool doAnd;
 
-        if (onStartEffect != null && onStartEffect.Count >= 1)
+        if (onStartEffect != null && onStartEffect.Count > 0)
         {
-            output += "On Press = ";
+            if(hasTooltip)
+            {
+                output += "\n\n";
+                hasTooltip = false;
+            }
+            //output += "On Press = ";
             doAnd = false;
             foreach (IncrementalValuePair pair in onStartEffect)
             {
-                if (doAnd) output += " and ";
+                if (doAnd) output += "\n";
                 doAnd = true;
                 output += pair.amount + " " + pair.incrementable.name;
             }
@@ -164,11 +183,16 @@ public class ButtonEffectScript : EffectScript
         {
             if (onTickEffect != null && onTickEffect.Count >= 1)
             {
+                if (hasTooltip)
+                {
+                    output += "\n\n";
+                    hasTooltip = false;
+                }
                 output += "Every " + frequency + " seconds = ";
                 doAnd = false;
                 foreach (IncrementalValuePair pair in onTickEffect)
                 {
-                    if (doAnd) output += " and ";
+                    if (doAnd) output += "\n";
                     doAnd = true;
                     output += pair.amount + " " + pair.incrementable.name;
                 }
@@ -176,7 +200,6 @@ public class ButtonEffectScript : EffectScript
             }
         }
         return output;
-        */
     }
 
     //since buttons don't deal with stacks.  Am changing the methods to not deal with parameters.
@@ -233,6 +256,45 @@ public class ButtonEffectScript : EffectScript
     public virtual void onTick()
     {
         
+    }
+
+    public void setStartEffect(IncrementableSO cost, float newCost)
+    {
+        if(onStartEffect != null && onStartEffect.Count > 0)
+        {
+            for(int i = 0; i<onStartEffect.Count;i++)
+            {
+                if (onStartEffect[i].incrementable == cost)
+                {
+                    onStartEffect[i].setPair(cost, newCost);
+                    return;
+                }
+            }
+        }
+        onStartEffect.Add(new IncrementalValuePair(cost, newCost));
+    }
+    public void addStartEffect(IncrementableSO cost, float newCost)
+    {
+        onStartEffect.Add(new IncrementalValuePair(cost, newCost));
+    }
+    public void removeStartEffect(IncrementableSO cost = null)
+    {
+        if (cost == null)
+        {
+            onStartEffect.Clear();
+            return;
+        }
+        if (onStartEffect != null && onStartEffect.Count > 0)
+        {
+            for (int i = onStartEffect.Count - 1; i >= 0; i--)
+            {
+                if (onStartEffect[i].incrementable == cost)
+                {
+                    onStartEffect.RemoveAt(i);
+                    return;
+                }
+            }
+        }
     }
 
     public void haltEffects()
