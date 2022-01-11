@@ -56,29 +56,29 @@ public class WeatherManager : MonoBehaviour
     public void PerSecondWeather() // Applies weather effects to the player.
     {
         PlayerAttributeSO Thirst = IncManager.instance.Get<PlayerAttributeSO>("Thirst");
-//        PlayerAttributeSO Hunger = IncManager.instance.Get<PlayerAttributeSO>("Hunger");
 
+        // SUN STUFF
         Sunlight(); // figures out how much sunlight affects the temperature
         TimeofDay(); // updates the time of day string
+
+        // WEATHER STUFF
         Temperature(); // find the exterior weather temperature, must be before Wetness.
+        RainType(); // updates the precipitation descriptor. Must be before Wetness call.
+        WindType(); // updates the wind descriptor.
+        CloudType(); // updates the cloud descriptor.
 
- //       Debug.Log("Wetness before delta: " + Player.instance.Wetness + " BodyTemp before delta: " + Player.instance.BodyTemp);
-
-        Player.instance.Wetness += Wetness(); // Sweat, evaporation, and rain. Must be before ChangeInTemp.
-        Player.instance.BodyTemp += ChangeInTemperature(); // Temp change based on weather.
-
-//        Debug.Log("Wetness after delta: " + Player.instance.Wetness + " BodyTemp after delta: " + Player.instance.BodyTemp + "deltaTemp: " + deltaTemp + " deltaWetn: " + deltaWet);
-        // Subtract sweat from player's current thirst.
-        Thirst.addAmount(-1 * sweatRate);
-
-//        Debug.Log("Sun:" + weather.Sun + " Temp:" + weather.CurrTemp + " deltaTemp:" + deltaTemp + " player wetness:" + Player.instance.Wetness);
-
+        // STUFF THAT AFFECTS THE PLAYER
+        Wetness(); // Finds the change in player wetness.
+        Player.instance.Wetness += deltaWet; // Sweat, evaporation, and rain. Must be before ChangeInTemp.
+        ChangeInTemperature(); // Calculates the per-second change in player body temp.
+        Player.instance.BodyTemp += deltaTemp; // Temp change based on weather.
+        Thirst.addAmount(-1 * sweatRate);         // Subtract sweat from player's current thirst.
     }
 
-    public float ChangeInTemperature() // Figures out how fast the player's temperature changes.
+    public void ChangeInTemperature() // Figures out how fast the player's temperature changes.
     {
         PlayerAttributeSO Thirst = IncManager.instance.Get<PlayerAttributeSO>("Thirst");
-        //        PlayerAttributeSO Hunger = IncManager.instance.Get<PlayerAttributeSO>("Hunger");
+
         // Set deltaTemp to a fresh 0.
         deltaTemp = 0;
 
@@ -118,7 +118,6 @@ public class WeatherManager : MonoBehaviour
             deltaTemp = 0;
         }
 
-        return deltaTemp;
     }
 
     void Temperature()
@@ -142,10 +141,10 @@ public class WeatherManager : MonoBehaviour
         }
     }
 
-    public float Wetness()
+    public void Wetness()
     {
         // Freshly sets per second change in wetness to 0.
-        WeatherManager.instance.deltaWet = 0;
+        deltaWet = 0;
 
         // Effects of rainfall
         if (weather.Snow == false && Player.instance.InShelter == false) // If you're not under cover and it's raining
@@ -162,20 +161,19 @@ public class WeatherManager : MonoBehaviour
         // Calculates how much wetness loss per second based on Temp, humidty, and wind. Wind is the dominant lever.
         // If you're curious, the math works out such that drying from 'drenched' to 'dry' takes ~3 hours in 70 F, 
         // mildly breezy weather at 50% (0.5) relative humidity.
-        WeatherManager.instance.Evaporation = 0.2777f * ((weather.CurrTemp + 100) / 100) * (1.25f - weather.Humidity) * (1 + weather.Wind / 7);
+        Evaporation = 0.2777f * ((weather.CurrTemp + 100) / 100) * (1.25f - weather.Humidity) * (1 + weather.Wind / 7);
 
         // If you have a campfire going, you dry off faster. 
-        if (Player.instance.campfire == true) { Evaporation += 1; }
+        // if (Player.instance.campfire == true) { Evaporation += 1; }
 
         Sweat();
-        Evaporate();
 
         // Apply values to wetness change this second.
-        WeatherManager.instance.deltaWet += WeatherManager.instance.sweatRate;
-        WeatherManager.instance.deltaWet -= WeatherManager.instance.Evaporation;
-        return deltaWet;
+        deltaWet += sweatRate;
+        deltaWet -= Evaporation;
+//        Debug.Log("[" + Evaporation + "/s evap]" + " [deltaWet:" + deltaWet + "]  [deltaTemp: " + deltaTemp + "]  [player wet: " + Player.instance.Wetness + "]  [sweat: " + sweatRate + "]");
     }
-    public float Sweat()
+    public void Sweat()
     {
         PlayerAttributeSO Thirst = IncManager.instance.Get<PlayerAttributeSO>("Thirst");
 
@@ -183,19 +181,7 @@ public class WeatherManager : MonoBehaviour
         sweatRate = 0.00034721666f * Player.instance.workDiff * (230 + weather.CurrTemp) * (1.4f - weather.Humidity) / skillEnduranceMod;
 
         if (Thirst.amount <= 0) { sweatRate = 0; }
-        else if (Thirst.amount - sweatRate < 0 && Thirst.amount > 0) { sweatRate = Thirst.amount; }
-
-
-        return sweatRate;
-    }
-
-    public float Evaporate()
-    {
-
-        if (Player.instance.Wetness <= 0) { Evaporation = 0; }
-        else if(Player.instance.Wetness < Evaporation) { Evaporation = Player.instance.Wetness; }
-
-        return Evaporation;
+        else if (Thirst.amount - sweatRate <= 0 && Thirst.amount > 0) { sweatRate = Thirst.amount; }
     }
 
 
@@ -251,7 +237,9 @@ public class WeatherManager : MonoBehaviour
 
         }
 
+
     }
+
     public void PerDayWeather()
     {
 
@@ -262,6 +250,63 @@ public class WeatherManager : MonoBehaviour
 
     }
 
+    public void RainType()
+    {
+        // Takes in weather variables and updates the precipitation descriptor
+        if (weather.CurrTemp < 32)
+        {
+            weather.Snow = true;
+            if (weather.Rain >= 1) { weather.RainType = "Blizzard"; }
+            else if (weather.Rain >= 0.9) { weather.RainType = "Snowstorm"; }
+            else if (weather.Rain >= 0.75) { weather.RainType = "Heavy Snowfall"; }
+            else if (weather.Rain >= 0.6) { weather.RainType = "Snowing"; }
+            else if (weather.Rain >= 0.45) { weather.RainType = "Light Snow"; }
+            else if (weather.Rain >= 0.3) { weather.RainType = "Snow Grains"; }
+            else if (weather.Rain >= 0.15) { weather.RainType = "Sleet"; }
+            else if (weather.Rain <= 0) { weather.RainType = "Clear"; }
+        }
+        else
+        {
+            if (weather.Rain >= 1) { weather.RainType = "Torrential Rain"; }
+            else if (weather.Rain >= 0.9) { weather.RainType = "Driving Rain"; }
+            else if (weather.Rain >= 0.75) { weather.RainType = "Pouring Rain"; }
+            else if (weather.Rain >= 0.6) { weather.RainType = "Raining"; }
+            else if (weather.Rain >= 0.45) { weather.RainType = "Light Showers"; }
+            else if (weather.Rain >= 0.3) { weather.RainType = "Drizzling"; }
+            else if (weather.Rain >= 0.15) { weather.RainType = "Misting"; }
+            else if (weather.Rain <= 0) { weather.RainType = "Clear"; }
+
+        }
+    }
+
+    public void WindType()
+    {
+        if(weather.Wind == 0) { weather.WindType = "Utter Calm"; }
+        else if (weather.Wind == 1) { weather.WindType = "Light Air"; }
+        else if (weather.Wind == 2) { weather.WindType = "Light Breeze"; }
+        else if (weather.Wind == 3) { weather.WindType = "Gentle Breeze"; }
+        else if (weather.Wind == 4) { weather.WindType = "Moderate Breeze"; }
+        else if (weather.Wind == 5) { weather.WindType = "Brisk Breeze"; }
+        else if (weather.Wind == 6) { weather.WindType = "Strong Breeze"; }
+        else if (weather.Wind == 7) { weather.WindType = "Gusts"; }
+        else if (weather.Wind == 8) { weather.WindType = "Near Gale"; }
+        else if (weather.Wind == 9) { weather.WindType = "Gale"; }
+        else if (weather.Wind == 10) { weather.WindType = "Strong Gale"; }
+        else if (weather.Wind == 11) { weather.WindType = "Storm Force"; }
+        else if (weather.Wind == 12) { weather.WindType = "Hurricane"; }
+    }
+
+    public void CloudType()
+    {
+        if (weather.Clouds >= 1) { weather.RainType = "Sky obscured by clouds"; }
+        else if (weather.Clouds >= 0.9) { weather.RainType = "Overcast"; }
+        else if (weather.Clouds >= 0.75) { weather.RainType = "Broken clouds"; }
+        else if (weather.Clouds >= 0.6) { weather.RainType = "Scattered clouds"; }
+        else if (weather.Clouds >= 0.45) { weather.RainType = "Few clouds"; }
+        else if (weather.Clouds >= 0.3) { weather.RainType = "Minimal clouds"; }
+        else if (weather.Clouds >= 0.15) { weather.RainType = "A single, lonesome cloud"; }
+        else if (weather.Clouds <= 0) { weather.RainType = "Not a cloud in the sky"; }
+    }
     void Awake()
     {
         instance = this;
@@ -299,4 +344,10 @@ public class WeatherManager : MonoBehaviour
             Debug.Log("autumnEffect loaded:" + autumnEffects[i].name);
         }
     }
+
+    // Saved Debug lines that are easier to read.
+    //       Debug.Log("Wetness before delta: " + Player.instance.Wetness + " BodyTemp before delta: " + Player.instance.BodyTemp);
+    //        Debug.Log("Wetness after delta: " + Player.instance.Wetness + " BodyTemp after delta: " + Player.instance.BodyTemp + "deltaTemp: " + deltaTemp + " deltaWetn: " + deltaWet);
+    //        Debug.Log("Sun:" + weather.Sun + " Temp:" + weather.CurrTemp + " deltaTemp:" + deltaTemp + " player wetness:" + Player.instance.Wetness + " [Wind: " + weather.WindType + "]  [Precipitation: " + weather.RainType + "]" + weather.Rain);
+
 }

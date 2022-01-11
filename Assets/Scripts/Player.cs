@@ -166,7 +166,9 @@ public class Player : MonoBehaviour
         get { return bodyTemp; }
         set
         {
-            bodyTemp = value;
+            if (value > 20) { bodyTemp = 20; }
+            if (value < -20) { bodyTemp = -20; }
+            else { bodyTemp = value; }
         }
     }
     public float ShelterCover

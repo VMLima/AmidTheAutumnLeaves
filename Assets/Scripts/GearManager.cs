@@ -17,8 +17,8 @@ public class GearManager : MonoBehaviour
         private float heatInsulation = 0; // Divisor for temp gain over 80F.
         private float coldInsulation = 0; // Divisor for temp loss under 68F.
 
-        private float waterRes = 0; // Level of weatherproofness of your gear.
-        private float windRes = 0; // Resistance to the wind
+        private float waterRes = 1; // Level of weatherproofness of your gear.
+        private float windRes = 1; // Resistance to the wind
 
 
 

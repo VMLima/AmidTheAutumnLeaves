@@ -20,6 +20,7 @@ public class Weather
     private float wind; // Wind level from 0 (dead calm) to 12 (hurricane)
     private float clouds; // cloud cover factors diurnal sunlight
     private float rain; // Wetness/s. Wetness 0 is bone dry, 100 is drenched.
+    private string windType; // Description of the level of wind. Purely aesthetic.
     private string rainType; // The description of the type of rain. Purely aesthetic.
     private float humidity; // 0 to 1, relative humidity
     private bool snow; // Flipped to 'true' when it's snowing, 'false' when not. 
@@ -94,7 +95,7 @@ public class Weather
         {
             // Sanitize the rain value
             if(value < 0) { rain = 0; }
-            if (value > 0) { rain = 1; }
+            if (value > 1) { rain = 1; }
             else { rain = value; }
         }
     }
@@ -104,6 +105,17 @@ public class Weather
         set { humidity = value; }
     }
 
+    public string RainType
+    {
+        get { return rainType; }
+        set { rainType = value; }
+    }
+
+    public string WindType
+    {
+        get { return windType; }
+        set { windType = value; }
+    }
     public bool Snow
     {
         get { return snow; }
