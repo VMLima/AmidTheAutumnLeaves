@@ -15,7 +15,7 @@ public class Weather
     private float currTemp; // The current temperature. Recalculated every second.
 
     // Modified by weather systems, then used to determine effects
-    private string currWeather;
+    private string currWeather; // String holding currently active weather pattern.
     private float wethTemp; // The temp modifier of the current weather, if any.
     private float wind; // Wind level from 0 (dead calm) to 12 (hurricane)
     private float clouds; // cloud cover factors diurnal sunlight
@@ -31,8 +31,9 @@ public class Weather
         get { return sun; }
         set
         {
+            // Sanitizes sun values. 
             if (value < 0)  { sun = 0; }
-            else if( value > 1.33) { sun = 1.5f; }
+            else if( value > 1.5f) { sun = 1.5f; }
             else { sun = Mathf.Round(1000 * value) / 1000; }
         }
     }
@@ -95,7 +96,7 @@ public class Weather
         {
             // Sanitize the rain value
             if(value < 0) { rain = 0; }
-            if (value > 1) { rain = 1; }
+            if (value > 3) { rain = 3; }
             else { rain = value; }
         }
     }

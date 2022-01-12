@@ -12,22 +12,22 @@ public class TimeManager : MonoBehaviour
     {
         instance = this;
     }
-    // Sets all of the time properties to a default for testing/so nothing explodes
+
     void Start()
     {
-
+        // Sets all of the time properties to a default for testing/so nothing explodes
         times.Minutes = 0;
         times.AMorPM = 1;
         times.TimeOfDay = "blank";
         times.Day = 1;
-        times.TimeFactor = 10;
+        times.TimeFactor = 1;
         times.Weekday = 5;
         times.WeekdayName = "Friday";
         times.DayMonth = 30;
         times.NumMonth = 7;
         times.Month = "blank";
         times.Season = "blank";
-        times.Years = 1;
+        times.Years = 0;
         incrementSeason();
         incrementMonth();
     }

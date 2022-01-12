@@ -10,6 +10,7 @@ public class WeatherManager : MonoBehaviour
     private float Evaporation; // Wetness loss per second
     private float sweatRate; // Wetness gained per second
     
+    // Per-second changes
     public float deltaTemp = 0; // Change in player body temperature
     public float deltaWet = 0; // change in wetness per second
     public float deltaThirst = 0; // Change in thirst from weather
@@ -97,7 +98,7 @@ public class WeatherManager : MonoBehaviour
             // Returns a value for how much the player's temperature changes per second.            
             deltaTemp -= (tempFactor * watrFactor) / (11.5f + (GearManager.instance.gear.ColdInsulation / (1 + Player.instance.Wetness)));
         }
-        else if (weather.CurrTemp >= 80)
+        else if (weather.CurrTemp > 80)
         {
             // Simple version, if you can sweat enough you're fine, otherwise bad things, but quite not as bad with protection.
             if(Thirst.amount > 0) { deltaTemp = 0; }
@@ -109,13 +110,18 @@ public class WeatherManager : MonoBehaviour
                 // Produces gradually increasing base value that is divided later
                 tempFactor = Mathf.Pow((weather.CurrTemp - 80), 0.33f);
 
-                // 
+                // Final deltaTemp calculation, made worse by sunlight then divided by heat insulation.
                 deltaTemp += tempFactor * windFactor * (1+weather.Humidity) * weather.Sun / GearManager.instance.gear.HeatInsulation;
             }
         }
         else
         {
-            deltaTemp = 0;
+            // If it's it's between 69 and 80, BodyTemp shifts back toward comfortable.
+            if (Player.instance.BodyTemp < -2.5) { deltaTemp += 0.1f; }
+            else if (Player.instance.BodyTemp > 2.5) { deltaTemp -= 0.1f; }
+            else if(Player.instance.BodyTemp > 0) { deltaTemp -= 0.05f; }
+            else if (Player.instance.BodyTemp < 0) { deltaTemp += 0.05f; }
+            else { deltaTemp = 0; }
         }
 
     }
