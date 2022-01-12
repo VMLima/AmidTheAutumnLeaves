@@ -132,7 +132,7 @@ MonoBehaviour:
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
   buttonTitle: Become a republican.
-  ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
+  ButtonTitleColor: {r: 0.3301887, g: 0.24764152, b: 0.24764152, a: 1}
   buttonTooltip: No escape from reality
   tooltipHoverDelay: 0.2
   doNotShowCostsInTooltip: 1

@@ -39,17 +39,21 @@ public class GameHandler : MonoBehaviour
         if (location == "Forest")
         {
             //setDarkness(0);
-            StartCoroutine(changeAlpha());
+            //StartCoroutine(changeAlpha());
+            FlashlightManager.HideDarkness_Static(2);
             background.GetComponent<Image>().color = new Color(0.83f, 0.91f, 0.77f);
         }
         else if (location == "Cave")
         {
             //setDarkness(60);
+            //FlashlightManager.HidDarkness_Static();
+            //FlashlightManager.HideFlashlight_Static();
             background.GetComponent<Image>().color = new Color(0.08f, 0.08f, 0.08f);
         }
         else if (location == "CaveIn")
         {
-            setDarkness(255);
+            //FlashlightManager.ShowDarkness_Static();
+            //setDarkness(255);
         }
         else Debug.LogError("GameHandler:modUIColor: could not find match for string:" + location + ":");
     }

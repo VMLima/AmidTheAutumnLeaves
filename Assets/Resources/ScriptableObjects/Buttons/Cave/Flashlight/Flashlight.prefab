@@ -120,7 +120,7 @@ MonoBehaviour:
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
   buttonTitle: Flashlight
-  ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
+  ButtonTitleColor: {r: 0.4056604, g: 0.376958, b: 0.376958, a: 1}
   buttonTooltip: open your eyes...
   tooltipHoverDelay: 0.2
   doNotShowCostsInTooltip: 0

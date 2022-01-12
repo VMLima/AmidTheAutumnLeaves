@@ -114,3 +114,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d5d4e565898af4796c68977abf38eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0
+  frequency: 1
+  maxStacks: 0
+  resetDurationOnStack: 0
+  destroyObjectOnEnd: 1
+  buttonTitle: 
+  ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
+  buttonTooltip: 
+  tooltipHoverDelay: 1
+  doNotShowCostsInTooltip: 0
+  buttonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  tooltip: {fileID: 0}
+  toggleButton: 1
+  onStartEffect: []
+  onTickEffect: []
+  mirrorStartonStop: 1

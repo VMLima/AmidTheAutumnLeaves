@@ -141,7 +141,6 @@ public class BearChase1 : ButtonEffectScript
         if (thisWasPressed)
         {
             sendPresses();
-            
         }
         else
         {
@@ -154,18 +153,18 @@ public class BearChase1 : ButtonEffectScript
     }
     IEnumerator chaseLoop()
     {
-        Debug.Log("Bearchase1:chaseLoop:starting");
+        //Debug.Log("Bearchase1:chaseLoop:starting");
         TooltipManager.StartEvent_Static();
         while (chasing)
         {
-            Debug.Log("Bearchase1:chaseLoop:loop");
+            //Debug.Log("Bearchase1:chaseLoop:loop");
             yield return new WaitForSeconds(1f);
-            Debug.Log("Bearchase1:chaseLoop:loopAfterTimer");
+            //Debug.Log("Bearchase1:chaseLoop:loopAfterTimer");
             if (wasPress) wasPress = false;
             else StartCoroutine(chaseDamage());
         }
         TooltipManager.StopEvent_Static();
-        Debug.Log("Bearchase1:chaseLoop:stopping");
+        //Debug.Log("Bearchase1:chaseLoop:stopping");
         yield return new WaitForEndOfFrame();
     }
 

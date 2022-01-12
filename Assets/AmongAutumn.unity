@@ -2058,7 +2058,7 @@ MonoBehaviour:
   CraftPanel: {fileID: 1433491759}
   CraftPrefab: {fileID: 2331072130200821675, guid: da2a45bcfb6197247ba7c76857fac707, type: 3}
   ButtonPanel: {fileID: 464441142}
-  ButtonPrefab: {fileID: 4663459186877341590, guid: b3ca197398b8f314d906298ec2d74b96, type: 3}
+  ButtonPrefab: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
   StatPanel: {fileID: 1430204151}
   StatPrefab: {fileID: 6213645488307479781, guid: e568b82f400cddc48be73c26a81d8842, type: 3}
 --- !u!114 &1910270603

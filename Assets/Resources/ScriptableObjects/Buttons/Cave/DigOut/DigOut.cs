@@ -73,16 +73,21 @@ public class DigOut : ButtonEffectScript
         TooltipManager.StartEvent_Static();
         TooltipManager.StartTooltip_Static("rumble", true);
         yield return new WaitForSeconds(2);
+        FlashlightManager.SetDarknessAlpha_Static(0,0); //instantly change to 0.
         TooltipManager.StartTooltip_Static("RUMBLE", true);
+        FlashlightManager.SetDarknessAlpha_Static(0.05f, 1.5f); //over 1.5 seconds, change alpha to 0.05 alpha
         yield return new WaitForSeconds(1.5f);
         TooltipManager.StartTooltip_Static("BAM", true);
         yield return new WaitForSeconds(0.75f);
         TooltipManager.StartTooltip_Static("BOOM", true);
         yield return new WaitForSeconds(0.5f);
+        FlashlightManager.SetDarknessAlpha_Static(0.15f, 0.5f);
         TooltipManager.StartTooltip_Static("CRASH", true);
         yield return new WaitForSeconds(0.5f);
         TooltipManager.StartTooltip_Static("POP!", true);
+        FlashlightManager.SetDarknessAlpha_Static(0.65f, 0.15f);
         yield return new WaitForSeconds(0.35f);
+        FlashlightManager.SetDarknessAlpha_Static(1, 0.05f);
         TooltipManager.StopEvent_Static();
         ButtonManager.instance.deactivateAllButtons();
         //GameHandler.instance.startDarkness(true);
