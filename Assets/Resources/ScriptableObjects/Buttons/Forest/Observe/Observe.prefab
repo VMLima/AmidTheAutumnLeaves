@@ -124,7 +124,7 @@ MonoBehaviour:
   buttonTooltip: 
   tooltipHoverDelay: 1
   doNotShowCostsInTooltip: 0
-  buttonColor: {r: 0.50883484, g: 0.735849, b: 0.107600555, a: 1}
+  buttonColor: {r: 0.24494371, g: 0.3773585, b: 0.008899963, a: 1}
   tooltip: {fileID: 0}
   toggleButton: 1
   onStartEffect: []

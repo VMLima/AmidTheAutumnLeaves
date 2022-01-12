@@ -12,9 +12,34 @@ public class GameHandler : MonoBehaviour
     Player player;
     public static GameHandler instance;
 
-    public GameObject mainCanvas;
+    public GameObject background;
     public GameObject darkness;
     GameObject darknessInstance;
+
+    public void modUIColor(string location)
+    {
+        if (location == "Forest")
+        {
+            setDarkness(0);
+            background.GetComponent<Image>().color = new Color(0.1f, 0.21f, 0f);
+        }
+        else if (location == "Cave")
+        {
+            //setDarkness(60);
+            background.GetComponent<Image>().color = new Color(0.17f, 0.17f, 0.17f);
+        }
+        else if (location == "CaveIn")
+        {
+            setDarkness(255);
+        }
+        else Debug.LogError("GameHandler:modUIColor: could not find match for string:" + location + ":");
+    }
+    public void setDarkness(int opacity)
+    {
+        Color color = darkness.GetComponent<Image>().color;
+        color.a = ((float) opacity)/255f;
+        darkness.GetComponent<Image>().color = color;
+    }    
     public void startDarkness(bool turnOn)
     {
         if (turnOn) darkness.GetComponent<Image>().color = Color.black;
@@ -59,6 +84,7 @@ public class GameHandler : MonoBehaviour
 
     void startGame()
     {
+        modUIColor("Cave");
         buttonM.addButtonArrayToUI("StartingButtons");
     }
 

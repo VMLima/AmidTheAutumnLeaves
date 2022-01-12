@@ -113,7 +113,9 @@ public class ExitCave : ButtonEffectScript
             ButtonManager.instance.deactivateAllButtons();
             ButtonManager.instance.addButtonArrayToUI("TheForest");
             //IncManager.instance.endDarkness();
-            GameHandler.instance.startDarkness(false);
+            //GameHandler.instance.setDarkness(25);
+            GameHandler.instance.modUIColor("Forest");
+           // GameHandler.instance.startDarkness(false);
             return;
         }
     }

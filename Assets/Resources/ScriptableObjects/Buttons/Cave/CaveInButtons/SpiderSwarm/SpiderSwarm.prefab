@@ -120,7 +120,7 @@ MonoBehaviour:
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
   buttonTitle: A Spider!
-  ButtonTitleColor: {r: 0.11320752, g: 0.011213952, b: 0.011213952, a: 1}
+  ButtonTitleColor: {r: 0.05660379, g: 0.0024029901, b: 0.0024029901, a: 1}
   buttonTooltip: skittering
   tooltipHoverDelay: 0.1
   doNotShowCostsInTooltip: 0
