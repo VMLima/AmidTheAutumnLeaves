@@ -41,12 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Button
+  - name: ??
     uniqueID: 3301224201
     locked: 0
-  - name: FlashLight
+  - name: Tooltip
     uniqueID: 1409382907
     locked: 0
-  - name: Text
+  - name: DARKNESS
     uniqueID: 195650921
     locked: 0
