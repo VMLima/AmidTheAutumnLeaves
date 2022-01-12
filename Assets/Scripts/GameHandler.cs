@@ -16,17 +16,36 @@ public class GameHandler : MonoBehaviour
     public GameObject darkness;
     GameObject darknessInstance;
 
+    IEnumerator changeAlpha()
+    {
+        Color color = darkness.GetComponent<Image>().color;
+        while (color.a>0)
+        {
+            if(color.a>0.02f)
+            {
+                color.a -= 0.02f;
+            }
+            else
+            {
+                color.a = 0;
+            }
+            darkness.GetComponent<Image>().color = color;
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     public void modUIColor(string location)
     {
         if (location == "Forest")
         {
-            setDarkness(0);
-            background.GetComponent<Image>().color = new Color(0.1f, 0.21f, 0f);
+            //setDarkness(0);
+            StartCoroutine(changeAlpha());
+            background.GetComponent<Image>().color = new Color(0.83f, 0.91f, 0.77f);
         }
         else if (location == "Cave")
         {
             //setDarkness(60);
-            background.GetComponent<Image>().color = new Color(0.17f, 0.17f, 0.17f);
+            background.GetComponent<Image>().color = new Color(0.08f, 0.08f, 0.08f);
         }
         else if (location == "CaveIn")
         {

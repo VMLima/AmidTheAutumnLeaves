@@ -47,7 +47,7 @@ public class Bear : ButtonEffectScript
         TooltipManager.StartEvent_Static();
         ButtonManager.instance.addButtonArrayToUI("TheForest", false);
         setButtonColor(Color.gray);
-        setButtonText("Bear", "");
+        setButtonText("Bear?", "");
         yield return new WaitForSeconds(1);
         setButtonText("?", "");
         yield return new WaitForSeconds(1.5f);
