@@ -17,6 +17,7 @@ public class TooltipManager : MonoBehaviour
     private RectTransform backgroundTransform;
     private void showTooltip(string tooltipString)
     {
+        if (tooltipString == "" || tooltipString == " ") return;
         tooltipText.text = tooltipString;
         float textPaddingSize = 4f;
         Vector2 backgroundSize = new Vector2(tooltipText.preferredWidth + 2 * textPaddingSize > 200 ? 200: tooltipText.preferredWidth + 2*textPaddingSize, tooltipText.preferredHeight + 2*textPaddingSize);

@@ -45,6 +45,8 @@ public class ButtonEffectScript : EffectScript
     public List<IncrementalValuePair> onTickEffect;
     public bool mirrorStartonStop = true;
 
+    IEnumerator inst = null;
+
 
     bool cannotPress = false;
     float waitTime = 1;
@@ -62,8 +64,9 @@ public class ButtonEffectScript : EffectScript
     public void PressDelay(float _waitTime = 1)
     {
         PreventPresses();
-        StopAllCoroutines();
-        StartCoroutine(noPressFor(_waitTime));
+        if(inst != null) StopCoroutine(inst);
+        inst = noPressFor(_waitTime);
+        StartCoroutine(inst);
     }
 
     public void PreventPresses()

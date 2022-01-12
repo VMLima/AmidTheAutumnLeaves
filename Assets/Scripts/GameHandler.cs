@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
 {
@@ -9,11 +10,20 @@ public class GameHandler : MonoBehaviour
     EffectManager effectM;
     ButtonManager buttonM;
     Player player;
+    public static GameHandler instance;
 
+    public GameObject mainCanvas;
+    public GameObject darkness;
+    GameObject darknessInstance;
+    public void startDarkness(bool turnOn)
+    {
+        if (turnOn) darkness.GetComponent<Image>().color = Color.black;
+        else darkness.GetComponent<Image>().color = Color.clear;
+    }
 
     private void Awake()
     {
-        
+        instance = this;
     }
     void Start()
     {

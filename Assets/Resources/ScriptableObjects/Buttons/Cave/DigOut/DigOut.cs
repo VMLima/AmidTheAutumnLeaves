@@ -85,7 +85,8 @@ public class DigOut : ButtonEffectScript
         yield return new WaitForSeconds(0.35f);
         TooltipManager.StopEvent_Static();
         ButtonManager.instance.deactivateAllButtons();
-        IncManager.instance.startDarkness();
+        GameHandler.instance.startDarkness(true);
+        //IncManager.instance.startDarkness();
         ButtonManager.instance.addButtonArrayToUI("CaveIn");
     }
     void everyTime()

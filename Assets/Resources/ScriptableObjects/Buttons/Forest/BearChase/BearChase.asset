@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97e9e3b5d71a544492fde659d4d86b9, type: 3}
-  m_Name: TheForest
+  m_Name: BearChase
   m_EditorClassIdentifier: 
-  nameTag: TheForest
+  nameTag: BearChase
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   features:
-  - {fileID: 11400000, guid: 726fe685c2c5ab1488df06b9be4bba9c, type: 2}
-  - {fileID: 11400000, guid: 0df90679c617aff4e953e2e9483db73b, type: 2}
+  - {fileID: 11400000, guid: 8a4639cdd7be6354f9050f2472809ec2, type: 2}
+  - {fileID: 11400000, guid: 9b10b3550fbefa04392104cb3f9a5b80, type: 2}
+  - {fileID: 11400000, guid: 2d066c46e2d845d4e84aad664883b1ae, type: 2}

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SearchArea : ButtonEffectScript
 {
-    bool toggle = false;
-    int stage = 0;
+    int stage;
     PlayerAttributeSO stamina;
     PlayerAttributeSO health;
     PlayerAttributeSO water;

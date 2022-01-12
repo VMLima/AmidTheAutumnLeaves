@@ -2,15 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExitCave : ButtonEffectScript
+public class BearChase2 : ButtonEffectScript
 {
+    public ButtonSO bearChase1;
+    public ButtonSO bearChase2;
+    BearChase1 _bearChase1;
+    public ButtonSO bearChase3;
+    BearChase3 _bearChase3;
+    //ienumerator running that checks if clicked flag changed.
+    //if it has, no damage, if it hasn't, damage.
+    bool chasing = true;
+    bool wasPress = true;
+    bool thisWasPressed = false;
+    bool doNotProgress = false;
+
     bool toggle = false;
     int stage = 0;
     PlayerAttributeSO stamina;
     PlayerAttributeSO health;
     PlayerAttributeSO water;
 
-    public ButtonSO spiderSwarm;
+    void sendPresses()
+    {
+        _bearChase1.goToNext();
+        _bearChase3.goToNext();
+    }
+
+    public void goToNext()
+    {
+        thisWasPressed = false;
+        onStart();
+    }
+
+
 
     private void Start()
     {
@@ -21,6 +45,9 @@ public class ExitCave : ButtonEffectScript
         health = IncManager.instance.Get<PlayerAttributeSO>("Health");
         water = IncManager.instance.Get<PlayerAttributeSO>("Water");
 
+        //yield return new WaitForEndOfFrame();
+        _bearChase1 = bearChase1.UIInstance.GetComponent<BearChase1>();
+        _bearChase3 = bearChase3.UIInstance.GetComponent<BearChase3>();
         //if the button needs to be reset (like new game) the stuff that needs to be set
         defaultValues();
     }
@@ -28,6 +55,7 @@ public class ExitCave : ButtonEffectScript
     public void defaultValues()
     {
         stage = 0;
+        thisWasPressed = false;
         onStart();
 
         //the tooltip will show up after 0.5s of hovering over the button.  Default is 1s. Low values for more story/actiony things.
@@ -41,86 +69,80 @@ public class ExitCave : ButtonEffectScript
         //stuff that happens specific to the current stage
         stageStuff();
         //stuff that happens every press
-        everyTime();
+        if(chasing) everyTime();
     }
-
-    
 
     void stageStuff()
     {
         //index is there so I can easily insert stages into spots without having to renumber everything. again.
+        
         int index = 0;
         if (stage == index)
         {
-            spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            //setup in editor.
-            //start spider shit.
-            //spider buttons will... just exist? sure for now.  Maybe start jumping in annoying spots in the button order.
-            //do the create button thing again in ButtonEffectScript, with addding to parent, yada yada.  OnDestroy, it is going to destroy it.
+            chasing = true;
+            setButtonText("RUN AWAY!!!");
             return;
         }
         index++;
         if (stage == index)
         {
-            spiderSwarm.createSpider(1);
-            PressDelay(1.0f);
+            chasing = true;
+            setButtonText("RUN FASTER");
             return;
         }
         index++;
         if (stage == index)
         {
-            spiderSwarm.createSpider(1);
-            for (int i = 0; i < stage * 2; i++)
-            {
-                spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            }
-            PressDelay(1.0f);
+            setButtonText("RUN INTO TREE");
             return;
         }
         index++;
         if (stage == index)
         {
-            spiderSwarm.createSpider(1);
-            for (int i = 0; i < stage * 2; i++)
-            {
-                spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            }
-            PressDelay(1.0f);
+            if(thisWasPressed) doNotProgress = true;
+            else setButtonText("SCREAM AND RUN.");
             return;
         }
         index++;
         if (stage == index)
         {
-            spiderSwarm.createSpider(1);
-            for (int i = 0; i < stage * 2; i++)
-            {
-                spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            }
-            PressDelay(1.0f);
+            setButtonText("TRIP OVER TURTLE");
             return;
         }
         index++;
         if (stage == index)
         {
-            //delete leftover spiders
-            //Debug.Log("ExitCave:Deleting spiders");
-            ButtonManager.instance.deleteButtons("Spider");
-            //Debug.Log("ExitCave:deactivating buttons");
-            ButtonManager.instance.deactivateAllButtons();
-            ButtonManager.instance.addButtonArrayToUI("TheForest");
-            //IncManager.instance.endDarkness();
-            GameHandler.instance.startDarkness(false);
+            if (thisWasPressed) doNotProgress = true;
+            else setButtonText("Get Lost!!");
+            return;
+        }
+        else
+        {
+            if (thisWasPressed) doNotProgress = true;
+            else chasing = false;
             return;
         }
     }
     void everyTime()
     {
+        if (doNotProgress)
+        {
+            doNotProgress = false;
+            return;
+        }
+
+        if (thisWasPressed)
+        {
+            sendPresses();
+            PressDelay(0.5f);
+        }
+        else
+        {
+            PressDelay(0.2f);
+        }
+        wasPress = true;
+        thisWasPressed = true;
         refreshTooltip(); // TOOLTIP WON"T REFRESH WITHOUT THIS HAPPENEING EACH TIME TOOLTIP CHAGNES.
         stage++;
     }
-
 }

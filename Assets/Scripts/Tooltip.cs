@@ -7,6 +7,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private string tipMessage = "";
     private float timeToWait = 1.0f;
+    IEnumerator inst = null;
 
     public string getTooltip()
     {
@@ -32,9 +33,10 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void clickReset(float _timeToWait = -1)
     {
         if (_timeToWait == -1) _timeToWait = timeToWait;
-        StopAllCoroutines();
+        if(inst != null) StopCoroutine(inst);
         TooltipManager.StopTooltip_Static();
-        StartCoroutine(startTimer(_timeToWait));
+        inst = startTimer(_timeToWait);
+        StartCoroutine(inst);
         
     }
 
@@ -46,12 +48,13 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void showMessage(float _timeToWait = -1)
     {
         if (_timeToWait == -1) _timeToWait = timeToWait;
-        StopAllCoroutines();
-        StartCoroutine(startTimer(_timeToWait));
+        if(inst != null) StopCoroutine(inst);
+        inst = startTimer(_timeToWait);
+        StartCoroutine(inst);
     }
     public void hideMessage()
     {
-        StopAllCoroutines();
+        if(inst != null) StopCoroutine(inst);
         TooltipManager.StopTooltip_Static();
     }
 

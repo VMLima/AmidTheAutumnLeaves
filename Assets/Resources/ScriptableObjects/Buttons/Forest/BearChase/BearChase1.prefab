@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &543016437879606357
+--- !u!1001 &5650653381030849398
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -93,25 +93,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
       propertyPath: m_Name
-      value: SpiderSwarm
+      value: BearChase1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
---- !u!1 &5244100504597056633 stripped
+--- !u!1 &82402085664156506 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
-  m_PrefabInstance: {fileID: 543016437879606357}
+  m_PrefabInstance: {fileID: 5650653381030849398}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-7750406881275290065
+--- !u!114 &75742760662314493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5244100504597056633}
+  m_GameObject: {fileID: 82402085664156506}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12099d2f63ddb5d4b8afbf5ddbb05ab9, type: 3}
+  m_Script: {fileID: 11500000, guid: dacb05445f174d94d830c975310c553c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0
@@ -119,14 +119,17 @@ MonoBehaviour:
   maxStacks: 0
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
-  buttonTitle: A Spider!
-  ButtonTitleColor: {r: 0.11320752, g: 0.011213952, b: 0.011213952, a: 1}
-  buttonTooltip: skittering
-  tooltipHoverDelay: 0.1
+  buttonTitle: 
+  ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
+  buttonTooltip: 
+  tooltipHoverDelay: 1
   doNotShowCostsInTooltip: 0
-  buttonColor: {r: 0, g: 0, b: 0, a: 1}
+  buttonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   tooltip: {fileID: 0}
   toggleButton: 1
   onStartEffect: []
   onTickEffect: []
   mirrorStartonStop: 1
+  bearchase1: {fileID: 11400000, guid: 8a4639cdd7be6354f9050f2472809ec2, type: 2}
+  bearChase2: {fileID: 11400000, guid: 9b10b3550fbefa04392104cb3f9a5b80, type: 2}
+  bearChase3: {fileID: 11400000, guid: 2d066c46e2d845d4e84aad664883b1ae, type: 2}
