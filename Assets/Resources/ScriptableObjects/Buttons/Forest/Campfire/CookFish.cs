@@ -77,7 +77,17 @@ public class CookFish : ButtonEffectScript
         TooltipManager.StartEvent_Static();
         TooltipManager.StartTooltip_Static("I have no fish to cook...",true);
         
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
+        TooltipManager.StopEvent_Static();
+    }
+
+    IEnumerator eatFish()
+    {
+        //I don't have any fish
+        TooltipManager.StartEvent_Static();
+        TooltipManager.StartTooltip_Static("mmmmm.\n  Tasty.", true);
+
+        yield return new WaitForSeconds(2);
         TooltipManager.StopEvent_Static();
     }
 
@@ -101,7 +111,8 @@ public class CookFish : ButtonEffectScript
             //setting name/tooltip of this one
             if(IncManager.instance.GetAmount<ResourceSO>("Fish")>0)
             {
-                setButtonText("Eat Fish", "mmmmmmmmmm");
+                setButtonText("Eat Fish", "");
+                
                 IncManager.instance.Add<ResourceSO>("Fish", -1);
             }
             else
@@ -114,6 +125,7 @@ public class CookFish : ButtonEffectScript
         index++;
         if (stage == index)
         {
+            StartCoroutine(eatFish());
             IncManager.instance.Add<PlayerAttributeSO>("Health", 10);
             IncManager.instance.Add<PlayerAttributeSO>("Stamina", 20);
             IncManager.instance.Add<PlayerAttributeSO>("Water", 10);

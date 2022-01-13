@@ -41,7 +41,7 @@ public class DiveIntoLake : ButtonEffectScript
             int numFish = 1;
             for(int i = 0;i < numFish; i++)
             {
-                fish.createSpawn(15);
+                fish.createSpawn(getPanelIndex() + 5);
             }
             yield return new WaitForSeconds(0.65f);
             ButtonManager.instance.deleteButtons("Fish");
@@ -62,7 +62,7 @@ public class DiveIntoLake : ButtonEffectScript
         if (stage == index)
         {
             //fish.createSpawn(15);
-            
+            GameHandler.instance.modUIColor("Swimming");
             ButtonManager.instance.addButtonArrayToUI("Lake", false);
             ButtonManager.instance.addButtonArrayToUI("Swimming");
             StartCoroutine(FishSpawn());
@@ -74,6 +74,7 @@ public class DiveIntoLake : ButtonEffectScript
         index++;
         if (stage == index)
         {
+            GameHandler.instance.modUIColor("Lake");
             StopCoroutine(FishSpawn());
             ButtonManager.instance.deleteButtons("Fish");
             diveDeeper.UIInstance.GetComponent<DiveDeeper>().setStage(0);
