@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
       propertyPath: m_Name
-      value: AddMoss
+      value: CookFish
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4050979142751541051, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
@@ -103,7 +103,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
   m_PrefabInstance: {fileID: 2652984134920049622}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &479677158677457263
+--- !u!114 &-5473329250200449912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,23 +112,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7754824788222104570}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08d6346ac54604f42abfbb3fa784c3bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ec3663785d7e2e4f99aae7c132a3cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0
-  frequency: 1
-  maxStacks: 0
-  resetDurationOnStack: 0
-  destroyObjectOnEnd: 1
-  buttonTitle: 
-  ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
-  buttonTooltip: 
-  tooltipHoverDelay: 1
-  doNotShowCostsInTooltip: 0
-  buttonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  tooltip: {fileID: 0}
-  toggleButton: 1
-  onStartEffect: []
-  onTickEffect: []
-  mirrorStartonStop: 1
-  campfire: {fileID: 11400000, guid: a386f1d0fa408044eb41b75d53c791fb, type: 2}
