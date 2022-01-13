@@ -252,7 +252,7 @@ public class WeatherManager : MonoBehaviour
         // Calculates seasonal time shift based on day of the year, the '0.5' can be adjusted 
         //later to return different seasonal variations. In its current form it should cause 
         // the day to be roughly 6 hours longer at the summer solstice and vice versa.
-        weather.TimeShift.Equals(0.5 * (Mathf.Abs(TimeManager.instance.times.Day - 180) - 90));
+       // weather.TimeShift.Equals(0.5 * (Mathf.Abs(TimeManager.instance.times.Day - 180) - 90));
 
     }
 
@@ -321,7 +321,7 @@ public class WeatherManager : MonoBehaviour
 
     private void Start()
     {
-        TimeManager.instance.incrementSeason();
+      //  TimeManager.instance.incrementSeason();
         PerDayWeather();
     }
 

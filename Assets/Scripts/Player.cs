@@ -74,14 +74,14 @@ public class Player : MonoBehaviour
     //      I dunno, I'll work it out later.
     public void everySecond()
     {
-        TimeManager.instance.incrementMinute();
-        WeatherManager.instance.PerSecondWeather();
+        //TimeManager.instance.incrementMinute();
+        //WeatherManager.instance.PerSecondWeather();
 
-        regen(ref healthCurrent, healthRate, healthMax);
-        regen(ref staminaCurrent, staminaRate, staminaMax);
-        regen(ref warmthCurrent, warmthRate, warmthMax);
-        IncManager.instance.AddAmount(hunger, 1);
-        IncManager.instance.AddAmount(thirst, 0.1f);
+        //regen(ref healthCurrent, healthRate, healthMax);
+        //regen(ref staminaCurrent, staminaRate, staminaMax);
+        //regen(ref warmthCurrent, warmthRate, warmthMax);
+       // IncManager.instance.AddAmount(hunger, 1);
+       // IncManager.instance.AddAmount(thirst, 0.1f);
 
         //warmthCurrent
         //THIRST/HUNGER RATE CALCULATIONS
@@ -89,9 +89,9 @@ public class Player : MonoBehaviour
 
         //Debug.Log("Player:everySecond: warmthCurrent:" + warmthCurrent);
 
-        cleanUpValue(ref healthCurrent);
-        cleanUpValue(ref staminaCurrent);
-        cleanUpValue(ref warmthCurrent);
+        //cleanUpValue(ref healthCurrent);
+        //cleanUpValue(ref staminaCurrent);
+        //cleanUpValue(ref warmthCurrent);
 
 
     }
