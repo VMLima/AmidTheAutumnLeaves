@@ -9,9 +9,12 @@ public class DigOut : ButtonEffectScript
     PlayerAttributeSO stamina;
     PlayerAttributeSO health;
     PlayerAttributeSO water;
+    public RockController rockController;
 
     private void Start()
     {
+
+        rockController = GetComponentInParent<RockController>();
         toggleButton = false;   //just making sure.  It is set in the inspector, but I've forgoten before.
         stamina = IncManager.instance.Get<PlayerAttributeSO>("Stamina");
         health = IncManager.instance.Get<PlayerAttributeSO>("Health");
@@ -78,12 +81,14 @@ public class DigOut : ButtonEffectScript
         FlashlightManager.SetDarknessAlpha_Static(0.05f, 1.5f); //over 1.5 seconds, change alpha to 0.05 alpha
         yield return new WaitForSeconds(1.5f);
         TooltipManager.StartTooltip_Static("BAM", true);
+        rockController.SpawnRockSlide();
         yield return new WaitForSeconds(0.75f);
         TooltipManager.StartTooltip_Static("BOOM", true);
         yield return new WaitForSeconds(0.5f);
         FlashlightManager.SetDarknessAlpha_Static(0.15f, 0.5f);
         TooltipManager.StartTooltip_Static("CRASH", true);
         yield return new WaitForSeconds(0.5f);
+       
         TooltipManager.StartTooltip_Static("POP!", true);
         FlashlightManager.SetDarknessAlpha_Static(0.65f, 0.15f);
         yield return new WaitForSeconds(0.35f);
