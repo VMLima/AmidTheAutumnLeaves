@@ -7,7 +7,6 @@ public class ButtonManager : MonoBehaviour
 {
 
     List<ButtonSO> activeButtons;
-
     public GameObject buttonPanel;
     private int buttonIndex;
 

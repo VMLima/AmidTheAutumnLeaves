@@ -38,9 +38,7 @@ public class DiveIntoLake : ButtonEffectScript
         while(true)
         {
             yield return new WaitForSeconds(Random.Range(1, 7));
-            int numFish = Random.Range(1, 7);
-            numFish -= 2; //-1->3
-            if (numFish < 1) numFish = 1;
+            int numFish = 1;
             for(int i = 0;i < numFish; i++)
             {
                 fish.createSpawn(15);

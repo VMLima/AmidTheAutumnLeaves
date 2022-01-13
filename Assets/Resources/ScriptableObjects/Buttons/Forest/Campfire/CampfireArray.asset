@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97e9e3b5d71a544492fde659d4d86b9, type: 3}
   m_Name: CampfireArray
   m_EditorClassIdentifier: 
-  nameTag: 
+  nameTag: CampfireArray
   toUnlock: []
-  unlocked: 0
+  unlocked: 1
   incManager: {fileID: 0}
   features:
   - {fileID: 11400000, guid: a386f1d0fa408044eb41b75d53c791fb, type: 2}
+  - {fileID: 11400000, guid: 078d704f292bcd542aacdeb80882763b, type: 2}
+  - {fileID: 11400000, guid: d570f9d0f47c8164d95b777d2090ff0a, type: 2}

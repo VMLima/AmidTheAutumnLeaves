@@ -10,25 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
-  m_Name: AddMoss
+  m_Name: CookTurtle
   m_EditorClassIdentifier: 
-  nameTag: AddMoss
-  toUnlock: []
+  nameTag: CookTurtle
+  toUnlock:
+  - incrementable: {fileID: 11400000, guid: 84a51ce150f176143a7bc60ddff9c195, type: 2}
+    amount: 1
   unlocked: 1
   incManager: {fileID: 0}
-  hideName: 0
-  hideQuantity: 0
+  hideName: 1
+  hideQuantity: 1
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 7754824788222104570, guid: 26c0077f75e37084a90c3149954d2325, type: 3}
+  UIPrefab: {fileID: 7754824788222104570, guid: e2f1623c19b383a41b864681dce1482c, type: 3}
   UIPanel: {fileID: 0}
   isActive: 0
-  tooltipText: 
+  tooltipText: ??????????
   useOnlyTooltipText: 0
-  UIIndex: 13
-  UISprite: {fileID: 0}
+  UIIndex: 1
+  UISprite: {fileID: 21300000, guid: 9652f93d21c232a47a4aa3fd383ff476, type: 3}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
   clickEffects: []
   tooltip: {fileID: 0}
-  button: {fileID: 9110974249032120963, guid: 26c0077f75e37084a90c3149954d2325, type: 3}
+  button: {fileID: 9110974249032120963, guid: e2f1623c19b383a41b864681dce1482c, type: 3}
