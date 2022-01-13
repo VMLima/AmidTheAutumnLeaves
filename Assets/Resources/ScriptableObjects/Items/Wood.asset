@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
-  m_Name: Twig
+  m_Name: Wood
   m_EditorClassIdentifier: 
-  nameTag: Twig
+  nameTag: Wood
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
@@ -24,7 +24,7 @@ MonoBehaviour:
   isActive: 0
   tooltipText: 
   useOnlyTooltipText: 0
-  UIIndex: 7
+  UIIndex: 0
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
@@ -32,14 +32,14 @@ MonoBehaviour:
   clickEffects: []
   tooltip: {fileID: 0}
   amount: 0
-  maximum: 5
-  maxStack: 5
+  maximum: 3
+  maxStack: 3
   minAmount: 0
   minStack: 0
   EffectObject: {fileID: 0}
-  removeFromUIOnEmpty: 0
+  removeFromUIOnEmpty: 1
   UIPanelID: 0
   UIActive: 0
-  hasUI: 0
+  hasUI: 1
   effectManager: {fileID: 0}
   DeleteWhenEmpty: 1

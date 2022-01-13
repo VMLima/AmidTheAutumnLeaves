@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97e9e3b5d71a544492fde659d4d86b9, type: 3}
-  m_Name: StartingButtons
+  m_Name: Swimming
   m_EditorClassIdentifier: 
-  nameTag: StartingButtons
+  nameTag: 
   toUnlock: []
-  unlocked: 1
+  unlocked: 0
   incManager: {fileID: 0}
   features:
-  - {fileID: 11400000, guid: 1df977cbf82b3bb44b7952fb03f0eda3, type: 2}
   - {fileID: 11400000, guid: e761d7039df90da4692d2a7459bc0655, type: 2}
+  - {fileID: 11400000, guid: 0990b9c5a1fddb4468950ea93dd3aba9, type: 2}

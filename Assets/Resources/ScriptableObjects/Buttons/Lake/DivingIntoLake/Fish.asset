@@ -9,37 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
-  m_Name: Twig
+  m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
+  m_Name: Fish
   m_EditorClassIdentifier: 
-  nameTag: Twig
+  nameTag: Fish
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   hideName: 0
   hideQuantity: 0
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 77532610994766148, guid: 14385605e8c10f341b9de80d34dcfd82, type: 3}
+  UIPrefab: {fileID: 5368924488188730230, guid: a0335dda687ea69448700d7cca9d91de, type: 3}
   UIPanel: {fileID: 0}
   isActive: 0
   tooltipText: 
   useOnlyTooltipText: 0
-  UIIndex: 7
+  UIIndex: 0
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
   clickEffects: []
   tooltip: {fileID: 0}
-  amount: 0
-  maximum: 5
-  maxStack: 5
-  minAmount: 0
-  minStack: 0
-  EffectObject: {fileID: 0}
-  removeFromUIOnEmpty: 0
-  UIPanelID: 0
-  UIActive: 0
-  hasUI: 0
-  effectManager: {fileID: 0}
-  DeleteWhenEmpty: 1
+  button: {fileID: 6875943987031028239, guid: a0335dda687ea69448700d7cca9d91de, type: 3}

@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
-  m_Name: Twig
+  m_Name: Basket
   m_EditorClassIdentifier: 
-  nameTag: Twig
+  nameTag: 
   toUnlock: []
-  unlocked: 1
+  unlocked: 0
   incManager: {fileID: 0}
   hideName: 0
-  hideQuantity: 0
+  hideQuantity: 1
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 77532610994766148, guid: 14385605e8c10f341b9de80d34dcfd82, type: 3}
+  UIPrefab: {fileID: 0}
   UIPanel: {fileID: 0}
   isActive: 0
-  tooltipText: 
+  tooltipText: Perfect for holding fish.
   useOnlyTooltipText: 0
-  UIIndex: 7
+  UIIndex: 0
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
@@ -32,12 +32,12 @@ MonoBehaviour:
   clickEffects: []
   tooltip: {fileID: 0}
   amount: 0
-  maximum: 5
-  maxStack: 5
+  maximum: 1
+  maxStack: 0
   minAmount: 0
   minStack: 0
   EffectObject: {fileID: 0}
-  removeFromUIOnEmpty: 0
+  removeFromUIOnEmpty: 1
   UIPanelID: 0
   UIActive: 0
   hasUI: 0

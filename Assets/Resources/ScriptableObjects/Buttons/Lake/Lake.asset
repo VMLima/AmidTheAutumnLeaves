@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97e9e3b5d71a544492fde659d4d86b9, type: 3}
-  m_Name: StartingButtons
+  m_Name: Lake
   m_EditorClassIdentifier: 
-  nameTag: StartingButtons
+  nameTag: Lake
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
   features:
-  - {fileID: 11400000, guid: 1df977cbf82b3bb44b7952fb03f0eda3, type: 2}
+  - {fileID: 11400000, guid: cb73f19cab793df4d968a6f141e0a088, type: 2}
+  - {fileID: 11400000, guid: 3341e70060c48244aa8d5f97ab2d12fd, type: 2}
   - {fileID: 11400000, guid: e761d7039df90da4692d2a7459bc0655, type: 2}

@@ -9,31 +9,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7810ebf041aaed4ca00d5842813a3de, type: 3}
-  m_Name: WaterBottle
+  m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
+  m_Name: Pants
   m_EditorClassIdentifier: 
-  nameTag: Water Bottle
+  nameTag: Pants
   toUnlock: []
   unlocked: 1
   incManager: {fileID: 0}
+  hideName: 0
+  hideQuantity: 0
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 5766463783397515592, guid: cc84a6b97b60a7b47891dcc8973269a9, type: 3}
+  UIPrefab: {fileID: 77532610994766148, guid: 14385605e8c10f341b9de80d34dcfd82, type: 3}
   UIPanel: {fileID: 0}
-  isActive: 0
-  tooltipText: A drink for the thirsty.
-  useOnlyTooltipText: 1
-  UIIndex: 3
+  isActive: 1
+  tooltipText: My best.
+  useOnlyTooltipText: 0
+  UIIndex: 5
   UISprite: {fileID: 0}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
-  clickEffects:
-  - incrementable: {fileID: 11400000, guid: 4424c0c4f9add2f4e9e40a7e81ed809f, type: 2}
-    amount: 25
+  clickEffects: []
   tooltip: {fileID: 0}
-  amount: 0
-  maximum: 0
-  maxStack: 0
+  amount: 1
+  maximum: 1
+  maxStack: 1
   minAmount: 0
   minStack: 0
   EffectObject: {fileID: 0}
@@ -42,3 +42,4 @@ MonoBehaviour:
   UIActive: 0
   hasUI: 0
   effectManager: {fileID: 0}
+  DeleteWhenEmpty: 1

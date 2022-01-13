@@ -9,18 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4de7afb36d42b489ce2e4a244f3fe6, type: 3}
-  m_Name: Sword
+  m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
+  m_Name: GatherStones
   m_EditorClassIdentifier: 
-  name: Sword
+  nameTag: 
   toUnlock: []
-  unlocked: 1
+  unlocked: 0
   incManager: {fileID: 0}
+  hideName: 0
+  hideQuantity: 0
   UIInstance: {fileID: 0}
-  UIPrefab: {fileID: 77532610994766148, guid: 14385605e8c10f341b9de80d34dcfd82, type: 3}
+  UIPrefab: {fileID: 0}
   UIPanel: {fileID: 0}
-  isActive: 1
-  tooltipText: How did I get this??
+  isActive: 0
+  tooltipText: 
   useOnlyTooltipText: 0
   UIIndex: 0
   UISprite: {fileID: 0}
@@ -28,15 +30,5 @@ MonoBehaviour:
   imageDisplay: {fileID: 0}
   clickButton: {fileID: 0}
   clickEffects: []
-  amount: 1
-  maximum: 1
-  maxStack: 1
-  minAmount: 0
-  minStack: 0
-  EffectObject: {fileID: 0}
-  removeFromUIOnEmpty: 0
-  UIPanelID: 0
-  UIActive: 0
-  hasUI: 1
-  effectManager: {fileID: 0}
-  DeleteWhenEmpty: 1
+  tooltip: {fileID: 0}
+  button: {fileID: 1498223693125796387, guid: 2ce9b6132927cd948b9c5790d489e59c, type: 3}

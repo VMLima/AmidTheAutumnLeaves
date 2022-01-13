@@ -52,11 +52,11 @@ public class ExitCave : ButtonEffectScript
         int index = 0;
         if (stage == index)
         {
-            spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
-            spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
+            spiderSwarm.createSpawn(getPanelIndex() + Random.Range(-2, 3));
+            spiderSwarm.createSpawn(getPanelIndex() + Random.Range(-2, 3));
+            spiderSwarm.createSpawn(getPanelIndex() + Random.Range(-2, 3));
+            spiderSwarm.createSpawn(getPanelIndex() + Random.Range(-2, 3));
+            spiderSwarm.createSpawn(getPanelIndex() + Random.Range(-2, 3));
             //setup in editor.
             //start spider shit.
             //spider buttons will... just exist? sure for now.  Maybe start jumping in annoying spots in the button order.
@@ -66,17 +66,17 @@ public class ExitCave : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            spiderSwarm.createSpider(1);
+            spiderSwarm.createSpawn(1);
             PressDelay(1.0f);
             return;
         }
         index++;
         if (stage == index)
         {
-            spiderSwarm.createSpider(1);
+            spiderSwarm.createSpawn(1);
             for (int i = 0; i < stage * 2; i++)
             {
-                spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
+                spiderSwarm.createSpawn(getPanelIndex() + Random.Range(-2, 3));
             }
             PressDelay(1.0f);
             return;
@@ -84,10 +84,10 @@ public class ExitCave : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            spiderSwarm.createSpider(1);
+            spiderSwarm.createSpawn(1);
             for (int i = 0; i < stage * 2; i++)
             {
-                spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
+                spiderSwarm.createSpawn(getPanelIndex() + Random.Range(-2, 3));
             }
             PressDelay(1.0f);
             return;
@@ -95,10 +95,10 @@ public class ExitCave : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            spiderSwarm.createSpider(1);
+            spiderSwarm.createSpawn(1);
             for (int i = 0; i < stage * 2; i++)
             {
-                spiderSwarm.createSpider(getPanelIndex() + Random.Range(-2, 3));
+                spiderSwarm.createSpawn(getPanelIndex() + Random.Range(-2, 3));
             }
             PressDelay(1.0f);
             return;
