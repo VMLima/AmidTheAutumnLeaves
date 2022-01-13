@@ -6,6 +6,8 @@ using TMPro;
 
 public class UIMenuSO : CommonBaseSO
 {
+    public bool hideName = false;
+    public bool hideQuantity = false;
     [HideInInspector]
     public GameObject UIInstance;
     [HideInInspector]
@@ -94,6 +96,15 @@ public class UIMenuSO : CommonBaseSO
         UIInstance.transform.SetParent(UIPanel.transform);
         UIInstance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         tooltip = UIInstance.GetComponent<Tooltip>();
+
+        if (UISprite != null)
+        {
+            Image tImage = UIInstance.GetComponent<Image>();
+            tImage.sprite = UISprite;
+            Color tColor = tImage.color;
+            tColor.a = 1;
+            tImage.color = tColor;
+        }
         setUIData();
 
         Tooltip temp = UIInstance.GetComponent<Tooltip>();
@@ -119,14 +130,20 @@ public class UIMenuSO : CommonBaseSO
         temp = UIInstance.transform.Find("HookName");
         if (temp)
         {
-            temp.GetComponent<TextMeshProUGUI>().text = nameTag;
+            if (hideName) temp.GetComponent<TextMeshProUGUI>().text = "";
+            else temp.GetComponent<TextMeshProUGUI>().text = nameTag;
         }
 
         temp = UIInstance.transform.Find("HookQuantity");
         if (temp)
         {
-            textDisplay = temp.GetComponent<TextMeshProUGUI>();
-            textDisplay.text = "0";
+            if (hideQuantity) temp.GetComponent<TextMeshProUGUI>().text = "";
+            else
+            {
+                textDisplay = temp.GetComponent<TextMeshProUGUI>();
+                textDisplay.text = "0";
+            }
+            
         }
 
         temp = UIInstance.transform.Find("HookButton");

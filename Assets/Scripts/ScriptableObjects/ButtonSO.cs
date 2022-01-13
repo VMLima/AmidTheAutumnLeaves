@@ -18,6 +18,7 @@ public class ButtonSO : UIMenuSO
     
     //private bool isActive;
     public Button button;
+    
     private ButtonEffectScript buttonEffect;
 
     private List<GameObject> extraInstances;

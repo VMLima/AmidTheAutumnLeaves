@@ -31,13 +31,13 @@ public class DigOut : ButtonEffectScript
         int index = 0;
         if (stage == index)
         {
-            setButtonText("digOut0", "digOut0 tooltip");
+            setButtonText("Try and crawl out", "I can see the light!!!!");
             return;
         }
         index++;
         if (stage == index)
         {
-            setButtonText("digOut1", "digOut1 tooltip");
+            setButtonText("I can't fit", "maybe if I shift some of these boulders");
 
             PressDelay(1.0f);
             return;
@@ -45,21 +45,21 @@ public class DigOut : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            setButtonText("digOut2", "digOut2 tooltip");
+            setButtonText("Shove large rocks asside", "I am feeling the effects of masculinity");
             PressDelay(1.0f);
             return;
         }
         index++;
         if (stage == index)
         {
-            setButtonText("digOut3", "digOut3 tooltip");
+            setButtonText("Shove more rocks asside", "MUST GET OUT!!");
             PressDelay(1.0f);
             return;
         }
         index++;
         if (stage == index)
         {
-            setButtonText("digOut4", "digOut4 tooltip");
+            setButtonText("Shove even more rocks", "I can feel it!! I'm nearly there!!!");
             return;
         }
         else
@@ -89,6 +89,8 @@ public class DigOut : ButtonEffectScript
         yield return new WaitForSeconds(0.35f);
         FlashlightManager.SetDarknessAlpha_Static(1, 0.05f);
         TooltipManager.StopEvent_Static();
+        ButtonManager.instance.addButtonToUI("Rest", false);
+        ButtonManager.instance.addButtonToUI("Panic", false);
         ButtonManager.instance.deactivateAllButtons();
         //GameHandler.instance.startDarkness(true);
         //GameHandler.instance.setDarkness(235);

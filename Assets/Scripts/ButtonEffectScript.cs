@@ -231,6 +231,8 @@ public class ButtonEffectScript : EffectScript
                 IncManager.instance.Add(pair.incrementable, pair.amount);
             }
         }
+        int i = Random.Range(0, 13);
+        if(i==0) McConnelManager.instance.startRandomQuoteDelay(0);
         onStart();
     }
 

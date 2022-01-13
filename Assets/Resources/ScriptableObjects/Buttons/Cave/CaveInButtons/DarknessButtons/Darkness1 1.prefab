@@ -132,9 +132,9 @@ MonoBehaviour:
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
   buttonTitle: Headbutt a wall.
-  ButtonTitleColor: {r: 0.26415092, g: 0.25542894, b: 0.25542894, a: 1}
+  ButtonTitleColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
   buttonTooltip: Is this the real life...
-  tooltipHoverDelay: 0.2
+  tooltipHoverDelay: 0.05
   doNotShowCostsInTooltip: 1
   buttonColor: {r: 0, g: 0, b: 0, a: 1}
   tooltip: {fileID: 0}

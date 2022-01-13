@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IntroStory : ButtonEffectScript
+public class Campfire : ButtonEffectScript
 {
 
     bool toggle = false;
@@ -42,6 +42,12 @@ public class IntroStory : ButtonEffectScript
         everyTime();
     }
 
+    public void incrementStage(int amount)
+    {
+        stage += amount;
+        onStart();
+    }
+
     void stageStuff()
     {
         //index is there so I can easily insert stages into spots without having to renumber everything. again.
@@ -51,11 +57,11 @@ public class IntroStory : ButtonEffectScript
             //complex effects from the last button name
 
             //changing simple click effects of this one
-                //setStartEffect(stamina, 5);    //if there is a stamina cost, or if there isn't, the new stamina cost is 5.
-                //removeStartEffect(thirst);    //remove any thirst costs.
+            //setStartEffect(stamina, 5);    //if there is a stamina cost, or if there isn't, the new stamina cost is 5.
+            //removeStartEffect(thirst);    //remove any thirst costs.
 
             //setting name/tooltip/color of this one
-            setButtonText("Open your eyes", "...");
+            setButtonText("Toes are about to freeze off", "I need fire!!");
 
             //setting delay till can be pressed again.
 
@@ -64,61 +70,83 @@ public class IntroStory : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            //complex effects from the last button name
-            //ButtonManager.instance.addButtonToUI("SearchArea");
+            setStartEffect(stamina, -5);
+            setButtonText("Rub two sticks together", "I have no idea what I'm doing...");
+            return;
+        }
+        index++;
+        if (stage == index)
+        {
+            setButtonText("Try and rub in the same spot??", "Still no idea what I'm doing...");
+            return;
+        }
+        index++;
+        if (stage == index)
+        {
+            setButtonText("ooo, what about a twisting motion", "I think I get it now");
+            return;
+        }
+        index++;
+        if (stage == index)
+        {
+            setButtonText("Don't give up!", "Almost got it!");
+            
+            return;
+        }
+        index++;
+        if (stage == index)
+        {
+            removeStartEffect(stamina);
+            setButtonText("check the smoke", "Tinder! I need Tinder!");
 
-            //changing simple click effects of this one
-
-            //setting name/tooltip of this one
-            setButtonText("Where..", "am i?\n");
-
-            //setting delay till can be pressed again.
             return;
         }
         index++;
         if (stage == index)
         {
-            setButtonText("It's dark.  It's quiet.", "Everything hurts.\nMust not panic.");
+            ButtonManager.instance.addButtonToUI("AddMoss");
+            setButtonText("Pick up dry leaves", "Is this right??");
             return;
         }
         index++;
         if (stage == index)
         {
-            ButtonManager.instance.addButtonToUI("Rest");
-            ButtonManager.instance.addButtonToUI("Panic");
-            setButtonText("Touch surroundings", "I was running through the woods...");
+            setStartEffect(stamina, -5);
+            setButtonText("More stick rubbing!", "Hawt.");
             return;
         }
         index++;
         if (stage == index)
         {
-            setButtonText("Find courage", "This can't be happening.");
+            removeStartEffect(stamina);
+            setButtonText("Gather kindling", "Looking good!");
             return;
         }
         index++;
         if (stage == index)
         {
-            setButtonText("Crawl around", "The walls... it feels like a cave...");
+            setButtonColor(Color.yellow);
+            ButtonManager.instance.addButtonToUI("AddMoss", false);
+            setButtonText("Campfire", "It is so warm");
             return;
         }
         index++;
         if (stage == index)
         {
-            //ButtonManager.instance.addButtonToUI("CallForHelp");
-            setButtonText("Aimlessly feel around", "So terribly lost.");
+            setButtonColor(Color.gray);
+            ButtonManager.instance.addButtonArrayToUI("TheForest", false);
+            ButtonManager.instance.addButtonArrayToUI("CampfireArray");
+            setButtonText("Leave Campfire", "But it is so warm");
             return;
         }
         index++;
         if (stage == index)
         {
-            setButtonText("You spot some light", "YES!!!");
-            return;
-        }
-        index++;
-        if (stage == index)
-        {
-            ButtonManager.instance.addButtonToUI("DigOut");
-            PreventPresses();
+            stage -= 2;
+            setButtonColor(Color.yellow);
+            ButtonManager.instance.addButtonArrayToUI("CampfireArray", false);
+            ButtonManager.instance.addButtonArrayToUI("TheForest");
+            setButtonText("Campfire", "It is so warm");
             return;
         }
     }
@@ -127,6 +155,4 @@ public class IntroStory : ButtonEffectScript
         refreshTooltip(); // TOOLTIP WON"T REFRESH WITHOUT THIS HAPPENEING EACH TIME TOOLTIP CHAGNES.
         stage++;
     }
-
-    
 }

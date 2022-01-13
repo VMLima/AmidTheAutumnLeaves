@@ -42,6 +42,7 @@ public class GameHandler : MonoBehaviour
             //StartCoroutine(changeAlpha());
             FlashlightManager.HideDarkness_Static(2);
             background.GetComponent<Image>().color = new Color(0.83f, 0.91f, 0.77f);
+            StartCoroutine(McConnelManager.instance.startQuoteDelay("If I were to suggest a course of action, I think we should start a Fillibuster.",3));
         }
         else if (location == "Cave")
         {

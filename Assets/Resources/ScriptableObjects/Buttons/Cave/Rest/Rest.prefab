@@ -121,11 +121,11 @@ MonoBehaviour:
   resetDurationOnStack: 0
   destroyObjectOnEnd: 1
   buttonTitle: Survival Toggle
-  ButtonTitleColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
+  ButtonTitleColor: {r: 0, g: 0, b: 0, a: 1}
   buttonTooltip: 
   tooltipHoverDelay: 1
   doNotShowCostsInTooltip: 0
-  buttonColor: {r: 0, g: 0, b: 0, a: 1}
+  buttonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   tooltip: {fileID: 0}
   toggleButton: 1
   onStartEffect: []

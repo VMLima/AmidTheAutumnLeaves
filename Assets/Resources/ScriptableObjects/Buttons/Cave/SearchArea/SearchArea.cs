@@ -37,6 +37,7 @@ public class SearchArea : ButtonEffectScript
         if (stage == index)
         {
             IncManager.instance.Add<ItemSO>("MedKit");
+            IncManager.instance.Add<ItemSO>("mcTurtle");
             setButtonText("SearchArea1", "SearchArea1 tooltip");
 
             PressDelay(1.5f);
