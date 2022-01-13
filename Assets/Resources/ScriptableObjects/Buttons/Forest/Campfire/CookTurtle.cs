@@ -94,6 +94,7 @@ public class CookTurtle : ButtonEffectScript
 
             //setting name/tooltip of this one
             IncManager.instance.Add<ItemSO>("mcTurtle", -1);
+            setTextColor(Color.red);
             setButtonText("Eat?", "...This may be a bad idea...");
 
             //setting delay till can be pressed again.

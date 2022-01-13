@@ -20,6 +20,9 @@ public class GameHandler : MonoBehaviour
     public Sprite underwater;
     public Sprite inCave;
     public Sprite inForest;
+    public Sprite nearLake;
+
+    bool mcQuoting = false;
 
     IEnumerator CreditsIE()
     {
@@ -55,27 +58,55 @@ public class GameHandler : MonoBehaviour
         //Code stuff:Tim
     }
 
+    IEnumerator mcQuote()
+    {
+        if (!mcQuoting)
+        {
+            mcQuoting = true;
+            StartCoroutine(McConnelManager.instance.startQuoteDelay("If I were to suggest a course of action...", 3));
+            yield return new WaitForSeconds(4);
+            StartCoroutine(McConnelManager.instance.startQuoteDelay("I think we should start a Fillibuster.", 3));
+            yield return new WaitForSeconds(10);
+            mcQuoting = false;
+        }
+    }
+
     public void modUIColor(string location)
     {
         if (location == "Forest")
         {
             //setDarkness(0);
             //StartCoroutine(changeAlpha());
+            background.GetComponent<Image>().color = new Color(0.57f, 0.68f, 0.57f);
             FlashlightManager.HideDarkness_Static(2);
-            background.GetComponent<Image>().color = new Color(0.83f, 0.91f, 0.77f);
-            StartCoroutine(McConnelManager.instance.startQuoteDelay("If I were to suggest a course of action, I think we should start a Fillibuster.",3));
+            background.GetComponent<Image>().sprite = inForest;
+            
+            StartCoroutine(mcQuote());
+            //background.GetComponent<Image>().color = new Color(0.83f, 0.91f, 0.77f);
+            
         }
         else if (location == "Cave")
         {
             //setDarkness(60);
             //FlashlightManager.HidDarkness_Static();
             //FlashlightManager.HideFlashlight_Static();
-            background.GetComponent<Image>().color = new Color(0.08f, 0.08f, 0.08f);
+            background.GetComponent<Image>().color = new Color(0f, 0f, 0f);
+            background.GetComponent<Image>().sprite = inCave;
         }
         else if (location == "CaveIn")
         {
             //FlashlightManager.ShowDarkness_Static();
             //setDarkness(255);
+        }
+        else if (location == "Swimming")
+        {
+            background.GetComponent<Image>().color = new Color(1, 1, 1);
+            background.GetComponent<Image>().sprite = underwater;
+        }
+        else if (location == "Lake")
+        {
+            background.GetComponent<Image>().color = new Color(0.57f, 0.64f, 0.68f);
+            background.GetComponent<Image>().sprite = inForest;
         }
         else Debug.LogError("GameHandler:modUIColor: could not find match for string:" + location + ":");
     }

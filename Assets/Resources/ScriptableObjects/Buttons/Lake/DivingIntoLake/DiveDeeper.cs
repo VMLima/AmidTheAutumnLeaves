@@ -6,6 +6,7 @@ public class DiveDeeper : ButtonEffectScript
 {
 
     int stage = 0;
+    float deeperCount = 0;
 
     private void Start()
     {
@@ -27,8 +28,11 @@ public class DiveDeeper : ButtonEffectScript
 
     public void setStage(int toSet)
     {
+        FlashlightManager.SetDarknessAlpha_Static(0, 1);
+        FlashlightManager.HideLight_Static();
         AllowPresses();
         stage = toSet;
+        deeperCount = 0;
         stageStuff();
     }
 
@@ -74,6 +78,9 @@ public class DiveDeeper : ButtonEffectScript
             //changing simple click effects of this one
 
             //setting name/tooltip of this one
+            
+            FlashlightManager.SetDarknessAlpha_Static(0, 0);
+            FlashlightManager.SetDarknessAlpha_Static(0.1f, 1);
             setButtonText("Even Deeper", ".flub.");
 
             //setting delay till can be pressed again.
@@ -83,34 +90,40 @@ public class DiveDeeper : ButtonEffectScript
         if (stage == index)
         {
             setButtonText("Even Even Deeper", ".gurgle.gurgle.");
+            FlashlightManager.SetDarknessAlpha_Static(0.25f, 1);
             return;
         }
         index++;
         if (stage == index)
         {
             setButtonText("Even Even Deeper Deeper", ".glub.\nglub\nglub\nglub");
+            FlashlightManager.SetDarknessAlpha_Static(0.35f, 1);
             return;
         }
         index++;
         if (stage == index)
         {
+            FlashlightManager.ShowLight_Static();
+            FlashlightManager.SetDarknessAlpha_Static(0.6f, 1);
             setButtonText("A shiney!!!!", ".glub.\nglub\nglub\nglub");
             return;
         }
         index++;
         if (stage == index)
         {
+            FlashlightManager.SetDarknessAlpha_Static(0.7f, 1);
             IncManager.instance.Add<ItemSO>("Chopper");
             setButtonText("Keep Going Deeper!!", ".glub.\nglub\nglub\nglub");
             return;
         }
         index++;
-        if (stage == index)
-        {
-            setButtonText("Keep Going Deeper than Deeper!!", ".glub.\nglub\nglub\nglub");
-            PreventPresses();
-            return;
-        }
+
+        deeperCount+=0.05f;
+        FlashlightManager.SetDarknessAlpha_Static(0.7f + deeperCount, 1);
+        setButtonText("Keep Going Deeper than Deeper!!", ".glub.\nglub\nglub\nglub");
+        PreventPresses();
+        return;
+        
     }
     void everyTime()
     {

@@ -62,7 +62,7 @@ public class Campfire : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            setStartEffect(stamina, -5);
+            
             setButtonText("I could really use a fire", "What do I need again...");
             return;
         }
@@ -143,6 +143,7 @@ public class Campfire : ButtonEffectScript
         index++;
         if (stage == index)
         {
+            setStartEffect(stamina, -5);
             setButtonText("Drill Fast", "");
         }
         index++;
@@ -160,7 +161,7 @@ public class Campfire : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            
+            removeStartEffect(stamina);
             setButtonColor(Color.yellow);
             setButtonText("Campfire", "It is so warm");
             return;

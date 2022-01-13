@@ -5,11 +5,13 @@ using UnityEngine;
 public class GoLake : ButtonEffectScript
 {
     int stage = 0;
-
+    Color lakeColor;
+    Color forestcolor;
     private void Start()
     {
         toggleButton = false;   //just making sure.  It is set in the inspector, but I've forgoten before.
-
+        lakeColor = new Color(0.23f, 0.55f, 0.54f);
+        forestcolor = new Color(0.23f, 0.55f, 0.34f);
         //if the button needs to be reset (like new game) the stuff that needs to be set
         defaultValues();
     }
@@ -44,7 +46,8 @@ public class GoLake : ButtonEffectScript
 
             //setting name/tooltip/color of this one
             setButtonText("Lake", "go to the lake!!");
-
+            setButtonColor(lakeColor);
+            //setButtonColor(Color.blue);
             //setting delay till can be pressed again.
 
             return;
@@ -56,11 +59,13 @@ public class GoLake : ButtonEffectScript
             //ButtonManager.instance.addButtonToUI("SearchArea");
 
             //changing simple click effects of this one
+            GameHandler.instance.modUIColor("Lake");
+
             ButtonManager.instance.addButtonArrayToUI("TheForest", false);
             ButtonManager.instance.addButtonArrayToUI("Lake");
             //setting name/tooltip of this one
             setButtonText("Forest", "");
-
+            setButtonColor(forestcolor);
             //setting delay till can be pressed again.
             return;
         }
@@ -68,9 +73,12 @@ public class GoLake : ButtonEffectScript
         if (stage == index)
         {
             stage -= 2;
+            GameHandler.instance.modUIColor("Forest");
             ButtonManager.instance.addButtonArrayToUI("Lake", false);
             ButtonManager.instance.addButtonArrayToUI("TheForest");
             setButtonText("Lake", "go to the lake!!");
+            setButtonColor(lakeColor);
+            //setButtonColor(Color.blue);
             return;
         }
     }
