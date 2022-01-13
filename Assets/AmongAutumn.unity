@@ -327,10 +327,10 @@ RectTransform:
   m_Father: {fileID: 650648862}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 57.75}
-  m_SizeDelta: {x: 765, y: 115.29}
+  m_AnchorMin: {x: 0.17, y: 0.15418746}
+  m_AnchorMax: {x: 0.82818764, y: 0.7867841}
+  m_AnchoredPosition: {x: 4, y: 37.097015}
+  m_SizeDelta: {x: -262.09998, y: -269.78998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &464441144
 MonoBehaviour:
@@ -776,6 +776,7 @@ GameObject:
   - component: {fileID: 650648862}
   - component: {fileID: 650648864}
   - component: {fileID: 650648863}
+  - component: {fileID: 650648865}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -847,6 +848,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650648861}
   m_CullTransparentMesh: 1
+--- !u!223 &650648865
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650648861}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &732271326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,10 +1303,10 @@ RectTransform:
   m_Father: {fileID: 650648862}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 119.82001, y: -0.5238037}
-  m_SizeDelta: {x: 220, y: 326.16}
+  m_AnchorMin: {x: 0, y: 0.18411115}
+  m_AnchorMax: {x: 1, y: 0.7867841}
+  m_AnchoredPosition: {x: -793, y: 1.132019}
+  m_SizeDelta: {x: -1599.24, y: -68.04999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207209953
 MonoBehaviour:
@@ -1427,10 +1449,10 @@ RectTransform:
   m_Father: {fileID: 650648862}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMin: {x: 1, y: 0.7867841}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -125.60004, y: -59.472046}
-  m_SizeDelta: {x: 223.2, y: 113.94}
+  m_AnchoredPosition: {x: -199.56, y: 0.08996582}
+  m_SizeDelta: {x: 399.11, y: -5.1900024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1430204153
 MonoBehaviour:
@@ -1659,10 +1681,10 @@ RectTransform:
   m_Father: {fileID: 650648862}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.44, y: -106.72}
-  m_SizeDelta: {x: 313.48, y: 113.77}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 98.66992}
+  m_SizeDelta: {x: -798.75, y: 197.34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1543195096
 MonoBehaviour:
@@ -1775,10 +1797,10 @@ RectTransform:
   m_Father: {fileID: 650648862}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -124.130005, y: -0.5237427}
-  m_SizeDelta: {x: 221.27002, y: 326.16}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.754346}
+  m_AnchoredPosition: {x: 808.68, y: -266.91}
+  m_SizeDelta: {x: -1617.37, y: 531.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1550533665
 MonoBehaviour:
@@ -2224,10 +2246,10 @@ RectTransform:
   m_Father: {fileID: 650648862}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.7867841}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -3.0974731, y: -58.22003}
-  m_SizeDelta: {x: 759.2, y: 116.44}
+  m_AnchoredPosition: {x: -1.2700043, y: 2.2200928}
+  m_SizeDelta: {x: 762.85, y: -4.4400024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1636372079
 MonoBehaviour:
@@ -2735,10 +2757,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
