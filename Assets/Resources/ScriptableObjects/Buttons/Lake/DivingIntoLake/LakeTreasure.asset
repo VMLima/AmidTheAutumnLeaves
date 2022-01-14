@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421a8b5d84151ee44832280d9d43b8bd, type: 3}
+  m_Name: LakeTreasure
+  m_EditorClassIdentifier: 
+  nameTag: LakeTreasure
+  toUnlock: []
+  unlocked: 1
+  incManager: {fileID: 0}
+  hideName: 0
+  hideQuantity: 0
+  UIInstance: {fileID: 0}
+  UIPrefab: {fileID: 5368924488188730230, guid: 39f462f61f51930488bbeb2bd481416a, type: 3}
+  UIPanel: {fileID: 0}
+  isActive: 0
+  tooltipText: 
+  useOnlyTooltipText: 0
+  UIIndex: 19
+  UISprite: {fileID: 0}
+  textDisplay: {fileID: 0}
+  imageDisplay: {fileID: 0}
+  clickButton: {fileID: 0}
+  clickEffects: []
+  tooltip: {fileID: 0}
+  button: {fileID: 6875943987031028239, guid: 39f462f61f51930488bbeb2bd481416a, type: 3}

@@ -84,6 +84,7 @@ public class IntroStory : ButtonEffectScript
         index++;
         if (stage == index)
         {
+            GameHandler.instance.addToColor(0.05f);
             ButtonManager.instance.addButtonToUI("Rest");
             ButtonManager.instance.addButtonToUI("Panic");
             setButtonText("Touch surroundings", "I was running through the woods...");
@@ -98,12 +99,14 @@ public class IntroStory : ButtonEffectScript
         index++;
         if (stage == index)
         {
+            GameHandler.instance.addToColor(0.05f);
             setButtonText("Crawl around", "The walls... it feels like a cave...");
             return;
         }
         index++;
         if (stage == index)
         {
+
             //ButtonManager.instance.addButtonToUI("CallForHelp");
             setButtonText("Aimlessly feel around", "So terribly lost.");
             return;
@@ -117,6 +120,7 @@ public class IntroStory : ButtonEffectScript
         index++;
         if (stage == index)
         {
+            GameHandler.instance.addToColor(0.15f);
             ButtonManager.instance.addButtonToUI("DigOut");
             PreventPresses();
             return;

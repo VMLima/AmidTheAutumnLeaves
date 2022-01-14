@@ -28,7 +28,7 @@ public class McConnelManager: MonoBehaviour
         if (tooltipString == "" || tooltipString == " ") return;
         tooltipText.text = tooltipString;
         float textPaddingSize = 4f;
-        Vector2 backgroundSize = new Vector2(tooltipText.preferredWidth + 2 * textPaddingSize > 200 ? 200 : tooltipText.preferredWidth + 2 * textPaddingSize, tooltipText.preferredHeight + 2 * textPaddingSize);
+        Vector2 backgroundSize = new Vector2(tooltipText.preferredWidth + 2 * textPaddingSize > 300 ? 300 : tooltipText.preferredWidth + 2 * textPaddingSize, tooltipText.preferredHeight + 2 * textPaddingSize);
         backgroundTransform.sizeDelta = backgroundSize;
         isActive = true;
 

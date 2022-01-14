@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BearChase1 : ButtonEffectScript
 {
+    
     public ButtonSO bearchase1;
     public ButtonSO bearChase2;
     BearChase2 _bearChase2;
@@ -124,6 +125,9 @@ public class BearChase1 : ButtonEffectScript
             StopCoroutine(chaseDamage());
             TooltipManager.StopTooltip_Static(true);
             TooltipManager.StopEvent_Static();
+            GameHandler.instance.BearScratch(false);
+
+            GameHandler.instance.modUIColor("Forest");
 
             ButtonManager.instance.addButtonArrayToUI("BearChase", false);
             ButtonManager.instance.addButtonArrayToUI("TheForest");
@@ -163,20 +167,22 @@ public class BearChase1 : ButtonEffectScript
             if (wasPress) wasPress = false;
             else StartCoroutine(chaseDamage());
         }
+        GameHandler.instance.BearScratch(false);
         TooltipManager.StopEvent_Static();
         //Debug.Log("Bearchase1:chaseLoop:stopping");
-        yield return new WaitForEndOfFrame();
     }
 
     IEnumerator chaseDamage()
     {
         IncManager.instance.Add(health, -5);
+        GameHandler.instance.BearScratch(true);
         int i = Random.Range(0, 4);
         if (i == 0) TooltipManager.StartTooltip_Static("IT BIT ME!!", true);
         else if (i == 1) TooltipManager.StartTooltip_Static("MY LEG!!", true);
-        else if (i == 2) TooltipManager.StartTooltip_Static("IT CLAWED ME!!", true);
+        else if (i == 2) TooltipManager.StartTooltip_Static("AHHHHH!!", true);
         else TooltipManager.StartTooltip_Static("I AM DYING!!", true);
         yield return new WaitForSeconds(0.75f);
+        GameHandler.instance.BearScratch(false);
         TooltipManager.StopTooltip_Static(true);
     }
 }

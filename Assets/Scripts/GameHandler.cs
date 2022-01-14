@@ -21,8 +21,15 @@ public class GameHandler : MonoBehaviour
     public Sprite inCave;
     public Sprite inForest;
     public Sprite nearLake;
+    public GameObject bearFace;
+    public GameObject bearScratch;
 
     bool mcQuoting = false;
+
+    public void BearScratch(bool start)
+    {
+        bearScratch.SetActive(start);
+    }
 
     IEnumerator CreditsIE()
     {
@@ -71,6 +78,20 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    public void setUIColor(Color color)
+    {
+        background.GetComponent<Image>().color = color;
+    }
+
+    public void addToColor(float toAdd)
+    {
+        Color color = background.GetComponent<Image>().color;
+        color.b += toAdd;
+        color.r += toAdd;
+        color.g += toAdd;
+        background.GetComponent<Image>().color = color;
+    }
+
     public void modUIColor(string location)
     {
         if (location == "Forest")
@@ -80,10 +101,11 @@ public class GameHandler : MonoBehaviour
             background.GetComponent<Image>().color = new Color(0.57f, 0.68f, 0.57f);
             FlashlightManager.HideDarkness_Static(2);
             background.GetComponent<Image>().sprite = inForest;
-            
+
             StartCoroutine(mcQuote());
+            bearFace.SetActive(false);
             //background.GetComponent<Image>().color = new Color(0.83f, 0.91f, 0.77f);
-            
+
         }
         else if (location == "Cave")
         {
@@ -97,6 +119,10 @@ public class GameHandler : MonoBehaviour
         {
             //FlashlightManager.ShowDarkness_Static();
             //setDarkness(255);
+        }
+        else if (location == "Bear")
+        {
+            bearFace.SetActive(true);
         }
         else if (location == "Swimming")
         {

@@ -29,7 +29,7 @@ public class ButtonEffectScript : EffectScript
     public bool doNotShowCostsInTooltip = false;
     public Color buttonColor = Color.gray;
     [HideInInspector] public Tooltip tooltip;
-    private Image image;
+    [HideInInspector] public Image image;
     
     private TextMeshProUGUI titleGUI;
     [Tooltip("")] public bool toggleButton = true;
@@ -113,8 +113,8 @@ public class ButtonEffectScript : EffectScript
 
     public void setButtonText(string newTitle, string newTooltip = "")
     {
-        if (newTitle != "") buttonTitle = newTitle;
-        if (newTooltip != "") buttonTooltip = newTooltip;
+        buttonTitle = newTitle;
+        buttonTooltip = newTooltip;
         updateButton();
     }
 
@@ -133,6 +133,11 @@ public class ButtonEffectScript : EffectScript
     {
         buttonColor = newColor;
         updateButton();
+    }
+
+    public void setButtonImage(Sprite sprite)
+    {
+        if (image != null) image.sprite = sprite;
     }
     public void setTooltip(string newTooltip)
     {

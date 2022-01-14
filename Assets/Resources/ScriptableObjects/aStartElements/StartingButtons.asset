@@ -18,5 +18,3 @@ MonoBehaviour:
   incManager: {fileID: 0}
   features:
   - {fileID: 11400000, guid: 1df977cbf82b3bb44b7952fb03f0eda3, type: 2}
-  - {fileID: 11400000, guid: d570f9d0f47c8164d95b777d2090ff0a, type: 2}
-  - {fileID: 11400000, guid: 078d704f292bcd542aacdeb80882763b, type: 2}

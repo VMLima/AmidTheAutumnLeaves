@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiveIntoLake : ButtonEffectScript
+public class LakeTreasure : ButtonEffectScript
 {
     int stage = 0;
-    public ButtonSO fish;
-    public ButtonSO diveDeeper;
+
     private void Start()
     {
         toggleButton = false;   //just making sure.  It is set in the inspector, but I've forgoten before.
+
+        //me setting the values I may use later for easy quick access.
+
         //if the button needs to be reset (like new game) the stuff that needs to be set
         defaultValues();
     }
@@ -32,57 +34,38 @@ public class DiveIntoLake : ButtonEffectScript
         everyTime();
     }
 
-    IEnumerator FishSpawn()
-    {
-        //random amount of time, then fish shows up for a half second.
-        while(true)
-        {
-            yield return new WaitForSeconds(Random.Range(3, 8));
-            int numFish = 1;
-            for(int i = 0;i < numFish; i++)
-            {
-                fish.createSpawn(getPanelIndex() + 5);
-            }
-        }
-        
-    }
-
     void stageStuff()
     {
         //index is there so I can easily insert stages into spots without having to renumber everything. again.
         int index = 0;
         if (stage == index)
         {
-            setButtonText("Dive into the lake", ":D");
+            setTextColor(Color.blue);
+            setButtonText("Shiny?", "...");
             return;
         }
         index++;
         if (stage == index)
         {
-            //fish.createSpawn(15);
-            GameHandler.instance.modUIColor("Swimming");
-            ButtonManager.instance.addButtonArrayToUI("Lake", false);
-            ButtonManager.instance.addButtonArrayToUI("Swimming");
-            StartCoroutine(FishSpawn());
-            setButtonText("Surface", "");
-
-            //setting delay till can be pressed again.
+            setTextColor(Color.black);
+            setButtonText("!!!", "It's sharp!!");
             return;
         }
         index++;
         if (stage == index)
         {
-            GameHandler.instance.modUIColor("Lake");
-            StopCoroutine(FishSpawn());
-            
-            diveDeeper.UIInstance.GetComponent<DiveDeeper>().setStage(0);
-            ButtonManager.instance.addButtonArrayToUI("Swimming", false);
-            ButtonManager.instance.addButtonArrayToUI("Lake");
-            setButtonText("Dive into the lake", ":D");
-            stage -= 2;
+            setButtonText("Carefully pick up.", "");
             return;
         }
-        
+        index++;
+        if (stage == index)
+        {
+            setButtonText("Carefully pick up.", "");
+            IncManager.instance.Add<ItemSO>("Chopper");
+            ButtonManager.instance.addButtonToUI("LakeTreasure", false);
+            PreventPresses();
+            return;
+        }
     }
     void everyTime()
     {

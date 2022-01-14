@@ -10,10 +10,14 @@ public class Bear : ButtonEffectScript
     PlayerAttributeSO health;
     PlayerAttributeSO water;
 
+    public Sprite bearButt;
+    public Sprite bearButtStick;
+    Sprite background;
+
     private void Start()
     {
         toggleButton = false;   //just making sure.  It is set in the inspector, but I've forgoten before.
-
+        background = image.sprite;
         //me setting the values I may use later for easy quick access.
         stamina = IncManager.instance.Get<PlayerAttributeSO>("Stamina");
         health = IncManager.instance.Get<PlayerAttributeSO>("Health");
@@ -46,27 +50,31 @@ public class Bear : ButtonEffectScript
 
         TooltipManager.StartEvent_Static();
         ButtonManager.instance.addButtonArrayToUI("TheForest", false);
-        setButtonColor(Color.gray);
-        setButtonText("Bear?", "");
-        yield return new WaitForSeconds(1);
-        setButtonText("?", "");
+        setButtonImage(bearButt);
+        setButtonColor(Color.white);
+        setButtonText("", "");
+        yield return new WaitForSeconds(3);
+        setButtonImage(bearButtStick);
         yield return new WaitForSeconds(1.5f);
-        setButtonColor(Color.red);
-        yield return new WaitForSeconds(0.25f);
-        setButtonColor(Color.gray);
-        yield return new WaitForSeconds(0.7f);
-        setButtonColor(Color.red);
-        yield return new WaitForSeconds(0.25f);
+        setButtonImage(bearButt);
+        yield return new WaitForSeconds(4f);
+        setButtonImage(bearButtStick);
+        yield return new WaitForSeconds(0.35f);
+        setButtonImage(bearButt);
+        yield return new WaitForSeconds(1f);
+        setButtonImage(background);
         setButtonColor(Color.gray);
         setButtonText("...");
+        GameHandler.instance.modUIColor("Bear");
         yield return new WaitForSeconds(2.5f);
         setButtonColor(Color.red);
         setButtonText("RUN");
         setTooltip("");
         yield return new WaitForSeconds(1.0f);
+        TooltipManager.StopEvent_Static();
         ButtonManager.instance.addButtonToUI("Bear", false);
         ButtonManager.instance.addButtonArrayToUI("BearChase");
-        TooltipManager.StopEvent_Static();
+        
     }
 
     void stageStuff()

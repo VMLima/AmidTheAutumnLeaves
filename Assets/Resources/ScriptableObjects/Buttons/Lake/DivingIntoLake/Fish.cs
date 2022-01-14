@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Fish : ButtonEffectScript
 {
+    bool wasPressed = false;
     private void Start()
     {
         int index = Random.Range(0, 4);
@@ -20,41 +21,45 @@ public class Fish : ButtonEffectScript
         {
             setButtonText("Small Fish", "");
         }
+
+        StartCoroutine(swimAway());
     }
     public override void onStart()
     {
+        if (wasPressed) return;
+        wasPressed = true;
         if(IncManager.instance.GetAmount<ItemSO>("Basket")>0)
         {
             IncManager.instance.Add<ResourceSO>("Fish");
+            setButtonText("CAUGHT");
             StartCoroutine(SquishSpider());
         }
         else
         {
-            StartCoroutine(noCatch());
+            StartCoroutine(letFishGo());
         }
     }
 
-    IEnumerator noCatch()
+    IEnumerator swimAway()
     {
-        bool untoggleEvent = true;
-        if (TooltipManager.isEvent) untoggleEvent = false;
-        //TooltipManager.StartEvent_Static();
-        //TooltipManager.StartTooltip_Static("I caught one!!  But I have nothing to put it in.....", true);
-        yield return new WaitForSeconds(0.5f);
-        //if (untoggleEvent) TooltipManager.StopEvent_Static();
-        //else TooltipManager.StopTooltip_Static(true);
+        yield return new WaitForSeconds(Random.Range(0.5f,1.25f));
+        if (!wasPressed) deleteSelf();
+    }
+
+    IEnumerator letFishGo()
+    {
+        TooltipManager.StartEvent_Static();
+        TooltipManager.StartTooltip_Static("You have no where to put the fish, so you just give it a nice lil pat.", true);
+        setButtonText("Happy Fish");
+        yield return new WaitForSeconds(2);
+        TooltipManager.StopEvent_Static();
         deleteSelf();
     }
 
     IEnumerator SquishSpider()
     {
-        bool untoggleEvent = true;
-        if (TooltipManager.isEvent) untoggleEvent = false;
-       // TooltipManager.StartEvent_Static();
-       // TooltipManager.StartTooltip_Static("I caught one!!", true);
+        wasPressed = true;
         yield return new WaitForSeconds(0.5f);
-       // if (untoggleEvent) TooltipManager.StopEvent_Static();
-       // else TooltipManager.StopTooltip_Static(true);
         deleteSelf();
     }
 }

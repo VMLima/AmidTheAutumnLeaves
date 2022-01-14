@@ -28,6 +28,7 @@ public class DiveDeeper : ButtonEffectScript
 
     public void setStage(int toSet)
     {
+        ButtonManager.instance.addButtonToUI("LakeTreasure", false);
         FlashlightManager.SetDarknessAlpha_Static(0, 1);
         FlashlightManager.HideLight_Static();
         AllowPresses();
@@ -81,7 +82,7 @@ public class DiveDeeper : ButtonEffectScript
             
             FlashlightManager.SetDarknessAlpha_Static(0, 0);
             FlashlightManager.SetDarknessAlpha_Static(0.1f, 1);
-            setButtonText("Even Deeper", ".flub.");
+            setButtonText("Even Deeper", "..");
 
             //setting delay till can be pressed again.
             return;
@@ -89,38 +90,46 @@ public class DiveDeeper : ButtonEffectScript
         index++;
         if (stage == index)
         {
-            setButtonText("Even Even Deeper", ".gurgle.gurgle.");
+            setButtonText("Even Even Deeper", "");
             FlashlightManager.SetDarknessAlpha_Static(0.25f, 1);
             return;
         }
         index++;
         if (stage == index)
         {
-            setButtonText("Even Even Deeper Deeper", ".glub.\nglub\nglub\nglub");
+            setButtonText("Even Even Deeper Deeper", ".glub.glubglub glub");
             FlashlightManager.SetDarknessAlpha_Static(0.35f, 1);
             return;
         }
         index++;
         if (stage == index)
         {
+            
             FlashlightManager.ShowLight_Static();
             FlashlightManager.SetDarknessAlpha_Static(0.6f, 1);
-            setButtonText("A shiney!!!!", ".glub.\nglub\nglub\nglub");
+            setButtonText("Deeper...", "!glub!glub!");
             return;
         }
         index++;
         if (stage == index)
         {
             FlashlightManager.SetDarknessAlpha_Static(0.7f, 1);
-            IncManager.instance.Add<ItemSO>("Chopper");
-            setButtonText("Keep Going Deeper!!", ".glub.\nglub\nglub\nglub");
+            setButtonText("Keep Going Deeper!!", "!glub !glub!glub! glub!");
             return;
         }
         index++;
-
-        deeperCount+=0.05f;
+        if (stage == index)
+        {
+            if (IncManager.instance.GetAmount<ItemSO>("Chopper") <= 0) ButtonManager.instance.addButtonToUI("LakeTreasure");
+            FlashlightManager.SetDarknessAlpha_Static(0.75f, 1);
+            setButtonText("Keep Going Deeper than Deeper!!", "!!!");
+            return;
+        }
+        index++;
+        
+        deeperCount +=0.05f;
         FlashlightManager.SetDarknessAlpha_Static(0.7f + deeperCount, 1);
-        setButtonText("Keep Going Deeper than Deeper!!", ".glub.\nglub\nglub\nglub");
+        setButtonText("Keep Going Deeper than Deeper!!", "!!!!!!!");
         PreventPresses();
         return;
         

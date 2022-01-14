@@ -25,7 +25,3 @@ MonoBehaviour:
     amount: 1
   - incrementable: {fileID: 11400000, guid: 71fb55ada35447044a3510a9a689d6cb, type: 2}
     amount: 1
-  - incrementable: {fileID: 11400000, guid: 6267c1dad17446445a069b06f4ad8b62, type: 2}
-    amount: 5
-  - incrementable: {fileID: 11400000, guid: 84a51ce150f176143a7bc60ddff9c195, type: 2}
-    amount: 1

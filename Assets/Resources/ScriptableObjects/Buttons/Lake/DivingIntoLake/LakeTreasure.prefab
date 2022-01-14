@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5650653381030849398
+--- !u!1001 &418174427840502618
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -93,25 +93,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
       propertyPath: m_Name
-      value: Bear
+      value: LakeTreasure
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
---- !u!1 &82402085664156506 stripped
+--- !u!1 &5368924488188730230 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5715040496820633644, guid: 9055e4b26db39e34c80ad694744def06, type: 3}
-  m_PrefabInstance: {fileID: 5650653381030849398}
+  m_PrefabInstance: {fileID: 418174427840502618}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1615315270108458511
+--- !u!114 &738214942976712853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82402085664156506}
+  m_GameObject: {fileID: 5368924488188730230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dba6de4b9d002b74abe55bef36cc15df, type: 3}
+  m_Script: {fileID: 11500000, guid: d919d3d1dc88af34db1931040665773d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0
@@ -124,12 +124,9 @@ MonoBehaviour:
   buttonTooltip: 
   tooltipHoverDelay: 1
   doNotShowCostsInTooltip: 0
-  buttonColor: {r: 0.4716981, g: 0.43388462, b: 0.38492346, a: 1}
+  buttonColor: {r: 0.24670699, g: 0.44980222, b: 0.6792453, a: 0.57254905}
   tooltip: {fileID: 0}
-  image: {fileID: 0}
   toggleButton: 1
   onStartEffect: []
   onTickEffect: []
   mirrorStartonStop: 1
-  bearButt: {fileID: 21300000, guid: a68c62c8d4a56d04d9a48ef63f2e0577, type: 3}
-  bearButtStick: {fileID: 21300000, guid: b48a6be6d76b46e4c8ba6482ff7ef14e, type: 3}

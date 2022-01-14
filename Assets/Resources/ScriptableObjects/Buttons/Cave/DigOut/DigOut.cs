@@ -81,7 +81,7 @@ public class DigOut : ButtonEffectScript
         FlashlightManager.SetDarknessAlpha_Static(0.05f, 1.5f); //over 1.5 seconds, change alpha to 0.05 alpha
         yield return new WaitForSeconds(1.5f);
         TooltipManager.StartTooltip_Static("BAM", true);
-        rockController.SpawnRockSlide();
+        
         yield return new WaitForSeconds(0.75f);
         TooltipManager.StartTooltip_Static("BOOM", true);
         yield return new WaitForSeconds(0.5f);
@@ -91,6 +91,7 @@ public class DigOut : ButtonEffectScript
        
         TooltipManager.StartTooltip_Static("POP!", true);
         FlashlightManager.SetDarknessAlpha_Static(0.65f, 0.15f);
+        rockController.SpawnRockSlide();
         yield return new WaitForSeconds(0.35f);
         FlashlightManager.SetDarknessAlpha_Static(1, 0.05f);
         TooltipManager.StopEvent_Static();
