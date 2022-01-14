@@ -108,6 +108,7 @@ public class ExitCave : ButtonEffectScript
         {
             //delete leftover spiders
             //Debug.Log("ExitCave:Deleting spiders");
+            IncManager.instance.Add<ItemSO>("mcTurtle");
             ButtonManager.instance.deleteButtons("Spider");
             //Debug.Log("ExitCave:deactivating buttons");
             ButtonManager.instance.deactivateAllButtons();

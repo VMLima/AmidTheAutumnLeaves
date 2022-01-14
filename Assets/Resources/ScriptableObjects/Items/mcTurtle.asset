@@ -24,7 +24,7 @@ MonoBehaviour:
   isActive: 1
   tooltipText: wtf, why won't this thing leave me alone.
   useOnlyTooltipText: 0
-  UIIndex: 5
+  UIIndex: 7
   UISprite: {fileID: 21300000, guid: 9652f93d21c232a47a4aa3fd383ff476, type: 3}
   textDisplay: {fileID: 0}
   imageDisplay: {fileID: 0}
@@ -32,7 +32,7 @@ MonoBehaviour:
   clickEffects: []
   tooltip: {fileID: 0}
   amount: 1
-  maximum: 0
+  maximum: 1
   maxStack: 0
   minAmount: 0
   minStack: 0

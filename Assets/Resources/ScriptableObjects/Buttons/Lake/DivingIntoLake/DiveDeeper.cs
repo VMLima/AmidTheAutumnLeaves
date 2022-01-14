@@ -31,6 +31,7 @@ public class DiveDeeper : ButtonEffectScript
         ButtonManager.instance.addButtonToUI("LakeTreasure", false);
         FlashlightManager.SetDarknessAlpha_Static(0, 1);
         FlashlightManager.HideLight_Static();
+        FlashlightManager.HideDarkness_Static();
         AllowPresses();
         stage = toSet;
         deeperCount = 0;
@@ -79,7 +80,7 @@ public class DiveDeeper : ButtonEffectScript
             //changing simple click effects of this one
 
             //setting name/tooltip of this one
-            
+            FlashlightManager.showSmallLight();
             FlashlightManager.SetDarknessAlpha_Static(0, 0);
             FlashlightManager.SetDarknessAlpha_Static(0.1f, 1);
             setButtonText("Even Deeper", "..");
@@ -105,7 +106,7 @@ public class DiveDeeper : ButtonEffectScript
         if (stage == index)
         {
             
-            FlashlightManager.ShowLight_Static();
+            //FlashlightManager.ShowLight_Static();
             FlashlightManager.SetDarknessAlpha_Static(0.6f, 1);
             setButtonText("Deeper...", "!glub!glub!");
             return;

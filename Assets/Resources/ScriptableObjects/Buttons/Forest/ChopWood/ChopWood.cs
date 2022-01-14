@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChopWood : ButtonEffectScript
 {
     int stage = 0;
+    bool doOnce = true;
     private void Start()
     {
         toggleButton = false;   //just making sure.  It is set in the inspector, but I've forgoten before.
@@ -14,6 +15,7 @@ public class ChopWood : ButtonEffectScript
     public void defaultValues()
     {
         stage = 0;
+        doOnce = true;
         onStart();
 
         //the tooltip will show up after 0.5s of hovering over the button.  Default is 1s. Low values for more story/actiony things.
@@ -55,7 +57,12 @@ public class ChopWood : ButtonEffectScript
             {
                 setButtonText("Chop Wood", "Fee Fi Fo Fum!");
                 IncManager.instance.Add<ItemSO>("Wood", 1);
-                ButtonManager.instance.addButtonToUI("Bear");
+                if(doOnce)
+                {
+                    doOnce = false;
+                    ButtonManager.instance.addButtonToUI("Bear");
+                }
+                
             }
             else
             {

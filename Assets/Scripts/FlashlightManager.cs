@@ -13,8 +13,10 @@ public class FlashlightManager : MonoBehaviour
 
     public GameObject Darkness;
     public GameObject Light;
+    //public GameObject SmallLight;
 
     private SpriteRenderer darknessSprite;
+    //private Image smallLightSprite;
 
     //private TextMeshProUGUI tooltipText;
     //private Text tooltipText;
@@ -31,6 +33,14 @@ public class FlashlightManager : MonoBehaviour
         isActive = false;
     }
 
+    public static void showSmallLight()
+    {
+        instance.isActive = true;
+        //instance.SmallLight.SetActive(true);
+        instance.Darkness.GetComponent<SpriteMask>().enabled = true;
+        instance.Darkness.GetComponent<SpriteMask>().UpdateGIMaterials();
+    }
+
     IEnumerator darknessAlphaSlide(float startingAlpha, float endingAlpha, float time)
     {
         Color tempColor = darknessSprite.color;
@@ -42,18 +52,26 @@ public class FlashlightManager : MonoBehaviour
         {
             tempColor.a -= step;
             darknessSprite.color = tempColor;
+            //smallLightSprite.color = tempColor;
             //Debug.Log("darknessAlphaSlide:tempColor.a=" + tempColor.a);
             yield return new WaitForSeconds(timeInverval);
         }
         tempColor.a = endingAlpha;
         darknessSprite.color = tempColor;
-        if (endingAlpha <= 0) instance.Darkness.SetActive(false);
+        //smallLightSprite.color = tempColor;
+        if (endingAlpha <= 0)
+        {
+            instance.Darkness.SetActive(false);
+            //instance.SmallLight.SetActive(false);
+        }
+            
     }
 
     void setDarknessAlpha(float alphaLevel)
     {
         Color tempColor = darknessSprite.color;
         tempColor.a = alphaLevel;
+        //smallLightSprite.color = tempColor;
         darknessSprite.color = tempColor;
     }
     void startAlphaSlide(float startingAlpha, float endingAlpha, float time)
@@ -64,13 +82,15 @@ public class FlashlightManager : MonoBehaviour
     public static void SetDarknessAlpha_Static(float endAlpha, float transitionTime = 0)
     {
         instance.Darkness.SetActive(true);
-        if(transitionTime == 0) instance.setDarknessAlpha(endAlpha);
+        //instance.SmallLight.SetActive(true);
+        if (transitionTime == 0) instance.setDarknessAlpha(endAlpha);
         else instance.startAlphaSlide(instance.darknessSprite.color.a, endAlpha, transitionTime);
     }
 
     public static void ShowDarkness_Static(float timeLapse = 0)
     {
         instance.Darkness.SetActive(true);
+        //instance.SmallLight.SetActive(true);
         //instance.Darkness.GetComponent<SpriteMask>().enabled = false;
         //instance.Darkness.GetComponent<SpriteMask>().UpdateGIMaterials();
     }
@@ -80,7 +100,11 @@ public class FlashlightManager : MonoBehaviour
     public static void HideDarkness_Static(float timeLapse = 0)
     {
         if (timeLapse > 0) instance.startAlphaSlide(1, 0, timeLapse);
-        else instance.Darkness.SetActive(false);
+        else
+        {
+            //instance.SmallLight.SetActive(false);
+            instance.Darkness.SetActive(false);
+        }
     }
 
     public static void ShowLight_Static()
@@ -103,6 +127,7 @@ public class FlashlightManager : MonoBehaviour
     {
         instance = this;
         darknessSprite = Darkness.GetComponent<SpriteRenderer>();
+        //smallLightSprite = SmallLight.GetComponent<Image>();
         //backgroundTransform = transform.Find("Background").GetComponent<RectTransform>();
         //tooltipText = transform.Find("Text").GetComponent<TextMeshProUGUI>();
         HideDarkness_Static();

@@ -284,15 +284,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCamera: {fileID: 476136561}
   quotes:
-  - You'll regret this, and you may regret this a lot sooner than you think
   - The minimum wage is mostly an entry-level wage for young people
   - I said, let's pass the sugar and then see if they can swallow the spinach. So
     the spinach was left behind. And as we speak today, they're having a hard time
     swallowing the spinach.
   - When in doubt just think to yourself... what would Reagan do?
   - "That\u2019s not a \u2018voting rights\u2019 bill!"
-  - If I were to suggest a course of action, I think we should start a Fillibuster.
   - Don't you worry, the trickle downs will be here any day now.
+  - You'll regret this, and you may regret this a lot sooner than you think
   mcTurtle: {fileID: 11400000, guid: 84a51ce150f176143a7bc60ddff9c195, type: 2}
 --- !u!223 &338992790
 Canvas:
@@ -345,6 +344,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1559595275}
+  - {fileID: 1778412112}
   - {fileID: 2044812544}
   m_Father: {fileID: 1940907183}
   m_RootOrder: 3
@@ -1285,8 +1285,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.18411115}
   m_AnchorMax: {x: 1, y: 0.7867841}
-  m_AnchoredPosition: {x: -754.47, y: -160.59}
-  m_SizeDelta: {x: -1522.18, y: 61.22}
+  m_AnchoredPosition: {x: -760.02, y: -160.59}
+  m_SizeDelta: {x: -1533.29, y: 61.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207209953
 MonoBehaviour:
@@ -1877,8 +1877,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.754346}
-  m_AnchoredPosition: {x: 761.96, y: -313.72}
-  m_SizeDelta: {x: -1523.92, y: 437.55}
+  m_AnchoredPosition: {x: 760.84937, y: -313.72}
+  m_SizeDelta: {x: -1521.7, y: 437.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1550533665
 MonoBehaviour:
@@ -2576,6 +2576,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741577926}
   m_CullTransparentMesh: 1
+--- !u!1 &1778412111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1778412112}
+  - component: {fileID: 1778412115}
+  - component: {fileID: 1778412114}
+  m_Layer: 5
+  m_Name: SmallLight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1778412112
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778412111}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 356389270}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1778412114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778412111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 80cf88de99c348247bef9741f8ae8061, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1778412115
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778412111}
+  m_CullTransparentMesh: 1
 --- !u!1 &1910270601
 GameObject:
   m_ObjectHideFlags: 0
@@ -3012,7 +3087,7 @@ RectTransform:
   m_LocalScale: {x: 600, y: 600, z: 1}
   m_Children: []
   m_Father: {fileID: 356389270}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3060,7 +3135,7 @@ SpriteMask:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_MaskAlphaCutoff: 0.2
+  m_MaskAlphaCutoff: 0.5
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
@@ -3109,8 +3184,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 35a49451350f038479516cd89c749ca6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ac41c4c32d0f6c24abecbff1dfa0906b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
